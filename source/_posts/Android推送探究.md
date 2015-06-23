@@ -89,5 +89,5 @@ androidpn-client(客户端)、Androidpn-tomcat(服务端)
 3. 设置jdbc.properties中的数据库名(下面test部分)：
 jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
 4. 创建数据库(假设上面数据库名填写test):
-`create database test`;
+`create database test;`
 5. 完成配置
