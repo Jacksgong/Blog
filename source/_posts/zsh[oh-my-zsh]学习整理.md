@@ -1,5 +1,5 @@
 title: zsh[oh my zsh]学习整理
-date: 2015-05-29 15:08:03
+date: 2015-03-29 15:08:03
 tags:
 - zsh
 - Linux
