@@ -7,6 +7,8 @@ tags:
 - Wechat
 - 优化
 
+---
+
 >Somebody ask me, why there are no layout jumping in wechat when switching between the panel and the keyboard?
 
 >It's very simple.
