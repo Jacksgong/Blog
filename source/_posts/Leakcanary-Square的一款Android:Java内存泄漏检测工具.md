@@ -18,6 +18,8 @@ tags:
 
 > "A small leak will sink a gret ship." - Benjamin Franklin
 
+<!--more-->
+
 ![](https://raw.githubusercontent.com/Jacksgong/leakcanary/master/assets/screenshot.png)
 
 ## I. 开始
@@ -45,7 +47,6 @@ public class ExampleApplication extends Application {
 
 **这样就可以了!** 在debug包中activity内存泄漏将会被监听到，并且将会自动显示一个通知(show a notification)。
 
-<!--more-->
 
 ## II. 为什么要使用LeakCanary?
 
