@@ -15,6 +15,8 @@ tags:
 ## 1. 入口
 `1.getFromInputStream(InputStream) : SVG` `2.getFromString(String) : SVG` `3.getFromResource(Resources, int) : SVG` `4.getFromAsset(AssetManager, String) : SVG`
 	
+<!--more-->
+
 	// *************** com.caverock.androidsvg.SVG *************** 
 	
 	/**
