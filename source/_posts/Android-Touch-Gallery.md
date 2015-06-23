@@ -16,6 +16,9 @@ tags:
 ## 2. 拓展部分
 
 实现相关接口，底层即可完成自动选择从网路加载、从本地文件加载或者从Cache加载
+
+<!--more-->
+
 下面是简单的案例：
 
 	public class GalleryPagerAdapter extends BaseGalleryPagerAdapter {
