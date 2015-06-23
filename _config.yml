@@ -66,8 +66,8 @@ pagination_dir: page
 theme: yilia
 
 # Disqus Comments
-disqus_short_name: jacksgong
-disqus_show_comment_count: true
+#disqus_short_name: jacksgong
+#disqus_show_comment_count: true
 
 sitemap:
    path: sitemap.xml
