@@ -237,4 +237,4 @@ SVG完胜栅格化图片形式
 
 ## 拓展链接
 1. [SVG-Android库 深入浅出 解析篇](http://blog.dreamtobe.cn/2014/12/10/SVG-Android%E5%BA%93-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA-%E8%A7%A3%E6%9E%90%E7%AF%87/)
-2. [SVG Android应用探究之路 【一】](http://blog.dreamtobe.cn/1657.html)
+2. [SVG Android应用探究之路 【一】](http://blog.dreamtobe.cn/2014/11/08/SVG-Android%E5%BA%94%E7%94%A8%E6%8E%A2%E7%A9%B6%E4%B9%8B%E8%B7%AF/)
