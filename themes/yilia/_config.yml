@@ -8,7 +8,7 @@ menu:
 subnav:
   github: "https://github.com/Jacksgong"
   #weibo: "#"
-  rss: "#"
+  rss: "/atom.xml"
   zhihu: "http://www.zhihu.com/people/jacks-gong"
   #douban: "#"
   #mail: "#"

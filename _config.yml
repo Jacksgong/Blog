@@ -65,6 +65,14 @@ pagination_dir: page
 ## Themes: http://hexo.io/themes/
 theme: yilia
 
+sitemap:
+   path: sitemap.xml
+
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
