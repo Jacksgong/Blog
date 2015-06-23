@@ -99,7 +99,7 @@ SVG-Android-AGG | http://www.antigrain.com/svg/index.html | 速度一般，C++�
 
 ##### (1) 朋友圈(96px*96px)图标:
 
-![](/img/svg-s-qq.png)
+![](/img/svg-s-sns.png)
 
 ###### 数据
 
