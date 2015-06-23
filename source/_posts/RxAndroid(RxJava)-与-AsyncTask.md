@@ -12,6 +12,7 @@ tags:
 
 > 整理自[使用RxJava.Observable取代AsyncTask和AsyncTaskLoader](https://github.com/bboyfeiyu/android-tech-frontier/tree/master/androidweekly/使用RxJava.Observable取代AsyncTask和AsyncTaskLoader)
 
+<!--more-->
 ## I. `AsyncTask`包含的问题:
 
 ```
@@ -37,7 +38,6 @@ private class CallWebServiceTask extends AsyncTask<String, Result, Void> {
 5. 难以测试（[如何成功测试AyncTask的帖子](http://www.making-software.com/2012/10/31/testable-android-asynctask/)）
 6. 异步数据无法得到良好的缓存
 
-<!--more-->
 
 
 ## II. 利用`RxAndroid(RxJava)`解决这些问题

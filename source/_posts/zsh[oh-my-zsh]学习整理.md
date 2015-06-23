@@ -22,6 +22,7 @@ chsh -s `which zsh`
 sudo shutdown -r 0
 ```
 
+<!--more-->
 ### II. 配置文件所在路径
 
 ##### 全局设置:
@@ -49,7 +50,6 @@ PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p%{$fg[cyan]%}%d %{$fg_bold[blu
 ######* 别名添加:
 
 直接在`~/.zshrc`中添加
-<!--more-->
 
 
 推荐别名:

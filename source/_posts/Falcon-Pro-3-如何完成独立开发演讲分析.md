@@ -18,6 +18,7 @@ tags:
 
 主要是简述了，作者的业余项目: Falcon
 
+<!--more-->
 ## II. 所用到的库
 
 ### 加入了4个library:
@@ -27,7 +28,6 @@ tags:
 3. Otto(Event bus)(可选择)
 4. Butter Knife
 
-<!--more-->
 
 ### 新的页面使用Activity:
 

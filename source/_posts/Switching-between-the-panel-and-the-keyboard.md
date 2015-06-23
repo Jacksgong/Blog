@@ -15,11 +15,11 @@ tags:
 
 >Just 2 cases under 2 rules.
 
+<!--more-->
 ### Precondition:
 - Definition android:windowSoftInputMode as adjustSize for Activity in AndroidManifest xml.
 - Already calculated keybord height.
 
-<!--more-->
 
 ### Case 1: switching from the panel to the keyboard:
 #### Rule:

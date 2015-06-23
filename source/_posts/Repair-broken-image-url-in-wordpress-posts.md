@@ -9,6 +9,8 @@ tags:
 
 >I changed my vps server recently, and I had to migrating my wordpress blog too. I found there are several trouble when I completed migrating, and the most serious trouble is some image in some posts was broken. so here come.
 
+<!--more-->
+
 ---
 ### How to use
 ####一、 Just run python:

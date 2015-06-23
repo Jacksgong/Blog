@@ -11,6 +11,7 @@ tags:
 
 > 整理自: [solving-the-android-image-loading-problem-volley-vs-picasso](https://www.bignerdranch.com/blog/solving-the-android-image-loading-problem-volley-vs-picasso/)
 
+<!--more-->
 ## I. PhotoGallery
 
 > 一个很简单的图片加载库
@@ -26,7 +27,6 @@ tags:
 
 > ps: 图片下载，单线程串行。
 
-<!--more-->
 
 #### 代码:
 

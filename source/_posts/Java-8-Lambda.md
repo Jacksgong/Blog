@@ -16,6 +16,7 @@ Java SE 8在2013年6月13的版本中已经完全了全部的功能
 
 
 
+<!--more-->
 #### 举例
 `Runnable`:
 
@@ -34,7 +35,6 @@ new Thread(() -> {
     }).start();
 ```
 
-<!--more-->
 
 
 使用: `java.util.function.Function`方式:

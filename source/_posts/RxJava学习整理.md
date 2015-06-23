@@ -21,10 +21,10 @@ ps: 如果不了解Lambda的话，最好先看下[Lambda](http://blog.dreamtobe.
 
 **观察者:** Subscribers (处理这些事件)
 
+<!--more-->
 1. Observable和Subscriber可以做任何事情
 
 2. Observable和Subscriber是独立于中间的变换过程的。
-<!--more-->
 
 
 ## II. 基本原型

@@ -20,12 +20,12 @@ tags:
 
 2.2 进入插件目录，双击Authenticate.app输入Mac的用户名密码（由于代理修改需要权限）
 
+<!--more-->
 ## 3. 使用
 
 1. fqrouter开启以后，会提示在同一局域网下，配置自动web代理为：http://xxx.xxx.xxx.xxx:2515即可实现翻墙
 2. 此时Mac端用Alfred输入对应的即可：
 
-<!--more-->
 
 `switch Tencent proxy and Home Proxy `
 
