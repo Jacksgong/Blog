@@ -8,11 +8,11 @@ tags:
 
 ---
 
-![](/img/php-mysql-1.png)
+![](/img/php-mysql-1.jpg)
 
 数据库中的内容:
 
-![](/img/php-mysql-2.png)
+![](/img/php-mysql-2.jpg)
 
 <!--more-->
 `index.php`:
