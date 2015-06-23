@@ -256,7 +256,7 @@ ps: support包有一个简单的判断是Android L的静态方法:`versionUtils.
 
 具体原因是由于，一旦设置了Alpha，每次draw 那个View都不得不 清除绘制缓存(Flush Buffer)，然后再绘制到屏幕上，效果如右图(顶部的那几个小点setAlpha(0.5*255))。
  
-![](/img/The_Making_of_Falcon_Pro_3_by_Joaquim_Vergès__Video__-_Realm_is_a_mobile_database__a_replacement_for_SQLite___Core_Data.png)
+![](/img/Falcon-font.png)
 
 #### 2. 调试CPU过渡绘制
 
@@ -296,7 +296,7 @@ Android Studio上的一个功能。
 
 Joaquim只用了Android SDK的: `android:font_family`，完全够用：
 
-![](The_Making_of_Falcon_Pro_3_by_Joaquim_Vergès__Video__-_Realm_is_a_mobile_database__a_replacement_for_SQLite___Core_Data 2.png)
+![](/img/SQLite___Core_Data.png)
 
 #### 5. 视觉宗旨定义
 
