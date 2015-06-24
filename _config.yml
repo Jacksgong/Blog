@@ -81,3 +81,5 @@ feed:
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type:
+
+baidu_analytics: 4784cbc58febd16c08b3dc017f5d5c6c
