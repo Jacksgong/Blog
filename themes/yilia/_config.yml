@@ -32,7 +32,7 @@ open_in_new: false
 
 # Miscellaneous
 google_analytics: ''
-favicon: /favicon.ico
+favicon: /favicon.png
 
 #你的头像url
 avatar: http://7xjww9.com1.z0.glb.clouddn.com/avatar_h.jpg
