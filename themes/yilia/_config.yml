@@ -11,11 +11,11 @@ subnav:
   rss: "/atom.xml"
   zhihu: "http://www.zhihu.com/people/jacks-gong"
   #douban: "#"
-  #mail: "#"
+  mail: "igzhenjie@gmail.com"
   #facebook: "#"
   #google: "#"
   #twitter: "#"
-  #linkedin: "#"
+  linkedin: "https://cn.linkedin.com/in/jacksgong"
 
 rss: /atom.xml
 
