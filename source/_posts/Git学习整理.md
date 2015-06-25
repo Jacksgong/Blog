@@ -6,8 +6,6 @@ tags:
 
 ---
 
-> ps: 文中的中括号表示为参数
-
 # Git特点:
 1. 在2002由Linus花了两周写的，用在Linux版本维护，后来由Linux社区高手维护
 2. git是维护修改
@@ -32,10 +30,11 @@ tags:
 
 - 效果: 克隆远程库到本地（包括工作区与版本库）（一般而言只checkout了远程origin分支到本地master分支）.
 
-`git clone -b <远程分支名> [<远程库地址>]`
+`git clone -b <远程分支名> <远程库地址>`
 
 - 效果: 克隆远程分支到本地（本地分支名和远程分支名相同）.
 	
+
 ##### 分支:
 	
 `git branch [<分支名>]`
@@ -63,7 +62,7 @@ tags:
 	
 `git push [<远程库分支名>] [<本地分支名>]`
 
-- 效果: 把分支内容推刀远程库相对应的分支上
+- 效果: 把分支内容推到远程库相对应的分支上
 
 ##### 合并:
 
@@ -77,6 +76,20 @@ tags:
 
 - 效果: 跳过Fast forward模式，保留版本库中分支结构(`git log --graph`)
 	
+`git fetch <远程仓库名> <远程分支名>(:本地新分支名)`
+
+- 效果: 从远程的仓库(通常是`origin`)的分支下载最新版本到 本地的新的分支上，如果不提供默认:下载到 本地分支远程仓库/分支名 (例子: `origin/master`) 上。
+
+`git fetch`和`git pull`
+
+- 区别: `git pull` = `git fetch` + `git merge`
+
+```
+// 以下命令等同于 git pull 
+git fetch origin master
+git merge origin/master
+```
+
 ##### 删除:	
 `git branch -d [<分支名>]`
 
@@ -131,6 +144,12 @@ tags:
 
 ### V. 日志:
 `git log`
+
+- 效果: 查看git日志
+
+`git log -p`
+
+- 效果: 查看git并且显示具体文件修改点
 
 ###### 查看历史git命令（可以用来找`commit id`）
 `git reflog`
@@ -222,7 +241,7 @@ Head 的内容
 	
 `git push [<远程库分支名>] :refs/tags/[<标签名>]`
 
-- 效果: 将删除的标签同步刀远程库分支
+- 效果: 将删除的标签同步到远程库分支
 
 ## X. 其他需要注意的
 
@@ -262,7 +281,35 @@ git config --global alias.last 'log -1'
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 ```
 
-# 外国朋友的Git Cheet Sheet:
-[http://www.git-tower.com/blog/assets/2013-05-22-git-cheat-sheet/cheat-sheet-large01.png](http://www.git-tower.com/blog/assets/2013-05-22-git-cheat-sheet/cheat-sheet-large01.png)
+## XI. GitHub
+
+### fork同步问题
+
+> A项目是B项目的fork，如果同步B项目的更新:
+
+#### 1. 先把B clone到本地
+
+```
+git clone B_REPOSITORY_URL
+```
+
+#### 2. 再cd到本地B的目录，把A作为一个remote加到本地的B中（一般命名为upstream）
+
+```
+git remote add upstream A_REPOSITORY_URL
+```
+
+#### 3. pull另一个A的remote（upstream）的相应分支（比如master）就可以
+
+```
+git pull upstream master
+```
+
+#### 4. 最后push回github的B_REPOSITORY
+
+```
+git push origin master
+```
+----
 
 > 最后如果想要完整学习的，推荐这个站点: http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000
