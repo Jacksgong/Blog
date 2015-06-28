@@ -45,6 +45,9 @@ duoshuo: "jacksgong"
 #是否开启云标签
 tagcloud: true
 
+#搜索
+swift_search: true
+
 #是否开启友情链接
 #不开启——
 friends: false
