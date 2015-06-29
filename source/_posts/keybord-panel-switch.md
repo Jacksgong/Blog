@@ -23,7 +23,7 @@ tags:
 
 > 如图，为了方便分析，我们分出3个View:
 
-<img src="/img/wechat-keybord-panel.jpg" width="500px" height="643px">
+<img src="/img/wechat-keybord-panel.jpg" width="30%" height="30%">
 
 - `CustomRootView`: 除去statusBar与ActionBar(ToolBar...balabala)
 - `FootRootView`: 整个底部（包括输入框与底部面板在内的整个View）
