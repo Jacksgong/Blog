@@ -17,8 +17,6 @@ subnav:
   #twitter: "#"
   linkedin: "https://cn.linkedin.com/in/jacksgong"
 
-rss: /atom.xml
-
 # Content
 excerpt_link: more
 fancybox: true
