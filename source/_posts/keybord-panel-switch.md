@@ -79,11 +79,15 @@ tags:
 
 > 通过`CustomRootView`高度的变化，来保证在`Super.onMeasure`之前获得**真正**的由于键盘导致布局将要变化，然后告知`PanelView`，让其在`Super.onMeasure`之前给到有效高度。
 
+#### 需要注意:
+
 > 在`adjustResize`模式下，键盘弹起会导致`CustomRootView`的高度变小，键盘收回会导致`CustomRootView`的高度变大。因此可以通过这个机制获知真正的`PanelView`将要变化的时机。
 
-> 由于到了`onLayout`以后，clipRect的大小已经确定了，又要避免不多次调用`onMeasure`因此要在`Super.onMeasure`之前 
 
-> 由于键盘收回的时候，会触发多次`measure`，如果不判断真正的由于键盘收回导致布局将要变化，就直接给有效高度，依然会有闪动的情况。
+> 由于到了`onLayout`，clipRect的大小已经确定了，又要避免不多次调用`onMeasure`因此要在`Super.onMeasure`之前 
+
+
+> 由于键盘收回的时候，会触发多次`measure`，如果 不判断真正的由于键盘收回导致布局将要变化，就直接给有效高度，依然会有闪动的情况。
 
 代码:
 
