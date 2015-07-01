@@ -238,4 +238,4 @@ public void setIsNeedHeight(final boolean isNeedheight) {
 
 ## III. GitHub:
 
-明天补上。
+[JKeybordPanelSwitch](https://github.com/Jacksgong/JKeybordPanelSwitch)
