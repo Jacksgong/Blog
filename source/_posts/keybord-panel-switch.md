@@ -81,96 +81,159 @@ tags:
 
 #### 需要注意:
 
-> 在`adjustResize`模式下，键盘弹起会导致`CustomRootView`的高度变小，键盘收回会导致`CustomRootView`的高度变大。因此可以通过这个机制获知真正的`PanelView`将要变化的时机。
+> 1) 在`adjustResize`模式下，键盘弹起会导致`CustomRootView`的高度变小，键盘收回会导致`CustomRootView`的高度变大。因此可以通过这个机制获知真正的`PanelView`将要变化的时机。
 
 
-> 由于到了`onLayout`，clipRect的大小已经确定了，又要避免不多次调用`onMeasure`因此要在`Super.onMeasure`之前 
+> 2) 由于到了`onLayout`，clipRect的大小已经确定了，又要避免不多次调用`onMeasure`因此要在`Super.onMeasure`之前 
 
 
-> 由于键盘收回的时候，会触发多次`measure`，如果 不判断真正的由于键盘收回导致布局将要变化，就直接给有效高度，依然会有闪动的情况。
+> 3) 由于键盘收回的时候，会触发多次`measure`，如果 不判断真正的由于键盘收回导致布局将要变化，就直接给有效高度，依然会有闪动的情况。
+
+> 4) 从`Keybord`切换到`PanelView`导致的布局冲突，只有在`Keybord`正在显示的时候，才有可能触发，因此我们需要处理到`Keybord`未显示的情况。
 
 代码:
 
 `CustomRootView`
 
 ```
- private int mOldHeight = -1;
+private int mOldHeight = -1;
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+@Override
+protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
-        do {
-            final int width = MeasureSpec.getSize(widthMeasureSpec);
-            final int height = MeasureSpec.getSize(heightMeasureSpec);
+    // 由当前布局被键盘挤压，获知，由于键盘的活动，导致布局将要发生变化。
+    do {
+        final int width = MeasureSpec.getSize(widthMeasureSpec);
+        final int height = MeasureSpec.getSize(heightMeasureSpec);
 
-            Log.d(TAG, "onMeasure, width: " + width + " height: " + height);
-            if (height < 0) {
-                break;
-            }
+        Log.d(TAG, "onMeasure, width: " + width + " height: " + height);
+        if (height < 0) {
+            break;
+        }
 
-            if (mOldHeight < 0) {
-                mOldHeight = height;
-                break;
-            }
-
-            final int offset = mOldHeight - height;
+        if (mOldHeight < 0) {
             mOldHeight = height;
+            break;
+        }
 
-            if (offset >= 0) {
-                //键盘弹起 (offset > 0，高度变小)
-                Log.d(TAG, "" + offset + " >= 0 break;");
-                break;
-            }
+        final int offset = mOldHeight - height;
+        mOldHeight = height;
 
-            final PanelView bottom = getPanelView(this);
+        if (offset >= 0) {
+            //键盘弹起 (offset > 0，高度变小)
+            Log.d(TAG, "" + offset + " >= 0 break;");
+            break;
+        }
 
-            if (bottom == null) {
-                Log.d(TAG, "bottom == null break;");
-                break;
-            }
+        final PanelLayout bottom = getPanelLayout(this);
 
-            bottom.IsNeedHeight(true);
+        if (bottom == null) {
+            Log.d(TAG, "bottom == null break;");
+            break;
+        }
 
-        } while (false);
+        // 检测到真正的 由于键盘收起触发了本次的布局变化
+        bottom.setIsNeedHeight(true);
 
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    } while (false);
 
+    super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+}
+
+private PanelLayout mPanelLayout;
+
+private PanelLayout getPanelLayout(final View view) {
+    if (mPanelLayout != null) {
+        return mPanelLayout;
     }
+
+    if (view instanceof PanelLayout) {
+        mPanelLayout = (PanelLayout) view;
+        return mPanelLayout;
+    }
+
+    if (view instanceof ViewGroup) {
+        for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+            PanelLayout v = getPanelLayout(((ViewGroup) view).getChildAt(i));
+            if (v != null) {
+                mPanelLayout = v;
+                return mPanelLayout;
+            }
+        }
+    }
+
+    return null;
+
+}
+
+private int maxBottom = 0;
+
+@Override
+protected void onLayout(boolean changed, int l, int t, int r, int b) {
+    super.onLayout(changed, l, t, r, b);
+
+    if (b >= maxBottom && maxBottom != 0) {
+        // 在底部，键盘隐藏状态
+        Log.d(TAG, "keybor hiding");
+        getPanelLayout(this).setIsKeybordShowing(false);
+    } else if(maxBottom != 0){
+        Log.d(TAG, "keybor showing");
+        getPanelLayout(this).setIsKeybordShowing(true);
+    }
+
+    if (maxBottom < b) {
+        maxBottom = b;
+    }
+
+}
 ```
 
 `PanelView`
 
 ```
 @Override
-    public void setVisibility(int visibility) {
-        if (visibility == getVisibility()) {
-            return;
-        }
-        mIsNeedHeight = false;
+public void setVisibility(int visibility) {
+    if (visibility == getVisibility()) {
+        return;
+    }
+
+    if (mIsKeybordShowing) {
+        //只有在键盘显示的时候才需要处理 keybord -> panel切换的布局冲突问题
+        setIsNeedHeight(false);
 
         ViewGroup.LayoutParams l = getLayoutParams();
         l.height = 0;
         setLayoutParams(l);
-        super.setVisibility(visibility);
+    }
+    super.setVisibility(visibility);
+
+}
+
+@Override
+protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+
+    if (getVisibility() == View.VISIBLE && mIsNeedHeight) {
+        // 真正需要高度的时候（是否需要高度由是否是键盘触发布局真正要发生变化时告知 & visible）。
+        ViewGroup.LayoutParams l = getLayoutParams();
+        setVisibility(View.VISIBLE);
+        l.height = mHeight;
+        heightMeasureSpec = MeasureSpec.makeMeasureSpec(mHeight, MeasureSpec.EXACTLY);
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+}
 
-        if (getVisibility() == View.VISIBLE && mIsNeedHeight) {
-            ViewGroup.LayoutParams l = getLayoutParams();
-            setVisibility(View.VISIBLE);
-            l.height = mHeight;
-        }
 
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
+private boolean mIsKeybordShowing = false;
+public void setIsKeybordShowing(final boolean isKeybordShowing) {
+    this.mIsKeybordShowing = isKeybordShowing;
+}
 
-    private boolean mIsNeedHeight = false;
-
-    public void IsNeedHeight(final boolean isNeedheight) {
-        this.mIsNeedHeight = isNeedheight;
-    }
+private boolean mIsNeedHeight = true;
+public void setIsNeedHeight(final boolean isNeedheight) {
+    this.mIsNeedHeight = isNeedheight;
+}
 ```
 
 ## III. GitHub:
