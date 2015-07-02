@@ -93,4 +93,4 @@ alias -s bz2='tar -xjvf'
 ```
 # Vi mode
 bindkey -v
-````
+```
