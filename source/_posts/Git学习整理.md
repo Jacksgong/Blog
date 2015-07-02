@@ -151,6 +151,10 @@ git merge origin/master
 
 - 效果: 查看git并且显示具体文件修改点
 
+`git commite --amend -m [msg]`
+
+- 效果: 修改上次提交的commit message
+
 ###### 查看历史git命令（可以用来找`commit id`）
 `git reflog`
 
