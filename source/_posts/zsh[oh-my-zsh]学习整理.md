@@ -85,3 +85,12 @@ alias -s bz2='tar -xjvf'
 `~/.oh-my-zsh/plugins`
 
 如想要修改`git`插件的带的`git`相关别名或其他配置，只需要编辑:`~/.oh-my-zsh/plugins/git/git.plugin.zsh`文件即可
+
+### IV. 其他
+
+##### 使用Vi模式
+
+```
+# Vi mode
+bindkey -v
+````
