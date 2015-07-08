@@ -44,7 +44,7 @@ duoshuo: "jacksgong"
 tagcloud: true
 
 #搜索
-swift_search: false
+swift_search: true
 
 #是否开启友情链接
 #不开启——
