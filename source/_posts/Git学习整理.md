@@ -100,6 +100,10 @@ git merge origin/master
 
 - 效果: 从暂存区撤销某文件的提交
 
+`git checkout -f`
+
+- 效果: 撤销未提交的文件
+
 ### III. 状态:
 `git status`
 
