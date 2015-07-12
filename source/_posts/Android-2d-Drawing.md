@@ -17,6 +17,7 @@ Which scene?
 1. static graphic
 2. predefined animation
 
+<!--more-->
 ###II. Drawing is handled by calling canvas draw mannual.
 
 #####Which scene?
