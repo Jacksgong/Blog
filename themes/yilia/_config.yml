@@ -23,7 +23,7 @@ fancybox: true
 mathjax: false
 
 # 是否开启动画效果
-animate: false
+animate: true
 
 # 是否在新窗口打开链接
 open_in_new: false
