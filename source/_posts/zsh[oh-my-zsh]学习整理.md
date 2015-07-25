@@ -88,9 +88,13 @@ alias -s bz2='tar -xjvf'
 
 ### IV. 其他
 
-##### 使用Vi模式
+#### 推荐使用插件
 
 ```
-# Vi mode
-bindkey -v
+// vim 模式
+vi-mode
+
+// 快速用sublime打开当前目录等互动
+sublime
+
 ```
