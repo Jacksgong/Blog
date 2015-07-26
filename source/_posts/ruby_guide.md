@@ -160,7 +160,7 @@ bin/rails server
 ```
 说明已经运行在3000端口了:[http://localhost:3000](http://localhost:3000)
 
-![](img/ruby_guide_1.png)
+![](/img/ruby_guide_1.png)
 
 #### IV. 终端服务器
 
@@ -212,7 +212,8 @@ end
 
 打开地址[http://localhost:3000/welcome/say_hello](http://localhost:3000/welcome/say_hello):
 
-![](img/ruby_guide_2.png)
+![](/img/ruby_guide_2.png)
+
 ---
 ## 参考资料
 
