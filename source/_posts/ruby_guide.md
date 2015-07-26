@@ -14,11 +14,14 @@ tags:
 > 动态语言: 更少的代码做更多的事，更敏捷的开发;执行效率比静态语言（Java、C++、etc.）慢，没有编译期可以检查类型错误(单元测试/TTD来解决)
 
 <!--more-->
+
 ### Ruby语言推荐入门
 
-1. [20分钟体验Ruby](https://www.ruby-lang.org/zh_cn/documentation/quickstart/)
-2. [Code School Try Ruby](http://tryruby.org/levels/1/challenges/0)
-3. [其他语言与Ruby的对比，学过其他语言的再学习ruby有很大帮助](https://www.ruby-lang.org/zh_cn/documentation/ruby-from-other-languages/)
+1. [Ruby 学习](https://ihower.tw/rails4/ruby.html)
+2. [关于Ruby](https://www.ruby-lang.org/zh_cn/about/)
+3. [20分钟体验Ruby](https://www.ruby-lang.org/zh_cn/documentation/quickstart/)
+4. [Code School Try Ruby](http://tryruby.org/levels/1/challenges/0)
+5. [其他语言与Ruby的对比，学过其他语言的再学习ruby有很大帮助](https://www.ruby-lang.org/zh_cn/documentation/ruby-from-other-languages/)
 
 ## 推荐学习网址
 
@@ -123,22 +126,22 @@ bundle config mirror.https://rubygems.org https://ruby.taobao.org
 
 创建`demo`以后，会出现一个`demo`文件夹，进入以后的目录结构:
 
-档案/目录 |	用途
+档案/目录 | 用途
 :-:|:-
-Gemfile|	设定Rails应用程式会使用哪些Gems套件
-README|	专案说明：你可以用来告诉其他人你的应用程式是做什么用的，如何使用等等。
-Rakefile|	用来载入可以被命令列执行的一些Rake任务
-app/|	放Controllers、Models和Views档案，接下来的内容主要都在这个目录。
-config/|	应用程式设定档、路由规则、资料库设定等等
-config.ru|	用来启动应用程式的Rack伺服器设定档
-db/|	资料库的结构纲要
-doc/|	用来放你的文件
-lib/|	放一些自定的Module和类别档案
-log/|	应用程式的Log记录档
-public/|	唯一可以在网路上看到的目录，这是你的图档、JavaScript、CSS和其他静态档案摆放的地方
-bin/|	放rails这个指令和放其他的script指令
-test/|	单元测试、fixtures及整合测试等程式
-tmp/|	暂时性的档案
+Gemfile|    设定Rails应用程式会使用哪些Gems套件
+README| 专案说明：你可以用来告诉其他人你的应用程式是做什么用的，如何使用等等。
+Rakefile|   用来载入可以被命令列执行的一些Rake任务
+app/|   放Controllers、Models和Views档案，接下来的内容主要都在这个目录。
+config/|    应用程式设定档、路由规则、资料库设定等等
+config.ru|  用来启动应用程式的Rack伺服器设定档
+db/|    资料库的结构纲要
+doc/|   用来放你的文件
+lib/|   放一些自定的Module和类别档案
+log/|   应用程式的Log记录档
+public/|    唯一可以在网路上看到的目录，这是你的图档、JavaScript、CSS和其他静态档案摆放的地方
+bin/|   放rails这个指令和放其他的script指令
+test/|  单元测试、fixtures及整合测试等程式
+tmp/|   暂时性的档案
 
 #### III. 启动服务器
 
@@ -214,10 +217,100 @@ end
 
 ![](/img/ruby_guide_2.png)
 
+### 进一步学习
+
+#### View相关
+
+```
+#link_to 是Rails内部方法用于输出超链接，welcome_say_hello_path输出地址/welcome/say_hello
+<p><%=link_to 'Hello!', welcome_say_hello_path %></p>
+#root_path 首页地址(http://localhost:3000/)
+<p><%=link_to 'Home', root_path %></p>
+```
+
+#### Model相关
+
+> Rails数据设定文件是: `config/database.yml`
+> Rails内建数据库SQLite是一套非常轻量的数据库文件(资料库)而已，流量大的线上环境不合适，用来开发和测试非常好用。
+
+##### `YAML`
+
+> 这里的配置文件是`YAML`格式文件，`YAML`是可读性高的表达配置文件的存档格式。
+
+严格要求: 
+1. 缩进
+2. 冒号后面必须有空格
+ 
+**注意:** 数字与换行尽量用引号，避免出错(一串数字会被解析成Fixnum)
+
+
+##### 三个模式在`config/database.yml`配置:
+
+- `development` 开发模式
+- `test` 测试模式，用在自动测试时，由于test的数据库会被删除，因此不要配置成`development`的与`production`的
+- `prodution`正式上线的模式
+
+```
+#建立资料库,会在db/目录下建立development、test的SQLite3的存档
+bin/rake db:create
+
+#Rake是Ruby的命令工具，这个命令列出rake的所有可用指令
+rake -T
+```
+
+##### scaffold鹰架功能
+
+> 会自动生成一组Model、Views、Controller代码，完成一个简易的C(Creat)R(Read)U(Update)D(Delete)的资料库
+
+```
+# 利用scaffold功能，建立person表，包含字段name，bio，birthday
+bin/rails g scaffold person name:string bio:text birthday:date
+
+# 通过迁移档，来生成资料页(http://localhost:3000/people)，支持rud
+bin/rake db:migrate
+```
+
+目录 | 说明
+:-: | :-
+db/migrate/20141021135430_create_people.rb| 用来建立people资料库资料表的Migration(你的档案开头名称会有不同的时间)
+app/models/person.rb|   person model档案
+app/controllers/people_controller.rb|   people controller档案
+app/views/people/index.html.erb|    用来显示所有文章的index页面
+app/views/people/edit.html.erb| 用来编辑文章的页面
+app/views/people/show.html.erb| 用来显示特定一篇文章的页面
+app/views/people/new.html.erb|  用来新增文章的页面
+app/views/people/_form.html.erb|    用来显示编辑和新增文章的表单局部(Partial)样板
+app/helpers/people_helper.rb|   可在文章Views中使用的Helper方法
+config/routes.rb|   设定URL路由规则的档案，scaffold再此新增了一行resources :people
+app/assets/stylesheets/scaffold.css.scss|   Scaffold鹰架提供的样式档案
+app/assets/stylesheets/people.css.scss| people的CSS样式档案
+app/assets/javascripts/people.js.coffee|    people的JavaScript档案
+
+#### `config/routes.rb`相关
+
+```
+Rails::Application.routes.draw do
+    ...
+    #设置wecome为首页
+    root :to => "welcome#index"
+    ...
+end
+```
+
+
+## 错误排查
+
+### NameError
+
+读取了一个不存在/没有初始化过的成员变量
+
+### SyntaxError:unexpected$end
+
+多了或少了`end`关键字，可以单独用`ruby -w`去执行发生错误的代码，例如`ruby -w app/controller/welcome_controller`这样会打开Ruby的警告模式
+
+
 ---
 ## 参考资料
 
 - [Ruby on Rails实战圣经](https://ihower.tw/rails4)
 - [RubyGems镜像 - 淘宝网](http://ruby.taobao.org/)
-
-
