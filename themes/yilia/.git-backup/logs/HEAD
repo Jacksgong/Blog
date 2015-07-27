@@ -1,3 +1,9 @@
 0000000000000000000000000000000000000000 82755c20beebdef77b69a4d488b853ac64110aa9 Jacksgong <igzhenjie@gmail.com> 1435065519 -0400	clone: from https://github.com/litten/hexo-theme-yilia.git
 82755c20beebdef77b69a4d488b853ac64110aa9 cb0f912fa0db8e53ed742acd95eb6c199cfdca48 Jacksgong <igzhenjie@gmail.com> 1435068578 -0400	commit: diy
 cb0f912fa0db8e53ed742acd95eb6c199cfdca48 dae780823e90880d6055040329927902186e2d16 Jacksgong <jacks@liulishuo.com> 1435206185 +0800	commit: diy
+dae780823e90880d6055040329927902186e2d16 fc33519bde080d15ed47c6f77569630f392d9d07 Jacksgong <igzhenjie@mail.com> 1438014712 +0800	commit: diy..
+fc33519bde080d15ed47c6f77569630f392d9d07 dff571cb671179fc22c53d40d07419d1d378279a Jacksgong <igzhenjie@mail.com> 1438014765 +0800	rebase: checkout upstream/master
+dff571cb671179fc22c53d40d07419d1d378279a a35bc76aa652b3034608ac639c8f810649fb2270 Jacksgong <igzhenjie@mail.com> 1438014765 +0800	rebase: diy
+a35bc76aa652b3034608ac639c8f810649fb2270 4b9298f572f0cf5da52e38087fcd345b07bf1bcc Jacksgong <igzhenjie@mail.com> 1438014766 +0800	rebase: diy
+4b9298f572f0cf5da52e38087fcd345b07bf1bcc 5046528f8391f2f1ea3af8271b6457bd15428051 Jacksgong <igzhenjie@mail.com> 1438014766 +0800	rebase: diy..
+5046528f8391f2f1ea3af8271b6457bd15428051 5046528f8391f2f1ea3af8271b6457bd15428051 Jacksgong <igzhenjie@mail.com> 1438014766 +0800	rebase finished: returning to refs/heads/master
