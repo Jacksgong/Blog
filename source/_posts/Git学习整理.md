@@ -225,6 +225,7 @@ Head 的内容
 - 效果: 给对应commit id打上标签，并给标签加上了描述，并且加上PGP签名，如果不提供comit id，默认给最新一次提交打上标签
 	
 ##### 显示:
+
 `git tag`
 
 - 效果: 查看所有标签
@@ -234,11 +235,13 @@ Head 的内容
 - 效果: 显示标签那次提交的信息
 	
 ##### 删除:
+
 `git tag -d [<标签名>]`
 
 - 效果: 删除标签
 	
 ##### 远程:
+
 `git push [<远程库分支名>] [<标签名>]`
 
 - 效果: 将标签推送到远程库分支
@@ -258,6 +261,7 @@ Head 的内容
 `git mv --force myfile MyFile`
 
 # Git 配置
+
 ##### 配置文件:
 
 局部: 项目工作区`.git/config`
@@ -265,16 +269,19 @@ Head 的内容
 全局: `~/.gitconfig`
 
 ##### 命令配置:
+
 `git config --global color.ui true`
 
 - 效果: Git会适应当地显示不同颜色
 	
 ##### 忽略特殊文件:
+
 在项目工作区根目录下直接创建`.gitignore`文件然后望里面添加文件名即可
 
 可以参考: [https://github.com/github/gitignore](https://github.com/github/gitignore)
 
 ##### 别名配置:
+
 `git config --global alias.[<别名>] [对应命令]`
 
 推荐别名:
@@ -318,6 +325,20 @@ git pull upstream master
 ```
 git push origin master
 ```
+
+## XII. 其他疑难问题
+
+调用`git fetch`的时候，出现:
+
+```
+Auto packing the repository in background for optimum performance.
+See "git help gc" for manual housekeeping.
+```
+
+你执行`git fack`会发现一堆的挂起的`dangling blob xxxxxxxxxxxxxxx`
+
+此时只需要: **gc**下 `git gc --prune=now`
+
 ----
 
 > 最后如果想要完整学习的，推荐这个站点: http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000
