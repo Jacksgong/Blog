@@ -29,7 +29,9 @@ animate: false
 open_in_new: false
 
 # Miscellaneous
-google_analytics: 'UA-64459895-1'
+#google_analytics: 'UA-64459895-1'
+baidu_analytics: 'e26ce8275e47e0826b4385b709462fef'
+
 favicon: /favicon.png
 
 #你的头像url
