@@ -7,7 +7,7 @@ title: Jacks Blog
 subtitle: 我尝试过很多的开发，目前是英语流利说的Android工程师。
 description: Jacksgong | 龚振杰 | Jacks
 author: Jacksgong
-language:
+language: zh-Hans
 timezone:
 
 # URL
@@ -66,7 +66,7 @@ plugins:
 - hexo-generator-feed
 
 ## Themes: http://hexo.io/themes/
-theme: yilia 
+theme: next
 
 # Disqus Comments
 #disqus_short_name: jacksgong
@@ -86,3 +86,12 @@ deploy:
   type:
 
 #baidu_analytics: 4784cbc58febd16c08b3dc017f5d5c6c
+
+#for nexT
+
+duoshuo_shortname: jacksgong
+duoshuo_share: true
+duoshuo_hotartical: true
+
+baidu_analytics: e26ce8275e47e0826b4385b709462fef
+swiftype_key: 4zCsp5m3sDz7XqsupTPs
