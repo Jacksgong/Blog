@@ -12,3 +12,6 @@
 [remote "upstream"]
 	url = https://github.com/litten/hexo-theme-yilia.git
 	fetch = +refs/heads/*:refs/remotes/upstream/*
+[remote "upstreamj"]
+	url = https://github.com/Jacksgong/hexo-theme-yilia.git
+	fetch = +refs/heads/*:refs/remotes/upstreamj/*
