@@ -83,4 +83,4 @@ tags:
 
 ## III. GitHub:
 
-[JKeybordPanelSwitch](https://github.com/Jacksgong/JKeybordPanelSwitch)
+[JKeyboardPanelSwitch](https://github.com/Jacksgong/JKeyboardPanelSwitch)
