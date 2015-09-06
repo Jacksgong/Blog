@@ -117,7 +117,7 @@ config 'swap'
         option  enabled '1'
 ```
 
-3. 接着把4M文件系统中的文件拷贝到u盘
+接着把4M文件系统中的文件拷贝到u盘
 
 > 这么做附带是，能够从u盘重启失败，把u盘拔出来，还是可以通过路由器4M闪存进入系统操作
 
@@ -132,7 +132,7 @@ umount /tmp/cproot
 echo option force_space >> /etc/opkg.conf
 ```
 
-4. 重启路由器
+重启路由器
 
 #### 5). 挂载最后的配置
 
