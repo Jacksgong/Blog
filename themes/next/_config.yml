@@ -44,7 +44,7 @@ scheme: Mist
 #  - post    expand on posts automatically. Default.
 #  - always  expand for all pages automatically
 #  - hide    expand only when click on the sidebar toggle icon.
-sidebar: post
+sidebar: hide 
 #sidebar: always
 #sidebar: hide
 
