@@ -18,6 +18,9 @@ tags:
 
 <!-- more -->
 
+## 刷完以后
+![](/img/wr720n-1.png)
+
 ## I. 选用固件
 
 - 没有刷过OpenWrt，选择这个: [openwrt-ar71xx-generic-tl-wr720n-v3-squashfs-factory.bin](http://downloads.openwrt.org/barrier_breaker/14.07/ar71xx/generic/openwrt-ar71xx-generic-tl-wr720n-v3-squashfs-factory.bin)
@@ -144,6 +147,10 @@ echo option force_space >> /etc/opkg.conf
 6. 选择/dev/sda1，文件系统选择ext4，这时候会出来一个选项，设置为rootfs，选中它，再选中启用
 7. 保存并应用
 
+#### 6). 挂载最终效果
+
+![](/img/wr720n-4.png)
+
 ## V. 安装chinadns和shadowscks
 
 > 参考 [ShadowSocks安装](http://openwrt-dist.sourceforge.net/)
@@ -183,6 +190,8 @@ opkg install luci-app-shadowsocks-spec
 
 #### 2). 配置ChinaDNS
 
+![](/img/wr720n-2.png)
+
 进入 服务->ChinaDNS 修改上游服务器为:
 
 ```
@@ -190,6 +199,8 @@ opkg install luci-app-shadowsocks-spec
 ```
 
 #### 3). 配置Shadowsocks
+
+![](/img/wr720n-5.png)
 
 1. 进入 服务->ShadowSocks 配置好全局配置，UDP转发 选择勾选。
 2. UDP本地端口保证与ChinaDNS中 上游服务器 中设置的本地的端口一样: 5151。
@@ -200,6 +211,9 @@ opkg install luci-app-shadowsocks-spec
 
 网络->DHCP/DNS设置->基本设置->DNS转发设置为:
 
+
+![](/img/wr720n-3.png)
+
 > 这里确实是#号
 
 ```
@@ -209,7 +223,9 @@ opkg install luci-app-shadowsocks-spec
 127.0.0.1#5353
 ```
 
-基本设置->host和解析文件
+基本设置->HOST和解析文件
+
+![](/img/wr720n-6.png)
 
 1. 忽略解析文件 打勾
 2. 忽略HOSTS文件 打勾
