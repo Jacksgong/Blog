@@ -6,6 +6,7 @@ tags:
 - 路由器
 - 翻墙
 - shadowsocks
+- OpenWrt
 
 ---
 
