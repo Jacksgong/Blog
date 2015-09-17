@@ -20,11 +20,11 @@ tags:
 
 ![](https://raw.githubusercontent.com/Jacksgong/SpanEllipsizeEnd/master/imgs/demo.jpg)
 
-## 基本算法
+## I. 基本算法
 
 ![](https://raw.githubusercontent.com/Jacksgong/SpanEllipsizeEnd/master/imgs/algorithm.jpg)
 
-## 使用方法
+## II. 使用方法
 
 简单如下:
 
@@ -32,6 +32,6 @@ tags:
 mDemoTv.setText(SpanEllipsizeEndHelper.matchMaxWidth(demoSS, mDemoTv));
 ```
 
-## GitHub
+## III. GitHub
 
 [SpanEllipsizeEnd](https://github.com/Jacksgong/SpanEllipsizeEnd)
