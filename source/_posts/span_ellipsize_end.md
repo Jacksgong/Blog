@@ -26,7 +26,7 @@ tags:
 
 ## 使用方法
 
-在最终`TextView#setText`前，轮一遍`SpanEllipsizeEndHelper.matchMaxWidth(SpannableString,TextView)`再传入。
+简单如下:
 
 ```
 mDemoTv.setText(SpanEllipsizeEndHelper.matchMaxWidth(demoSS, mDemoTv));
