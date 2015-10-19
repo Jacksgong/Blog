@@ -125,11 +125,11 @@ UNSPECIFIED | 希望子视图 任意大小（很少遇到）
 
 - 实际上应用程序也可以通过`setPressed()`方法来控制的
 
-## 状态变化回调
+## IV. 状态变化回调
 
 ![](/img/android_view-1.jpg)
 
-## IV. View#invalidate
+## V. View#invalidate
 
 > 需要注意`invalidate`虽然最终调到`performTraversals()`但是很可能没有 潜质**重新测量标志**，大小没有变化，因此不会执行`measure`和`layout`，只有`draw`可以执行到。
 > 相比之下如果希望视图绘制流程完整重新走一遍，需要调用`requestLayout`。
