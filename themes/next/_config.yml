@@ -16,7 +16,7 @@ keywords: "Jacksgong,Jacks,Jacks Blog,龚振杰,英语流利说,微信,wechat"
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
 # Set rss to specific value if you have burned your feed already.
-rss:
+rss: /atom.xml
 
 # Icon fonts
 # Place your font into next/source/fonts, specify directory-name and font-name here
@@ -44,7 +44,7 @@ scheme: Mist
 #  - post    expand on posts automatically. Default.
 #  - always  expand for all pages automatically
 #  - hide    expand only when click on the sidebar toggle icon.
-sidebar: hide 
+sidebar: hide
 #sidebar: always
 #sidebar: hide
 
