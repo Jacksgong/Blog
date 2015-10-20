@@ -1,4 +1,4 @@
-title: Android View相关复习梳理
+title: Android绘制整理
 date: 2015-10-20 00:48:03
 tags:
 - Android
