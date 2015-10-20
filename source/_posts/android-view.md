@@ -114,7 +114,7 @@ UNSPECIFIED | 希望子视图 任意大小（很少遇到）
 
 ### window_focused
 
-- 应用程序不能改变
+- 应用程序不能改变，由系统控制
 - 表示视图是否处于正在交互的窗口中
 
 ### selected
@@ -131,7 +131,7 @@ UNSPECIFIED | 希望子视图 任意大小（很少遇到）
 
 ## V. View#invalidate
 
-> 需要注意`invalidate`虽然最终调到`performTraversals()`但是很可能没有 潜质**重新测量标志**，大小没有变化，因此不会执行`measure`和`layout`，只有`draw`可以执行到。
+> 需要注意`invalidate`虽然最终调到`performTraversals()`但是很可能没有 **重新测量标志**，大小没有变化，因此不会执行`measure`和`layout`，只有`draw`可以执行到。
 > 相比之下如果希望视图绘制流程完整重新走一遍，需要调用`requestLayout`。
 
 ![](/img/android_view-2.jpg)
