@@ -1,4 +1,4 @@
-title: Android绘制整理
+title: Android绘制布局相关整理
 date: 2015-10-20 00:48:03
 tags:
 - Android
@@ -9,7 +9,15 @@ tags:
 
 ---
 
-## I. `LayoutInflater`
+## I. 布局简单优化
+
+1. 尽量少的布局层级
+2. `LinearLayout`性能比`RelativeLayout` 稍高
+3. `ViewStub`代替`include`来引用不常用的布局
+4. 用`merge`来代替根节点是`FrameLayout`，并且不需要`background`或`padding`等属性时。
+5. 用`merge`来代替`include`的顶节点，这样被引入时顶节点会自动被忽略。
+
+## II. `LayoutInflater`
 
 - 使用XmlPull来解析
 - `rInflate()`方法(中不断递归)遍历根布局下的子布局
@@ -22,7 +30,7 @@ tags:
 
 1. 其中的`createView()`方法中通过反射创建出View实例
 
-## II. 绘制过程
+## III. 绘制过程
 
 ### 开始
 
@@ -101,7 +109,7 @@ UNSPECIFIED | 希望子视图 任意大小（很少遇到）
 
 其实每个View都可以有滚动条的。
 
-## III. 视图状态
+## IV. 视图状态
 
 > 这里只提到需要特别注意到的。
 
@@ -125,11 +133,11 @@ UNSPECIFIED | 希望子视图 任意大小（很少遇到）
 
 - 实际上应用程序也可以通过`setPressed()`方法来控制的
 
-## IV. 状态变化回调
+## V. 状态变化回调
 
 ![](/img/android_view-1.jpg)
 
-## V. View#invalidate
+## VI. View#invalidate
 
 > 需要注意`invalidate`虽然最终调到`performTraversals()`但是很可能没有 **重新测量标志**，大小没有变化，因此不会执行`measure`和`layout`，只有`draw`可以执行到。
 > 相比之下如果希望视图绘制流程完整重新走一遍，需要调用`requestLayout`。
@@ -139,10 +147,11 @@ UNSPECIFIED | 希望子视图 任意大小（很少遇到）
 
 ---
 
-> ps 第四篇是一些简单的应用层，就没有整理了
+> ps [第四篇](http://blog.csdn.net/guolin_blog/article/details/17357967)是一些简单的应用层，就没有整理了
 
 ----
 
 - [Android LayoutInflater原理分析，带你一步步深入了解View(一)](http://blog.csdn.net/guolin_blog/article/details/12921889)
 - [Android视图绘制流程完全解析，带你一步步深入了解View(二)](http://blog.csdn.net/guolin_blog/article/details/16330267)
 - [Android视图状态及重绘流程分析，带你一步步深入了解View(三)](http://blog.csdn.net/guolin_blog/article/details/17045157)
+- [Android 布局优化](http://www.stormzhang.com/android/2014/04/10/android-optimize-layout/gg)
