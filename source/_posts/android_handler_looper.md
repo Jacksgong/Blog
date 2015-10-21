@@ -12,9 +12,10 @@ tags:
 
 > 整理了半天，还不如画张图来的清晰
 
+<!-- more -->
+
 ![](/img/android_handler_looper.jpg)
 
-<!-- more -->
 
 ## II. 常见异常及原因
 
