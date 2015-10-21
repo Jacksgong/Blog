@@ -23,6 +23,8 @@ tags:
 - `rInflate()`方法(中不断递归)遍历根布局下的子布局
 - 由于`setContentView`默认是添加到id为`content`的`FrameLayout`中，因此`LyoautParams`有效。
 
+<!-- more -->
+
 ### 最终结果:
 是一个完整的DOM结构，返回的是顶层布局。
 
