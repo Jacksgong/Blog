@@ -14,7 +14,7 @@ tags:
 
 <!-- more -->
 
-![](/img/android_handler_looper.jpg)
+![](/img/android_handler_looper.png)
 
 
 ## II. 常见异常及原因
