@@ -14,11 +14,11 @@ tags:
 
 <!-- more -->
 
-### 1. Handler创建所在线程
+#### 1. Handler创建所在线程
 
 ![](/img/android_handler_looper-1.png)
 
-### 1. Handler发消息所在线程
+#### 2. Handler发消息所在线程
 
 ![](/img/android_handler_looper-2.png)
 
