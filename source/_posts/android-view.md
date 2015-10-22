@@ -17,13 +17,22 @@ tags:
 4. 用`merge`来代替根节点是`FrameLayout`，并且不需要`background`或`padding`等属性时。
 5. 用`merge`来代替`include`的顶节点，这样被引入时顶节点会自动被忽略。
 
-## II. `LayoutInflater`
+<!-- more -->
+
+## II. 绘制相关深度优化
+
+1. 已知View大小的，自定义View，`onMeasure`时直接`setMeasuredDimension`
+2. 已知布局或者其他特定规律的，直接自定义View，达到减少层级，针对性`measure`、`layout`、`draw`
+3. 如果布局含有复杂的动画，或者需要复杂的绘制，考虑在独立的绘制线程处理，而不block UI线程，此时考虑`SurfaceView`或`TextureView`(Android 4.0引入)(相比`SurfaceView`而言，可以像常规视图一样被改变)
+4. 使用`OpenGL ES` API进行绘制，可以更加针对性的高性能绘图。
+5. 如果资源图片比较大，考虑放在`drawable-nodpi`或者直接放在asset，防止获取资源的时候缩放暂用大量内存，也产生不必要的延时。
+
+## III. `LayoutInflater`
 
 - 使用XmlPull来解析
 - `rInflate()`方法(中不断递归)遍历根布局下的子布局
 - 由于`setContentView`默认是添加到id为`content`的`FrameLayout`中，因此`LyoautParams`有效。
 
-<!-- more -->
 
 ### 最终结果:
 是一个完整的DOM结构，返回的是顶层布局。
@@ -32,7 +41,7 @@ tags:
 
 1. 其中的`createView()`方法中通过反射创建出View实例
 
-## III. 绘制过程
+## IV. 绘制过程
 
 ### 开始
 
@@ -111,7 +120,7 @@ UNSPECIFIED | 希望子视图 任意大小（很少遇到）
 
 其实每个View都可以有滚动条的。
 
-## IV. 视图状态
+## V. 视图状态
 
 > 这里只提到需要特别注意到的。
 
@@ -135,11 +144,11 @@ UNSPECIFIED | 希望子视图 任意大小（很少遇到）
 
 - 实际上应用程序也可以通过`setPressed()`方法来控制的
 
-## V. 状态变化回调
+## VI. 状态变化回调
 
 ![](/img/android_view-1.png)
 
-## VI. View#invalidate
+## VII. View#invalidate
 
 > 需要注意`invalidate`虽然最终调到`performTraversals()`但是很可能没有 **重新测量标志**，大小没有变化，因此不会执行`measure`和`layout`，只有`draw`可以执行到。
 > 相比之下如果希望视图绘制流程完整重新走一遍，需要调用`requestLayout`。
@@ -157,3 +166,4 @@ UNSPECIFIED | 希望子视图 任意大小（很少遇到）
 - [Android视图绘制流程完全解析，带你一步步深入了解View(二)](http://blog.csdn.net/guolin_blog/article/details/16330267)
 - [Android视图状态及重绘流程分析，带你一步步深入了解View(三)](http://blog.csdn.net/guolin_blog/article/details/17045157)
 - [Android 布局优化](http://www.stormzhang.com/android/2014/04/10/android-optimize-layout/)
+- [性能优化之布局优化](http://www.trinea.cn/android/layout-performance/)
