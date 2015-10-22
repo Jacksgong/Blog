@@ -14,7 +14,13 @@ tags:
 
 <!-- more -->
 
-![](/img/android_handler_looper.png)
+### 1. Handler创建所在线程
+
+![](/img/android_handler_looper-1.png)
+
+### 1. Handler发消息所在线程
+
+![](/img/android_handler_looper-2.png)
 
 
 ## II. 常见异常及原因
