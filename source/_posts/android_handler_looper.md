@@ -66,7 +66,12 @@ public Handler() {
 
 因此创建`Handler`的同时是需要保证所在线程已经有了局部变量`Looper`的实例，才能保证`Handler`接下来真正运作。
 
+#### 通常解决方法:
+
+在创建`Handler`前，主动调用下`Looper.prepare()`
+
 > ps: 每个线程的的`Looper#prepare`相对所在线程只能被调用一次，否则会报`"Only one Looper may be created per thread"`(参见`Looper#prepare`)
+> ps: 之所以主线程直接创建`Handler`不会抛出类似异常，是因为在程序启动时，系统已经帮我们调用了`Looper#prepare`(参见`ActivityThread#main`)
 
 ---
 
