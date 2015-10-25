@@ -153,7 +153,7 @@ tags:
 > 对于卡顿相关排查推荐参看: [Android性能优化案例研究(上)](http://www.importnew.com/3784.html)与[Android性能优化案例研究（下）](http://www.importnew.com/4065.html)
 
 - 减少不必要的不透明背景相互覆盖，减少重绘，因为GPU不得不一遍又一遍的画这些图层
-- 保证UI线程一次完整的绘制(measure、layout、draw)不超过16ms(60Hz)，(比如Adapter#getView否则就会出现掉帧，卡顿的现象
+- 保证UI线程一次完整的绘制(measure、layout、draw)不超过16ms(60Hz)，否则就会出现掉帧，卡顿的现象
 - 在UI线程中频繁的调度中，尽量少的对象创建，减少gc等。
 - 分步加载（减少任务颗粒）、预加载、异步加载(区别出耗时任务，采用异步加载)
 
