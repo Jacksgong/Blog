@@ -217,7 +217,7 @@ tags:
 - 智能预加载，通过权重等方式结合业务层面，分析出哪些更有可能被用户浏览使用，然后再在某个可能的时刻进行预加载。如，进入朋友圈之前通过用户行为，智能预加载部分原图。
 - 做好有损体验的准备，在一些无法避免的问题面前做好有损体验（如，非UI进程crash，可以自己解决就不要让用户感知，或者UI进程crash了，做好场景恢复）
 - 做好各项有效监控：crash(注意还有JNI的)、anr(定期扫描文件)、掉帧(绘制监控、activity生命周期监控等)、异常状态监控(本地Log根据需要不同级别打Log并选择性上报监控)等
-- 文件存储推荐放在`/sdcard/Android/data/[package name]/cache/`里(在应用卸载时，会随即删除)(`Context#getExternalFilesDir()`)，而非`/sdcard/`根目录建文件夹（节操问题）
+- 文件存储推荐放在`/sdcard/Android/data/[package name]/`里(在应用卸载时，会随即删除)(`Context#getExternalFilesDir()`)，而非`/sdcard/`根目录建文件夹（节操问题）
 - 通过gradle的`shrinkResources`与`minifyEnabled`参数可以简单快速的在编包的时候自动删除无用资源
 - 由于resources.arsc在api8以后，appt中默认采用UTF-8编码，导致资源中大都是中文的resources.arsc相比采用UTF-16编码更大，此时，可以考虑appt中指定使用UTF-16
 
