@@ -207,7 +207,7 @@ tags:
 
 - 全局统一`BitmapFactory#decode`出口，捕获此处decode oom，控制长宽（小于屏幕分辨率大小 ）
 - 如果采用RGB_8888 oom了，尝试RGB_565(相比内存小一半以上(w*h*2(bytes)))
-- 如果还考虑2.x监控的话，设置`BitmapFactory#options`的`InNativeAlloc`参数为true，此时decode的内存不会上报到dvm中，便不会oom。
+- 如果还考虑2.x机器的话，设置`BitmapFactory#options`的`InNativeAlloc`参数为true，此时decode的内存不会上报到dvm中，便不会oom。
 
 
 ## IX. 其他
