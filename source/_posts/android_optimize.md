@@ -141,7 +141,7 @@ tags:
 
 - 充分独立，解耦部分
 - 大内存(如临时展示大量图片的Activity)、无法解决的crash、内存泄漏等问题，考虑通过独立进程解决
-- 独立UI进程，需要在后台长期存活的服务(参看[Android中线程、进程与组件的关系](http://blog.dreamtobe.cn/2015/04/08/android_thread_process_components/))
+- 独立于UI进程，需要在后台长期存活的服务(参看[Android中线程、进程与组件的关系](http://blog.dreamtobe.cn/2015/04/08/android_thread_process_components/))
 - 非己方第三方库（无法保证稳定、性能等问题，并且独立组件），可考虑独立进程
 
 > 最后，多进程存在的两个问题: 相比而言会多由于多进程通讯，或者首次掉起进程的消耗等，带来的cpu、内存等的资源竞争。也许对于部分同事来说，会还有可读性问题吧，毕竟多了层IPC绕了点。
