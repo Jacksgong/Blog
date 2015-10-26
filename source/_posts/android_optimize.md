@@ -184,7 +184,7 @@ tags:
 
 #### 5. 数据库层:
 
-[Realm](https://realm.io): 效率极高（基于TightDB，底层C++闭源，Java层开源，简单使用，性能远高于SQLite等）
+[Realm](https://realm.io): 效率极高(Falcon Pro 3的作者Joaquim用了该库以后，所有数据库操作都放到了UI线程)（基于TightDB，底层C++闭源，Java层开源，简单使用，性能远高于SQLite等）
 
 #### 6. Crash上报:
 
