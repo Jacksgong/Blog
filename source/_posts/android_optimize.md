@@ -190,7 +190,11 @@ tags:
 
 [Fabric](https://fabric.io): 全面的信息、稳定的数据、及时的通知
 
-#### 7. 其他
+#### 7. 内存泄漏自动化检测
+
+[LeakCanary](https://github.com/square/leakcanary): 自动化泄漏检测与分析 ( 可以看看这个[LeakCanary使用总结](http://blog.dreamtobe.cn/2015/05/18/LeakCanary%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/)与[Leakcanary Square的一款Android/Java内存泄漏检测工具](http://blog.dreamtobe.cn/2015/05/12/Leakcanary-Square%E7%9A%84%E4%B8%80%E6%AC%BEAndroid:Java%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E6%A3%80%E6%B5%8B%E5%B7%A5%E5%85%B7/))
+
+#### 8. 其他
 
  - 代码质量: [phabricator 的arc diff](http://phabricator.org) (尽量小颗粒度的arc diff 与update review)，其实也可以看看Google是如何做的: [笔记-谷歌是如何做代码审查的](http://blog.dreamtobe.cn/2015/03/23/%5B笔记%5D谷歌是如何做代码审查的/)，还有一点的TODO要写好deadline与master
  - 编包管理: [Gitlab CI](https://about.gitlab.com/gitlab-ci/) (结合Gitlab，功能够用，方便)
