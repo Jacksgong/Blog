@@ -188,7 +188,7 @@ tags:
 
 #### 6. Crash上报:
 
-[Fabric](https://fabric.io): 全面的信息、稳定的数据、及时的通知
+[Fabric](https://fabric.io): 全面的信息(新版本还支持JNI Crash获取和上报)、稳定的数据、及时的通知、强大的反混淆(其实在混淆后有上传mapping)
 
 #### 7. 内存泄漏自动化检测
 
