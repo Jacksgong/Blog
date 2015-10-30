@@ -171,7 +171,7 @@ tags:
 相关了解可以参看: [RxJava学习整理](http://blog.dreamtobe.cn/2015/04/29/RxJava学习整理/)
 
 #### 2. 图片加载:
-- 小型快捷: [Picasso](https://github.com/square/picasso) (接口干净、支持okhttp、功能强大、稳定、高效)
+- 小型快捷: [Picasso](https://github.com/square/picasso) (接口干净、支持okhttp、功能强大、稳定、高效, 可以延读: [PhotoGallery、Volley、Picasso 比较](http://blog.dreamtobe.cn/2015/04/28/PhotoGallery%E3%80%81Volley%E3%80%81Picasso-%E6%AF%94%E8%BE%83/))
 - 大项目考虑: [Fresco](http://fresco-cn.org) (2.5M，pipeline解决资源竞争、Native Heep解决OOM，的同时减少GC)
 
 #### 3. 网络底层库:
