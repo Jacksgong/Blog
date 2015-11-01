@@ -33,7 +33,7 @@ tags:
 - 运行速度更快，且更省电 - 运行程序时无需额外的编译、加载转换等，少去这块的CPU资源竞争。
 
 
-## II. ART与Dalvik相同之处
+## III. ART与Dalvik相同之处
 
 
 接口名 | 备注
@@ -45,7 +45,7 @@ tags:
 
 > `persist.sys.dalvik.vm.lib`: 系统属性，若等于`libdvm.so`则当前使用的是Dalvik虚拟机，若等于`libstart.so`，则当前使用的是ART虚拟机
 
-## III. ART与Dalvik不同之处
+## IV. ART与Dalvik不同之处
 
 ART执行的是本地机器码 -> 在应用Android安装时进行
 
@@ -55,7 +55,7 @@ ART | 解析翻译dex字节码为本地代码(AOT) | 直接执行本地代码
 Dalvik | 将dex字节码优化生成odex文件(`PackageManagerService`请求守护进程`installd`来执行) | 通过解释器(Android 2.2引入JIT(缓存热点代码的解释结果))对dex字节码解释为机器码，再执行机器码
 
 
-## IV. 深入
+## V. 推敲
 
 ### 1. 安装
 > 最终安装优化/翻译 结果都是保存在`odex`文件中
