@@ -99,6 +99,7 @@ tags:
 ## IV. JNI抉择
 
 > JNI不一定显得更快，有些会更慢。
+> Android JVM相关知识，可参看: [ART、Dalvik](http://blog.dreamtobe.cn/2015/10/20/android_art_dalvik/)
 
 > 特点: 不用在虚拟机的框子下写代码
 
@@ -106,35 +107,6 @@ tags:
 - 如果是Dalvik，将省去了由JIT编译期转为本地代码的这个步骤。 -- Good
 - Java调用JNI的耗时较Java调用Java肯定更慢，虽然随着JDK版本的升级，差距已经越来越小(JDK1.6版本是5倍Java调用Java方法的耗时) -- Bad
 - 内存不在Java Heap，没有OOM风险，有效减少gc。 -- Good
-
----
-
-### Android JVM
-
-> 就GC而言，都是采用Mark-Sweep算法进行垃圾回收
-
-- 类似单独沙箱体系，每启动一个应用程序，同时启动JVM，应用程序运行于JVM之上
-
-#### 1. Dalvik
-
-##### dex字节码解释器
-
-逐条逐行的执行字节码指令
-
-##### JIT(Just-In-Time)编译器
-
-当多次运行速度稍慢的代码时，JIT编译器则会自动将热点代码编译并缓存起来，由此执行速度会逐渐加快
-
-#### 2. ART
-
-> Ahead-Of-Time(AOT)编译
-
-在安装时就已经编译成本地代码，因此只需要编译一次，运行时直接执行（应用运行更快(少去该部分的资源竞争)的同时，更省电）。
-
- - 占用内存空间变大。
- - 运行速度更快，且更省电 - 运行程序时无需额外的编译、加载转换等，少去这块的CPU资源竞争。
-
----
 
 ## V. 多进程抉择
 
@@ -236,10 +208,6 @@ tags:
 - [移动端网络优化](http://www.trinea.cn/android/mobile-performance-optimization/)
 - [性能优化之Java(Android)代码优化](http://www.trinea.cn/android/java-android-performance/)
 - [JNI性能测试一—JNI调用C与Java调用java性能比较](http://blog.csdn.net/zgjxwl/article/details/6232577)
-- [Dalvik VM vs. ART (Android Runtime): Impact for end-users?](http://android.stackexchange.com/questions/56773/dalvik-vm-vs-art-android-runtime-impact-for-end-users)
-- [浅谈为什么Java运行环境是虚拟机，而Python运行环境是解释器](http://www.xrpmoon.com/blog/archives/jripple1105.html)
-- [ART运行时垃圾收集（GC）过程分析](http://blog.csdn.net/luoshengyang/article/details/42555483)
-- [Dalvik、ART虚拟机小结](http://www.itlipan.info/android/2015/08/07/android-dalvik.html)
 - [微信ANDROID客户端-会话速度提升70%的背后](https://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&mid=207548094&idx=1&sn=1a277620bc28349368b68ed98fbefebe)
 - [新的Andriod Gradle插件可自动移除无用资源](http://www.infoq.com/cn/news/2014/11/new-android-gradle)
 - [Android安装包相关知识汇总](https://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&mid=208008519&idx=1&sn=278b7793699a654b51588319b15b3013)
