@@ -1,4 +1,4 @@
-title: Android代码优化整理
+title: Android代码优化
 date: 2015-10-26 00:26:03
 tags:
 - Android
