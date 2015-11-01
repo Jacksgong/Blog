@@ -11,7 +11,7 @@ tags:
 
 ## I. 网络相关
 
-> 更多网络优化，可参考: [Android网络](http://blog.dreamtobe.cn/2015/03/28/Android网络学习整理/)
+> 更多网络优化，可参考: [Android网络](http://blog.dreamtobe.cn/2015/03/28/Android网络学习笔记整理/)
 
 - http头信息带Cache-Control域 确定缓存过期时间  防止重复请求
 - 直接用IP直连，不用域名，策略性跟新本地IP列表。 -- DNS解析过程耗时在百毫秒左右，并且还有可能存在DNS劫持。
