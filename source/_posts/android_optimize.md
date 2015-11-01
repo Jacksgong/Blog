@@ -11,7 +11,7 @@ tags:
 
 ## I. 网络相关
 
-> 更多网络优化，可参考: [Android网络学习笔记整理](http://blog.dreamtobe.cn/2015/03/28/Android网络学习笔记整理/)
+> 更多网络优化，可参考: [Android网络](http://blog.dreamtobe.cn/2015/03/28/Android网络学习整理/)
 
 - http头信息带Cache-Control域 确定缓存过期时间  防止重复请求
 - 直接用IP直连，不用域名，策略性跟新本地IP列表。 -- DNS解析过程耗时在百毫秒左右，并且还有可能存在DNS劫持。
@@ -123,7 +123,7 @@ tags:
 
 ## VI. UI层面
 
-> 相关深入优化，可参看[Android绘制布局相关整理](http://blog.dreamtobe.cn/2015/10/20/android-view/)
+> 相关深入优化，可参看[Android绘制布局相关](http://blog.dreamtobe.cn/2015/10/20/android-view/)
 
 > 对于卡顿相关排查推荐参看: [Android性能优化案例研究(上)](http://www.importnew.com/3784.html)与[Android性能优化案例研究（下）](http://www.importnew.com/4065.html)
 
@@ -141,7 +141,7 @@ tags:
 
 [RxJava](https://github.com/ReactiveX/RxJava) (响应式编程，代码更加简洁，异步处理更快快捷、异常处理更加彻底、数据管道理念)
 
-相关了解可以参看: [RxJava学习整理](http://blog.dreamtobe.cn/2015/04/29/RxJava学习整理/)
+相关了解可以参看: [RxJava](http://blog.dreamtobe.cn/2015/04/29/RxJava学习整理/)
 
 #### 2. 图片加载:
 - 小型快捷: [Picasso](https://github.com/square/picasso) (接口干净、支持okhttp、功能强大、稳定、高效, 可以延读: [PhotoGallery、Volley、Picasso 比较](http://blog.dreamtobe.cn/2015/04/28/PhotoGallery%E3%80%81Volley%E3%80%81Picasso-%E6%AF%94%E8%BE%83/))

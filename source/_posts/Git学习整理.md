@@ -1,4 +1,4 @@
-title: Git学习整理
+title: Git
 date: 2015-03-16 07:51:03
 tags:
 - git

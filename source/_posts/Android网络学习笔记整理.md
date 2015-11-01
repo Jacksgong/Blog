@@ -1,4 +1,4 @@
-title: Android网络学习笔记整理
+title: Android网络
 date: 2015-03-28 08:35:03
 tags:
 - Android

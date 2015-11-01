@@ -1,4 +1,4 @@
-title: Android绘制布局相关整理
+title: Android绘制
 date: 2015-10-20 00:48:03
 tags:
 - Android

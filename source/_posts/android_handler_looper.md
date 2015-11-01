@@ -1,4 +1,4 @@
-title: Android Handler Looper机制整理
+title: Android Handler Looper机制
 date: 2015-10-22 00:13:03
 tags:
 - Handler

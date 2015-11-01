@@ -1,4 +1,4 @@
-title: zsh[oh my zsh]学习整理
+title: zsh[oh my zsh]
 date: 2015-03-29 15:08:03
 tags:
 - zsh

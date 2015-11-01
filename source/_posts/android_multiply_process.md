@@ -1,5 +1,5 @@
 
-title: Android多进程整理
+title: Android多进程
 date: 2015-08-19 06:35:03
 tags:
 - Android

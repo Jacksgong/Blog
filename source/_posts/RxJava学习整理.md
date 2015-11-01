@@ -1,4 +1,4 @@
-title: RxJava学习整理
+title: RxJava
 date: 2015-04-29 08:35:03
 tags:
 - java
@@ -130,7 +130,7 @@ Observable.from("url1", "url2", "url3")
 // 这里通过flatMap，输入一个Observable<List<String>>返回了一个新的Observable<String>
 
 query("Hello, world!")  
-    .flatMap(urls -> Observable.from(urls)) 
+    .flatMap(urls -> Observable.from(urls))
     .flatMap(url -> getTitle(url))
     .subscribe(title -> System.out.println(title));
 ```
@@ -203,7 +203,7 @@ Observable.from(someSource)
 ```
 ubscription subscription = Observable.just("Hello, World!")
     .subscribe(s -> System.out.println(s));
-    
+
 subscription.unsubscribe(); //调用会停止整个调用链（会在当前正在执行的操作符的地方就终止）
 System.out.println("Unsubscribed=" + subscription.isUnsubscribed());
 // Outputs "Unsubscribed=true"
@@ -254,7 +254,7 @@ AndroidObservable.fromBroadcast(context, filter)
 // 这里监听了mCardNameEditText的点击时间
 ViewObservable.clicks(mCardNameEditText, false)
     .subscribe(view -> handleClick(view));
-    
+
 // 还可以进行很多监听，如ViewObservable.text就可以监听TextView的内容变化
 ```
 
@@ -270,7 +270,7 @@ Observable<Photo> request = service.getUserPhoto(id).cache(); //缓存请求结�
 Subscription sub = request.subscribe(photo -> handleUserPhoto(photo));
 
 //当Activity将需要重建(一般是销毁)的时候
-sub.unsubscribe(); 
+sub.unsubscribe();
 
 //一旦Activity重建
 request.subscribe(photo -> handleUserPhoto(photo));
