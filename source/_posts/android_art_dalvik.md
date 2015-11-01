@@ -35,19 +35,13 @@ tags:
 
 ## III. ART与Dalvik相同之处
 
-
 接口名 | 备注
 -|-
 `JNI_GetDefaultJavaVMInitArgs` | 获取虚拟机的默认初始化参数
 `JNI_CreateJavaVM` | 在进程中创建虚拟机实例
 `JNI_GetCreatedJavaVMs` | 获取进程中创建的虚拟机实例
 
-
-> `persist.sys.dalvik.vm.lib`: 系统属性，若等于`libdvm.so`则当前使用的是Dalvik虚拟机，若等于`libstart.so`，则当前使用的是ART虚拟机
-
 ## IV. ART与Dalvik不同之处
-
-ART执行的是本地机器码 -> 在应用Android安装时进行
 
 虚拟机名 | 安装时 | 每次重新运行apk时 |
 :-: | - | - |
@@ -56,6 +50,8 @@ Dalvik | 将dex字节码优化生成odex文件(`PackageManagerService`请求守�
 
 
 ## V. 推敲
+
+> `persist.sys.dalvik.vm.lib`: 系统属性，若等于`libdvm.so`则当前使用的是Dalvik虚拟机，若等于`libstart.so`，则当前使用的是ART虚拟机
 
 ### 1. 安装
 > 最终安装优化/翻译 结果都是保存在`odex`文件中
