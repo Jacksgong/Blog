@@ -98,8 +98,9 @@ tags:
 
 ## IV. JNI抉择
 
+> Android JVM相关知识，可参看: [ART、Dalvik](http://blog.dreamtobe.cn/2015/11/01/android_art_dalvik/)
+
 > JNI不一定显得更快，有些会更慢。
-> Android JVM相关知识，可参看: [ART、Dalvik](http://blog.dreamtobe.cn/2015/10/20/android_art_dalvik/)
 
 > 特点: 不用在虚拟机的框子下写代码
 
