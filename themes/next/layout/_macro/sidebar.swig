@@ -10,7 +10,9 @@
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
 
-      {% if is_post %}
+      {% set display_toc = is_post and theme.toc.enable %}
+
+      {% if display_toc %}
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             {{ __('sidebar.toc') }}
@@ -21,7 +23,7 @@
         </ul>
       {% endif %}
 
-      <section class="site-overview">
+      <section class="site-overview sidebar-panel {% if not display_toc %} sidebar-panel-active {% endif %}">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" src="{{ theme.avatar or url_for(theme.images) + '/default_avatar.jpg' }}" alt="{{ theme.author }}" itemprop="image"/>
           <p class="site-author-name" itemprop="name">{{ theme.author }}</p>
@@ -54,7 +56,7 @@
         {% if theme.rss %}
           <div class="feed-link motion-element">
             <a href="{{ url_for(theme.rss) }}" rel="alternate">
-              <i class="menu-item-icon icon-next-feed"></i>
+              <i class="fa fa-rss"></i>
               RSS
             </a>
           </div>
@@ -64,7 +66,11 @@
           {% if theme.social %}
             {% for name, link in theme.social %}
               <span class="links-of-author-item">
-                <a href="{{ link }}" target="_blank">{{ name }}</a>
+                <a href="{{ link }}" target="_blank">
+                  {% if theme.social_icons.enable %}
+                    <i class="fa fa-{{ theme.social_icons[name] || 'globe' }}"></i> {{ name }}
+                  {% endif %}
+                </a>
               </span>
             {% endfor %}
           {% endif %}
@@ -84,7 +90,7 @@
             <p class="site-author-name">{{ theme.links_title }}</p>
             {% for name, link in theme.links %}
               <span class="links-of-author-item">
-              <a href="{{ link }}" target="_blank">{{ name }}</a>
+                <a href="{{ link }}" target="_blank">{{ name }}</a>
               </span>
             {% endfor %}
           {% endif %}
@@ -92,18 +98,26 @@
 
       </section>
 
-      {% if is_post %}
-        <section class="post-toc-wrap sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator"></div>
+      {% if display_toc %}
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
           <div class="post-toc">
-            {% set toc = toc(page.content, {"class": "nav", list_number: theme.toc_list_number}) %}
+            {% if page.toc_number === undefine %}
+              {% set toc = toc(page.content, { "class": "nav", list_number: theme.toc.number }) %}
+            {% else %}
+              {% set toc = toc(page.content, {"class": "nav", list_number: page.toc_number}) %}
+            {% endif %}
             {% if toc.length <= 1 %}
               <p class="post-toc-empty">{{ __('post.toc_empty') }}</p>
             {% else %}
               <div class="post-toc-content">{{ toc }}</div>
             {% endif %}
           </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
         </section>
       {% endif %}
 

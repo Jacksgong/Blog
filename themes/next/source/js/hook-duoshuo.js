@@ -1,7 +1,7 @@
 if (typeof DUOSHUO !== 'undefined') {
 	hook_duoshuo_templates();
 } else {
-	$('[src="http://static.duoshuo.com/embed.js"]')[0].onload = hook_duoshuo_templates;
+	$('#duoshuo-script')[0].onload = hook_duoshuo_templates;
 }
 var is_hook_duoshuo = false;
 
@@ -17,7 +17,11 @@ function hook_duoshuo_templates() {
 		var is_admin;
 		if (typeof duoshuo_user_ID !== 'undefined') {
 			if (e.post.author.user_id && (e.post.author.user_id == duoshuo_user_ID)) {
-				is_admin = '<span class="this_ua admin">博主</span>'
+				if(duoshuo_admin_nickname){
+				is_admin = '<span class="this_ua admin">'+duoshuo_admin_nickname+'</span>'
+				}else{
+					is_admin = '<span class="this_ua admin">博主</span>'
+				}
 			} else {
 				is_admin = '';
 			}
