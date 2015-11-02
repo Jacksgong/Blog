@@ -16,7 +16,7 @@ tags:
 
 API数量繁多，官方升级维护较少
 
-<!-- more --> 
+<!-- more -->
 
 ## II. HttpURLConnection
 
@@ -40,11 +40,9 @@ Android 2.2以前: 可读的InputStream调用close时，可能导致连接池失
 
 - 响应缓存机制(`HttpResponseCache#install`):
 
-```
 1. 都由本地提供的响应，没有必要发起网络连接的请求，都直接从本地缓存直接取得
 2. 视情况而定的缓存响应，由服务器确定(304 Not Modified代表不需要更新，就不会下载任何数据，将直接用本地缓存);
 3. 没有缓存的响应，都由服务器直接下载。
-```
 
 ## III. 选择
 
