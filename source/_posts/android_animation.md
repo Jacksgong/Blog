@@ -128,7 +128,9 @@ ObjectAnimator.ofFloat(myObject, "translationY", -myObject.getHeight()).start();
 
 ```
 //  不断循环3s内背景颜色从红色渐变到蓝色再到红色
-ValueAnimator colorAnim = ObjectAnimator.ofInt(this, "backgroundColor", /*Red*/0xFFFF8080, /*Blue*/0xFF8080FF);
+ValueAnimator colorAnim = ObjectAnimator.ofInt(
+                this, "backgroundColor",
+                /*Red*/0xFFFF8080,/*Blue*/0xFF8080FF);
 colorAnim.setDuration(3000);
 colorAnim.setEvaluator(new ArgbEvaluator());
 colorAnim.setRepeatCount(ValueAnimator.INFINITE);
