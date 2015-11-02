@@ -103,10 +103,10 @@ social_icons:
 
 # TOC in the Sidebar
 toc:
-  enable: true
+  enable: false
 
   # Automatically add list number to toc.
-  number: true
+  number: false
 
 
 # Creative Commons 4.0 International License.
