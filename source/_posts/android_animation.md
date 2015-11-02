@@ -37,7 +37,7 @@ rotate | 画面旋转
 
 `AnimationDrawable`结合xml中定义`animation-list`标签
 
-> `AnimationDrawable本身无法监听动画状态
+> `AnimationDrawable`本身无法监听动画状态
 
 ## III. 对象属性动画
 
@@ -46,7 +46,7 @@ rotate | 画面旋转
 
 动画的默认帧率是一帧10ms(100帧/s(Android正常绘制60帧/s))
 
-### TimeInterpolator(时间插值器)
+### 1. TimeInterpolator(时间插值器)
 
 > 根据时间流逝的百分比来计算出当前属性值改变的百分比
 
@@ -58,7 +58,7 @@ rotate | 画面旋转
 - `AccelerateInterpolator`: 加速插值器，动画越来越快
 ...
 
-### TypeEvaluator(类型估值算法)
+### 2. TypeEvaluator(类型估值算法)
 
 > 根据当前属性改变的百分比来计算改变后的属性值
 
@@ -98,7 +98,7 @@ public class IntEvaluator implements TypeEvaluator<Integer> {
 ```
 
 
-### ObjectAnimator、ValueAnimator、AnimatorSet
+### 3. ObjectAnimator、ValueAnimator、AnimatorSet
 
 > 都可以直接在xml中定义 / 直接代码中实现，结合TimeInterpolator与TypeEvaluator，几乎可以实现所有想要的动画
 
