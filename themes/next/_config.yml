@@ -71,8 +71,8 @@ scheme: Mist
 #  - always  expand for all pages automatically
 #  - hide    expand only when click on the sidebar toggle icon.
 #  - remove  Totally remove sidebar including sidebar toggle icon.
-sidebar: hide
-#sidebar: always
+#sidebar: post
+sidebar: always
 #sidebar: hide
 #sidebar: remove
 
@@ -241,7 +241,7 @@ social:
   linkedin: "https://cn.linkedin.com/in/jacksgong"
 
 
-avatar: http://7xjww9.com1.z0.glb.clouddn.com/4.pic_s_500.jpg
+avatar: http://7xjww9.com1.z0.glb.clouddn.com/head_s_600.jpg
 
 links_title: Resume
 links:
