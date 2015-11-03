@@ -1,0 +1,4 @@
+0000000000000000000000000000000000000000 74fe43abb2ba7b2c4e4e58fbe267e9c37993c2e9 Jacksgong <jacks@liulishuo.com> 1446477569 +0800	branch: Created from HEAD
+74fe43abb2ba7b2c4e4e58fbe267e9c37993c2e9 2e5e1f543a4e822458e8363c427fa7d9b7fe416d Jacksgong <jacks@liulishuo.com> 1446477585 +0800	commit: blog diy
+2e5e1f543a4e822458e8363c427fa7d9b7fe416d 21dd1d5032b0c1e4fd91864f3301c37265b3ef1e Jacksgong <jacks@liulishuo.com> 1446477826 +0800	rebase finished: refs/heads/blog onto 1bcd64bc1a00886d7cedf87cad7f04d92363f1e4
+21dd1d5032b0c1e4fd91864f3301c37265b3ef1e a19b835dbbfc532b4b95993f3094bc8424ca784e Jacksgong <jacks@liulishuo.com> 1446529978 +0800	commit: 完善config

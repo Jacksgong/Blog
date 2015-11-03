@@ -1,0 +1,11 @@
+0000000000000000000000000000000000000000 74fe43abb2ba7b2c4e4e58fbe267e9c37993c2e9 Jacksgong <igzhenjie@mail.com> 1440851132 +0800	clone: from https://github.com/Jacksgong/hexo-theme-next.git
+74fe43abb2ba7b2c4e4e58fbe267e9c37993c2e9 74fe43abb2ba7b2c4e4e58fbe267e9c37993c2e9 Jacksgong <jacks@liulishuo.com> 1446477569 +0800	checkout: moving from master to blog
+74fe43abb2ba7b2c4e4e58fbe267e9c37993c2e9 2e5e1f543a4e822458e8363c427fa7d9b7fe416d Jacksgong <jacks@liulishuo.com> 1446477585 +0800	commit: blog diy
+2e5e1f543a4e822458e8363c427fa7d9b7fe416d 74fe43abb2ba7b2c4e4e58fbe267e9c37993c2e9 Jacksgong <jacks@liulishuo.com> 1446477591 +0800	checkout: moving from blog to master
+74fe43abb2ba7b2c4e4e58fbe267e9c37993c2e9 1bcd64bc1a00886d7cedf87cad7f04d92363f1e4 Jacksgong <jacks@liulishuo.com> 1446477675 +0800	rebase: checkout upstream/master
+1bcd64bc1a00886d7cedf87cad7f04d92363f1e4 1bcd64bc1a00886d7cedf87cad7f04d92363f1e4 Jacksgong <jacks@liulishuo.com> 1446477675 +0800	rebase finished: returning to refs/heads/master
+1bcd64bc1a00886d7cedf87cad7f04d92363f1e4 2e5e1f543a4e822458e8363c427fa7d9b7fe416d Jacksgong <jacks@liulishuo.com> 1446477681 +0800	checkout: moving from master to blog
+2e5e1f543a4e822458e8363c427fa7d9b7fe416d 1bcd64bc1a00886d7cedf87cad7f04d92363f1e4 Jacksgong <jacks@liulishuo.com> 1446477685 +0800	rebase: checkout master
+1bcd64bc1a00886d7cedf87cad7f04d92363f1e4 21dd1d5032b0c1e4fd91864f3301c37265b3ef1e Jacksgong <jacks@liulishuo.com> 1446477826 +0800	rebase: blog diy
+21dd1d5032b0c1e4fd91864f3301c37265b3ef1e 21dd1d5032b0c1e4fd91864f3301c37265b3ef1e Jacksgong <jacks@liulishuo.com> 1446477826 +0800	rebase finished: returning to refs/heads/blog
+21dd1d5032b0c1e4fd91864f3301c37265b3ef1e a19b835dbbfc532b4b95993f3094bc8424ca784e Jacksgong <jacks@liulishuo.com> 1446529978 +0800	commit: 完善config
