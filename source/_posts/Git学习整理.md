@@ -357,3 +357,4 @@ See "git help gc" for manual housekeeping.
 
 - [Git教程](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
 - [6.6 Git 工具 - 子模块](https://git-scm.com/book/zh/v1/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97)
+- [Git Submodule的坑](http://blog.devtang.com/blog/2013/05/08/git-submodule-issues/)
