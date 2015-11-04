@@ -198,7 +198,7 @@ tags:
 - 做好各项有效监控：crash(注意还有JNI的)、anr(定期扫描文件)、掉帧(绘制监控、activity生命周期监控等)、异常状态监控(本地Log根据需要不同级别打Log并选择性上报监控)等
 - 文件存储推荐放在`/sdcard/Android/data/[package name]/`里(在应用卸载时，会随即删除)(`Context#getExternalFilesDir()`)，而非`/sdcard/`根目录建文件夹（节操问题）
 - 通过gradle的`shrinkResources`与`minifyEnabled`参数可以简单快速的在编包的时候自动删除无用资源
-- 由于resources.arsc在api8以后，appt中默认采用UTF-8编码，导致资源中大都是中文的resources.arsc相比采用UTF-16编码更大，此时，可以考虑appt中指定使用UTF-16
+- 由于resources.arsc在api8以后，aapt中默认采用UTF-8编码，导致资源中大都是中文的resources.arsc相比采用UTF-16编码更大，此时，可以考虑aapt中指定使用UTF-16
 
 ---
 
