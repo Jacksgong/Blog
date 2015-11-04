@@ -254,7 +254,21 @@ Head 的内容
 
 - 效果: 将删除的标签同步到远程库分支
 
-## X. 其他需要注意的
+## X. 子模块
+
+`git submodule add [<远程库地址>] [<存储本地路径>]`
+
+- 效果: 添加外部项目为当前项目的子模块, 添加完后，会配置到`.gitmodules`内
+
+`git submodule init`
+
+- 效果: 初始化本地外部项目的配置文件
+
+`git submodule update`
+
+- 效果: 拉取submodule 配置文件中的所有submodule文件。
+
+## XI. 其他需要注意的
 
 1. 由于Mac下文件名大小不敏感，造成git下如果改了名字，git不识别有变化，因此改名字需要使用下面命令:
 
@@ -296,7 +310,7 @@ git config --global alias.last 'log -1'
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 ```
 
-## XI. GitHub
+## XII. GitHub
 
 ### fork同步问题
 
@@ -326,7 +340,7 @@ git pull upstream master
 git push origin master
 ```
 
-## XII. 其他疑难问题
+## XIII. 其他疑难问题
 
 调用`git fetch`的时候，出现:
 
@@ -341,4 +355,5 @@ See "git help gc" for manual housekeeping.
 
 ----
 
-> 最后如果想要完整学习的，推荐这个站点: http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000
+- [Git教程](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
+- [6.6 Git 工具 - 子模块](https://git-scm.com/book/zh/v1/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97)
