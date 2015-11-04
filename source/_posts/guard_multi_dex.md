@@ -12,15 +12,16 @@ tags:
 
 > Proguard与DexGuard是同一团队开发的
 
+<!-- more -->
+
 ## I. 区别表
 
 Proguard | DexGuard | 备注
 -|-|-
 免费 | 收费 | [DexGuard GuardSquare](https://www.guardsquare.com/dexguard)
-一般代码混淆 | 代码混淆力度更大 + 资源混淆 + so加壳等
-不需要multi-dex | 自带multi-dex扫描
+一般代码混淆 | 代码混淆力度更大 + 资源混淆 + so加壳等 | -
+不需要multi-dex | 自带multi-dex扫描 | -
 
-<!-- more -->
 
 #### 资源混淆?
 首先， 所有static final的都会直接预编译，代码中都是资源ID，资源混淆只和 **resources.arsc** (资源ID、string、路径映射等)、**资源路径**、**资源文件名** 有关。
