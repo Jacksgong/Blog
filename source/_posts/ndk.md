@@ -387,8 +387,6 @@ NDK_APPLICATION_MK=<file>
 
 #### 推荐书籍:
 
-> 谷歌给出的SDK的书籍很少。
-
 Cinar O. – Pro Android C++ with the NDK – 2012.
 
 ---
