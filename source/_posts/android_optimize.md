@@ -100,6 +100,8 @@ tags:
 
 > Android JVM相关知识，可参看: [ART、Dalvik](http://blog.dreamtobe.cn/2015/11/01/android_art_dalvik/)
 
+> Android JNI、NDK相关知识，可参看: [NDK](http://blog.dreamtobe.cn/2015/11/08/ndk/)
+
 > JNI不一定显得更快，有些会更慢。
 
 > 特点: 不用在虚拟机的框子下写代码
