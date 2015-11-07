@@ -396,3 +396,4 @@ Cinar O. – Pro Android C++ with the NDK – 2012.
 - [Android NDK介绍（上）](http://www.importnew.com/8038.html)
 - [Android NDK介绍（下）](http://www.importnew.com/8052.html)
 - [NDK Application.mk使用手册](http://www.oschina.net/question/565065_93983)
+- [Working Around JNI UTF-8 Strings](http://banachowski.com/deprogramming/2012/02/working-around-jni-utf-8-strings/)
