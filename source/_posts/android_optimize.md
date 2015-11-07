@@ -1,4 +1,4 @@
-title: Android代码优化
+title: Android优化
 date: 2015-10-26 00:26:03
 tags:
 - Android
@@ -111,6 +111,8 @@ tags:
 - Java调用JNI的耗时较Java调用Java肯定更慢，虽然随着JDK版本的升级，差距已经越来越小(JDK1.6版本是5倍Java调用Java方法的耗时) -- Bad
 - 内存不在Java Heap，没有OOM风险，有效减少gc。 -- Good
 
+> 一些重要的参数之类，也可以考虑放在Native层，保证安全性。参考: [Android应用程序通用自动脱壳方法研究](http://blog.dreamtobe.cn/2015/07/17/wh_android_tk/)
+
 ## V. 多进程抉择
 
 > 360 17个进程: [360手机卫士 Android开发 InfoQ视频 总结
@@ -191,7 +193,14 @@ tags:
 - 如果还考虑2.x机器的话，设置`BitmapFactory#options`的`InNativeAlloc`参数为true，此时decode的内存不会上报到dvm中，便不会oom。
 
 
-## IX. 其他
+## IX. 编译与发布
+
+- 考虑采用DexGuard，或ProGuard结合相关资源混淆来提高安全与包大小，参考: [DexGuard、Proguard、Multi-dex](http://blog.dreamtobe.cn/2015/11/04/guard_multi_dex/)
+- 结合Gradle、Gitlab-CI 与Slack(Incoming WebHooks)，快速实现，打相关git上打相关Tag，自动编相关包通知Slack。
+- 结合Gitlab-CI与Slack(Incoming WebHooks)，快速实现，所有的push，Slack快速获知。
+- 结合Gradle中Android提供的`productFlavors`参数，定义不同的variations，快速批量打渠道包
+
+## X. 其他
 
 - `final`能用就用（高效: 编译器在调用`final`方法时，会转入内嵌机制）
 - 懒预加载，如简单的ListView、RecyclerView等滑动列表控件，停留在当前页面的时候，可以考虑直接预加载下个页面所需图片
