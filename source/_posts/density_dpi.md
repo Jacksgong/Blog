@@ -14,7 +14,7 @@ tags:
 
 > 下文中提到的density是指: `DisplayMetrics#density`
 
-> 在显示器设置时，dpi = ppi
+> 在显示器中，dpi = ppi
 > 手机的ppi: 对角线像素点个数px / 对角线英寸inch
 
 <!-- more -->
