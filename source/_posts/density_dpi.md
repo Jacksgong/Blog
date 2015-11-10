@@ -26,7 +26,7 @@ tags:
 
 - dp(Density-independent pixel): 1dp为屏幕点密度为160dpi(density=1)时像素点数: dp = px/(dpi /160 ) = px / density
 - dpi(dot per inch): dip = dp
-- sp : 一般系统没有特殊配置，sp = dp
+- sp : 一般系统没有特殊配置(用于字体)，sp = dp
 
 > 市面主要的Android手机屏幕尺寸: 5.5寸、5寸、4.7寸、3.7寸
 
@@ -58,6 +58,12 @@ tags:
 
 Android Virtual Device Manager
 
+#### 需要注意
+
+> [Managing Launcher Icons as mipmap Resources](https://developer.android.com/intl/zh-cn/tools/projects/index.html#mipmap)
+
+mipmap用于存放应用图标(Launcher Icon)，不会受资源优化所影响，保证应用图标的高清.
+
 ## II. 9patch
 
 > 俗称点9图
@@ -82,6 +88,8 @@ Android Virtual Device Manager
 ![](/img/density_dpi-3.png)
 
 ---
+
+- [提供资源](https://developer.android.com/intl/zh-cn/guide/topics/resources/providing-resources.html)
 - [Supporting Multiple Screens](https://developer.android.com/intl/zh-cn/guide/practices/screens_support.html)
 - [DPI、PPI、DP、PX 的详细计算方法及算法来源是什么？](http://www.zhihu.com/question/21220154)
 - [Android设计中的.9.png](http://isux.tencent.com/android-ui-9-png.html)

@@ -186,6 +186,7 @@ private void performAnimate(final View target, final int start, final int end) {
 
 ---
 
+- [Property Animation](https://developer.android.com/intl/zh-cn/guide/topics/graphics/prop-animation.html)
 - [android动画简介](http://blog.csdn.net/singwhatiwanna/article/details/9270275)
 - [Android动画进阶—使用开源动画库nineoldandroids](http://blog.csdn.net/singwhatiwanna/article/details/17639987)
 - [Animation 之 Interpolator 插补器理解](http://blog.csdn.net/qingye_love/article/details/8859347)
