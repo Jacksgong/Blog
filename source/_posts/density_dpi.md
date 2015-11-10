@@ -89,6 +89,7 @@ mipmap用于存放应用图标(Launcher Icon)，不会受资源优化所影响�
 
 ---
 
+- [Icons - Style -Google design guidelines](https://www.google.com/design/spec/style/icons.html)
 - [提供资源](https://developer.android.com/intl/zh-cn/guide/topics/resources/providing-resources.html)
 - [Supporting Multiple Screens](https://developer.android.com/intl/zh-cn/guide/practices/screens_support.html)
 - [DPI、PPI、DP、PX 的详细计算方法及算法来源是什么？](http://www.zhihu.com/question/21220154)
