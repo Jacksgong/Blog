@@ -213,6 +213,7 @@ tags:
 
 ---
 
+- [Optimize Your App](http://developer.android.com/intl/zh-cn/distribute/essentials/optimizing-your-app.html)
 - [JNI调用性能测试及优化](http://wiki.jikexueyuan.com/project/jni-ndk-developer-guide/performance.html)
 - [Java学习笔记：(30)谨慎地使用本地方法](http://www.programgo.com/article/39033077030/)
 - [Android 4.4 引入的 ART 对比 Dalvik 性能提升大吗，后者会不会被取代，会不会产生兼容性问题？](http://www.zhihu.com/question/21942389)
