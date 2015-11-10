@@ -52,7 +52,7 @@ tags:
 
 #### Android 取资源原则
 
-如果存在匹配的就取对应文件夹资源，否则取最高清的资源根据density进行缩放。
+如果存在匹配的就取对应文件夹资源，否则会选择default的作为160dpi进行缩放(但是也不一定，因为如ldpi与hdpi是0.5倍关系内部此时为了便于计算，就会取hdpi的进行缩放)，否则一般取最高清的资源根据density进行缩放。
 
 #### 常用工具
 
@@ -89,6 +89,7 @@ mipmap用于存放应用图标(Launcher Icon)，不会受资源优化所影响�
 
 ---
 
+- [Android 如何找到最匹配资源](https://developer.android.com/intl/zh-cn/guide/topics/resources/providing-resources.html#BestMatch)
 - [Icons - Style -Google design guidelines](https://www.google.com/design/spec/style/icons.html)
 - [提供资源](https://developer.android.com/intl/zh-cn/guide/topics/resources/providing-resources.html)
 - [Supporting Multiple Screens](https://developer.android.com/intl/zh-cn/guide/practices/screens_support.html)
