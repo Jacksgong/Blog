@@ -210,10 +210,12 @@ tags:
 - 文件存储推荐放在`/sdcard/Android/data/[package name]/`里(在应用卸载时，会随即删除)(`Context#getExternalFilesDir()`)，而非`/sdcard/`根目录建文件夹（节操问题）
 - 通过gradle的`shrinkResources`与`minifyEnabled`参数可以简单快速的在编包的时候自动删除无用资源
 - 由于resources.arsc在api8以后，aapt中默认采用UTF-8编码，导致资源中大都是中文的resources.arsc相比采用UTF-16编码更大，此时，可以考虑aapt中指定使用UTF-16
+- 谷歌建议，大于10M的大型应用考虑安装到SD卡上: [App Install Location](http://developer.android.com/intl/zh-cn/guide/topics/data/install-location.html)
+- 当然运维也是一方面: [Optimize Your App](http://developer.android.com/intl/zh-cn/distribute/essentials/optimizing-your-app.html)
 
 ---
 
-- [Optimize Your App](http://developer.android.com/intl/zh-cn/distribute/essentials/optimizing-your-app.html)
+- [应用的核心质量](http://developer.android.com/intl/zh-cn/distribute/essentials/quality/core.html)
 - [JNI调用性能测试及优化](http://wiki.jikexueyuan.com/project/jni-ndk-developer-guide/performance.html)
 - [Java学习笔记：(30)谨慎地使用本地方法](http://www.programgo.com/article/39033077030/)
 - [Android 4.4 引入的 ART 对比 Dalvik 性能提升大吗，后者会不会被取代，会不会产生兼容性问题？](http://www.zhihu.com/question/21942389)
