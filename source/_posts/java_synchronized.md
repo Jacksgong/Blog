@@ -133,3 +133,4 @@ B: 而由于在频繁的执行中，反复的加锁和解锁，设置可能导�
 - [聊聊并发（二）——Java SE1.6中的Synchronized](http://www.infoq.com/cn/articles/java-se-16-synchronized)
 - [深入JVM锁机制1-synchronized](http://blog.csdn.net/chen77716/article/details/6618779)
 - [虚拟机中的锁优化简介（适应性自旋/锁粗化/锁削除/轻量级锁/偏向锁）](http://icyfenix.iteye.com/blog/1018932)
+- [Java偏向锁实现原理(Biased Locking)](http://my.oschina.net/u/140462/blog/490897)
