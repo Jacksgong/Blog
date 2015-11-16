@@ -213,6 +213,7 @@ Head 的内容
 ### IX. 标签
 
 ##### 创建:
+
 `git tag [<标签名>] [<commit id>]`
 
 - 效果: 给对应commit id打上标签，如果不提供comit id，默认给最新一次提交打上标签
@@ -242,7 +243,11 @@ Head 的内容
 
 ##### 远程:
 
-`git push [<远程库分支名>] [<标签名>]`
+> [Push a tag to a remote repository using Git?](http://stackoverflow.com/questions/5195859/push-a-tag-to-a-remote-repository-using-git)
+
+> [How to: Delete a remote Git tag](https://nathanhoad.net/how-to-delete-a-remote-git-tag)
+
+`git push [<远端仓库名>] [<标签名>]`
 
 - 效果: 将标签推送到远程库分支
 
