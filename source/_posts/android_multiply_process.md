@@ -1,9 +1,11 @@
 
 title: Android多进程
-date: 2015-08-19 06:35:03
+date: 2015-11-25 23:54:03
 tags:
 - Android
 - 多进程
+- Binder
+- ServiceManager
 
 ---
 ## I. Binder
