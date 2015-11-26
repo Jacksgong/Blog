@@ -29,7 +29,7 @@ tags:
 <!--more-->
 ## 最终效果对比:
 
-![](/resolve_mv.gif)![](/img/unresolve_mv.gif)
+![](/img/resolve_mv.gif)![](/img/unresolve_mv.gif)
 
 
 ## I. 准备
