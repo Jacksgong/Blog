@@ -29,7 +29,7 @@ tags:
 <!--more-->
 ## 最终效果对比:
 
-![](https://raw.githubusercontent.com/Jacksgong/JKeybordPanelSwitch/master/img/resolve_mv.gif)![](https://raw.githubusercontent.com/Jacksgong/JKeybordPanelSwitch/master/img/unresolve_mv.gif)
+![](/resolve_mv.gif)![](/img/unresolve_mv.gif)
 
 
 ## I. 准备
@@ -38,7 +38,7 @@ tags:
 
 > 如图，为了方便分析，我们分出3个View:
 
-![](https://raw.githubusercontent.com/Jacksgong/JKeybordPanelSwitch/master/img/WeChat_1435588322.png)
+![](/img/WeChat_1435588322.png)
 
 - `CustomRootView`: 除去statusBar与ActionBar(ToolBar...balabala)
 - `FootRootView`: 整个底部（包括输入框与底部面板在内的整个View）
