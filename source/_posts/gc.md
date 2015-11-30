@@ -9,7 +9,9 @@ tags:
 
 ---
 
-> Dalvik虚拟机Gc与ART运行时GC采用同一套机制
+> Dalvik的GC与ART运行时GC采用同一套机制
+
+<!-- more -->
 
 ## Heap分布
 
@@ -17,9 +19,6 @@ Heap名 | 分布 | 内容
 :-: | :-: | :-: |
 Activity Heap | 第一个应用程序fork前，未使用的部分 | 第一个应用fork开始后，无论是Zygote进程，还是应用进程，分配的对象
 Zygote Heap | 第一个应用程序fork前，已经使用的部分 | Zygote进程在启动过程中加载的类、资源、对象
-
-
-<!-- more -->
 
 ## 资源回收:
 
