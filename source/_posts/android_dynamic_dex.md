@@ -94,7 +94,7 @@ Loads the class with the specified name, optionally linking it after loading. Th
 
 > Android中的这几种类加载器实际是依赖`DexFile`的，对于`DexFile`有以下两点
 
-1. 打开的DEX文件不会直接存储在`DexFile`对象中，而是存储在对于虚拟机制度的memory-mapped上。
+1. 打开的DEX文件不会直接存储在`DexFile`对象中，而是存储在对于虚拟机只读的memory-mapped上。
 2. 我们无法直接调用`DexFile.loadClass`进行对dex的加载，只能通过ClassLoader进行加载
 
 `PathClassLoader`的使用案例推荐参考: [secondary-dex-gradle/.../secondarydex/plugin/](https://github.com/creativepsyco/secondary-dex-gradle/tree/master/app/src/main/java/com/github/creativepsyco/secondarydex/plugin)
@@ -106,7 +106,6 @@ Loads the class with the specified name, optionally linking it after loading. Th
 #### Ant
 
 可以参考[这里](http://android-developers.blogspot.hk/2011/07/custom-class-loading-in-dalvik.html)后面的`Build Process`.
-
 
 #### Gradle
 
