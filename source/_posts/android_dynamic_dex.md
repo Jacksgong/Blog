@@ -101,7 +101,7 @@ Loads the class with the specified name, optionally linking it after loading. Th
 
 `DexClassLoader`的使用案例推荐参考: [Custom Class Loading in Dalvik](http://android-developers.blogspot.hk/2011/07/custom-class-loading-in-dalvik.html)，如果你有网络下载dex动态打补丁的需求的话
 
-## II. Gradle层如何在编译层面实现自动化
+## II. 何在编译层面实现打指定独立dex
 
 #### Ant
 
