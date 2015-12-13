@@ -39,7 +39,7 @@ tags:
                     app:mpb_default_color="@color/mpb_default_color"/>
 ```
 
-#### Magic Progress Circle
+#### 1. Magic Progress Circle
 
 参数 | 含义 | 默认值
 :-: | :- | :-
@@ -49,6 +49,10 @@ mpc_start_color | 渐变颜色起点颜色(percent=0) | <font color="#FF00FFED">
 mpc_end_color | 渐变颜色终点颜色(percent=1) | <font color="#FFED00FF">#FFED00FF</font>
 mpc_default_color | 未填充部分的描边的颜色 | <font color="#1AFFFFFF">#1AFFFFFF</font>
 
+
+#### 2. Magic Progress Bar
+
+> 相比系统的ProgressBar更加轻量，如果你的ProgressBar要求不是很复杂，推荐使用
 
 ## III. Github
 
