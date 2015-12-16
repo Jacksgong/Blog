@@ -275,11 +275,11 @@ Head 的内容
 
 ## XI. 其他需要注意的
 
-1. 由于Mac下文件名大小不敏感，造成git下如果改了名字，git不识别有变化，因此改名字需要使用下面命令:
+#### 1. 由于Mac下文件名大小不敏感，造成git下如果改了名字，git不识别有变化，因此改名字需要使用下面命令:
 
 `git mv --force myfile MyFile`
 
-2. 如果需要修改提交用户资料
+#### 2. 如果需要修改提交用户资料
 
 [Changing author info](https://help.github.com/articles/changing-author-info/)
 
