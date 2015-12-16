@@ -279,7 +279,7 @@ Head 的内容
 
 `git mv --force myfile MyFile`
 
-#### 2. 如果需要修改提交用户资料
+#### 2. 如果需要修改提交过的历史用户资料
 
 [Changing author info](https://help.github.com/articles/changing-author-info/)
 
