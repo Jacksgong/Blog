@@ -64,10 +64,10 @@ tags:
 > 如果需要只指定< API 19 才申请存储权限，可以使用以下方式
 
 ```
-<users-permission
+<uses-permission
     android:name="android.permission.READ_EXTERNAL_STORAGE"
     android:maxSdkVersion="18" />
-<users-permission
+<uses-permission
     android:name="android.permission.WRITE_EXTERNAL_STORAGE"
     android:maxSdkVersion="18" />
 ```
