@@ -17,6 +17,8 @@ tags:
 
 > 总之，你负责大胆高并发高频率的往下载引擎里面以队列(请求需要并行处理/串行处理)/单任务的形式放任务，引擎负责给你达预期稳定、高效的结果输出
 
+<!-- more -->
+
 #### 1. 稳定:
 
 - 高并发: 兼容高频率不断入队 并行任务队列/串行任务队列/单一下载任务，甚至其中包含大量重复任务(url与path都相同)，不同队列独立运作，不同任务相对独立运作，互不干涉
@@ -262,7 +264,7 @@ blockComplete -> completed
 
 ## III. Open Source
 
-[lingochamp/FileDownloader](https://github.com/lingochamp/FileDownloader)
+[lingochamp/FileDownloader](https://github.com/lingochamp/FileDownloadergg)
 
 [mix_gif]: https://github.com/lingochamp/FileDownloader/raw/master/art/mix.gif
 [parallel_gif]: https://github.com/lingochamp/FileDownloader/raw/master/art/parallel.gif
