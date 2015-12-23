@@ -264,7 +264,7 @@ blockComplete -> completed
 
 ## III. Open Source
 
-[lingochamp/FileDownloader](https://github.com/lingochamp/FileDownloadergg)
+[lingochamp/FileDownloader](https://github.com/lingochamp/FileDownloader)
 
 [mix_gif]: https://github.com/lingochamp/FileDownloader/raw/master/art/mix.gif
 [parallel_gif]: https://github.com/lingochamp/FileDownloader/raw/master/art/parallel.gif
