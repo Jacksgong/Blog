@@ -10,8 +10,6 @@ tags:
 Android 文件下载引擎，稳定、高效、简单易用
 
 [![Download][bintray_svg]][bintray_url]
-![][file_downloader_svg]
-![][license_2_svg]
 
 > 本引擎目前基于口碑很好的okhttp
 
@@ -267,23 +265,10 @@ blockComplete -> completed
 | warn | 在下载队列中(正在等待/正在下载)已经存在相同下载连接与相同存储路径的任务 | -
 
 
-## III. LICENSE
+## III. OPEN SOURCE
 
-```
-Copyright (c) 2015 LingoChamp Inc.
+[lingochamp/FileDownloader](https://github.com/lingochamp/FileDownloader)
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-```
 
 [license_2_svg]: https://img.shields.io/hexpm/l/plug.svg
 [android_platform_svg]: https://img.shields.io/badge/Platform-Android-brightgreen.svg
