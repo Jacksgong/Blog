@@ -7,11 +7,17 @@ tags:
 - Project
 
 ---
+Android 文件下载引擎，稳定、高效、简单易用
 
-[ ![Download][bintray_svg] ][bintray_url]
+[![Download][bintray_svg]][bintray_url]
+![][file_downloader_svg]
+![][license_2_svg]
 
-> Android 文件下载引擎，稳定、高效、简单易用
 > 本引擎目前基于口碑很好的okhttp
+
+---
+#### 版本迭代日志: [Change Log](https://github.com/lingochamp/FileDownloader/blob/master/CHANGELOG.md)
+---
 
 ### 特点
 
@@ -56,15 +62,12 @@ tags:
 在项目中引用:
 
 ```
-compile 'com.liulishuo.filedownloader:library:0.0.9'
+compile 'com.liulishuo.filedownloader:library:0.1.1'
 ```
-
-> 假如发现IDE没有自动绑定源码到拉下来的`.class`，请下载[library-0.0.9-sources.jar][library_last_source_jar]，然后主动`Choose Sources...`进行绑定，这样方便阅读与debug。有任何问题，提issue即可。
 
 #### 全局初始化在`Application.onCreate`中
 
 ```
-
 public XXApplication extends Application{
 
     ...
@@ -76,13 +79,11 @@ public XXApplication extends Application{
 
     ...
 }
-
 ```
 
 #### 启动单任务下载
 
 ```
-
 FileDownloader.getImpl().create(url)
         .setPath(path)
         .setListener(new FileDownloadListener() {
@@ -100,6 +101,10 @@ FileDownloader.getImpl().create(url)
 
             @Override
             protected void blockComplete(BaseDownloadTask task) {
+            }
+
+            @Override
+            protected void retry(final BaseDownloadTask task, final Throwable ex, final int retryingTimes, final int soFarBytes) {
             }
 
             @Override
@@ -123,46 +128,41 @@ FileDownloader.getImpl().create(url)
 #### 启动多任务下载
 
 ```
-
 final FileDownloadListener queueTarget = new FileDownloadListener() {
             @Override
             protected void pending(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-
             }
 
             @Override
             protected void connected(BaseDownloadTask task, String etag, boolean isContinue, int soFarBytes, int totalBytes) {
-
             }
 
             @Override
             protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-
             }
 
             @Override
             protected void blockComplete(BaseDownloadTask task) {
+            }
 
+            @Override
+            protected void retry(final BaseDownloadTask task, final Throwable ex, final int retryingTimes, final int soFarBytes) {
             }
 
             @Override
             protected void completed(BaseDownloadTask task) {
-
             }
 
             @Override
             protected void paused(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-
             }
 
             @Override
             protected void error(BaseDownloadTask task, Throwable e) {
-
             }
 
             @Override
             protected void warn(BaseDownloadTask task) {
-
             }
         };
 
@@ -211,6 +211,7 @@ if(parallel){
 | setTag(tag:Object) | 内部不会使用，在回调的时候用户自己使用
 | setForceReDownload(isForceReDownload:boolean) | 强制重新下载，将会忽略检测文件是否健在
 | setFinishListener(listener:FinishListener) | 结束监听，仅包含结束(over(void))的监听
+| setAutoRetryTimes(autoRetryTimes:int) | 当请求或下载或写文件过程中存在错误时，自动重试次数，默认为0次
 | ready(void) | 用于队列下载的单任务的结束符(见上面:启动多任务下载的案例)
 | start(void) | 启动下载任务
 | pause(void) | 暂停下载任务(也可以理解为停止下载，但是在start的时候默认会断点续传)
@@ -228,6 +229,8 @@ if(parallel){
 | getTag(void):Object | 获取用户setTag进来的Object
 | isContinue(void):boolean | 是否成功断点续传
 | getEtag(void):String | 获取当前下载获取到的ETag
+| getAutoRetryTimes(void):int | 自动重试次数
+| getRetryingTimes(void):int | 当前重试次数。将要开始重试的时候，会将接下来是第几次
 
 #### 监听器(`FileDownloadListener`)说明
 
@@ -257,15 +260,34 @@ blockComplete -> completed
 | connected | 已经连接上 | ETag, 是否断点续传, soFarBytes, totalBytes
 | progress | 下载进度回调 | soFarBytes
 | blockComplete | 在完成前同步调用该方法，此时已经下载完成 | -
+| retry | 重试之前把将要重试是第几次回调回来 | 之所以重试遇到Throwable, 将要重试是第几次, soFarBytes
 | completed | 完成整个下载过程 | -
 | paused | 暂停下载 | soFarBytes
 | error | 下载出现错误 | 抛出的Throwable
 | warn | 在下载队列中(正在等待/正在下载)已经存在相同下载连接与相同存储路径的任务 | -
 
-## III. Open Source
 
-[lingochamp/FileDownloader](https://github.com/lingochamp/FileDownloader)
+## III. LICENSE
 
+```
+Copyright (c) 2015 LingoChamp Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
+
+[license_2_svg]: https://img.shields.io/hexpm/l/plug.svg
+[android_platform_svg]: https://img.shields.io/badge/Platform-Android-brightgreen.svg
+[file_downloader_svg]: https://img.shields.io/badge/Android-FileDownloader-orange.svg
 [mix_gif]: https://github.com/lingochamp/FileDownloader/raw/master/art/mix.gif
 [parallel_gif]: https://github.com/lingochamp/FileDownloader/raw/master/art/parallel.gif
 [serial_gif]: https://github.com/lingochamp/FileDownloader/raw/master/art/serial.gif
@@ -273,4 +295,3 @@ blockComplete -> completed
 [single_gif]: https://github.com/lingochamp/FileDownloader/raw/master/art/single.gif
 [bintray_svg]: https://api.bintray.com/packages/jacksgong/maven/FileDownloader/images/download.svg
 [bintray_url]: https://bintray.com/jacksgong/maven/FileDownloader/_latestVersion
-[library_last_source_jar]: https://bintray.com/artifact/download/jacksgong/maven/com/liulishuo/filedownloader/library/0.0.9/library-0.0.9-sources.jar
