@@ -261,15 +261,13 @@ blockComplete -> completed
 
 [lingochamp/FileDownloader](https://github.com/lingochamp/FileDownloader)
 
-
 [license_2_svg]: https://img.shields.io/hexpm/l/plug.svg
 [android_platform_svg]: https://img.shields.io/badge/Platform-Android-brightgreen.svg
 [file_downloader_svg]: https://img.shields.io/badge/Android-FileDownloader-orange.svg
-[mix_gif]: https://github.com/lingochamp/FileDownloader/raw/master/art/mix.gif
-[parallel_gif]: https://github.com/lingochamp/FileDownloader/raw/master/art/parallel.gif
-[serial_gif]: https://github.com/lingochamp/FileDownloader/raw/master/art/serial.gif
-[single_progress_gif]: https://github.com/lingochamp/FileDownloader/raw/master/art/single_progress.gif
-[single_gif]: https://github.com/lingochamp/FileDownloader/raw/master/art/single.gif
+[mix_tasks_demo_gif]: https://github.com/lingochamp/FileDownloader/raw/master/art/mix_tasks_demo.gif
+[parallel_tasks_demo_gif]: https://github.com/lingochamp/FileDownloader/raw/master/art/parallel_tasks_demo.gif
+[serial_tasks_demo_gif]: https://github.com/lingochamp/FileDownloader/raw/master/art/serial_tasks_demo.gif
+[single_task_demo_gif]: https://github.com/lingochamp/FileDownloader/raw/master/art/single_task_demo.gif
 [bintray_svg]: https://api.bintray.com/packages/jacksgong/maven/FileDownloader/images/download.svg
 [bintray_url]: https://bintray.com/jacksgong/maven/FileDownloader/_latestVersion
 [file_download_listener_callback_flow_png]: https://github.com/lingochamp/FileDownloader/raw/master/art/filedownloadlistener_callback_flow.png
