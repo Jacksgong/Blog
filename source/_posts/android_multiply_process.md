@@ -49,11 +49,34 @@ Socket/管道/消息队列 | A中缓冲区 --(存储)--> 内核缓冲区 --(转�
 我们可以将Binder理解为 通信管道的入口，Client 需要通信必须建立通信管道，并且获得通信管道入口。
 
 
-## 使用注意
+## 注意
 
-如果需要其他apk也可以调用AIDL来通信(调用Stub中的相关方法)，只需要在对应的Stub中，复写`onTransact`方法，根据调用者的uid来做权限认证，返回true，让其调用成功，否则调用失败。
+- 如果需要其他apk也可以调用AIDL来通信(调用Stub中的相关方法)，只需要在对应的Stub中，复写`onTransact`方法，根据调用者的uid来做权限认证，返回true，让其调用成功，否则调用失败。
+- 几乎所有系统服务都是通过Binder进行通信: `Telephone`、`Vibrator`、`Wifi`、`Battery`、`Notification`等
+- 几乎所有IPC架构都是基于Binder: `Intent`、`Content Provider`、`Messager`、ActivityManagerServer中处理的各种生命周期(`onStart()`、`onResume()`...)
+
+### 通信过程中线程关系
+
+> Client - Proxies (封装调用方法，将对象转为系统可读): 提交处理给Binder内核驱动并且block住 ||| Service - Stubs(Listens): 监听Binder内核驱动并且基于接收的回调反序列化为对象
+
+> 如果不想被block住，可以通过`IBinder.FLAG_ONEWAY`标记，将会立马完成返回空数据
+
+#### 1. Client 与 Service通信
+
+Client - `transact()`(block client thread by default) -> Service - `onTransact()`(这个方法在Binder线程执行执行，完成后，unblock client thread)
+
+执行`onTransact()`的Binder线程池最大活动线程数量: 16
+
+![](https://sujaiantony.files.wordpress.com/2011/12/binder_commn.png)
+
+图片来自: [An Android 101](https://sujaiantony.wordpress.com/2011/12/28/an-android-101-an-overview-on-binder-framework/)
 
 
+#### 2. Service 与 Client通信
+
+Service - `onTransact()` -> Client - transaction (transaction, 在binder thread)
+
+> The client will receive the transaction in the thread waiting for the first transaction to be finished rather than a binder thread
 
 #### 优点:
 
@@ -154,3 +177,5 @@ Service Manager | 用户空间 | 辅助: Binder机制的守护进程用于管理
 - [快速简单Demo](http://blog.csdn.net/singwhatiwanna/article/details/17041691)
 - [浅谈Service Manager成为Android进程间通信（IPC）机制Binder守护进程之路](http://blog.csdn.net/luoshengyang/article/details/6621566)
 - [Android进程间通信（IPC）机制Binder简要介绍和学习计划](http://blog.csdn.net/luoshengyang/article/details/6618363)
+- [An Overview of Android Binder Framework](http://codetheory.in/an-overview-of-android-binder-framework/)
+- [An Android 101 : An overview on Binder framework.](https://sujaiantony.wordpress.com/2011/12/28/an-android-101-an-overview-on-binder-framework/)
