@@ -5,6 +5,9 @@ tags:
 - 最佳实践
 
 ---
+
+
+
 > 视频: [Respecting User Attention: Notification Best Practices (Android Dev Summit 2015)](https://www.youtube.com/watch?v=WzRSpZpw2wg)
 
 > CODE: https://goo.gl/NfwEiY
@@ -184,3 +187,9 @@ new Notification.Builder(this)
         "1(617) 555-1212", null)
         .toString())
 ```
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

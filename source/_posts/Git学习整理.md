@@ -360,10 +360,16 @@ See "git help gc" for manual housekeeping.
 
 你执行`git fack`会发现一堆的挂起的`dangling blob xxxxxxxxxxxxxxx`
 
-此时只需要: **gc**下 `git gc --prune=now`
+此时只需要: **gc** 下 `git gc --prune=now`
 
 ----
 
 - [Git教程](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
 - [6.6 Git 工具 - 子模块](https://git-scm.com/book/zh/v1/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97)
 - [Git Submodule的坑](http://blog.devtang.com/blog/2013/05/08/git-submodule-issues/)
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

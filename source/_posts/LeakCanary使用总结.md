@@ -11,7 +11,7 @@ tags:
 
 ## I. 使用
 
-`build.gradle`中配置: 
+`build.gradle`中配置:
 
 ```
 dependencies {
@@ -24,7 +24,7 @@ dependencies {
 
 ```
 public class ExampleApplication extends Application {
- 
+
   @Override public void onCreate() {
     super.onCreate();
     LeakCanary.install(this);
@@ -103,3 +103,9 @@ adb logcat | grep -e "leak" -e "hprof" -e "analysis"
 1. release千万不要带上(带no-op包)，由于GC耗时，因此会带来：安装包增加、应用onDestory由于gc带来耗时、由于新建的分析进程带来内存开销，由于大量的计算分析，带来的CPU资源的占用。
 2. Android api 14以下的`LeakCanary#install(Application):RefWatcher`是不会自动注册对`Activity`的检测的，需要自己实现`BaseActivity`并且在`Activity#onDestroy`的地方主动调用`RefWatcher#watch(Object)`进行检测
 3. 检测是比较慢的，其中涉及i/o，涉及大量的计算分析，通常在20s~1分钟左右，根当前cpu资源占用情况有关。
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

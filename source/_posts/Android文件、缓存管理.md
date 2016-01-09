@@ -22,20 +22,20 @@ tags:
 ### 两个缓存池支持并发操作，但这里的支持并发，对于本library而言，外部多线程使用时，注意同步。
 
 这里有几个需要考究的地方，一个就是缓存池类型的选用，主要考究参考如下：
-   
-    
+
+
     ConcurrentHashMap 允许在不阻塞线程 （block threads）的情况下，几个线程同时修改Map。
     Collections.synchronizedMap(map) 创建一个阻塞Map (blocking map)， 这会降低map性能。如果需要确保数据的 一致性，使得每个线程都有Map 的即时视图，那么可以使用它
-     
+
 参考网友测试数据：[http://www.java-forums.org/new-java/13840-hashmap-vs-skiplistmap.html](http://www.java-forums.org/new-java/13840-hashmap-vs-skiplistmap.html)
-    
+
     在4线程1.6万数据的条件下，ConcurrentHashMap 存取速度是ConcurrentSkipListMap 的4倍左右。
     但ConcurrentSkipListMap有几个ConcurrentHashMap 不能比拟的优点：
     1、ConcurrentSkipListMap 的key是有序的。
     2、ConcurrentSkipListMap 支持更高的并发。ConcurrentSkipListMap 的存取时间是log（N），和线程数几乎无关。也就是说在数据量一定的情况下，并发的线程越多，ConcurrentSkipListMap越能体现出他的优势。
-     
+
     3、的使用Vector或Collections.synchronizedList(List<T>)的方式来解决该问题。但是这并没有效果!虽然在列表上add(),remove()和get()方法现在对线程是安全的，但遍历时仍然会抛出ConcurrentModificationException！在你遍历在列表时，你需要在该列表上使用同步，同时，在使用Quartz修改它时，也需要使用同步机制。
-     
+
     重点提下，所有的线程安全都是对于内部而言
 
 因此我们两个缓存池如下：
@@ -54,24 +54,24 @@ tags:
     */
     private Map<String, byte[]> mCache = Collections.synchronizedMap(new LinkedHashMap<String, byte[]>(INIT_CAPACITY, LOAD_FACTOR, true));
     private Map<String, WeakReference<byte[]>> mWeakCache = new ConcurrentHashMap<String, WeakReference<byte[]>>();
-    
+
 也许你会问为什么做了这些分析，强引用缓存池还使用Collections.synchronizedMap，我想coderanch.com论坛的Steve已经给我做出了答复：
 
-    You will have to come up with the requirements for your storage structure to figure out which one is best. There are two big differences: 
+    You will have to come up with the requirements for your storage structure to figure out which one is best. There are two big differences:
 
-    1) The LinkedHashMap is ordered but not thread safe 
+    1) The LinkedHashMap is ordered but not thread safe
 
-    2) The ConcurrentHashMap is thread safe but not ordered 
+    2) The ConcurrentHashMap is thread safe but not ordered
 
-    If you need an ordered thread safe map, then maybe ConcurrentSkipListMap might be a better choice (but maybe not...). 
+    If you need an ordered thread safe map, then maybe ConcurrentSkipListMap might be a better choice (but maybe not...).
 
-    If you wanted the ordering of LinkedHashMap in a thread safe structure, your concerns should be: 
-    - How much work would it take to make LinkedHashMap thread safe? 
-    - Do you trust yourself to be able to make it thread safe? 
-    - Can you make it thread safe and still efficient? 
+    If you wanted the ordering of LinkedHashMap in a thread safe structure, your concerns should be:
+    - How much work would it take to make LinkedHashMap thread safe?
+    - Do you trust yourself to be able to make it thread safe?
+    - Can you make it thread safe and still efficient?
 
-    versus 
-    - How much work would it take to make ConcurrentSkipListMap (or ConcurrentHashMap) sort like the LinkedHashMap?At first blush, this might seem easy (CSKLM uses a comparator, so just make a comparator for access time) but it won't be (you would be sorting on something other than the Key (insertion/access order), your structure would have to change with access, not just insertion, iteration would be affected...). 
+    versus
+    - How much work would it take to make ConcurrentSkipListMap (or ConcurrentHashMap) sort like the LinkedHashMap?At first blush, this might seem easy (CSKLM uses a comparator, so just make a comparator for access time) but it won't be (you would be sorting on something other than the Key (insertion/access order), your structure would have to change with access, not just insertion, iteration would be affected...).
     - Is the Map you come up with efficient enough to use?
 
 因此目前强引用缓存池，这么做是折中的选择，当然还有很大的优化空间。我承认这里完全可以我们自己写一个线程安全的LinkedHashMap或支持LRU的ConcurrenthashMap，因为我们有他们的源码与详细的分析文稿。暂时如此，以后抽空优化。
@@ -90,9 +90,9 @@ tags:
     import cn.dreamtobe.library.cache.util.TransUtil;
 
     /**
-     * 
+     *
      * @describe Proxy
-     * 
+     *
      * @author Jacksgong
      * @since 2013-12-16 下午8:47:17
      * @Web http://blog.dreamtobe.cn/1470.html
@@ -157,7 +157,7 @@ tags:
 
 	// Parcelable
 	/**
-	 * 
+	 *
 	 * @param key
 	 * @param p
 	 *            这里选用Parcelable的原因
@@ -257,3 +257,9 @@ tags:
 
 ### 最后，作为缓存入口，它的功能绝非止于此。
 抽空我会进行数据分块处理等拓展（对外提供接口），并且优化弱引用池类型与文件缓存处理，并做一些考究。
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

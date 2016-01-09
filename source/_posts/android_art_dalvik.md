@@ -318,3 +318,9 @@ static void run_dex2oat(int zip_fd, int oat_fd, const char* input_file_name,
 - [Dalvik、ART虚拟机小结](http://www.itlipan.info/android/2015/08/07/android-dalvik.html)
 - [ART运行时垃圾收集（GC）过程分析](http://blog.csdn.net/luoshengyang/article/details/42555483)
 - [浅谈为什么Java运行环境是虚拟机，而Python运行环境是解释器](http://www.xrpmoon.com/blog/archives/jripple1105.html)
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

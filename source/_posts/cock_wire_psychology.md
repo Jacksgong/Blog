@@ -97,7 +97,7 @@ tags:
 1. 如果不值得去做，就勇敢的放弃
 2. 一点一滴的强化意志力，先从一件小事来训练自己
 3. 不要总以为有很多时间做。想到就去实现
-4. 劳逸结合（当觉得还有一个小时才能完成的时候，最好休息一下） 
+4. 劳逸结合（当觉得还有一个小时才能完成的时候，最好休息一下）
 
 ## X. 交往定律
 
@@ -110,11 +110,11 @@ tags:
 2. 主动定律
 
 	男人：迅速出击；女人：缓慢渗透
-	
+
 3. 考验定律
 
 	男人考验女人：约会迟到；女人考验男人：逛街啥都要
-	
+
 4. 求爱定律
 
 	男追女如隔座山；女追男如隔张纸
@@ -122,27 +122,27 @@ tags:
 5. 热恋定律
 
 	热恋的男人：再笨也有用不完的小聪明；热恋的女人：再精明也会变得很愚蠢
-	
+
 6. 情人定律
 
 	男人相当女人的初恋情人，女人想做男人的最后情人
-	
+
 7. 下一个定律
 
 	双方都会总觉得下一个会更好
-	
+
 8. 说话定律
 
 	男人酒后话多，女人婚后话多
-	
+
 9. 区别定律
 
 	男人不修边幅的时候，人们会质疑他的女朋友；女人仪容不整时，人们会同情她的那朋友
-	
+
 10. 成功背后定律
 
 	一个成功男人的背后，总有一个坚强的女人；一个成功女人的背后，总有一个伤她心的男人
-	
+
 ## XI. 邻近性原则
 
 在人际交往中，距离的接近程度与交往的频率有直接的关系
@@ -162,7 +162,13 @@ tags:
 2. 恐怖电影
 3. 公路狂飙
 
- 
+
 ## XIII. 古烈治效应
 
 喜新厌旧
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

@@ -16,7 +16,7 @@ tags:
 今年2月，斯诺登暴露美国安全局黑入某Sim卡生厂商。
 
 <!--more-->
-### 重点: 
+### 重点:
 
 Sim卡的密钥，得到他的 通话信息与短信信息 甚至是克隆Sim卡。
 
@@ -42,3 +42,9 @@ Sim卡的密钥，得到他的 通话信息与短信信息 甚至是克隆Sim卡
 
 容易采集加密设备的功耗: SPA、DPA 进行分析攻击
 
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

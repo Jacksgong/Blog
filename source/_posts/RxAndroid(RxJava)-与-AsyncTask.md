@@ -63,11 +63,11 @@ webService.doSomething(someData)
 Subscriber<String> mySubscriber = new Subscriber<String>() {
     @Override
     public void onNext(String s) { System.out.println(s); }
- 
+
 // 如果正确的终结，最后会调到这里
     @Override
     public void onCompleted() { }
- 
+
 // 只要有异常抛出（包括操作符中的调用），会调到这里
     @Override
     public void onError(Throwable e) { }
@@ -93,7 +93,7 @@ Subscriber<String> mySubscriber = new Subscriber<String>() {
 ```
 //这里是一个链式Web Service调用的例子，这些请求互相依赖，在线程池中运行第二批并行调用，然后在将结果返回给Observer之前，对数据进行合并和排序。
 public Observable<List<CityWeather>> getWeatherForLargeUsCapitals() {
-    return cityDirectory.getUsCapitals() 
+    return cityDirectory.getUsCapitals()
         .flatMap(cityList -> Observable.from(cityList))
         .filter(city -> city.getPopulation() > 500,000)
         .flatMap(city -> weatherService.getCurrentWeather(city)) //each runs in parallel
@@ -147,7 +147,7 @@ public void onViewCreated() {
     if (weatherSubject == null) {
         weatherSubject = AsyncSubject.create();
 
-        cityDirectory.getUsCapitals() 
+        cityDirectory.getUsCapitals()
             .flatMap(cityList -> Observable.from(cityList))
             .filter(city -> city.getPopulation() > 500,000)
             .flatMap(city -> weatherService.getCurrentWeather(city))
@@ -156,6 +156,12 @@ public void onViewCreated() {
     }
     return weatherSubject;
     }
-    
+
 // weatherManager.invalidate(); //invalidate cache on fresh start
 ```
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

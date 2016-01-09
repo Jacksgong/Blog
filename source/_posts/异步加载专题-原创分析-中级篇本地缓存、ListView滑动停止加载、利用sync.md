@@ -21,12 +21,12 @@ tags:
 
 ```
 package cindy.android.test.synclistview;
- 
+
 import java.io.File;
- 
+
 import android.app.Application;
 import android.os.Environment;
- 
+
 public class MyApp extends Application{
 //will cause that class to be instantiated for you when the process for your application/package is created...
 	//create cache on install application
@@ -39,7 +39,7 @@ public class MyApp extends Application{
 			f.mkdir();
 		}
 	}
- 
+
 }
 ```
 
@@ -53,11 +53,11 @@ Log记录做一个类，这样即可以统一管理TAG也可以清晰的通过�
 
 ```
 package cindy.android.test.synclistview;
- 
+
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
- 
+
 public class DebugUtil {
     public static final String TAG = "DebugUtil";
     public static final boolean DEBUG = true;
@@ -65,23 +65,23 @@ public class DebugUtil {
     public static void toast(Context context,String content){
         Toast.makeText(context, content, Toast.LENGTH_SHORT).show();
     }
- 
+
     public static void debug(String tag,String msg){
         if (DEBUG) {
             Log.d(tag, msg);
         }
     }
- 
+
     public static void debug(String msg){
         if (DEBUG) {
             Log.d(TAG, msg);
         }
     }
- 
+
     public static void error(String tag,String error){
         Log.e(tag, error);
     }
- 
+
     public static void error(String error){
         Log.e(TAG, error);
     }
@@ -92,56 +92,56 @@ public class DebugUtil {
 
 ```
 package cindy.android.test.synclistview;
- 
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Window;
 import android.widget.Toast;
- 
+
 public abstract class AbstructCommonActivity extends Activity  {
- 
+
 	//Main Activity's Parent
 	//Window Feature_no_Title
 	//Hanlder to Show some tip.
 	private MyHandler handler = new MyHandler();
- 
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 	}
- 
+
 	protected void handleOtherMessage(int flag){
- 
+
 	}
- 
+
 	public void sendMessage(int flag) {
 		handler.sendEmptyMessage(flag);
 	}
- 
+
 	public void sendMessageDely(int flag,long delayMillis){
 		handler.sendEmptyMessageDelayed(flag, delayMillis);
 	}
- 
+
 	public void showToast(String toast_message){
 		handler.toast_message = toast_message;
 		sendMessage(MyHandler.SHOW_STR_TOAST);
 	}
- 
+
 	public void showToast(int res){
 		handler.toast_res = res;
 		sendMessage(MyHandler.SHOW_RES_TOAST);
 	}
- 
+
 	private class MyHandler extends Handler {
 		public static final int SHOW_STR_TOAST = 0;
 		public static final int SHOW_RES_TOAST = 1;
- 
+
 		private String toast_message=null;
 		private int toast_res;
- 
+
 		@Override
 		public void handleMessage(Message msg) {
 			if (!Thread.currentThread().isInterrupted()) {
@@ -157,7 +157,7 @@ public abstract class AbstructCommonActivity extends Activity  {
 				}
 			}
 		}
- 
+
 	}
 }
 ```
@@ -168,7 +168,7 @@ public abstract class AbstructCommonActivity extends Activity  {
 
 ```
 package cindy.android.test.synclistview;
- 
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -177,22 +177,22 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
- 
+
 public class LoadStateView extends RelativeLayout{
 	//Loading RelativeLayout
 	ProgressBar progBar;
- 
+
 	LinearLayout downLoadErrMsgBox;
- 
+
 	TextView downLoadErrText;
- 
+
 	Button btnListLoadErr;
- 
+
 	public LoadStateView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		// TODO Auto-generated constructor stub
 	}
- 
+
 	@Override
 	protected void onFinishInflate() {
 		// TODO Auto-generated method stub
@@ -202,26 +202,26 @@ public class LoadStateView extends RelativeLayout{
 		downLoadErrText = (TextView) findViewById(R.id.downLoadErrText);
 		btnListLoadErr = (Button) findViewById(R.id.btnListLoadErr);
 	}
- 
+
 	public void startLoad(){
 		downLoadErrMsgBox.setVisibility(View.GONE);
 		progBar.setVisibility(View.VISIBLE);
 	}
- 
+
 	public void stopLoad(){
 		progBar.setVisibility(View.GONE);
 	}
- 
+
 	public void showError(){
 		downLoadErrMsgBox.setVisibility(View.VISIBLE);
 		progBar.setVisibility(View.GONE);
 	}
- 
+
 	public void showEmpty(){
 		downLoadErrMsgBox.setVisibility(View.VISIBLE);
 		progBar.setVisibility(View.GONE);
 	}
- 
+
 	public void setOnReloadClickListener(OnClickListener onReloadClickListener){
 		btnListLoadErr.setOnClickListener(onReloadClickListener);
 	}
@@ -237,24 +237,24 @@ public class LoadStateView extends RelativeLayout{
 
 ```
 package cindy.android.test.synclistview;
- 
+
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
- 
+
 public class TestListViewActivity extends AbstructCommonActivity
 	implements AdapterView.OnItemClickListener{
- 
+
 	ListView viewBookList;
- 
+
 	BookItemAdapter adapter;
- 
+
 	//ViewGroup listFolder;
- 
+
 	LoadStateView loadStateView;
- 
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -263,9 +263,9 @@ public class TestListViewActivity extends AbstructCommonActivity
 		viewBookList = (ListView) findViewById(R.id.viewBookList);
 		adapter = new BookItemAdapter(this,viewBookList);
 		loadStateView = (LoadStateView) findViewById(R.id.downloadStatusBox);
- 
+
 		loadStateView.setOnReloadClickListener(new View.OnClickListener() {
- 
+
 			@Override
 			public void onClick(View v) {
 				reload();
@@ -277,7 +277,7 @@ public class TestListViewActivity extends AbstructCommonActivity
 		viewBookList.setOnItemClickListener(this);
 		reload();
 	}
- 
+
 	private void reload(){
 		adapter.clean();
 		loadStateView.startLoad();
@@ -296,40 +296,40 @@ public class TestListViewActivity extends AbstructCommonActivity
 			}
 		}).start();
 	}
- 
+
 	public void loadDate(){
 		for(int i=0;i&lt;10;i++){
 			adapter.addBook("吞噬星空"+i,
 			"http://www.pfwx.com/bookinfo/11/11000.html",
 			"http://www.pfwx.com/files/article/image/11/11000/11000s.jpg");
- 
+
 			adapter.addBook("仙逆"+i,
 			"http://www.pfwx.com/bookinfo/9/9760.html",
 			"http://www.pfwx.com/files/article/image/9/9760/9760s.jpg");
- 
+
 			adapter.addBook("武动乾坤"+i,
 			"http://www.pfwx.com/bookinfo/13/13939.html",
 			"http://www.pfwx.com/files/article/image/13/13939/13939s.jpg");
- 
+
 			adapter.addBook("凡人修仙传"+i,
 			"http://www.pfwx.com/bookinfo/3/3237.html",
 			"http://www.pfwx.com/files/article/image/3/3237/3237s.jpg");
- 
+
 			adapter.addBook("遮天"+i,
 			"http://www.pfwx.com/bookinfo/11/11381.html",
 			"http://www.pfwx.com/files/article/image/11/11381/11381s.jpg");
 		}
 	}
- 
+
 	@Override
 	public void onItemClick(AdapterView&lt;?&gt; arg0, View arg1, int arg2, long arg3) {
- 
+
 	}
- 
+
 	private static final int REFRESH_LIST = 0x10001;
 	private static final int SHOW_LOAD_STATE_VIEW = 0x10003;
 	private static final int HIDE_LOAD_STATE_VIEW = 0x10004;
- 
+
 	@Override
 	protected void handleOtherMessage(int flag) {
 		switch (flag) {
@@ -346,12 +346,12 @@ public class TestListViewActivity extends AbstructCommonActivity
 		case HIDE_LOAD_STATE_VIEW:
 			loadStateView.stopLoad();
 			break;
- 
+
 		default:
 			break;
 		}
 	}
- 
+
 }
 ```
 
@@ -366,9 +366,9 @@ adapter = new BookItemAdapter(this,viewBookList);
 
 ```
 package cindy.android.test.synclistview;
- 
+
 import java.util.Vector;
- 
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -379,7 +379,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
- 
+
 public class BookItemAdapter extends BaseAdapter{
 	//Main List Adapter
 	private LayoutInflater mInflater;
@@ -387,16 +387,16 @@ public class BookItemAdapter extends BaseAdapter{
 	private Vector mModels = new Vector();
 	private ListView mListView;
 	SyncImageLoader syncImageLoader;
- 
+
 	public BookItemAdapter(Context context,ListView listView){
 		mInflater = LayoutInflater.from(context);
 		syncImageLoader = new SyncImageLoader();
 		mContext = context;
 		mListView = listView;
- 
+
 		mListView.setOnScrollListener(onScrollListener);
 	}
- 
+
 	public void addBook(String book_name,String out_book_url,String out_book_pic){
 		BookModel model = new BookModel();
 		model.book_name =book_name;
@@ -404,17 +404,17 @@ public class BookItemAdapter extends BaseAdapter{
 		model.out_book_pic = out_book_pic;
 		mModels.add(model);
 	}
- 
+
 	public void clean(){
 		mModels.clear();
 	}
- 
+
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return mModels.size();
 	}
- 
+
 	@Override
 	public Object getItem(int position) {
 		if(position &gt;= getCount()){
@@ -422,13 +422,13 @@ public class BookItemAdapter extends BaseAdapter{
 		}
 		return mModels.get(position);
 	}
- 
+
 	@Override
 	public long getItemId(int position) {
 		// TODO Auto-generated method stub
 		return position;
 	}
- 
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if(convertView == null){
@@ -445,9 +445,9 @@ public class BookItemAdapter extends BaseAdapter{
 		syncImageLoader.loadImage(position,model.out_book_pic,imageLoadListener);
 		return  convertView;
 	}
- 
+
 	SyncImageLoader.OnImageLoadListener imageLoadListener = new SyncImageLoader.OnImageLoadListener(){
- 
+
 		@Override
 		public void onImageLoad(Integer t, Drawable drawable) {
 			//BookModel model = (BookModel) getItem(t);
@@ -466,9 +466,9 @@ public class BookItemAdapter extends BaseAdapter{
 				iv.setBackgroundResource(R.drawable.rc_item_bg);
 			}
 		}
- 
+
 	};
- 
+
 	public void loadImage(){
 		int start = mListView.getFirstVisiblePosition();
 		int end =mListView.getLastVisiblePosition();
@@ -478,9 +478,9 @@ public class BookItemAdapter extends BaseAdapter{
 		syncImageLoader.setLoadLimit(start, end);
 		syncImageLoader.unlock();
 	}
- 
+
 	AbsListView.OnScrollListener onScrollListener = new AbsListView.OnScrollListener() {
- 
+
 		@Override
 		public void onScrollStateChanged(AbsListView view, int scrollState) {
 			switch (scrollState) {
@@ -496,18 +496,18 @@ public class BookItemAdapter extends BaseAdapter{
 				case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
 					syncImageLoader.lock();
 					break;
- 
+
 				default:
 					break;
 			}
- 
+
 		}
- 
+
 		@Override
 		public void onScroll(AbsListView view, int firstVisibleItem,
 				int visibleItemCount, int totalItemCount) {
 			// TODO Auto-generated method stub
- 
+
 		}
 	};
 }
@@ -524,7 +524,7 @@ mListView.setOnScrollListener(onScrollListener);
 
 ```
 AbsListView.OnScrollListener onScrollListener = new AbsListView.OnScrollListener() {
- 
+
 		@Override
 		public void onScrollStateChanged(AbsListView view, int scrollState) {
 			switch (scrollState) {
@@ -540,18 +540,18 @@ AbsListView.OnScrollListener onScrollListener = new AbsListView.OnScrollListener
 				case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
 					syncImageLoader.lock();
 					break;
- 
+
 				default:
 					break;
 			}
- 
+
 		}
- 
+
 		@Override
 		public void onScroll(AbsListView view, int firstVisibleItem,
 				int visibleItemCount, int totalItemCount) {
 			// TODO Auto-generated method stub
- 
+
 		}
 	};
 ```
@@ -560,7 +560,7 @@ AbsListView.OnScrollListener onScrollListener = new AbsListView.OnScrollListener
 
 ```
 package cindy.android.test.synclistview;
- 
+
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -570,34 +570,34 @@ import java.io.InputStream;
 import java.lang.ref.SoftReference;
 import java.net.URL;
 import java.util.HashMap;
- 
+
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.os.Handler;
- 
+
 public class SyncImageLoader {
 	//Sync Image Loader
 	//Message Load Image
 	//
 	private Object lock = new Object();
- 
+
 	private boolean mAllowLoad = true;
- 
+
 	private boolean firstLoad = true;
- 
+
 	private int mStartLoadLimit = 0;
- 
+
 	private int mStopLoadLimit = 0;
- 
+
 	final Handler handler = new Handler();
- 
+
 	private HashMap&lt;String, SoftReference&gt; imageCache = new HashMap&lt;String, SoftReference&gt;();
- 
+
 	public interface OnImageLoadListener {
 		public void onImageLoad(Integer t, Drawable drawable);
 		public void onError(Integer t);
 	}
- 
+
 	public void setLoadLimit(int startLoadLimit,int stopLoadLimit){
 		if(startLoadLimit &gt; stopLoadLimit){
 			return;
@@ -605,32 +605,32 @@ public class SyncImageLoader {
 		mStartLoadLimit = startLoadLimit;
 		mStopLoadLimit = stopLoadLimit;
 	}
- 
+
 	public void restore(){
 		mAllowLoad = true;
 		firstLoad = true;
 	}
- 
+
 	public void lock(){
 		mAllowLoad = false;
 		firstLoad = false;
 	}
- 
+
 	public void unlock(){
 		mAllowLoad = true;
 		synchronized (lock) {
 			lock.notifyAll(); //wake up all waiting thread.
 		}
 	}
- 
+
 	public void loadImage(Integer t, String imageUrl,
 			OnImageLoadListener listener) {
 		final OnImageLoadListener mListener = listener;
 		final String mImageUrl = imageUrl;
 		final Integer mt = t;
- 
+
 		new Thread(new Runnable() {
- 
+
 			@Override
 			public void run() {
 				if(!mAllowLoad){
@@ -644,21 +644,21 @@ public class SyncImageLoader {
 						}
 					}
 				}
- 
+
 				if(mAllowLoad &amp;&amp; firstLoad){
 					loadImage(mImageUrl, mt, mListener);
 				}
- 
+
 				if(mAllowLoad &amp;&amp; mt &lt;= mStopLoadLimit &amp;&amp; mt &gt;= mStartLoadLimit){
 					loadImage(mImageUrl, mt, mListener);
 				}
 			}
- 
+
 		}).start();
 	}
- 
+
 	private void loadImage(final String mImageUrl,final Integer mt,final OnImageLoadListener mListener){
- 
+
 		if (imageCache.containsKey(mImageUrl)) {
             SoftReference softReference = imageCache.get(mImageUrl);
             final Drawable d = softReference.get();
@@ -697,7 +697,7 @@ public class SyncImageLoader {
 			e.printStackTrace();
 		}
 	}
- 
+
 	public static Drawable loadImageFromUrl(String url) throws IOException {
 		DebugUtil.debug(url);
 		if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
@@ -728,7 +728,7 @@ public class SyncImageLoader {
 			Drawable d = Drawable.createFromStream(i, "src");
 			return d;
 		}
- 
+
 	}
 }
 ```
@@ -737,7 +737,7 @@ public class SyncImageLoader {
 
 ```
 private void loadImage(final String mImageUrl,final Integer mt,final OnImageLoadListener mListener){
- 
+
 		if (imageCache.containsKey(mImageUrl)) {
             SoftReference softReference = imageCache.get(mImageUrl);
             final Drawable d = softReference.get();
@@ -785,7 +785,7 @@ private HashMap&lt;String, SoftReference&gt; imageCache = new HashMap&lt;String,
 
 ```
 SyncImageLoader.OnImageLoadListener imageLoadListener = new SyncImageLoader.OnImageLoadListener(){
- 
+
 		@Override
 		public void onImageLoad(Integer t, Drawable drawable) {
 			//BookModel model = (BookModel) getItem(t);
@@ -804,7 +804,7 @@ SyncImageLoader.OnImageLoadListener imageLoadListener = new SyncImageLoader.OnIm
 				iv.setBackgroundResource(R.drawable.rc_item_bg);
 			}
 		}
- 
+
 	};
 ```
 
@@ -849,7 +849,7 @@ public static Drawable loadImageFromUrl(String url) throws IOException {
 			Drawable d = Drawable.createFromStream(i, "src");
 			return d;
 		}
- 
+
 	}
 ```
 
@@ -896,3 +896,9 @@ public void unlock(){
 
 此时getView中各种加载，这里的加载条件与方法上面已经知道了。
 其它的，入口的reload和刷新的作用一样.重新刷新一遍。
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

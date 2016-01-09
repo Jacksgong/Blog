@@ -168,3 +168,9 @@ UNSPECIFIED | 希望子视图 任意大小（很少遇到）
 - [Android视图状态及重绘流程分析，带你一步步深入了解View(三)](http://blog.csdn.net/guolin_blog/article/details/17045157)
 - [Android 布局优化](http://www.stormzhang.com/android/2014/04/10/android-optimize-layout/)
 - [性能优化之布局优化](http://www.trinea.cn/android/layout-performance/)
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

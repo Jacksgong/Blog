@@ -32,8 +32,8 @@ while($row)
 }
 mysqli_close($link);
 ?>
- 
- 
+
+
 <form method="POST" action="InsetToDB.php">
 昵称:<input type="text" size="8"; name="name">
    <p>内容:<textarea rows="5" name="text" cols="60"></textarea>
@@ -51,15 +51,15 @@ $link=mysqli_connect('127.0.0.1','root','');
 if(!$link)
 {
    die("<center>出错啦:1!</center>");
- 
+
 }
- 
+
 if(!mysqli_select_db($link,'guestbook'))
 {
    die("<center>出错啦:2!</center>");
    }
- 
- 
+
+
 ?>
 ```
 
@@ -79,7 +79,7 @@ if(mysqli_query($link,$sql))
    }
 else
    echo "留言失败！";
- 
+
 mysqli_close($link);
 ?>
 ```
@@ -96,3 +96,9 @@ CREATE TABLE `intd` (
 PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=gb2312 AUTO_INCREMENT=11 ;
 ```
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

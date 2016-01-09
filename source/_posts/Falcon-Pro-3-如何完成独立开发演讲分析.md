@@ -50,13 +50,13 @@ tags:
 //表
 @DatabaseTable(tableName = "accounts")
 public class Account {
-    
+
     @DatabaseField(id = true)
     private String name;
-    
+
     @DatabaseField(canBeNull = false)
     private String password;
-    
+
     // getters & setters
 }
 ```
@@ -70,7 +70,7 @@ TableUtils.createTable(connectionSource, Account.class);
 // instantiate the DAO to handle Account with String id
 Dao<Account, String> accountDao =
         databaseHelper.getDao(Account.class);
-        
+
 //create an instance of Account
 String name = "Jim Smith";
 Account account = new Account(name, "_secret");
@@ -109,10 +109,10 @@ where.query();
 // 表
 
 public class Account extends RealmObject {
-    
+
     private String name;
     private String password;
-    
+
     // getters & setters
 }
 ```
@@ -217,7 +217,7 @@ recyclerView.scrollToPosition(0);
 
 ps: support包有一个简单的判断是Android L的静态方法:`versionUtils.isAtLeastL`
 
-#### LayoutTransitions ( API 1开始就有): 
+#### LayoutTransitions ( API 1开始就有):
 
 非常强大，布局变化或者Visible/Gone这类的切换动画。考虑用这个，简单强大。
 
@@ -235,7 +235,7 @@ ps: support包有一个简单的判断是Android L的静态方法:`versionUtils.
 #### 1. View层级不要太深
 
  保持Layout平坦，不要有深层级
- 
+
 #### 2. 谨慎创建对象(避免在View draw流程中（onMearsure、onLayout、onDraw...）创建对象
 
 因为gc会带来很多帧率上的损失
@@ -255,7 +255,7 @@ ps: support包有一个简单的判断是Android L的静态方法:`versionUtils.
 **千万避免在View中设置透明度**，特别是在自定义的View上（一般来说ImageView、TextView(ButtonView..)是没有问题的），Falcon作者，在一次检测GPU呈现模式的时候，发现一个设置透明度，导致了Frame的渲染慢了一倍多。
 
 具体原因是由于，一旦设置了Alpha，每次draw 那个View都不得不 清除绘制缓存(Flush Buffer)，然后再绘制到屏幕上，效果如右图(顶部的那几个小点setAlpha(0.5*255))。
- 
+
 ![](/img/Falcon-font.png)
 
 #### 2. 调试CPU过渡绘制
@@ -347,3 +347,9 @@ Joaquim不喜欢 赤裸裸的截图，喜欢重构布局、装饰以后的截图
 1. 通过尽量快的应答用户，让用户感觉他们也是产品项目的一员。
 2. 通过用户反馈，来生成项目接下来要做的清单。
 3. 解决用户的问题，因为他们将会成为你最好的客户。
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

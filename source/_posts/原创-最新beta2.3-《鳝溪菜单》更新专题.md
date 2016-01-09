@@ -11,7 +11,7 @@ tags:
 
 2013年1月2日： 由于接下来进入考试月，将不再进行更新。下学期将抽空推出一款服务系统，周期为半年希望大家多多支持。
 
- 
+
 <!--more-->
 
 《鳝溪菜单 beta 2.4》
@@ -22,7 +22,7 @@ tags:
 > 2012年12月29日 更新《鳝溪菜单 beta 2.3》
 
 ## 更新内容：
- 
+
 1.重新设计编排整个UI界面
 2.添加短信订餐功能
 3.添加一键催单功能
@@ -31,7 +31,7 @@ tags:
 > 2012年12月12日更新《鳝溪菜单 beta1.3》
 
 ## 更新内容：
- 
+
 1.添加开启自动监测版本更新
 2.添加语音搜索
 3.修复菜系列表出现重复错误点击
@@ -41,10 +41,15 @@ tags:
 > 2012年12月11日更新 《鳝溪菜单 beta 1.1》
 
 ## 更新内容：
- 
+
 1.修复在无网络状态下，会打开两次主界面。
 2.修复在无网络状态下，冗余的上传下载测试。
 3.修复在首页进入菜单搜索，搜索菜名时获得错误的店名Extra导致，进入店铺页面加载内容失败.
 4.首页搜索操作优化，当点击记录时，键盘进行隐藏。
- 
 
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

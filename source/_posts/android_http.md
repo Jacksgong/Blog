@@ -52,3 +52,9 @@ Android 2.2以前: 可读的InputStream调用close时，可能导致连接池失
 
 - [Android访问网络，使用HttpURLConnection还是HttpClient？](http://blog.csdn.net/guolin_blog/article/details/12452307)
 - [Android’s HTTP Clients](http://android-developers.blogspot.com/2011/09/androids-http-clients.html)
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

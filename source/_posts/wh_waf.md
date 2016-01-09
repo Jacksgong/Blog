@@ -61,3 +61,9 @@ http://zone.wooyun.org/content/13270
 - 如果上传一个1G大小的流，WAF肯定不会扫描的，要保障大小。
 - post请求加了很多数据，并发的请求，会有部分请求绕过
 - 通过%26是&绕过了360安全卫士
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

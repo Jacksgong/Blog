@@ -10,41 +10,41 @@ tags:
 - 目前的现状：
 
 	SVG能够在大小上、画质上对Apps进行优化，但是在解析效率上以及对各种图片的支持上是需要接下来持续优化的。
- 
+
 <!--more-->
 - SVG代码特征：
 
 	目前已有的几个库中，Android-SVG这个库支持的元素、属性最多，但是在效率上却不是最快的（大约90%的时间消耗在了解析SVG文件上），而虽然SVG-Android-JNI这个库在支持方面略有不足，如不支持阴影、不支持渐变，甚至很少的常见元素都不被支持，但是在效率方面却远领先于其他库，也是最接近RESOURCE库的，因此预计作为后期对SVG库开发的基础或参考。
-	
+
 	目前已有库的总体运行有两个步骤：（1）解析、（2）渲染
-	
+
 - 对Apps的影响
 
 	(1) 提高清晰度，在所有屏幕分辨率上都能完美显示。
-	
+
 	(2) 安装包在大小上能够得到一定的缩减，主要来源于SVG XML格式的压缩
-	
+
 	(3) 初步评估在性能上，总体体验上可接受，但是可能在性能上存在潜在的风险，如一些过于复杂的图片加载时间过长可能会造成体验上的损失，需要在实施时考虑解决方案进行风险规避，可以考虑对加载时间进行监控
-	
+
 - 改进优化的空间：
-	
+
 	对于支持来说，是后期一个持续加入的过程，对于效率我们有下面一些考量：
-	
+
 	(1) 多中间格式的支持，SVG文件格式为XML，而对XML的解析效率其实是解析耗时的一个瓶颈，我们可以考虑直接支持更多更高效序列化、反序列化的中间格式的解析。
-	
+
 	(2) 目前Android-SVG库，在渲染方面表现出色，可以考虑，在解析部分借鉴SVG-Android-JNI的解析，而在渲染上对Android-SVG进行借鉴
-	
+
 	(3) 考虑实现一个体积更小、便于使用、同时不损失开发效率的库和调用框架，这点对于我们同样重要。
 
  经过前期对SVG的预研，矢量图在对任意屏幕的完美支持正是我们所需要的，同时SVG资源文件在打包过程中，经过压缩使得资源文件大小上能够得到优化，，而目前耗时上，大约在RESOURCE加载资源图片的3〜8倍之间不等。经过初步评估，资源图片（通常在100x100左右）加载时间大多在2~4毫秒，SVG的加载预计将在一个大体可接受的范围（也就是实际体验不会感知到区别）。最后目前Parser＋Render的解析方式还存在一定的优化空间，相信可以使SVG的效率得到进一步提升。
 
-总的来说，好多于坏，值得研究与引入。	
+总的来说，好多于坏，值得研究与引入。
 
 
-	
-	
+
+
 # 详细过程
-	
+
 ## 1 主要考量
 - 可行性
 - TTF/SVG选择
@@ -73,7 +73,7 @@ tags:
 
 ### 3.3 参与研究预言SVG库
 库名称 | 地址 | 补充说明 | 支持表现 | Licenses
--|-| - | 
+-|-| - |
 Android-SVG | https://code.google.com/p/androidsvg/ | 代码结构清晰，支持元素较多，速度中，纯Java实现 | 一般图片支持良好，阴影不支持、渐变支持 | Apache License 2.0
 SVG-Android-2 | https://code.google.com/p/svg-android-2/ | 速度慢，纯Java实现 |一般图片支持不好，阴影不支持，渐变不支持 | Apache License 2.0
 SVG-Android-JNI | https://code.launchpad.net/~pltxtra/libsvg-android/main | 速度快，C++实现 | 一般图片支持一般，阴影不支持、渐变不支持 | Simplified BSD Licence, GNU GPL v3, GNU LGPL v2.1, GNU LGPL v3, MIT / X / Expat Licence
@@ -208,10 +208,10 @@ SVG完胜栅格化图片形式
  个数 | 所占大小
  -|-|
  2700-721-45-16-666 = 1252 | 7.7MB - 1.3MB - 856kb - 703kb - 2.2MB = 2.68MB
- 
+
  大小可压缩比较:
  虽然从4.2文件大小对比来看，其实在App大多数图片都是小图的情况来看，对于单张图片从栅格图像转为SVG而言并没有多少的压缩，二者是差不多大的。
- 
+
  对于jpg、png、gif等栅格图像而言，在打包应用时是得不到压缩的：
 
 ![](/img/svg-s-file-1.png)
@@ -223,7 +223,7 @@ SVG完胜栅格化图片形式
  一般的xml压缩:
 
 ![](/img/svg-s-file-3.png)
- 
+
 （3） App在任意屏幕下都得到完美适配（对后期需求需要做到全局大小调整也可以得到很好的助攻）
 ### 5.3 缺点
 （1） 就目前而言，Apps中大多数的资源图片都是96px*96px甚至更小的小图，在资源加载速度方面预计会比目前慢3~8倍。
@@ -238,3 +238,9 @@ SVG完胜栅格化图片形式
 ## 拓展链接
 1. [SVG-Android库 深入浅出 解析篇](http://blog.dreamtobe.cn/2014/12/10/SVG-Android库-深入浅出-解析篇/)
 2. [SVG Android应用探究之路 【一】](http://blog.dreamtobe.cn/2014/11/08/SVG-Android应用探究之路/)
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

@@ -137,3 +137,9 @@ Loads the class with the specified name, optionally linking it after loading. Th
 - [creativepsyco/secondary-dex-gradle](https://github.com/creativepsyco/secondary-dex-gradle)
 - [Android类动态加载技术](http://www.blogjava.net/zh-weir/archive/2011/10/29/362294.html)
 - [JVM学习笔记（八）：类加载器以及双亲委派模型介绍](http://chenzhou123520.iteye.com/blog/1601319)
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

@@ -151,3 +151,9 @@ B: 而由于在频繁的执行中，反复的加锁和解锁，设置可能导�
 - [深入JVM锁机制1-synchronized](http://blog.csdn.net/chen77716/article/details/6618779)
 - [虚拟机中的锁优化简介（适应性自旋/锁粗化/锁削除/轻量级锁/偏向锁）](http://icyfenix.iteye.com/blog/1018932)
 - [Java偏向锁实现原理(Biased Locking)](http://my.oschina.net/u/140462/blog/490897)
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

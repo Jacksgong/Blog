@@ -64,7 +64,7 @@ tags:
 
 - Portable 解释器
 - 绕过反调试: Dalvik源码中做
-- 运行时数据 
+- 运行时数据
 - 任意脱壳: 任何一个指令后面插一个脱壳点的插桩
 - 真机部署
 
@@ -111,3 +111,9 @@ CTF?
 10. DEXProtector
 
 > 最佳防御 混淆&Java自动转为 Native
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

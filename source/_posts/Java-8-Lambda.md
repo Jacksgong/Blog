@@ -48,7 +48,7 @@ public class CollectionUtils {
         }
         return result;
     }
-    
+
     public static void main(String[] args) {
         List input = Arrays.asList(new String[] {"apple", "orange", "pear"});
         List lengths = CollectionUtils.map(input, (String v) -> v.length());
@@ -126,3 +126,9 @@ Android开发中，推荐使用[retrolambda](https://github.com/evant/gradle-ret
 
 ----
 > 整理自: [Java SE 8: Lambda表达式](http://www.infoq.com/cn/articles/Java-se-8-lambda)
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

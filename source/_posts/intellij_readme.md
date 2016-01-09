@@ -1,7 +1,7 @@
 title: Intellij 使用说明
 date: 2015-02-25 08:35:03
 tags:
-- Intellij 
+- Intellij
 - 使用说明
 
 ---
@@ -69,7 +69,7 @@ Alt+Shift+Up/Down| 上/下移一行
 Shift+F6| 重构 - 重命名
 Ctrl+X| 删除行
 Ctrl+D| 复制行
-Ctrl+/或Ctrl+Shift+/| 注释（//或者/**/）
+Ctrl+/或Ctrl+Shift+/| 注释（//或者`/**/` ）
 Ctrl+J| 自动代码（例如：serr）
 Ctrl+Alt+J| 用动态模板环绕
 Ctrl+H| 显示类结构图（类的继承层次）
@@ -192,3 +192,9 @@ Alt+~| VCS 操作菜单
 Ctrl+K| 提交更改
 Ctrl+T| 更新项目
 Ctrl+Alt+Shift+D| 显示变化
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

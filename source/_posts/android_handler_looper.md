@@ -78,3 +78,9 @@ public Handler() {
 - [Android异步消息处理机制完全解析，带你从源码的角度彻底理解](http://blog.csdn.net/guolin_blog/article/details/9991569)
 - [Android消息机制不完全解析（上）](http://blog.csdn.net/a220315410/article/details/9857225)
 - [Android消息机制不完全解析（下）](http://blog.csdn.net/a220315410/article/details/10444171)
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

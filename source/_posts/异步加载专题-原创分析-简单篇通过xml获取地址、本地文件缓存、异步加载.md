@@ -19,10 +19,10 @@ tags:
 
 ```
 package com.example.synctask;
- 
+
 import java.io.File;
 import java.util.List;
- 
+
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -31,27 +31,27 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.widget.ListView;
- 
+
 public class MainActivity extends Activity {
 	protected static final int SUCCESS_GET_CONTACT = 0;
 	private ListView mListView;
 	private ImageAdapter mAdapter;
 	private File cache;
- 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
- 
+
         mListView = (ListView) findViewById(R.id.listView);
- 
+
         //创建缓存目录，系统一运行就得创建缓存目录的，
         cache = new File(Environment.getExternalStorageDirectory(), "cache");
- 
+
         if(!cache.exists()){
         	cache.mkdirs();
         }
- 
+
         //获取数据，主UI线程是不能做耗时操作的，所以启动子线程来做
         new Thread(){
         	public void run() {
@@ -71,7 +71,7 @@ public class MainActivity extends Activity {
         	};
         }.start();
     }
- 
+
     private Handler mHandler = new Handler(){
 		public void handleMessage(android.os.Message msg) {
 			if(msg.what == SUCCESS_GET_CONTACT){
@@ -81,7 +81,7 @@ public class MainActivity extends Activity {
 			}
 		};
 	};
- 
+
     @Override
     protected void onDestroy() {
     	super.onDestroy();
@@ -99,12 +99,12 @@ public class MainActivity extends Activity {
 
 ```
 package com.example.synctask;
- 
+
 public class Contact {
 	int id;
 	String image;
 	String name;
- 
+
 	public Contact() {
 		super();
 	}
@@ -131,7 +131,7 @@ public class Contact {
 	public void setName(String name) {
 		this.name = name;
 	}
- 
+
 }
 ```
 
@@ -139,7 +139,7 @@ ContactService 用于获取网络资源:
 
 ```
 package com.example.synctask;
- 
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -147,16 +147,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
- 
- 
+
+
 import org.xmlpull.v1.XmlPullParser;
- 
+
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.util.Xml;
- 
+
 public class ContactService {
- 
+
 	/*
 	 * 从服务器上获取数据
 	 */
@@ -177,7 +177,7 @@ public class ContactService {
 			return null;
 		}
 	}
- 
+
 	// 这里并没有下载图片下来，而是把图片的地址保存下来了
 	private List<contact> xmlParser(InputStream is) throws Exception {
 		List<contact> contacts = null;
@@ -199,7 +199,7 @@ public class ContactService {
 					contact.setImage(parser.getAttributeValue(0));
 				}
 				break;
- 
+
 			case XmlPullParser.END_TAG:
 				if (parser.getName().equals("contact")) {
 					contacts.add(contact);
@@ -209,7 +209,7 @@ public class ContactService {
 		}
 		return contacts;
 	}
- 
+
 	/*
 	 * 从网络上获取图片，如果图片在本地存在的话就直接拿，如果不存在再去服务器上下载图片
 	 * 这里的path是图片的地址
@@ -228,7 +228,7 @@ public class ContactService {
 			conn.setRequestMethod("GET");
 			conn.setDoInput(true);
 			if (conn.getResponseCode() == 200) {
- 
+
 				InputStream is = conn.getInputStream();
 				FileOutputStream fos = new FileOutputStream(file);
 				byte[] buffer = new byte[1024];
@@ -312,24 +312,24 @@ private Handler mHandler = new Handler(){
 		ViewHolder holder = null;
 		if (convertView == null) {
 			holder = new ViewHolder();
- 
+
 			convertView = mInflater.inflate(R.layout.item, null);
- 
+
 			holder.iv_header = (ImageView) convertView.findViewById(R.id.imageView);
 			holder.tv_name = (TextView) convertView.findViewById(R.id.textView);
- 
+
 			convertView.setTag(holder);
 		}else {
 			holder = (ViewHolder)convertView.getTag();
 		}
- 
+
 		Contact contact = contacts.get(position);
- 
+
 		// 异步的加载图片 (线程池 + Handler ) ---> AsyncTask
 		asyncloadImage(holder.iv_header, contact.image);
- 
+
 		holder.tv_name.setText(contact.name);
- 
+
 		return convertView;
 	}
 ```
@@ -348,15 +348,15 @@ private void asyncloadImage(ImageView iv_header, String path) {
 
 ```
 private final class AsyncImageTask extends AsyncTask<string, Integer, Uri> {
- 
+
 		private ContactService service;
 		private ImageView iv_header;
- 
+
 		public AsyncImageTask(ContactService service, ImageView iv_header) {
 			this.service = service;
 			this.iv_header = iv_header;
 		}
- 
+
 		// 后台运行的子线程子线程
 		@Override
 		protected Uri doInBackground(String... params) {
@@ -367,7 +367,7 @@ private final class AsyncImageTask extends AsyncTask<string, Integer, Uri> {
 			}
 			return null;
 		}
- 
+
 		// 这个放在在ui线程中执行
 		@Override
 		protected void onPostExecute(Uri result) {
@@ -420,7 +420,7 @@ private final class AsyncImageTask extends AsyncTask<string, Integer, Uri> {
 			conn.setRequestMethod("GET"); //通过get请求
 			conn.setDoInput(true);
 			if (conn.getResponseCode() == 200) {
- 
+
 				InputStream is = conn.getInputStream();
 				FileOutputStream fos = new FileOutputStream(file);
 				byte[] buffer = new byte[1024];
@@ -443,10 +443,10 @@ private final class AsyncImageTask extends AsyncTask<string, Integer, Uri> {
 
 ```
 package com.example.synctask;
- 
+
 import java.security.MessageDigest;
 import java.util.Iterator;
- 
+
 public class MD5 {
 	public static String getMD5(String content) {
 		try {
@@ -458,13 +458,13 @@ public class MD5 {
 		}
 		return null;
 	}
- 
+
 	public static String getHashString(MessageDigest digest) {
 		StringBuilder builder = new StringBuilder();
 		for (byte b : digest.digest()) {
 			builder.append(Integer.toHexString((b >> 4) & 0xf));
 			builder.append(Integer.toHexString(b & 0xf));
- 
+
 		}
 		return builder.toString();
 	}
@@ -486,3 +486,9 @@ public class MD5 {
 ```
 
 至此简单的异步加载就实现了。
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

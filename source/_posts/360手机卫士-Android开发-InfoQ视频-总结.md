@@ -14,7 +14,7 @@ tags:
 
 视频标题: 从360手机卫士的开发历程看如何实施大型移动应用开发
 
-视频地址: http://www.infoq.com/cn/presentations/from-360-development-see-big-mobile-application-development 
+视频地址: http://www.infoq.com/cn/presentations/from-360-development-see-big-mobile-application-development
 
 
 ## 宗旨:
@@ -124,3 +124,9 @@ tags:
 2. 代码方面，通过插件化，整个团队分模块达到解耦，独立维护，加快各模块独立维护速度。
 3. 研发流程: 重视build break问题
 4. 组织架构: 小团队；少开大会；专人维护Build系统；专门的架构组；专门的质量改进组（高手重点）；专门的自动化测试组；每周召开质量会
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

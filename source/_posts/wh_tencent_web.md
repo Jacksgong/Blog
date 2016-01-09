@@ -26,7 +26,7 @@ tags:
 
 - 扫描程序架构: 全异步事件驱动 ＋ 协程
 - 规则: 检测逻辑、配置(lua脚本(性能高(1/4 c))、实时更新
-- 任务调度系统: Gearman: 系统优先级，多任务类型、任务出错重试、超时 
+- 任务调度系统: Gearman: 系统优先级，多任务类型、任务出错重试、超时
 - 爬虫: webkit后台server，与调度系统结合
 
 ## WAF方案
@@ -80,3 +80,9 @@ WAF回来以后做网络通信: 通过Nginx1.4.4＋的对外接口来获得回�
 ### 3. 大数据分析
 
 解决: 误报、漏报
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

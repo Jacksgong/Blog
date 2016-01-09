@@ -144,3 +144,9 @@ android {
 - [“minifyEnabled” vs “shrinkResources” - what's the difference? and how to get the saved space?](http://stackoverflow.com/questions/30800804/minifyenabled-vs-shrinkresources-whats-the-difference-and-how-to-get-the)
 - [Gradle Plugin User Guide](http://tools.android.com/tech-docs/new-build-system/user-guide)
 - [PROGUARD FOR ANDROID](https://lab.getbase.com/proguard-for-android/)
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

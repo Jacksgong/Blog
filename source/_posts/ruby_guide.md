@@ -272,19 +272,19 @@ bin/rake db:migrate
 
 目录 | 说明
 :-: | :-
-db/migrate/20141021135430_create_people.rb| 用来建立people资料库资料表的Migration(你的档案开头名称会有不同的时间)
-app/models/person.rb|   person model档案
-app/controllers/people_controller.rb|   people controller档案
-app/views/people/index.html.erb|    用来显示所有文章的index页面
-app/views/people/edit.html.erb| 用来编辑文章的页面
-app/views/people/show.html.erb| 用来显示特定一篇文章的页面
-app/views/people/new.html.erb|  用来新增文章的页面
-app/views/people/_form.html.erb|    用来显示编辑和新增文章的表单局部(Partial)样板
-app/helpers/people_helper.rb|   可在文章Views中使用的Helper方法
-config/routes.rb|   设定URL路由规则的档案，scaffold再此新增了一行resources :people
-app/assets/stylesheets/scaffold.css.scss|   Scaffold鹰架提供的样式档案
-app/assets/stylesheets/people.css.scss| people的CSS样式档案
-app/assets/javascripts/people.js.coffee|    people的JavaScript档案
+`db/migrate/20141021135430_create_people.rb`| 用来建立people资料库资料表的Migration(你的档案开头名称会有不同的时间)
+`app/models/person.rb`|   person model档案
+`app/controllers/people_controller.rb` |   people controller档案
+`app/views/people/index.html.erb` |    用来显示所有文章的index页面
+`app/views/people/edit.html.erb` | 用来编辑文章的页面
+`app/views/people/show.html.erb` | 用来显示特定一篇文章的页面
+`app/views/people/new.html.erb` |  用来新增文章的页面
+`app/views/people/_form.html.erb` |    用来显示编辑和新增文章的表单局部(Partial)样板
+`app/helpers/people_helper.rb` |   可在文章Views中使用的Helper方法
+`config/routes.rb` |   设定URL路由规则的档案，scaffold再此新增了一行resources :people
+`app/assets/stylesheets/scaffold.css.scss` |   Scaffold鹰架提供的样式档案
+`app/assets/stylesheets/people.css.scss` | people的CSS样式档案
+`app/assets/javascripts/people.js.coffee` |    people的JavaScript档案
 
 #### `config/routes.rb`相关
 
@@ -314,3 +314,10 @@ end
 
 - [Ruby on Rails实战圣经](https://ihower.tw/rails4)
 - [RubyGems镜像 - 淘宝网](http://ruby.taobao.org/)
+
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

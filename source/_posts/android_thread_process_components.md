@@ -24,7 +24,7 @@ tags:
 1. `AndroidManifest`中给`manifest`标签中定义相同的`android:sharedUserId`属性
 2. 以相同的签名加密
 
-**[效果]**: 运行在相同的进程中，互相共享资源 
+**[效果]**: 运行在相同的进程中，互相共享资源
 
 ## II. Dalvik、进程、应用程序关系
 
@@ -69,3 +69,9 @@ Dalvik虚拟机
 
 > **优点:**  下次启动该应用程序时会更快速（因为资源可能没有被回收）
 > **缺点:**  可能资源被回收，而启动时资源不够，需要等待系统回收其他资源
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

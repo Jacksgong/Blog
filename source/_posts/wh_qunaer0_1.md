@@ -17,7 +17,7 @@ tags:
 > Enterprise Strategy Group
 
 <!--more-->
-### 愿景: 
+### 愿景:
 
 1. 初始阶段: 可有可无，运维
 2. 进阶: 被提出，比较独立
@@ -40,7 +40,7 @@ tags:
 
 #### 3. 职权
 
-- 组织架构： 
+- 组织架构：
 
     他之前的公司: 运维 <- 安全工程师 | 安全独立 | 安全上升到VP级别(阿里巴巴)
 
@@ -57,7 +57,7 @@ tags:
 
 #### 网络模块
 
-##### 问题&解决方案: 
+##### 问题&解决方案:
 
 - 办公网: 未隔离
 
@@ -68,7 +68,7 @@ tags:
     设置ACL: 只开http/https端口 &只开给指定的IP
     Web统一由nginx做反向代理
     Nginx配置走变更流程
-    
+
 - VPN: 用户名/密码验证
 
 ### 第二阶段
@@ -84,13 +84,13 @@ tags:
 ##### 操作系统层面问题
 
 - 用户名/密码认证
- 
+
     双因素认证 : 登陆服务器，先登陆堡垒机
 
 - 弱口令
 
     tcp wrapper
-    
+
 - 离职人员账号
 
 ##### 数据库
@@ -98,16 +98,16 @@ tags:
 - 空口令/弱口令: mysql, pg, mongod
 
     检测配置文件，把密码的hash拿出来
-    
+
 ##### 系统应用
 
 - 软件?版本?配置?漏洞?
-    
+
     收集软件版本、配置等 & 漏洞检测 & 警告邮件
 
 ##### Web server
 
-> 百分百覆盖以下问题 
+> 百分百覆盖以下问题
 
 - 默认管理后台: tomcat，jboos等
 - 启动账号:nobody
@@ -129,14 +129,14 @@ tags:
 - 账号密码?复杂度?定期改
 
     QSSO系统: 集中管理，双因素认证
-    
+
     QWAF: 静态、动态(静态 ＋ 动态策略规则)
 
 - OWASP TOP 10
 
     制定安全标准
     内部测试、终测
-    
+
 ### 第三阶段
 
 > 10000人，第4年
@@ -158,7 +158,7 @@ tags:
 
 - 统一入口，收缩防线
 - 动静结合
- 
+
 ##### 反欺诈:用户/商业作弊
 
 - 异常行为分析
@@ -178,3 +178,9 @@ tags:
     产品流程切入，一般会在后期切入
 
 - 冲突: 汇报人员级别不断升级
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

@@ -10,13 +10,13 @@ tags:
 
 ## 前言 机制种类
 - 抢占机制
-	
+
 	多个线程状态可以是：可运行。但是：只有一个线程是：在运行
-	
+
 	为Java多线程机制
-	
+
 - 分时机制
-	
+
 	顾名思义
 
 <!--more-->
@@ -97,3 +97,9 @@ tags:
 > Android系统锁的机制，即系统在检测到一段时间没有活跃以后，会关闭一些不必要的服务来减少资源和电量的消耗，因此这种抢占机制在服务上的线程来说是不稳定的。
 
 > 而`AlarmManager`持有一个CPU唤醒锁，是不存在这个问题的。(因此如果要做轮询、Socket心跳之类的，推荐使用`AlarmManager`，这样才能保证时间间隔的稳定、可靠)
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

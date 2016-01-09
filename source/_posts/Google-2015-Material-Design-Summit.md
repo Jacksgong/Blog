@@ -18,13 +18,13 @@ tags:
     符合不同年龄层的app
 
     1) 严禁app有root行为; 2) 不能自己升级; 3) 不允许应用内部的应用推荐（必须经过Google Play）
-    
+
 
 <!--more-->
 ## II. 应用质量
 
 #### 该做
-- **返回键:** 
+- **返回键:**
     应该回到上个界面 ，上部分返回键(up)可以相同与不同。
     Webview: back button: 返回上一页; up button(通常会更重一些): 返回上一个Activity
 
@@ -54,9 +54,9 @@ tags:
 - 2014 年 新的Android设计语言 Android(MATERIAL DESIGN)([google.com/design](google.com/design))
 
  > 获得2014 UX Awards Gold Award Winner
- 
+
  > 宗旨: 界面由电子的纸 z轴叠加而成
- 
+
 ```
 会叠加影子(**android.support.v7.cardview**带有md属性)
 高度可能根据交互变化
@@ -72,7 +72,7 @@ Google Api，给一张图片，会给出几种颜色
 ```
 
 ## IV. Links
- 
+
 - [Google Design](http://google.com/design)
 - [Google Developers Share Video](youtube.com/GoogleDevelopers)
 - [Android API](http://developer.android.com)
@@ -83,3 +83,9 @@ Google Api，给一张图片，会给出几种颜色
 ## V. Codelab
 
 Github: [https://github.com/Jacksgong/Sunshine(Material Design 教程)](https://github.com/Jacksgong/Sunshine)
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

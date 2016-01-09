@@ -77,14 +77,14 @@ tags:
 
 ```
  private class GalleryItemAdapter extends ArrayAdapter<GalleryItem> {
- 
+
         ...
-        
+
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
             ...
-            
+
             GalleryItem item = getItem(position);
             ImageView imageView = (ImageView)convertView
                     .findViewById(R.id.gallery_item_imageView);
@@ -108,12 +108,12 @@ tags:
 
 ```
 private class GalleryItemAdapter extends ArrayAdapter<GalleryItem> {
-       
+
         ...
-        
+
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            
+
             ...
 
             GalleryItem item = getItem(position);
@@ -199,16 +199,16 @@ private class GalleryItemAdapter extends ArrayAdapter<GalleryItem> {
 
 ```
  private class GalleryItemAdapter extends ArrayAdapter<GalleryItem> {
-        
+
         ...
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-        
+
             ...
 
             GalleryItem item = getItem(position);
-            
+
             // Volley可以用在一个普通的ImageView中，不过为了更简单的使用，Volley提供了一个NetworkImageView。
             NetworkImageView imageView = (NetworkImageView)convertView
                     .findViewById(R.id.gallery_item_imageView);
@@ -228,7 +228,7 @@ private class GalleryItemAdapter extends ArrayAdapter<GalleryItem> {
 1. 网络部分，并不是仅仅用于图片，它打算作为前端不可或缺的一部分。对于简单的REST服务的应用，这是一个很大的优势。
 
 2. `NetworkImageview`在清理这块相比Picasso而言，更暴力，并且GC方面更加保守。`NetworkImageView`依赖专门的强引用，并且清除所有的请求数据当ImageView发起了新的请求，或者是ImageView已经被移除了显示范围。
- 
+
 3. 性能方面，本文并没有提及性能，但是在内存使用部分，更加着合理的管理。Volley还通过一系列有效的回调来到主线程来减少上下文的切换
 
 4. 支持`RequestFuture`（同步网络请求）(Volley apparently has futures, too. Check out RequestFuture if you’re interested.)
@@ -256,3 +256,9 @@ private class GalleryItemAdapter extends ArrayAdapter<GalleryItem> {
 - 如果已经有一个稳定的，大型的项目，那么Picasso是更好的选择。
 
 - 另一方面，如果是一个新的app，或者项目很小，可以直接让Volley充当后端网络架构，它可以解决绝大多数HTTP的负担。（这里不是很认同作者，如果是网络框架这边，我个人建议先看看Retrofit，具体可以看看这篇[Retrofit开发指南](https://github.com/bboyfeiyu/android-tech-frontier/tree/master/issue-7/Retrofit开发指南)）
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

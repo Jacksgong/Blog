@@ -97,3 +97,9 @@ mipmap用于存放应用图标(Launcher Icon)，不会受资源优化所影响�
 - [Android设计中的.9.png](http://isux.tencent.com/android-ui-9-png.html)
 - [Dashboards](https://developer.android.com/intl/zh-cn/about/dashboards/index.html)
 - [友盟指数](http://www.umindex.com/)
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

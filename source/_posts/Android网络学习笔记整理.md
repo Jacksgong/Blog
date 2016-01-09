@@ -177,3 +177,9 @@ tags:
 	分包(octet-stuffing、octet-counting、connect-blasting)、并发处理(序列号、命令号)、兼容性&拓展性（版本号，压缩算法、加密算法）、精简(严格按照packed所需大小)
 
 ###### 3. 时序（先后顺序）
+
+---
+
+> © 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---

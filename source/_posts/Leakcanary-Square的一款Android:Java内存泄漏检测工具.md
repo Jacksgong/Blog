@@ -248,7 +248,7 @@ public class DebugExampleApplication extends ExampleApplication {
 
 ![](https://raw.githubusercontent.com/Jacksgong/leakcanary/master/assets/icon_512.png)
 
-**LeakCanary**名称是为了表达[canary in a coal mine](http://en.wiktionary.org/wiki/canary_in_a_coal_mine)，因为LeakCanary是通过提供危险预警，检测风险的哨兵，维护者[@edenman](https://github.com/edenman)提的建议!
+**LeakCanary** 名称是为了表达[canary in a coal mine](http://en.wiktionary.org/wiki/canary_in_a_coal_mine)，因为LeakCanary是通过提供危险预警，检测风险的哨兵，维护者[@edenman](https://github.com/edenman)提的建议!
 
 ## X. License
 
