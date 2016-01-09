@@ -29,8 +29,6 @@ new NotificationCompat.Builder(this)
 
 ## II. Respect the user
 
-> as demo, 有setPriority，就没了setCategory, 要看下
-
 ![](/img/notification_best_practise-1.png)
 
 ```
