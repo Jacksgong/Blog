@@ -21,11 +21,11 @@
 - 2012年 基于框架[Joomla](http://www.joomla.cn/)，搭建博客并进行迁移。
 - 2013年 博客域名`dreamtobe.cn`备案成功。
 - 2013年 基于框架[Wordpress](https://cn.wordpress.org/), 搭建博客并进行迁移。
-- 2014年6月 基于框架[OctoPress](http://octopress.org/)，搭建博客并进行迁移。
-- 2014年 博客使用git进行管理，托管在自己服务器上的gitlab。
-- 2014年8月 基于架构[Hexo](https://github.com/hexojs/hexo)，搭建博客并进行迁移。
-- 2015年 博客服务器迁到韩国，并接入腾讯云CDN。
-- 2016 博客开源并两个远端，双备份。
+- 2014年 基于框架[OctoPress](http://octopress.org/)，搭建博客并进行迁移。
+- 2015年6月 博客使用git进行管理，托管在自己服务器上的gitlab。
+- 2015年6月 基于架构[Hexo](https://github.com/hexojs/hexo)，搭建博客并进行迁移。
+- 2015年6月 博客服务器迁到韩国，并接入腾讯云CDN。
+- 2016年1月 博客开源并两个远端，双备份。
 
 ## LICENSE
 
