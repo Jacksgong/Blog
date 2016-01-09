@@ -14,16 +14,18 @@
 - [文章标签](http://blog.dreamtobe.cn/tags/)
 - [文章归档](http://blog.dreamtobe.cn/archives/)
 
-## 博客历史
+## 博客事件
 
-- 2008年 通过百度空间 建立自己的第一个博客: 王者博客（现百度博客已经关闭）
-- 2012年 注册`dreamtobe.cn`域名原本打算创业搞个点子分享站点，阴差阳错做了自己博客的域名
-- 2012年 基于框架[Joomla](http://www.joomla.cn/)，搭建博客并进行迁移
-- 2013年 博客域名`dreamtobe.cn`备案成功
-- 2013年 基于框架[Wordpress](https://cn.wordpress.org/), 搭建博客并进行迁移
-- 2014年6月 基于框架[OctoPress](http://octopress.org/)，搭建博客并进行迁移
-- 2014年 博客使用git进行管理，托管在自己服务器上的gitlab.
-- 2014年8月 基于架构[Hexo](https://github.com/hexojs/hexo)，搭建博客并进行迁移
+- 2008年 通过百度空间 建立自己的第一个博客: 王者博客（现百度博客已经关闭）。
+- 2012年 注册`dreamtobe.cn`域名原本打算创业搞个点子分享站点，阴差阳错做了自己博客的域名。
+- 2012年 基于框架[Joomla](http://www.joomla.cn/)，搭建博客并进行迁移。
+- 2013年 博客域名`dreamtobe.cn`备案成功。
+- 2013年 基于框架[Wordpress](https://cn.wordpress.org/), 搭建博客并进行迁移。
+- 2014年6月 基于框架[OctoPress](http://octopress.org/)，搭建博客并进行迁移。
+- 2014年 博客使用git进行管理，托管在自己服务器上的gitlab。
+- 2014年8月 基于架构[Hexo](https://github.com/hexojs/hexo)，搭建博客并进行迁移。
+- 2015年 博客服务器迁到韩国，并接入腾讯云CDN。
+- 2016 博客开源并两个远端，双备份。
 
 ## LICENSE
 
