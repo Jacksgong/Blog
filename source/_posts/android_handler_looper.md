@@ -1,5 +1,5 @@
 title: Android Handler Looper机制
-date: 2015-10-22 00:13:03
+date: 2016-01-16 23:54:03
 tags:
 - Handler
 - Looper
@@ -14,7 +14,7 @@ tags:
 
 <!-- more -->
 
-#### 1. Handler创建所在线程
+#### 1. Handler创建所在线程(Looper所在线程)
 
 ![](/img/android_handler_looper-1.png)
 
@@ -22,6 +22,42 @@ tags:
 
 ![](/img/android_handler_looper-2.png)
 
+### 3. Handler中Message回收机制
+
+Message中回收用的池子:
+
+> 池子大小50个Message
+
+ `sPool:Message`(静态变量)、`next#message`、`sPoolSize:int`(静态变量)、`sPoolSync:Object`(静态常量)形成一个简单的线程安全的先进先出的单向链表作为Message复用的池子。每次`obtain`时，取链表头Message, 标记`flag`为0，返回;`recycle`时，放入链表头。
+
+
+> 记录参数: `Message#flag`， 基于位运算用于记录`FLAG_IN_USE`与`FLAG_ASYNCHRONOUS` (是否使用中 与 是否是是异步消息)
+
+由于对外可见的`recycle`在检测flag的时候有可能会抛crash，因此不得不跟踪flag的变化。
+
+![](/img/android_handler_looper-3.png)
+
+### 4. Handler提供功能
+
+除了常用的`send*`、`post*`、`remove*`以外还有一个`runWithScissors`:
+
+#### `runWithScissors`:
+
+ 若是调用线程与Handler的Looper所在线程非同一线程，将通过该方法可以简单的实现timeout，调用以后会block，直到传入的runnable结束或者是timeout，若是timeout，返回false，否则返回true。
+
+#### `asynchronous`:
+
+ Handler中的对应构造函数被隐藏，但是可以通过调用`Message#setAsynchronous`指定对应的Message为asynchronous的Message。
+
+ 这个指定的异步消息与MessageQueue中的`barrier`相关，在MessageQueue中，`MessageQueue#mMessages`指向链表头，整个链表是一个按照`Message#when`增序排列，而每个`Message#target`指向其处理消息所属的Handler，当`Message#target`为null时，该Message将被视为Barrier，每个barrier使用独立的token(记录在`Message#arg1`)进行区分，所有的同步消息(相对与异步消息而言，默认消息都是同步消息)如果其事件在barrier之后，都会被stall，直到调用`MessageQueue#removeSyncBarrier`通过其token将该barrier清除。
+
+ >值得一提的是，部署barrier(`MessageQueue#postSyncBarrier`)与清除barrier(`MessageQueue#removesyncBarrier`)的相关方法都是对外不可见的。
+
+---
+
+> ps: 关于Handler的外界有效全局控制，我开源了一个库，支持Handler的暂停、恢复等操作: [Jacksgong/MessageHandler](https://github.com/Jacksgong/MessageHandler)
+
+---
 
 ## II. 常见异常及原因
 
