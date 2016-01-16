@@ -1,0 +1,28 @@
+[1mdiff --git a/package.json b/package.json[m
+[1mindex 7302063..f39f5e7 100644[m
+[1m--- a/package.json[m
+[1m+++ b/package.json[m
+[36m@@ -3,7 +3,7 @@[m
+   "version": "0.0.0",[m
+   "private": true,[m
+   "hexo": {[m
+[31m-    "version": "3.1.1"[m
+[32m+[m[32m    "version": ""[m
+   },[m
+   "dependencies": {[m
+     "hexo": "^3.1.0",[m
+[36m@@ -12,10 +12,8 @@[m
+     "hexo-generator-index": "^0.1.2",[m
+     "hexo-generator-tag": "^0.1.1",[m
+     "hexo-renderer-ejs": "^0.1.0",[m
+[31m-    "hexo-renderer-stylus": "^0.2.0",[m
+[32m+[m[32m    "hexo-renderer-stylus": "^0.3.0",[m
+     "hexo-renderer-marked": "^0.2.4",[m
+[31m-    "hexo-server": "^0.1.2",[m
+[31m-    "hexo-generator-sitemap": "~1.0.1",[m
+[31m-    "hexo-generator-feed": "~1.0.2"[m
+[32m+[m[32m    "hexo-server": "^0.1.2"[m
+   }[m
+[31m-}[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
