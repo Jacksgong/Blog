@@ -413,3 +413,4 @@ blockComplete -> completed
 [bintray_svg]: https://api.bintray.com/packages/jacksgong/maven/FileDownloader/images/download.svg
 [bintray_url]: https://bintray.com/jacksgong/maven/FileDownloader/_latestVersion
 [file_download_listener_callback_flow_png]: https://github.com/lingochamp/FileDownloader/raw/master/art/filedownloadlistener_callback_flow.png
+[file_downloader_map]: https://raw.githubusercontent.com/lingochamp/FileDownloader/master/art/filedownload_sample_description.png
