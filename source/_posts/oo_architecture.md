@@ -96,3 +96,10 @@ TODO
 - [【设计模式】之六大原则（二）](http://m.blog.csdn.net/article/details?id=48834109)
 - [软件设计之——“高内聚低耦合”](http://blog.csdn.net/csh624366188/article/details/7183726)
 - [UML中几种类间关系：继承、实现、依赖、关联、聚合、组合的联系与区别](http://blog.csdn.net/sfdev/article/details/3906243)
+
+
+---
+
+> © 2012 - 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
+
+---
