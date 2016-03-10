@@ -10,12 +10,60 @@ tags:
 
 <!-- more -->
 
+## Touch Event: Down
+
+> Down事件，无论 `clickable` 与否都会各层级传递
+
 ![](/img/touch_event-down-not-cliable.png)
+
+## Touch Event: Move
+
+| Hierarchy | `clickable`/`longClickable`
+| --- | ---
+| Parent | `false`
+| Child | `false`
+
 ![](/img/touch_event-move-not-cliable.png)
+
+| Hierarchy | `clickable`/`longClickable`
+| --- | ---
+| Parent | `false`/`true`
+| Child | `true`
+
+
 ![](/img/touch_event-move-child-cliable.png)
+
+| Hierarchy | `clickable`/`longClickable`
+| --- | ---
+| Parent | `true`
+| Child | `false`
+
 ![](/img/touch_event-move-cliable.png)
+
+## Touch Event: Up
+
+
+| Hierarchy | `clickable`/`longClickable`
+| --- | ---
+| Parent | `false`
+| Child | `false`
+
 ![](/img/touch_event-up-not-cliable.png)
+
+
+| Hierarchy | `clickable`/`longClickable`
+| --- | ---
+| Parent | `true`/`false`
+| Child | `true`
+
 ![](/img/touch_event-up-child-cliable.png)
+
+
+| Hierarchy | `clickable`/`longClickable`
+| --- | ---
+| Parent | `true`
+| Child | `false`
+
 ![](/img/touch_event-up-cliable.png)
 
 
