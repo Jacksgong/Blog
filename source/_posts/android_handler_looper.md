@@ -1,10 +1,12 @@
 title: Android Handler Looper机制
-date: 2016-01-16 23:54:03
+date: 2016-03-11 14:36:03
 tags:
 - Handler
 - Looper
 - Android
 - 消息机制
+- MessageQueue
+- Barrier
 
 ---
 
@@ -47,11 +49,20 @@ Message中回收用的池子:
 
 #### `asynchronous`:
 
- Handler中的对应构造函数被隐藏，但是可以通过调用`Message#setAsynchronous`指定对应的Message为asynchronous的Message。
+> @see `MessageQueue#postSyncBarrier`、`MessageQueue#removeSyncBarrier`
+> 案例: View请求启动绘制生命周期: `ViewRootImpl#scheduleTraversals`
 
- 这个指定的异步消息与MessageQueue中的`barrier`相关，在MessageQueue中，`MessageQueue#mMessages`指向链表头，整个链表是一个按照`Message#when`增序排列，而每个`Message#target`指向其处理消息所属的Handler，当`Message#target`为null时，该Message将被视为Barrier，每个barrier使用独立的token(记录在`Message#arg1`)进行区分，所有的同步消息(相对与异步消息而言，默认消息都是同步消息)如果其事件在barrier之后，都会被stall，直到调用`MessageQueue#removeSyncBarrier`通过其token将该barrier清除。
+![](/img/android_handler_looper-4.png)
 
- >值得一提的是，部署barrier(`MessageQueue#postSyncBarrier`)与清除barrier(`MessageQueue#removesyncBarrier`)的相关方法都是对外不可见的。
+1. MessageQueue 从栈底到栈顶按`Message.when`降序排列(相同`Message.when`的先进栈的离栈顶更近)的后进先出的栈(`MessageQueue#enqueueMessage` `MessageQueue#next`)
+2. `barrier`的Message与普通Message的差别是target(类型是Handler)为null，只能通过`MessageQueue#postSyncBarrier`创建 `barrier` Message
+3. `barrier`的Message与普通Message以同样的规则进栈，但是却只能通过 `MessageQueue#removeSyncBarrier`出栈
+4. 每个`barrier`使用独立的token(记录在`Message#arg1`)进行区分
+5. 所有的同步消息(相对与异步消息而言，默认消息都是同步消息)如果`barrier`之后，都会被延后执行，直到调用`MessageQueue#removeSyncBarrier`通过其token将该barrier清除
+6. 当`barrier`在栈顶时，栈中的异步消息照常出栈不受影响
+
+ > Handler中的对应构造函数被隐藏，但是可以通过调用`Message#setAsynchronous`指定对应的Message为asynchronous的Message。
+ >值得一提的是，部署barrier(`MessageQueue#postSyncBarrier`)与清除barrier(`MessageQueue#removeSyncBarrier`)的相关方法都是对外不可见的。
 
 ---
 
