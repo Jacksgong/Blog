@@ -91,6 +91,59 @@ tags:
 
 ![](/img/architecture-factor-method.png)
 
+### 2. 单例模式
+
+#### Initialization-on-demand holder idiom
+> [Wiki](https://en.wikipedia.org/wiki/Initialization-on-demand_holder_idiom)
+
+> 性能高，线程安全 基于JVM [Class Loader保证Class唯一性线程安全的模型](http://blog.dreamtobe.cn/2015/12/07/android_dynamic_dex/)
+
+```
+public class Something {
+    private Something() {}
+
+    private static class LazyHolder {
+        private static final Something INSTANCE = new Something();
+    }
+
+    public static Something getInstance() {
+        return LazyHolder.INSTANCE;
+    }
+}
+```
+
+### 3. 建造者模式
+
+> 与工厂模式区别是: 工厂模式关注构建单个类型类型；建造者模式关注构建符合类型对象。
+
+![](/img/architecture-builder-method.png)
+
+### 4. 原型模式
+
+> 当前对象对外提供拷贝方法
+
+#### 浅拷贝
+
+> 除了基本数据类型外，其他类型的对象都只持有当前对象的引用，而非重新创建拷贝
+
+##### Java中的`Object#clone`
+
+1. `Object#clone()`就已经提供了该对象的浅拷贝
+2. 如果需要使用`Object#clone`,需要类实现`Clonable`这个接口，来申明该类对象支持拷贝，否则会抛`CloneNotSupportedException`, 如果对象中存在队列成员变量，队列也需要实现`Clonable`
+
+#### 深拷贝
+
+> 所有成员变量都将重新创建
+
+##### 方式一:
+
+直接序列化(Java中基于JVM层级最简单的让对象支持序列化的方式，实现`Serializable`），拷贝二进制流。
+
+##### 方式二(推荐）：
+
+基于`Object#clone()`将非基本数据类型以外的元素都实现深拷贝，挨个深拷贝返回。
+
+
 TODO
 
 ---
