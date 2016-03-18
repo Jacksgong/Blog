@@ -144,6 +144,23 @@ public class Something {
 基于`Object#clone()`将非基本数据类型以外的元素都实现深拷贝，挨个深拷贝返回。
 
 
+### 5. 适配器模式
+
+![](/img/architecture-adapter-method.png)
+
+
+### 6. 装饰模式
+
+![](/img/architecture-decorator-method.png)
+
+### 7. 代理模式
+
+![](/img/architecture-proxy-method.png)
+
+### 8. 外观模式
+
+![](/img/architecture-facade-method.png)
+
 TODO
 
 ---
@@ -154,6 +171,7 @@ TODO
 - [软件设计之——“高内聚低耦合”](http://blog.csdn.net/csh624366188/article/details/7183726)
 - [UML中几种类间关系：继承、实现、依赖、关联、聚合、组合的联系与区别](http://blog.csdn.net/sfdev/article/details/3906243)
 - [UML Class Diagrams](http://pages.cs.wisc.edu/~hasti/cs302/examples/UMLdiagram.html)
+- [Java之美[从菜鸟到高手演变]之设计模式二](http://blog.csdn.net/zhangerqing/article/details/8239539)
 
 
 
