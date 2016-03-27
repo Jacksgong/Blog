@@ -53,13 +53,13 @@ dest root /
 dest ram /tmip
 lists_dir ext /var/opkg-lists
 option overlay_root /overlay
-src/gz barrier_breaker_base http://mirrors.ustc.edu.cn/openwrt/openwrt/barrier_breaker/14.07/ar71xx/generic/packages/base
-src/gz barrier_breaker_luci http://mirrors.ustc.edu.cn/openwrt/openwrt/barrier_breaker/14.07/ar71xx/generic/packages/luci
-src/gz barrier_breaker_packages http://mirrors.ustc.edu.cn/openwrt/openwrt/barrier_breaker/14.07/ar71xx/generic/packages/packages
-src/gz barrier_breaker_routing http://mirrors.ustc.edu.cn/openwrt/openwrt/barrier_breaker/14.07/ar71xx/generic/packages/routing
-src/gz barrier_breaker_telephony http://mirrors.ustc.edu.cn/openwrt/openwrt/barrier_breaker/14.07/ar71xx/generic/packages/telephony
-src/gz barrier_breaker_management http://mirrors.ustc.edu.cn/openwrt/openwrt/barrier_breaker/14.07/ar71xx/generic/packages/management
-src/gz barrier_breaker_oldpackages http://mirrors.ustc.edu.cn/openwrt/openwrt/barrier_breaker/14.07/ar71xx/generic/packages/oldpackages
+src/gz barrier_breaker_base http://mirrors.ustc.edu.cn/openwrt/barrier_breaker/14.07/ar71xx/generic/packages/base
+src/gz barrier_breaker_luci http://mirrors.ustc.edu.cn/openwrt/barrier_breaker/14.07/ar71xx/generic/packages/luci
+src/gz barrier_breaker_packages http://mirrors.ustc.edu.cn/openwrt/barrier_breaker/14.07/ar71xx/generic/packages/packages
+src/gz barrier_breaker_routing http://mirrors.ustc.edu.cn/openwrt/barrier_breaker/14.07/ar71xx/generic/packages/routing
+src/gz barrier_breaker_telephony http://mirrors.ustc.edu.cn/openwrt/barrier_breaker/14.07/ar71xx/generic/packages/telephony
+src/gz barrier_breaker_management http://mirrors.ustc.edu.cn/openwrt/barrier_breaker/14.07/ar71xx/generic/packages/management
+src/gz barrier_breaker_oldpackages http://mirrors.ustc.edu.cn/openwrt/barrier_breaker/14.07/ar71xx/generic/packages/oldpackages
 
 #shadowsocks
 src/gz openwrt_dist http://openwrt-dist.sourceforge.net/releases/ar71xx/packages
