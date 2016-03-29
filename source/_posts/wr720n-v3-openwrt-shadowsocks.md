@@ -241,6 +241,12 @@ opkg install libcurl curl
 curl 'http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest' | grep ipv4 | grep CN | awk -F\| '{ printf("%s/%d\n", $4, 32-log($5)/log(2)) }' > /etc/chinadns_chnroute.txt
 ```
 
+> 计划，每天凌晨4点更新下
+
+```
+* 4 * * * curl 'http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest' | grep ipv4 | grep CN | awk -F\| '{ printf("%s/%d\n", $4, 32-log($5)/log(2)) }' > /etc/chinadns_chnroute.txt
+```
+
 ---
 
 - [国内源](http://mirrors.ustc.edu.cn/openwrt/openwrt/barrier_breaker/)
@@ -254,6 +260,7 @@ curl 'http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest' | grep ipv4
 - [ShadowSocks安装](http://openwrt-dist.sourceforge.net/)
 - [Where to get packages](http://wiki.openwrt.org/doc/packages)
 - [南浦月 TP-LINK TL-WR720N V3 OpenWrt 固件下载](http://blog.nanpuyue.com/2012/011.html)
+- [Lenovo-Y1_RY-1S-firmware](http://downloads.openwrt.org.cn/PandoraBox/Lenovo-Y1_RY-1S/firmware/)
 
 
 ---
