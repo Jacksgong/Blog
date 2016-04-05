@@ -11,75 +11,36 @@ tags:
 
 ---
 
-> 之前有写过一篇核心思想: [Switching between the panel and the keyboard in Wechat](http://blog.dreamtobe.cn/2015/02/07/Switching-between-the-panel-and-the-keyboard/)
-
-> 这次主要是根据核心思想的实践，实践原理是通过`CustomRootLayout`布局变化，来获知是否是键盘引起的真正的布局变化，进而处理到接下来`PanelLayout`的`onMersure`中。
+> 起源，之前在微信工作的时候，为了给用户带来更好的基础体验，做了很多尝试，踩了很多输入法的坑，特别是动态调整键盘高度，二级页面是透明背景，魅族早期的Smart bar等, 后来逐一完善了，考虑到拥抱开源，看业界还是有很多应用存在类似问题。就有了这个repo
 
 ---
 
-- 新算法不再动态修改`View#LayoutParams`，而是更加简单明了的方式
-- 最新代码在原基础上**自动动态适配面板高度与键盘高度等高**，很大程度上优化了体验。
+> 之前有写过一篇核心思想: [Switching between the panel and the keyboard in Wechat](http://blog.dreamtobe.cn/2015/02/07/Switching-between-the-panel-and-the-keyboard/)。
 
----
+<!-- more -->
 
-我们可以看到微信中的 从键盘与微信的切换是无缝的，而且是无闪动的，这种基础体验是符合预期的。
-
-但是实际中，简单的 键盘与面板切换 是会有闪动，问题的。今天我们就实践分析与解决这个问题。
-
-<!--more-->
-## 最终效果对比:
-
-![](/img/resolve_mv.gif)![](/img/unresolve_mv.gif)
+![][non-fullscreen_resolved_gif]![][fullscreen_resolved_gif]
+![][adjust_resolved_gif]![][adjust_unresolved_gif]
 
 
-## I. 准备
+## 如何使用
 
-> 以下建立在`android:windowSoftInputMode`带有`adjustResize`的基础上。
+在`build.gradle`中引入:
 
-> 如图，为了方便分析，我们分出3个View:
+```
+compile 'cn.dreamtobe.kpswitch:library:1.4.1'
+```
 
-![](/img/WeChat_1435588322.png)
+## 使用引导
 
-- `CustomRootView`: 除去statusBar与ActionBar(ToolBar...balabala)
-- `FootRootView`: 整个底部（包括输入框与底部面板在内的整个View）
-- `PanelView`: 面板View
+- [非全屏主题情况下使用引导](https://github.com/Jacksgong/JKeyboardPanelSwitch/blob/master/NON-FULLSCREEN_TUTORIAL.md)
+- [全屏主题情况下使用引导](https://github.com/Jacksgong/JKeyboardPanelSwitch/blob/master/FULLSCREEN_TUTORIAL.md)
 
-> 整个处理过程，其实需要分为两块处理:
+## 基本原理
 
-1. 从`PanelView`切换到`Keybord`
+- 键盘高度计算，以及键盘是否显示的计算，参看: [KeyboardUtil.KeyboardStatusListener#calculateKeyboardHeight][KeyboardUtil_calculateKeyboardHeight_link]、[KeyboardUtil.KeyboardStatusListener#calculateKeyboardShowing][KeyboardUtil_calculateKeyboardShowing_link]。
+- 处理闪动问题，参看: [KPSwitchRootLayoutHandler][KPSwitchRootLayoutHandler_link]，以及如果是非全屏主题用到的面板布局: [KPSwitchPanelLayoutHandler][KPSwitchPanelLayoutHandler_link]；如果是全屏主题用到的面板布局: [KPSwitchFSPanelLayoutHandler][KPSwitchFSPanelLayoutHandler_link]。
 
-**现象:** 由于显示`Keybord`时直接`PanelView#setVisibility(View.GONE)`，导致会出现整个`FooterRootView`到底部然后又被键盘顶起。
-
-**符合预期的应该:** 直接被键盘顶起，不需要到底部再顶起。
-
-2. 从`Keybord`切换到`PanelView`
-
-**现象:** 由于隐藏`Keybord`时，直接`PanelView#setVisibility(View.VISIBLE)`，导致会出现整个`FootRootView`先被顶到键盘上面，然后再随着键盘的动画，下到底部。
-
-**符合预期的应该:** 随着键盘收下直接切换到底部，而配有被键盘顶起的闪动。
-
-## II. 处理
-
-#### 原理
-
-在真正由`Keybord`导致布局**真正**将要变化的时候，才对`PanelView`做出适配。（**注意**，所有的判断处理要在`Super.onMeasure`之前完成判断）
-
-#### 方法:
-
-> 通过`CustomRootView`高度的变化，来保证在`Super.onMeasure`之前获得**真正**的由于键盘导致布局将要变化，然后告知`PanelView`，让其在`Super.onMeasure`之前给到有效高度。
-
-#### 需要注意:
-
-> 1) 在`adjustResize`模式下，键盘弹起会导致`CustomRootView`的高度变小，键盘收回会导致`CustomRootView`的高度变大，反之变小。因此可以通过这个机制获知真正的`PanelView`将要变化的时机。
-
-
-> 2) 由于到了`onLayout`，clipRect的大小已经确定了，又要避免不多次调用`onMeasure`因此要在`Super.onMeasure`之前
-
-> 3) 由于键盘收回的时候，会触发多次`measure`，如果 不判断真正的由于键盘收回导致布局将要变化，就直接给`View#VISIBLE`，依然会有闪动的情况。
-
-> 4) 从`Keybord`切换到`PanelView`导致的布局冲突，只有在`Keybord`正在显示的时候。
-
-> 5) 从`PanelView`切换到`Keybord`导致的布局冲突，已经在`PanelView`与`CustomRootView`中内部处理。
 
 ## III. GitHub:
 
@@ -90,3 +51,17 @@ tags:
 > © 2012 - 2016, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
 
 ---
+
+[bintray_link]: https://bintray.com/jacksgong/maven/JKeyboardPanelSwitch/_latestVersion
+[bintray_svg]: https://api.bintray.com/packages/jacksgong/maven/JKeyboardPanelSwitch/images/download.svg
+[fullscreen_resolved_gif]: https://raw.githubusercontent.com/Jacksgong/JKeybordPanelSwitch/master/art/fullscreen_resolved.gif
+[non-fullscreen_resolved_gif]: https://raw.githubusercontent.com/Jacksgong/JKeybordPanelSwitch/master/art/non-fullscreen_resolved.gif
+[adjust_resolved_gif]: https://raw.githubusercontent.com/Jacksgong/JKeybordPanelSwitch/master/art/adjust_resolved.gif
+[adjust_unresolved_gif]: https://raw.githubusercontent.com/Jacksgong/JKeybordPanelSwitch/master/art/adjust_unresolved.gif
+[build_status_svg]: https://travis-ci.org/Jacksgong/JKeyboardPanelSwitch.svg?branch=master
+[build_status_link]: https://travis-ci.org/Jacksgong/JKeyboardPanelSwitch
+[KeyboardUtil_calculateKeyboardHeight_link]: https://github.com/Jacksgong/JKeyboardPanelSwitch/blob/master/library/src/main/java/cn/dreamtobe/kpswitch/util/KeyboardUtil.java#L197
+[KeyboardUtil_calculateKeyboardShowing_link]: https://github.com/Jacksgong/JKeyboardPanelSwitch/blob/master/library/src/main/java/cn/dreamtobe/kpswitch/util/KeyboardUtil.java#L248
+[KPSwitchRootLayoutHandler_link]: https://github.com/Jacksgong/JKeyboardPanelSwitch/blob/master/library/src/main/java/cn/dreamtobe/kpswitch/handler/KPSwitchRootLayoutHandler.java
+[KPSwitchPanelLayoutHandler_link]: https://github.com/Jacksgong/JKeyboardPanelSwitch/blob/master/library/src/main/java/cn/dreamtobe/kpswitch/handler/KPSwitchPanelLayoutHandler.java
+[KPSwitchFSPanelLayoutHandler_link]: https://github.com/Jacksgong/JKeyboardPanelSwitch/blob/master/library/src/main/java/cn/dreamtobe/kpswitch/handler/KPSwitchFSPanelLayoutHandler.java
