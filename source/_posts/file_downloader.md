@@ -32,8 +32,8 @@ tags:
 
 ## Demo
 
-![](/img/serial_tasks_demo_gif)
-![](/img/parallel_tasks_demo_gif)
-![](/img/tasks_manager_demo_gif)
-![](/img/mix_tasks_demo_gif)
-![](/img/avoid_drop_frames_1_gif)
+![](/img/filedownloader-serial_tasks_demo.gif)
+![](/img/filedownloader-parallel_tasks_demo.gif)
+![](/img/filedownloader-tasks_manager_demo.gif)
+![](/img/filedownloader-mix_tasks_demo.gif)
+![](/img/filedownloader-avoid_drop_frames1.gif)
