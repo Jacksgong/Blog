@@ -20,6 +20,7 @@ tags:
 - 全局缩略图直接采用webp，在尽可能不损失图片质量的前提下，图片大小与png比缩小30% ~ 70%
 - 如果列表里的缩略图服务器处理好的小图，可以考虑直接在列表数据请求中，直接以base64在列表数据中直接带上图片（国内还比较少，海外有些这种做法，好像web端比较常见）
 - 轮询或者socket心跳采用系统`AlarmManager`提供的闹钟服务来做，保证在系统休眠的时候cpu可以得到休眠，在需要唤醒时可以唤醒（持有cpu唤醒锁）
+- 可以通过将零散的网路的请求打包进行一次操作，避免过多的无线信号引起电量消耗。
 
 <!-- more -->
 
@@ -27,7 +28,7 @@ tags:
 #### 1. 传输数据格式选择
 
 - 如果是基本需要全量数据的，考虑使用[Protobuffers](https://developers.google.com/protocol-buffers/?hl=zh-cn) (序列化反序列化性能高于json)
-- 如果传输回来的数据不需要全量读取，考虑使用[Flatbuffers](https://github.com/google/flatbuffers) (序列化反序列化几乎不耗时，耗时是在读取对象时(就这一部分如果需要优化，可以参看[Flatbuffer Use Optimize](http://blog.dreamtobe.cn/2015/01/05/Flatbuffer-Use-Optimize/))
+- 如果传输回来的数据不需要全量读取，考虑使用[Flatbuffers](https://github.com/google/flatbuffers) (序列化反序列化几乎不耗时，耗时是在读取对象时(就这一部分如果需要优化，可以参看[Flatbuffer Use Optimize](http://blog.dreamtobe.cn/2015/01/05/Flatbuffer-Use-Optimize/)
 
 #### 2. 输入流
 > 使用具有缓存策略的输入流
@@ -212,6 +213,7 @@ tags:
 - 由于resources.arsc在api8以后，aapt中默认采用UTF-8编码，导致资源中大都是中文的resources.arsc相比采用UTF-16编码更大，此时，可以考虑aapt中指定使用UTF-16
 - 谷歌建议，大于10M的大型应用考虑安装到SD卡上: [App Install Location](http://developer.android.com/intl/zh-cn/guide/topics/data/install-location.html)
 - 当然运维也是一方面: [Optimize Your App](http://developer.android.com/intl/zh-cn/distribute/essentials/optimizing-your-app.html)
+- 在已知并且不需要栈数据的情况下，就没有必要需要使用异常，或创建`Throwable`生成栈快照是一项耗时的工作。
 
 ---
 
@@ -226,6 +228,7 @@ tags:
 - [微信ANDROID客户端-会话速度提升70%的背后](https://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&mid=207548094&idx=1&sn=1a277620bc28349368b68ed98fbefebe)
 - [新的Andriod Gradle插件可自动移除无用资源](http://www.infoq.com/cn/news/2014/11/new-android-gradle)
 - [Android安装包相关知识汇总](https://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&mid=208008519&idx=1&sn=278b7793699a654b51588319b15b3013)
+- [Android优化实践](http://gold.xitu.io/entry/55272f6be4b0da2c5deb7f36)
 
 ---
 

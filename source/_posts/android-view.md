@@ -21,6 +21,9 @@ tags:
 
 ## II. 绘制相关深度优化
 
+> 可以通过[Hierarchy Viewer](http://developer.android.com/tools/help/hierarchy-viewer.html)可视化布局，直观的看布局层级分布以及各View `measure`、`layout`、`draw` 的耗时。
+> 可以通过[traceview](http://developer.android.com/tools/debugging/debugging-tracing.html)，计算出每个方法所占用的CPU时间。
+
 1. 已知View大小的，自定义View，`onMeasure`时直接`setMeasuredDimension`
 2. 已知布局或者其他特定规律的，直接自定义View，达到减少层级，针对性`measure`、`layout`、`draw`
 3. 如果布局含有复杂的动画，或者需要复杂的绘制，考虑在独立的绘制线程处理，而不block UI线程，此时考虑`SurfaceView`或`TextureView`(Android 4.0引入)(相比`SurfaceView`而言，可以像常规视图一样被改变)
