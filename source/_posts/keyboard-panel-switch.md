@@ -42,5 +42,5 @@ tags:
 
 ![](/img/keyboard_pannel_switch-demo_snapshot.jpg)
 
-![](/img/keyboard_pannel_switch-non-fullscreen_resolved_gif)![](/img/keyboard_pannel_switch-fullscreen_resolved_gif)
-![](/img/keyboard_pannel_switch-adjust_resolved_gif)![](/img/keyboard_pannel_switch-adjust_unresolved_gif)
+![](/img/keyboard_pannel_switch-non-fullscreen_resolved.gif)![](/img/keyboard_pannel_switch-fullscreen_resolved.gif)
+![](/img/keyboard_pannel_switch-adjust_resolved.gif)![](/img/keyboard_pannel_switch-adjust_unresolved.gif)
