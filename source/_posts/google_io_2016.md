@@ -2,9 +2,7 @@ title: Google IO 2016
 date: 2016-05-19 03:03:03
 tags:
 - Android
-- IO
-- 2016
-- Google
+- Google IO
 - Firebase
 - Allo
 - VR Mode
@@ -20,6 +18,8 @@ tags:
 1. 音乐、连接电视
 2. 闹钟，管理事务
 3. Google Search
+
+<!-- more -->
 
 ## Allo
 

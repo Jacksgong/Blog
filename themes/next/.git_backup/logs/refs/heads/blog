@@ -2,3 +2,7 @@
 74fe43abb2ba7b2c4e4e58fbe267e9c37993c2e9 2e5e1f543a4e822458e8363c427fa7d9b7fe416d Jacksgong <jacks@liulishuo.com> 1446477585 +0800	commit: blog diy
 2e5e1f543a4e822458e8363c427fa7d9b7fe416d 21dd1d5032b0c1e4fd91864f3301c37265b3ef1e Jacksgong <jacks@liulishuo.com> 1446477826 +0800	rebase finished: refs/heads/blog onto 1bcd64bc1a00886d7cedf87cad7f04d92363f1e4
 21dd1d5032b0c1e4fd91864f3301c37265b3ef1e a19b835dbbfc532b4b95993f3094bc8424ca784e Jacksgong <jacks@liulishuo.com> 1446529978 +0800	commit: 完善config
+a19b835dbbfc532b4b95993f3094bc8424ca784e c00737ff6fe8dab81fb95093c8506960369a7233 Jacksgong <igzhenjie@gmail.com> 1464535548 +0800	commit: feat: add twitter and replace avatar
+c00737ff6fe8dab81fb95093c8506960369a7233 4848fb372eff85ca9b0ef599c3560f3fd77c5662 Jacksgong <igzhenjie@gmail.com> 1464535578 +0800	commit: refactor: diy the hot post list, weekly->monthly
+4848fb372eff85ca9b0ef599c3560f3fd77c5662 4bd89420a5575b810cd7d7b1d3057b30ab69d099 Jacksgong <igzhenjie@gmail.com> 1464535961 +0800	rebase finished: refs/heads/blog onto 28e80ea2f486825a94a32378f7a4f2448b711f82
+4bd89420a5575b810cd7d7b1d3057b30ab69d099 6cd710e7d8c5303d0d66290d64e62288ab1ed134 Jacksgong <igzhenjie@gmail.com> 1464541425 +0800	commit: refactor: adapt config for 5.1.0 next theme

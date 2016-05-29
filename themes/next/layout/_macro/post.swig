@@ -1,7 +1,6 @@
 {% macro render(post, is_index, post_extra_class) %}
 
   {% set headlessPost = Array.prototype.indexOf.call(['quote', 'picture'], post.type) > -1 %}
-  {% set navlessPost = headlessPost %}
 
   {% set post_class = 'post post-type-' + post.type | default('normal') %}
   {% set post_class = post_class + ' ' + post_extra_class | default('') %}
@@ -48,7 +47,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            {{ __('post.posted') }}
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">{{ __('post.posted') }}</span>
             <time itemprop="dateCreated" datetime="{{ moment(post.date).format() }}" content="{{ date(post.date, config.date_format) }}">
               {{ date(post.date, config.date_format) }}
             </time>
@@ -56,7 +58,11 @@
 
           {% if post.categories and post.categories.length %}
             <span class="post-category" >
-              &nbsp; | &nbsp; {{ __('post.in') }}
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">{{ __('post.in') }}</span>
               {% for cat in post.categories %}
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="{{ url_for(cat.path) }}" itemprop="url" rel="index">
@@ -83,11 +89,11 @@
               </span>
             {% elseif theme.disqus_shortname %}
               <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="{{ url_for(post.path) }}#comments" itemprop="discussionUrl">
-                <span class="post-comments-count disqus-comment-count" data-disqus-identifier="{{ post.path }}" itemprop="commentsCount"></span>
-              </a>
-            </span>
+                &nbsp; | &nbsp;
+                <a href="{{ url_for(post.path) }}#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="{{ post.path }}" itemprop="commentsCount"></span>
+                </a>
+              </span>
             {% endif %}
           {% endif %}
 
@@ -96,12 +102,30 @@
             <div class="fb-like" data-layout="button_count" data-share="true"></div>
           {% endif %}
 
+          {# LeanCould PageView #}
+          {% if theme.leancloud_visitors.enable %}
+             <span id="{{ url_for(post.path) }}" class="leancloud_visitors" data-flag-title="{{ post.title }}">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">{{__('post.visitors')}} </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          {% endif %}
+
+          {% if not is_index and theme.busuanzi_count.enable and theme.busuanzi_count.page_pv %}
+              &nbsp; | &nbsp;
+              <span class="page-pv">{{ theme.busuanzi_count.page_pv_header }}
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>{{ theme.busuanzi_count.page_pv_footer }}
+              </span>
+          {% endif %}
         </div>
       </header>
     {% endif %}
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       {# Gallery support #}
       {% if post.photos and post.photos.length %}
@@ -124,7 +148,7 @@
 
       {% if is_index %}
         {% if post.description %}
-          <span itemprop="description">{{ post.description }}</span>
+          {{ post.description }}
           <div class="post-more-link text-center">
             <a class="btn" href="{{ url_for(post.path) }}">
               {{ __('post.read_more') }} &raquo;
@@ -138,40 +162,50 @@
             </a>
           </div>
         {% elif theme.auto_excerpt.enable %}
-          <span itemprop="articleBody">
-            {% set content = post.content | striptags %}
-            {{ content.substring(0, theme.auto_excerpt.length) }}
-            {% if content.length > theme.auto_excerpt.length %}...{% endif %}
-          </span>
+          {% set content = post.content | striptags %}
+          {{ content.substring(0, theme.auto_excerpt.length) }}
+          {% if content.length > theme.auto_excerpt.length %}...{% endif %}
+
           <div class="post-more-link text-center">
             <a class="btn" href="{{ url_for(post.path) }}{% if theme.scroll_to_more %}#more{% endif %}" rel="contents">
               {{ __('post.read_more') }} &raquo;
             </a>
           </div>
         {% else %}
-          <span itemprop="articleBody">
-            {% if post.type === 'picture' %}
-              <a href="{{ url_for(post.path) }}">{{ post.content }}</a>
-            {% else %}
-              {{ post.content }}
-            {% endif %}
-          </span>
+          {% if post.type === 'picture' %}
+            <a href="{{ url_for(post.path) }}">{{ post.content }}</a>
+          {% else %}
+            {{ post.content }}
+          {% endif %}
         {% endif %}
       {% else %}
-        <span itemprop="articleBody">{{ post.content }}</span>
+        {{ post.content }}
       {% endif  %}
     </div>
+
+    <div>
+      {% if not is_index %}
+        {% include 'wechat-subscriber.swig' %}
+      {% endif %}
+    </div>
+
+    <div>
+      {% if not is_index %}
+        {% include 'reward.swig' %}
+      {% endif %}
+    </div>
+
 
     <footer class="post-footer">
       {% if post.tags and post.tags.length and not is_index %}
         <div class="post-tags">
           {% for tag in post.tags %}
-            <a href="{{ url_for(tag.path) }}" rel="tag">#{{ tag.name }}</a>
+            <a href="{{ url_for(tag.path) }}" rel="tag"># {{ tag.name }}</a>
           {% endfor %}
         </div>
       {% endif %}
 
-      {% if not is_index and (post.prev or post.next) and not navlessPost %}
+      {% if not is_index and (post.prev or post.next) %}
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             {% if post.next %}
@@ -181,10 +215,12 @@
             {% endif %}
           </div>
 
+          <span class="post-nav-divider"></span>
+
           <div class="post-nav-prev post-nav-item">
             {% if post.prev %}
               <a href="{{ url_for(post.prev.path) }}" rel="prev" title="{{ post.prev.title }}">
-                {{post.prev.title}} <i class="fa fa-chevron-right"></i>
+                {{ post.prev.title }} <i class="fa fa-chevron-right"></i>
               </a>
             {% endif %}
           </div>
