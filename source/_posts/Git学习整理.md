@@ -283,6 +283,14 @@ Head 的内容
 
 [Changing author info](https://help.github.com/articles/changing-author-info/)
 
+#### 3. 修改Commit Message
+
+> 当然若修改的那个Commit已经在远端，需要`git push --force`覆盖远端。
+
+- 如果只是修改最后一条Commit Message: `git commit --amend`
+- 如果需要修改更早之前的一些Commit Message: `git rebase -i [<Commit Id>]`
+
+
 # Git 配置
 
 ##### 配置文件:
