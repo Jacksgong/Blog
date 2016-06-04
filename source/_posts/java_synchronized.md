@@ -1,4 +1,4 @@
-title: Java锁机制
+title: Java Synchronised机制
 date: 2015-11-13 21:14:03
 tags:
 - Android
