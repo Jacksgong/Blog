@@ -9,7 +9,7 @@ tags:
 
 ---
 
-> 测试驱动式编程(Test-Driven)在RoR中已经是非常普遍的开发方式，是一种十分可靠、优秀的编程思想，可是在Android领域中这块还没有普及，今天主要聊聊Android中的单元测试与模拟测试及常用的一些库。
+> 测试驱动式编程(Test-Driven-Development)在RoR中已经是非常普遍的开发模式，是一种十分可靠、优秀的编程思想，可是在Android领域中这块还没有普及，今天主要聊聊Android中的单元测试与模拟测试及其常用的一些库。
 
 <!-- more -->
 
@@ -19,24 +19,24 @@ tags:
 
 - 为了稳定性，能够明确的了解是否正确的完成开发。
 - 更加易于维护，能够在修改代码后保证功能不被破坏。
-- 集成一些工具，规范开发规范，使得代码更加稳定( 如通过 phabricator differential 发diff，如果发 `arc diff`的时候提交需要执行的单元测试，在开发流程上就可以保证远端代码的稳定性)。
+- 集成一些工具，规范开发规范，使得代码更加稳定( 如通过 phabricator differential 发diff时提交需要执行的单元测试，在开发流程上就可以保证远端代码的稳定性)。
 
 #### 2. 测什么?
 
 - 一般单元测试: 列出想要测试覆盖的异常情况，进行验证。
-- 模拟测试: 根据需求，测试用户真正在使用过程中，界面的反馈与显示以及一些依赖系统架构的组件的反馈。
+- 模拟测试: 根据需求，测试用户真正在使用过程中，界面的反馈与显示以及一些依赖系统架构的组件的应用测试。
 
 #### 3. 需要注意
 
 - 考虑可读性，对于方法名使用表达能力强的方法名，对于测试范式可以考虑使用一种规范, 如 RSpec-style。
-- 不要使用逻辑流关键字(If/ese、for、do/while、switch/case)，在一个测试方法中，如果需要有这些，拆分到单独的每个测试方法里。
+- 不要使用逻辑流关键字(If/else、for、do/while、switch/case)，在一个测试方法中，如果需要有这些，拆分到单独的每个测试方法里。
 - 测试真正需要测试的内容，需要覆盖的情况，一般情况只考虑验证输出（如某操作后，显示什么，值是什么）。
 - 考虑耗时，Android Studio默认会输出耗时。
 - 不需要考虑测试`private`的方法，将`private`方法当做黑盒内部组件，测试对其引用的`public`方法即可。
 - 尽可能的解耦对于不同的测试方法，不应该存在Test A与Test B存在时序性的情况。
 
 
-## II. Android自带基本的单元测试
+## II. Android Studio中的单元测试与模拟测试
 
 > control + shift + R (Android Studio 默认执行单元测试快捷键)。
 
@@ -68,9 +68,9 @@ dependencies {
 
 ### 2. 模拟测试
 
-> 运行在Android设备或者虚拟机上的测试
+> 需要运行在Android设备或者虚拟机上的测试。
 
-> 主要用于测试: 单元(Android架构引用相关的单元测试)、UI、应用组件集成测试(Service、Content Provider、etc.)
+> 主要用于测试: 单元(Android SDK层引用关系的相关的单元测试)、UI、应用组件集成测试(Service、Content Provider等)。
 
 #### 代码存储:
 
@@ -94,7 +94,7 @@ dependencies {
 
 #### 常见的UI测试
 
-> 需要模拟Android系统环境
+> 需要模拟Android系统环境。
 
 ##### 主要三点:
 
@@ -141,6 +141,11 @@ Mockito.doReturn((long) 1363027600).when(myQueryObject).getCurrentTime();
 > (Integration Tests)模拟用户操作，事件流测试。
 
 通过模拟用户的操作的行为事件流进行测试，这类测试无法避免需要在虚拟机或者设备上面运行的。是一些用户操作流程与视觉显示强相关的很好的选择。
+
+
+---
+
+本文已经发布到JackBlog公众号，可请直接访问: [Android单元测试与模拟测试 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483680&idx=1&sn=a81f0b86696f243bf32c032fc7b09574)
 
 ---
 
