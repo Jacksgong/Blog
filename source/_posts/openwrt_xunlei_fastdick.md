@@ -81,6 +81,10 @@ killall -9 swjsq
 
 ---
 
+本文已经发布到JackBlog公众号，可请直接访问: [OpenWrt通过迅雷快鸟提速 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483654&idx=1&sn=151940b17d4f1bd03076988027a35831)
+
+---
+
 - [加速你的带宽—迅雷快鸟OPENWRT插件](http://www.openwrt.org.cn/bbs/thread-19695-1-1.html)
 
 ---

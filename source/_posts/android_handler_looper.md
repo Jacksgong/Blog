@@ -120,6 +120,11 @@ public Handler() {
 > ps: 每个线程的的`Looper#prepare`相对所在线程只能被调用一次，否则会报`"Only one Looper may be created per thread"`(参见`Looper#prepare`)
 > ps: 之所以主线程直接创建`Handler`不会抛出类似异常，是因为在程序启动时，系统已经帮我们调用了`Looper#prepare`(参见`ActivityThread#main`)
 
+
+---
+
+本文已经发布到JackBlog公众号，可请直接访问: [Android Handler - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483661&idx=1&sn=39c0e67abfb50042936f4af9ec985ed8)
+
 ---
 
 - [Android异步消息处理机制完全解析，带你从源码的角度彻底理解](http://blog.csdn.net/guolin_blog/article/details/9991569)

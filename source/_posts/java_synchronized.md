@@ -129,6 +129,10 @@ JVM会为每个对象分配一个`monitor`，而同时只能有一个线程可�
 
 ---
 
+本文已经发布到JackBlog公众号，可请直接访问: [Java Synchronized机制与常见的多线程抢占 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483673&idx=1&sn=cc20b1149e9ffed649dd00d8737e6a08)
+
+---
+
 - [Java的多线程机制系列：(三）synchronized的同步原理](http://www.cnblogs.com/mengheng/p/3491304.html)
 - [再说 lock-free 编程](http://www.cnblogs.com/lucifer1982/archive/2009/04/08/1431992.html)
 - [聊聊并发（一）——深入分析Volatile的实现原理](http://www.infoq.com/cn/articles/ftf-java-volatile)

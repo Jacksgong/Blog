@@ -128,6 +128,10 @@ Android中的这几种类加载器实际是依赖`DexFile`的，对于`DexFile`�
 
 ---
 
+本文已经发布到JackBlog公众号，可请直接访问: [Android动态加载dex - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483667&idx=1&sn=5e4cc3bd07e81efa41fbfce25f4a6bd3)
+
+---
+
 - [Custom Class Loading in Dalvik](http://android-developers.blogspot.hk/2011/07/custom-class-loading-in-dalvik.html)
 - [Custom Class Loading in Dalvik with Gradle (Android New Build System)](http://stackoverflow.com/questions/18174022/custom-class-loading-in-dalvik-with-gradle-android-new-build-system)
 - [外部动态加载DEX安全风险浅析](http://jaq.alibaba.com/blog.htm?id=63)

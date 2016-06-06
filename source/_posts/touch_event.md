@@ -66,6 +66,9 @@ tags:
 
 ![](/img/touch_event-up-cliable.png)
 
+---
+
+本文已经发布到JackBlog公众号，可请直接访问: [Android Touch Event派发分析 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483664&idx=1&sn=9871b049b89ec0b5198e85759986f50b)
 
 ---
 
