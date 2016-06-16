@@ -161,6 +161,10 @@ public class Something {
 
 ![](/img/architecture-facade-method.png)
 
+### 9. 桥接模式
+
+![](/img/architecture-bridge-method.png)
+
 TODO
 
 ---
