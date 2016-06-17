@@ -165,6 +165,10 @@ public class Something {
 
 ![](/img/architecture-bridge-method.png)
 
+### 10. 组合模式
+
+![](/img/architecture-composite-method.png)
+
 TODO
 
 ---
