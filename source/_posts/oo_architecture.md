@@ -169,6 +169,10 @@ public class Something {
 
 ![](/img/architecture-composite-method.png)
 
+### 11. 享元模式
+
+![](/img/architecture-flyweight-method.png)
+
 TODO
 
 ---
