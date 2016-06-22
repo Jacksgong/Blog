@@ -261,17 +261,67 @@ Head 的内容
 
 ## X. 子模块
 
-`git submodule add [<远程库地址>] [<存储本地路径>]`
+> [使用Git Submodule管理子模块](https://segmentfault.com/a/1190000003076028)
 
-- 效果: 添加外部项目为当前项目的子模块, 添加完后，会配置到`.gitmodules`内
+#### 1. 添加子模块:
 
-`git submodule init`
+```
+// 添加外部项目为当前项目的子模块, 添加完后，会配置到`.gitmodules`内
+git submodule add [<远程库地址>] [<存储本地路径>]
+// 添加 .gitmodules 与 新拉下来的子模块文件夹 到 stage.
+git add .gitmodules [<子模块目录>]
+// 提交对子模块文件的添加
+git commit -m "[<描述>]"
+// 完成子模块添加
+git submodule init
+```
 
-- 效果: 初始化本地外部项目的配置文件
+#### 2. 修改子模块
 
-`git submodule update`
+```
+cd [<子模块目录>]/
+// 修改子模块中的文件->提交对子模块中的文件的修改->推到远端
+...
+// 回到父目录
+cd ..
+// 提交子模块中的修改->推到远端
+```
 
-- 效果: 拉取submodule 配置文件中的所有submodule文件。
+#### 3. 更新子模块
+
+##### 方式一:
+
+在父项目目录下运行: `git submodule foreach git pull`
+
+##### 方式二:
+
+进入对应的子项目目录: `git pull`
+
+#### 4. 拉取存在子模块的项目
+
+##### 方式一:
+
+在父项目目录下运行: `git clone [<远程库地址>] --recursive`
+
+##### 方式二:
+
+```
+// 先clone父项目
+git clone [<远程库地址>]
+cd [<子模块目录>]
+git submodule init
+// 拉取子模块 配置文件中的所有子模块文件
+git submodule update
+```
+
+#### 5. 删除项目中的子模块
+
+```
+git rm --cached [<子模块目录>]
+rm -rf [<子模块目录]
+// 编辑 .gitmodules 删除其中对于要删除的子模块相关的内容
+// 提交对应的修改即可
+```
 
 ## XI. 其他需要注意的
 
