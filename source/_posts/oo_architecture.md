@@ -173,6 +173,11 @@ public class Something {
 
 ![](/img/architecture-flyweight-method.png)
 
+### 12. 策略模式
+
+![](/img/architecture-strategy-method.png)
+
+
 TODO
 
 ---
