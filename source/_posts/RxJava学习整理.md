@@ -29,7 +29,7 @@ ps: 如果不了解Lambda的话，最好先看下[Lambda](http://blog.dreamtobe.
 
 ## II. 基本原型
 
-```
+```java
 //创建 Observable
 Observable<String> myObservable = Observable.create(
     new Observable.OnSubscribe<String>() {
@@ -61,7 +61,7 @@ myObservable.subscribe(mySubscriber);
 
 ## III. 通用接口
 
-```
+```java
 // Action1<T>(){ call(String): void}
 myObservable.subscribe(onNextAction, onErrorAction, onCompleteAction);  
 
@@ -70,7 +70,7 @@ myObservable.subscribe(onNextAction);
 
 上面的代码最终可以变成这样
 
-```
+```java
 //Action1<T>
 Observable.just("Hello, world!")
     .subscribe(s -> System.out.println(s));
@@ -80,7 +80,7 @@ Observable.just("Hello, world!")
 
 > 操作符用于在Observable和最终的Subscriber之间修改Observable发出的时间(RxJava提供了很多有用的操作符)
 
-```
+```java
 //假设定义了以下方法，接下来有些地方为了举例有用到
 query(String) : Observable<List<String>> // 根据链接搜索结果
 getTitle(String) : Observable<String> // 获取标题
@@ -96,7 +96,7 @@ saveTitle(String) : boolean // 保存标题
 ![](/img/rxjava-map.png)
 
 
-```
+```java
 Observable.just("Hello, world!")
     .map(s -> s.hashCode())
     .map(i -> Integer.toString(i))
@@ -113,7 +113,7 @@ Observable.just("Hello, world!")
 
 ![](/img/rxjava-from.png)
 
-```
+```java
 Observable.from("url1", "url2", "url3")  
     .subscribe(url -> System.out.println(url));
 ```
@@ -126,7 +126,7 @@ Observable.from("url1", "url2", "url3")
 
 ![](/img/rxjava-flatmap.png)
 
-```
+```java
 // 这里通过flatMap，输入一个Observable<List<String>>返回了一个新的Observable<String>
 
 query("Hello, world!")  
@@ -143,7 +143,7 @@ query("Hello, world!")
 
 ![](/img/rxjava-filter.png)
 
-```
+```java
 query("Hello, world!")  
     .flatMap(urls -> Observable.from(urls))  
     .flatMap(url -> getTitle(url))  
@@ -159,7 +159,7 @@ query("Hello, world!")
 
 ![](/img/rxjava-take.png)
 
-```
+```java
 query("Hello, world!")  
     .flatMap(urls -> Observable.from(urls))  
     .flatMap(url -> getTitle(url))  
@@ -171,7 +171,8 @@ query("Hello, world!")
 #### 6. doOnNext操作符
 
 > 在每次输出一个元素之前做一些额外的事情
-```
+
+```java
 query("Hello, world!")  
     .flatMap(urls -> Observable.from(urls))  
     .flatMap(url -> getTitle(url))  
@@ -186,7 +187,8 @@ query("Hello, world!")
 > 通过`subscribeOn()`指定观察者运行的线程，`observerOn()`指定订阅者运行的线程
 
 [What's the difference between SubscribeOn and ObserveOn](http://stackoverflow.com/questions/7579237/whats-the-difference-between-subscribeon-and-observeon)
-```
+
+```java
 Observable.from(someSource)  
     .map(data -> manipulate(data)) //将会在io线程执行
     .subscribeOn(Schedulers.io())
@@ -200,7 +202,7 @@ Observable.from(someSource)
 
 > 当调用`Observable.subscribe()`，会返回一个`Subscription`对象。这个对象代表了被观察者和订阅者之间的联系。
 
-```
+```java
 ubscription subscription = Observable.just("Hello, World!")
     .subscribe(s -> System.out.println(s));
 
@@ -218,7 +220,7 @@ System.out.println("Unsubscribed=" + subscription.isUnsubscribed());
 
 > 提供了针对Android的线程系统的调度
 
-```
+```java
 retrofitService.getImage(url)
     .subscribeOn(Schedulers.io()) //操作符中间操作在I/0线程
     .observeOn(AndroidSchedulers.mainThread()) // subscribe 在UI线程
@@ -229,7 +231,7 @@ retrofitService.getImage(url)
 
 > 它提供了跟踪Android生命周期的功能。`bindActivity()`和`bindFragment()`方法默认在UI线程调用，并且这两个方法会在生命周期结束的时候通知Observable停止发出新的消息。
 
-```
+```java
 AndroidObservable.bindActivity(this, retrofitService.getImage(url))
     .subscribeOn(Schedulers.io())
     .subscribe(bitmap -> myImageView.setImageBitmap(bitmap);
@@ -239,7 +241,7 @@ AndroidObservable.bindActivity(this, retrofitService.getImage(url))
 
 > 功能类似`BroadcastReceiver`
 
-```
+```java
 // 实现了网络变化被通知到
 IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
 AndroidObservable.fromBroadcast(context, filter)
@@ -250,7 +252,7 @@ AndroidObservable.fromBroadcast(context, filter)
 
 > 可以很轻易的在View触发某些Action时，被通知
 
-```
+```java
 // 这里监听了mCardNameEditText的点击时间
 ViewObservable.clicks(mCardNameEditText, false)
     .subscribe(view -> handleClick(view));
@@ -265,7 +267,7 @@ ViewObservable.clicks(mCardNameEditText, false)
 > 通过RxJava内置缓存机制解决
 > **原理:** `cache()`(或者`replay()`)不会使`unsubscribe`打断，网络请求，因此在`unsubscribe`以后直接从`cache()`的返回值中创建一个新的`Observable`对象。
 
-```
+```java
 Observable<Photo> request = service.getUserPhoto(id).cache(); //缓存请求结果，缓存的地方需要具体实现(在这个案例中，应该缓存在生命周期以外的地方)
 Subscription sub = request.subscribe(photo -> handleUserPhoto(photo));
 
@@ -280,7 +282,7 @@ request.subscribe(photo -> handleUserPhoto(photo));
 > 参考解决方案: 在生命周期的某个时刻取消订阅
 > **原理:** 利用`CompositeSubscription`持有所有的`Subscriptions`，然后在`onDestory()`或者`onDestroyView()`里取消所有的订阅。
 
-```
+```java
 // 一般可以在Activyt/Fragment的基类里面定义这个，达到系统化处理
 private CompositeSubscription mCompositeSubscription
     = new CompositeSubscription();
@@ -307,7 +309,7 @@ protected void onDestroy() {
 > **功能:**  REST的网络架构，目前有[测试结果](http://themakeinfo.com/2015/04/retrofit-android-tutorial/)比Volley、AsyncTask快
 > 目前Retrofit库内置了对RxJava的支持
 
-```
+```java
 //请求是获取照片
 @GET("/user/{id}/photo")
 Observable<Photo> getUserPhoto(@Path("id") int id);
@@ -329,7 +331,7 @@ Observable.zip(
 
 如果`oldMethod`足够快:
 
-```
+```java
 private Object oldMethod() { ... }
 
 public Observable<Object> newMethod() {
@@ -339,7 +341,7 @@ public Observable<Object> newMethod() {
 
 如果`oldMethod`很慢，为了防止阻塞所在线程:
 
-```
+```java
 private Object slowBlockingMethod() { ... }
 
 public Observable<Object> newMethod() {
@@ -349,14 +351,62 @@ public Observable<Object> newMethod() {
 
 ----
 
+## 简单案例
+
+#### 案例1
+
+```java
+Observable.just("Alpha","Beta","Gamma","Delta","Epsilon")
+        .map(s -> s.length())
+        .distinct() //去除重复
+        .subscribe(l -> System.out.println(l));
+```
+
+输出
+
+```
+5
+4
+7
+```
+
+#### 案例2
+
+```java
+Observable.just("1/5/8", "1/9/11/58/16/", "9/15/56/49/21");
+        .flatMap(s -> Observable.from(s.split("/")))
+        .map(s -> Integer.valueOf(s))
+        .subscribe(i -> System.out.println(i));
+```
+
+输出
+
+```
+1
+5
+8
+1
+9
+11
+58
+16
+9
+15
+56
+49
+21
+```
+
+----
+
 [更多了解请移步>>](https://github.com/ReactiveX/RxJava/wiki)
 
 #### 参考以下文档整理:
 
-[Grokking RxJava, Part 1: The Basics](http://blog.danlew.net/2014/09/15/grokking-rxjava-part-1/)
-[Grokking RxJava, Part 2: Operator, Operator](http://blog.danlew.net/2014/09/22/grokking-rxjava-part-2/)
-[Grokking RxJava, Part 3: Reactive with Benefits](http://blog.danlew.net/2014/09/30/grokking-rxjava-part-3/)
-[Grokking RxJava, Part 4: Reactive Android](http://blog.danlew.net/2014/10/08/grokking-rxjava-part-4/)
+- [Grokking RxJava, Part 1: The Basics](http://blog.danlew.net/2014/09/15/grokking-rxjava-part-1/)
+- [Grokking RxJava, Part 2: Operator, Operator](http://blog.danlew.net/2014/09/22/grokking-rxjava-part-2/)
+- [Grokking RxJava, Part 3: Reactive with Benefits](http://blog.danlew.net/2014/09/30/grokking-rxjava-part-3/)
+- [Grokking RxJava, Part 4: Reactive Android](http://blog.danlew.net/2014/10/08/grokking-rxjava-part-4/)
 
 
 #### 参考以下博客的翻译校对:
@@ -365,9 +415,10 @@ public Observable<Object> newMethod() {
 
 #### 拓展阅读:
 
-[不要打破链式：使用Rxjava的compose()操作符](http://www.pythonnote.com/archives/bu-yao-da-po-lian-shi-shi-yong-rxjavade-composecao-zuo-fu.html)
-
-[RxAndroid(RxJava) 与 AsyncTask](http://blog.dreamtobe.cn/2312.html)
+- [不要打破链式：使用Rxjava的compose()操作符](http://www.pythonnote.com/archives/bu-yao-da-po-lian-shi-shi-yong-rxjavade-composecao-zuo-fu.html)
+- [RxAndroid(RxJava) 与 AsyncTask](http://blog.dreamtobe.cn/2312.html)
+- [Crash Course on RxJava with Thomas Nield (Part 1)](http://www.andevcon.com/news/crash-course-on-rxjava-with-thomas-nield-part-1?utm_content=buffer4d157&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer)
+- [通过RxJava简化SQL查询 -  RxJava-JDBC](https://github.com/davidmoten/rxjava-jdbc)
 
 ---
 
