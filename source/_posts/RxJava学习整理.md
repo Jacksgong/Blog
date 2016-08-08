@@ -397,6 +397,33 @@ Observable.just("1/5/8", "1/9/11/58/16/", "9/15/56/49/21");
 21
 ```
 
+#### 案例3
+
+> 提供多个Observable根据不同的数据进行网络请求，当其中有一个成功，就停止请求，如果所有请求都失败就失败。
+
+```java
+modelProvider.getItems() // 多个不同数据的Observable
+    .flatMap(retroApiInterface::doBackendRequest) //触发网络请求
+    .takeUntil(response -> response.isSuccessful()) // 直到其中有任意一个请求成功，将停止其他的请求
+    .lastOrDefault(ServerResponse.createUnsuccessful()) // 所有的都请求都失败就返回失败的
+    .toSingle() // 如果最后一个
+    .subscribe(response -> {
+        if (response.isSuccessful()) {
+            // We made it.
+        } else {
+            // Not successful.
+        }
+    }, throwable -> {
+        // Some error happened along the way.
+    })
+
+// 下面是简化版
+modelProvider.getItems() // 多个不同数据的Observable
+    .flatMap(retroApiInterface::doBackendRequest) //触发网络请求
+    .firstOrDefault(ServerResponse.createUnsuccessful(), response -> response.isSuccessful()) // 直到其中有任意一个请求成功，将停止其他的请求
+    .toSingle()
+```
+
 ----
 
 [更多了解请移步>>](https://github.com/ReactiveX/RxJava/wiki)
@@ -419,6 +446,7 @@ Observable.just("1/5/8", "1/9/11/58/16/", "9/15/56/49/21");
 - [RxAndroid(RxJava) 与 AsyncTask](http://blog.dreamtobe.cn/2312.html)
 - [Crash Course on RxJava with Thomas Nield (Part 1)](http://www.andevcon.com/news/crash-course-on-rxjava-with-thomas-nield-part-1?utm_content=buffer4d157&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer)
 - [通过RxJava简化SQL查询 -  RxJava-JDBC](https://github.com/davidmoten/rxjava-jdbc)
+- [RxJava — Practical takeUntil Example](https://medium.com/@vanniktech/rxjava-practial-takeuntil-example-bc9766918cad#.7ufu9ry19)
 
 ---
 
