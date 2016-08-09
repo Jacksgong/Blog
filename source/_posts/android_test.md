@@ -151,6 +151,36 @@ Mockito.doReturn((long) 1363027600).when(myQueryObject).getCurrentTime();
 
 > 该库被[谷歌官方推荐过](https://www.youtube.com/watch?v=aHcmsK9jfGU)，并且收到谷歌工程师的Review。
 
+## IV. 拓展思路
+
+#### 1. Android Robots
+
+> [Instrumentation Testing Robots - Jake Wharton](https://realm.io/news/kau-jake-wharton-testing-robots/)
+
+假如我们需要测试: 发送 $42 到 "foo@bar.com"，然后验证是否成功。
+
+##### 通常的做法
+
+![](/img/android-test_1.png)
+
+![](/img/android-test_2.png)
+
+##### Robot思想
+
+在写真正的UI测试的时候，只需要关注要测试什么，而不需要关注需要怎么测试，换句话说就是让测试逻辑与View或Presenter解耦，而与数据产生关系。
+
+首先通过封装一个Robot去处理How的部分:
+
+![](/img/android-test_3.png)
+
+然后在写测试的时候，只关注需要测试什么:
+
+![](/img/android-test_4.png)
+
+最终的思想原理
+
+![](/img/android-test_5.png)
+
 ---
 
 本文已经发布到JackBlog公众号，可请直接访问: [Android单元测试与模拟测试 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483680&idx=1&sn=a81f0b86696f243bf32c032fc7b09574)
