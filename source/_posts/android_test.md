@@ -142,6 +142,14 @@ Mockito.doReturn((long) 1363027600).when(myQueryObject).getCurrentTime();
 
 通过模拟用户的操作的行为事件流进行测试，这类测试无法避免需要在虚拟机或者设备上面运行的。是一些用户操作流程与视觉显示强相关的很好的选择。
 
+#### 5. Test Butler
+
+> [linkedin/test-butler](https://github.com/linkedin/test-butler)
+> 避免设备/模拟器系统或者环境的错误，导致测试的失败。
+
+通常我们在进行UI测试的时候，会遇到由于模拟器或者设备的错误，如系统的crash、ANR、或是未预期的Wifi、CPU罢工，或者是锁屏，这些外再环境因素导致测试不过。Test-Butler引入就是避免这些环境因素导致UI测试不过。
+
+> 该库被[谷歌官方推荐过](https://www.youtube.com/watch?v=aHcmsK9jfGU)，并且收到谷歌工程师的Review。
 
 ---
 
@@ -154,6 +162,7 @@ Mockito.doReturn((long) 1363027600).when(myQueryObject).getCurrentTime();
 - [timber中的单元测试实例](https://github.com/JakeWharton/timber/blob/master/timber/src/test/java/timber/log/TimberTest.java)
 - [timber/build.gradle](https://github.com/JakeWharton/timber/blob/master/timber/build.gradle)
 - [A BDD (RSpec-like) testing library for Java](http://stackoverflow.com/questions/30675748/a-bdd-rspec-like-testing-library-for-java)
+- [Open Sourcing Test Butler](https://engineering.linkedin.com/blog/2016/08/introducing-and-open-sourcing-test-butler--reliable-android-test)
 
 
 ---
