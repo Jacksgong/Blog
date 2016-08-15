@@ -41,7 +41,7 @@ tags:
 - 官方不建议网络请求相关的使用AlarmManager。
 - 考虑到电量损耗，建议非特殊情况使用 大概时间的方式，这样Android会尽量让几个任务打包在一起执行，防止频繁的唤起手机。
 
-## II. Job Scheduler:
+## III. Job Scheduler:
 
 > [JobScheduler官方文档](https://developer.android.com/reference/android/app/job/JobScheduler.html)
 
@@ -82,7 +82,7 @@ void onStopJob(){
 }
 ```
 
-## III. GCM
+## IV. GCM
 
 > GCM Netwrok Manager实际上在 Api 21 或以上也是使用了 Job Scheduler，在此之前的版本使用的是Google Play Service中实现Job Scheduler的功能。
 
@@ -95,7 +95,7 @@ void onStopJob(){
 
 > 触发场景与JobInfo中的一样。
 
-## IV. Sync Adapter
+## V. Sync Adapter
 
 > [Transferring Data Using Sync Adapters](https://developer.android.com/training/sync-adapters/index.html)
 
@@ -130,7 +130,7 @@ void onStopJob(){
 - 如果同步失败，会放到同步失败的队列中，在尽可能的时候进行同步。
 
 
-## V. Doze Mode
+## VI. Doze Mode
 
 ### Deep Doze Mode
 
