@@ -71,7 +71,6 @@
   {% include '_scripts/third-party/mathjax.swig' %}
   {% include '_scripts/third-party/lean-analytics.swig' %}
   {% include '_scripts/baidu-push.swig' %}
-  {% include '_components/algolia-search/assets.swig' %}
 
 </body>
 </html>

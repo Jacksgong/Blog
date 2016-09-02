@@ -33,7 +33,7 @@
 
 {% include "./head/external-fonts.swig" %}
 
-{% set font_awesome_uri = url_for(theme.vendors._internal + '/font-awesome/css/font-awesome.min.css?v=4.6.2') %}
+{% set font_awesome_uri = url_for(theme.vendors._internal + '/font-awesome/css/font-awesome.min.css?v=4.4.0') %}
 {% if theme.vendors.fontawesome %}
   {% set font_awesome_uri = theme.vendors.fontawesome %}
 {% endif %}
@@ -80,10 +80,9 @@
 
 
 {# Export some HEXO Configurations to Front-End #}
-<script type="text/javascript" id="hexo.configurations">
+<script type="text/javascript" id="hexo.configuration">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '{{ theme.root }}',
     scheme: '{{ theme.scheme }}',
     sidebar: {{ theme.sidebar | json_encode }},
     fancybox: {{ theme.fancybox }},
@@ -91,15 +90,12 @@
     duoshuo: {
       userId: {{ theme.duoshuo_info.user_id | default() }},
       author: '{{ theme.duoshuo_info.admin_nickname | default(__('author'))}}'
-    },
-    algolia: {
-      applicationID: '{{ theme.algolia.applicationID }}',
-      apiKey: '{{ theme.algolia.apiKey }}',
-      indexName: '{{ theme.algolia.indexName }}',
-      hits: {{ theme.algolia_search.hits | json_encode }},
-      labels: {{ theme.algolia_search.labels | json_encode }}
     }
   };
 </script>
 
-{% include 'head/custom-head.swig' %}
+
+{# Canonical, good for google search engine (SEO) : https://support.google.com/webmasters/answer/139066 #}
+{% if theme.canonical %}
+  <link rel="canonical" href="{{ config.url }}/{{ page.canonical_path.replace('index.html', '') }}"/>
+{% endif %}

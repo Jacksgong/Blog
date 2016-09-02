@@ -6,7 +6,7 @@
 $code-block {
   overflow: auto;
   margin: 20px 0;
-  padding: 0;
+  padding: 15px;
   font-size $code-font-size;
   color: $highlight-foreground;
   background: $highlight-background;
@@ -37,12 +37,11 @@ pre {
 
 .highlight {
   @extend $code-block;
-  border-radius: 1px
 
   pre {
     border: none;
     margin: 0;
-    padding: 10px 0;
+    padding: 1px;
   }
 
   table {
@@ -72,17 +71,9 @@ pre {
   }
 
   .gutter pre {
-    padding-left: 10px
-    padding-right: 10px
-    color: $highlight-gutter.color
-    text-align: right
-    background-color: $highlight-gutter.bg-color
-  }
-
-  .code pre {
-    padding-left: 10px
-    padding-right: 10px
-    background-color: $highlight-background
+    color: $grey-dim;
+    text-align: right;
+    padding-right: 20px;
   }
 
   .line { height: 20px; }
