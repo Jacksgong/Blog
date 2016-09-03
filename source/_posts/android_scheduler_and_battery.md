@@ -13,59 +13,50 @@ tags:
 ## I. Handler:
 
 > 在进程存活的期间有效使用, Google官方推荐使用。
+> 相关机制可以参见: [Android Handler Looper机制](http://blog.dreamtobe.cn/2016/03/11/android_handler_looper/)
 
 - 简单易用。
 - 稳定高效。
 
 ## II. AlarmManager:
 
-> 利用系统层级的闹钟服务(持有Wake lock)。
-
-> 如果需要精确的定时任务，这个是最佳选择。
+> 利用系统层级的闹钟服务(持有`Wake Lock`)。
 
 <!-- more -->
 
-#### 1. 功能
+#### 1. 使用场景
 
-- 在大概的时间间隔 运行/重复执行 指定任务。
-- 指定精确的时间间隔执行任务。
+> 在大概的时间间隔(重复)运行指定任务。
+> 在精确的时间间隔(重复)运行指定任务。
+
+- 需要精确的定时(重复)任务，如闹钟。
+- 非网络访问的，大概时间间隔的定时(重复)任务。
+- Google官方不建议网络请求相关的业务使用`AlarmManager`。
 
 #### 2. 特征
 
-- 注册以后，无论是自己的应用进程是否存在/组件是否存在，都会正常执行。
-- 所有注册的闹钟服务都会在系统重启后复位，因此如果需要保证任务，就需要注册RECEIVE_BOOT_COMPLETE，保证重启后，可以重新将任务注册到闹钟服务中。
-- AlarmManager处理的是一个PendingIntent，因此通常是启动一个服务，进行处理事务。
-
-#### 3. 备注
-
-- 官方不建议网络请求相关的使用AlarmManager。
-- 考虑到电量损耗，建议非特殊情况使用 大概时间的方式，这样Android会尽量让几个任务打包在一起执行，防止频繁的唤起手机。
+- 运行在系统的闹钟服务上的，注册以后，无论是自己的应用进程或组件是否存在，都会正常运作。
+- 所有注册的闹钟服务都会在系统重启后复位，因此如果需要保证任务，就需要注册`RECEIVE_BOOT_COMPLETE`广播，确保重启后，可以重新将任务注册到闹钟服务中。
+- `AlarmManager`处理的是一个`PendingIntent`。
+- 考虑到电量损耗，建议非特殊情况使用大概时间间隔的规则，这样Android会尽量让几个任务打包在一起执行，防止频繁的唤起手机。
 
 ## III. Job Scheduler:
 
 > [JobScheduler官方文档](https://developer.android.com/reference/android/app/job/JobScheduler.html)
 
-> 建议网络相关任务放到Job Scheduler。
+#### 1. 使用场景
 
-> 系统重启以后，任务会依然保留在Job Scheduler当中。
+> 在指定特定场景下执行指定任务
 
-> 只有在Api21或以上的系统支持
+- Google官方建议网络请求相关业务放到`Job Scheduler`，由于其的省电的特性。
+- 一些与特定场景(`JobInfo`)绑定的任务。
 
+#### 2. 特征
 
-#### 1. 优势
-
-- 更节省电量
-- 更高效
-- 更易用
-
-#### 2. 明确的指定特定场景下执行(JobInfo):
-
-> 由于是将多个任务打包在一个场景下执行，因此执行有略微的延后；并且有期限，如果在期限内还没有满足特定情况，系统会将这些任务加入队列，并且随后会进行执行。
-
-1. 设备开始充电
-2. 空闲
-3. 连接上网络
-4. 断开网络
+- `Job Scheduler`只有在`Api21`或以上的系统支持。
+- `Job Scheduler`是将多个任务打包在一个场景下执行。
+- 在系统重启以后，任务会依然保留在`Job Scheduler`当中，因此不需要监听系统系统状态重复设定。
+- 如果在一定期限内还没有满足特定执行所需情况，`Job Scheduler`会将这些任务加入队列，并且随后会进行执行。
 
 #### 3. 接口类型
 
@@ -82,18 +73,25 @@ void onStopJob(){
 }
 ```
 
-## IV. GCM
+## IV. GCM(FCM)
 
-> GCM Netwrok Manager实际上在 Api 21 或以上也是使用了 Job Scheduler，在此之前的版本使用的是Google Play Service中实现Job Scheduler的功能。
+> GCM Network Manager实际上在 Api 21 或以上也是使用了 Job Scheduler，在此之前的版本使用的是Google Play Service中实现Job Scheduler的功能。
+> 在[GCMNetworkManager](https://developers.google.com/android/reference/com/google/android/gms/gcm/GcmNetworkManager)中有很多利于省电的规则。
+> 在中国内地，该服务被墙，无法正常使用。
 
-> 在[GCMNetworkManager](https://developers.google.com/android/reference/com/google/android/gms/gcm/GcmNetworkManager)中有很多利于省点的规则。
+#### 1. 使用场景
 
-#### 1. 接口类型
+- 实时消息推送。
+- 非实时消息推送。
+
+#### 2. 特征
+
+- 系统级别维护的长链接，十分稳定。
+
+#### 3. 接口类型
 
 - 通过 `OneoffTask.Builder()`与`PeriodicTask.Builder()`创建任务。
 - `GcmTaskService#onRunTask(TaskParams params)`是在后台线程执行的。
-
-> 触发场景与JobInfo中的一样。
 
 ## V. Sync Adapter
 
@@ -101,55 +99,52 @@ void onStopJob(){
 
 ![](/img/android-scheduler_syncs-adapter.png)
 
-> - 通常是用于同步较多的数据。
-> - 也许这是Job Scheduler API 21前比较好的替代品。
+#### 1. 使用场景
 
-同步服务端与本地设备中的数据。
+> 用于同步服务端与本地设备中的数据。
 
-#### 1. 特征
+- 通常是用于同步较多的数据，如系统联系人信息、Dropbox等。
 
-- 利于大数据同步。
-- 不需要依赖Google Play Service。
+#### 2. 特征
+
 - 省电稳定。
-- 用户可以通过设置中主动查看同步的时间，以及触发同步，或者关闭同步。
-- API 7 或以上。
-
-#### 2. 备注
-
 - 可绑定一个账户。
-- 通过提供ContentProvider，并且与服务端同步的数据库。
+- 利于大数据同步。
+- 通过提供`ContentProvider`，可以快捷的与服务端同步的数据库。
 - 只有在存在网络的时候才触发同步。
+- 不需要依赖Google Play Service。
+- 用户可以通过设置中主动查看同步的时间，以及触发同步，或者关闭同步。
+- `Sync Adapter`在`API7`或以上就可以使用，因此在一些场景下这是`Job Scheduler`在`API21`之前比较好的替代品。
 
-#### 2. 在一定的场景下触发同步
+#### 3. 在一定的场景下触发同步
 
 > 尽可能的打包所有需要同步的任务在一个周期中执行，以此来进行尽可能的节省手机电量。
 
-- 服务端/设备端数据发生变化。
+- 服务端或设备端数据发生变化。
 - 手机闲置时。
 - 一天。
 - 如果同步失败，会放到同步失败的队列中，在尽可能的时候进行同步。
-
 
 ## VI. Doze Mode
 
 ### Deep Doze Mode
 
-> API 23中直接称其为Doze Mode。
-
-> 无论Target SDK是多少，只要设备是Android API 23或以上会启用该模式。
+> `API23`中直接称其为`Doze Mode`。
 
 #### 1. 特征
 
-- 旨在: 在用户离开设备以后，尽可能的减少手机电量的消耗。
-- 开发人员并不需要做特殊的适配，但是会对上面提到的所有Schedule的方式(Job Scheduler、AlarmManager、Syncs Adapter)进行影响。
+> **旨在**: 在用户离开设备以后，尽可能的减少手机电量的消耗。
 
-通过移动窗口打包任务请求，并且间隔时间会越来越久。
+- 无论应用指定的`Target SDK`是多少，只要设备是`Android 6`或以上会启用该模式。
+- 开发人员并不需要做特殊的适配，但是会对上面提到的所有Schedule的方式(`Job Scheduler`、`AlarmManager`、`Syncs Adapter`)产生影响。
+
+> 所有任务周期通过移动窗口打包任务执行，并且间隔时间会越来越久。
 
 ![](/img/android-scheduler_deep-doze.png)
 
 #### 2. 进入条件
 
-会同时满足以下情况过后一段时间(大约30分钟)以后生效:
+会同时满足以下情况一段时间(大约30分钟)以后生效:
 
 - 手机没有在充电
 - 屏幕被关闭
@@ -160,32 +155,31 @@ void onStopJob(){
 #### 3. 在两个处理窗口之间的手机状态
 
 1. 对所有应用拒绝网络访问。
-2. 所有JobScheduler、Sync-Adapter、AlarmManager的任务都会被延后到窗口中执行。
-3. 系统会拒绝所有来自应用的`WAKE-LOCK`
+2. 所有`JobScheduler`、`Sync-Adapter`、`AlarmManager`的任务都会被延后到窗口中执行。
+3. 系统会拒绝所有来自应用的`Wake Lock`
 4. 停止所有Wifi以及GPS扫描
 5. 减少位置事件从设备检测WiFi热点。
 
 ### Light Doze Mode
 
-> API 24 或以上会启用该模式
+> `Android 7`或以上会启用该模式。
 
 #### 1. 特征
 
-- 相比Deep Doze Mode，打包任务的频率会更高些
+- 相比`Deep Doze Mode`，打包执行任务的频率会更高些。
 
 ![](/img/android-scheduler_light-doze.png)
 
 #### 2. 进入条件
 
-会同事满足以下情况后一段时间(大约几分钟)以后生效:
+会同时满足以下情况一段时间(大约几分钟)以后生效:
 
 - 手机没有在充电
 - 屏幕被关闭
 - 处于稳定状态/不稳定状态
 
-或者在以下的条件:
+或者在`Deep Doze Mode`的情况下同时满足以下条件下生效:
 
-- 处于Deep Doze Mode
 - 屏幕关闭
 - 手机没有在充电
 - 手机不再处于稳定状态
@@ -194,22 +188,22 @@ void onStopJob(){
 
 - 屏幕打开
 - 手机开始充电
-- 进入Deep Doze Mode
+- 进入`Deep Doze Mode`
 
 #### 4. 在两个处理窗口之间的手机状态
 
 - 对所有应用拒绝网络访问。
-- 所有JobScheduler与Sync-Adapter的任务都会被延后到窗口中执行。
-- 不会对AlarmManager中的任务进行影响，但是将无网络访问（如果你的任务需要网络访问，是时候改用JobScheduler或Sync-Adapter，保证在任务窗口执行会有网络）
+- 所有`JobScheduler`与`Sync Adapter`的任务都会被延后到窗口中执行。
+- 不会对`AlarmManager`中的任务进行影响，但是将无网络访问（如果你的任务需要网络访问，是时候改用`JobScheduler`或`Sync Adapter`了，这样才会保证在任务窗口执行会有网络）
 
 ### 中断/避开Doze
 
-> 以下所有情况，Google官方都建议不在特殊情景，不要去使用，由于中断了省电的规则。
+> 以下所有情况，Google官方都建议不在特殊情景，不要去使用，由于中断了Doze Mode的省电规则。
 
 #### 1. AlarmManager
 
-- 指定需要精确时间的事件: `setAndAllowWhileIdle()`、`setExactAndAllowWhileIdle()`。但是在非窗口期间并不解除无网络访问的限制，并且只有10s的时间给予处理。
-- 指定闹钟事件`AlarmManager.setAlarmClock()`的事件会在闹钟结束前，令系统短暂的完全退出Doze模式，并且正常处理事件，系统为了突显该闹钟事件，将会在status bar上显示物理闹钟的icon。
+- 在精确的时间间隔中运行的任务: `setAndAllowWhileIdle()`、`setExactAndAllowWhileIdle()`。但是在非窗口期间并不解除无网络访问的限制，并且只有10s的时间给予处理。
+- 指定闹钟事件`AlarmManager.setAlarmClock()`的事件会在闹钟结束前，令系统短暂的完全退出Doze模式，并且正常处理事件，系统为了突显该闹钟事件，将会在系统的`Status Bar`上显示物理闹钟的ICON。
 
 #### 2. FCM/GCM
 
@@ -220,14 +214,12 @@ FCM/GCM中高优先级的任务配置中(`"priority" : "high"`) 的消息，在D
 #### 3. 白名单
 
 > [白名单官方文档](https://developer.android.com/training/monitoring-device-state/doze-standby.html#support_for_other_use_cases)
-
-
 > [官方建议可考虑加入白名单的情况](https://developer.android.com/training/monitoring-device-state/doze-standby.html#whitelisting-cases)
 
-- 主动请求加入白名单，用户同一以后加入白名单;
-- 用户也可以主动将App从白名单中删除或添加应用;
+- 主动请求加入白名单，用户同意以后才加入白名单;
+- 用户也可以主动将应用从白名单中删除或将应用添加到白名单中;
 - 应用可以通过`isIgnoringBatteryOptimizations()`来获知是否在白名单中;
-- 白名单的应用可以访问网络与持有有效的WAKELOKE，但是其他Doze的约束依然存在(如延后的Job Scheduler、Syncs-Adapter、AlarmManager);
+- 白名单的应用可以访问网络与持有有效的`Wake Lock`，但是其他`Doze`的约束依然存在(如延后的`Job Scheduler`、`Syncs-Adapter`、`AlarmManager`);
 
 白名单的请求方式:
 
@@ -236,7 +228,7 @@ FCM/GCM中高优先级的任务配置中(`"priority" : "high"`) 的消息，在D
 
 #### 4. 特殊情况
 
-前台服务(foreground-service)将不会受到Doze模式影响。
+前台服务(`Foreground Service`)将不会受到`Doze`模式影响。
 
 ### Doze模式测试
 
@@ -244,16 +236,16 @@ FCM/GCM中高优先级的任务配置中(`"priority" : "high"`) 的消息，在D
 
 #### 1. 进入Doze模式
 
-- 准备一台系统是在Android Nougat Devloper Preview4或以上版本的设备。
+- 准备一台系统是在Android Nougat Developer Preview4或以上版本的设备。
 - 将其连接连接到电脑。
-- 通过 `adb shell dumpsys battery unplug` 命令让设备进入未连接充电的模式。
-- 通过 `adb shell dumpsys deviceidle step [light|deep]` 强行进入Doze模式。
+- 通过执行`adb shell dumpsys battery unplug`命令让设备进入未连接充电的模式。
+- 通过执行`adb shell dumpsys deviceidle step [light|deep]`强行进入`Doze`模式。
 
-> 退出Doze模式，让手机恢复正常需要复位充电模式: `adb shell dumpsys battery reset`。
+> 退出`Doze`模式，让手机恢复正常需要复位充电模式:`adb shell dumpsys battery reset`。
 
 #### 2. 其他指令
 
-- 获取设备状态 `adb shell dumpsys deviceidle get [light|deep|force|screen|charging|network]`。
+- 获取设备状态:`adb shell dumpsys deviceidle get [light|deep|force|screen|charging|network]`。
 
 在Android Nougat Developer Preview 4中，Doze模式的状态周期是:
 
