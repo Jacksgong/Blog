@@ -63,7 +63,6 @@ tags:
 | 合成复用原则 | 优先使用合成/聚合，而非继承 | 可以通过引入抽象类更加灵活，相互耦合变小，更加简单 | 尽量将已有对象纳入到新对象中，成为新对象的一部分，而不使用继承的方式进行复用，如 `ClassLoader` 中双亲委派架构
 
 
-
 #### 使用组合而非继承的场景:
 
 > 优先使用对象组合，而非继承
@@ -85,7 +84,17 @@ tags:
 
 ![](/img/architecture-class-relate.png)
 
-## II. 设计模式
+## II. 常见的模式
+
+![](/img/architecutre-mvp-mvc.gif)
+From http://msdn.microsoft.com/en-us/library/ff647859.aspx
+
+> MVP(Model-View_Presenter)是MVC(Model-View_Controller)的一个子集。
+
+- MVC中`Controller`控制全局事务，`View`将事件发送给`Controller`，`Controller`处理完事件同步给`Model`(数据库/数据模型)，`View`是通过所绑定的`Model`的改变来刷新自己。
+- MVP中`Presenter`从`View`中获取数据，刷新`Model`，当`Model`中的数据发生改变后，`Presenter`读取`Model`并刷新`View`。
+
+## III. 设计模式
 
 ### 1. 工厂方法模式
 
@@ -196,7 +205,7 @@ TODO
 - [UML Class Diagrams](http://pages.cs.wisc.edu/~hasti/cs302/examples/UMLdiagram.html)
 - [Java之美[从菜鸟到高手演变]之设计模式二](http://blog.csdn.net/zhangerqing/article/details/8239539)
 - [Java之美[从菜鸟到高手演变]之设计模式三](http://blog.csdn.net/zhangerqing/article/details/8243942)
-
+- [Difference between asp.net MVC and MVP? are they both same?](http://stackoverflow.com/questions/19996963/difference-between-asp-net-mvc-and-mvp-are-they-both-same)
 
 
 ---
