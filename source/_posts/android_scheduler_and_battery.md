@@ -55,12 +55,12 @@ tags:
 
 - `Job Scheduler`只有在`Api21`或以上的系统支持。
 - `Job Scheduler`是将多个任务打包在一个场景下执行。
-- 在系统重启以后，任务会依然保留在`Job Scheduler`当中，因此不需要监听系统系统状态重复设定。
+- 在系统重启以后，任务会依然保留在`Job Scheduler`当中，因此不需要监听系统启动状态重复设定。
 - 如果在一定期限内还没有满足特定执行所需情况，`Job Scheduler`会将这些任务加入队列，并且随后会进行执行。
 
 #### 3. 接口类型
 
-```
+```java
 boolean onStartJob(JobParams params) {
     // 开始执行
     // 注意这个方法是在主线程执行的，如果是耗时操作请抛到独立线程中
@@ -232,11 +232,11 @@ FCM/GCM中高优先级的任务配置中(`"priority" : "high"`) 的消息，在D
 
 ### Doze模式测试
 
-> Google官方提供了一些adb命令用于测试Doze模式，而非需要通过等待来进入Doze模式的。
+> Google官方提供了一些adb命令用于测试`Doze`模式，而非需要通过等待来进入`Doze`模式的。
 
 #### 1. 进入Doze模式
 
-- 准备一台系统是在Android Nougat Developer Preview4或以上版本的设备。
+- 准备一台系统是在`Android Nougat Developer Preview4`或以上版本的设备。
 - 将其连接连接到电脑。
 - 通过执行`adb shell dumpsys battery unplug`命令让设备进入未连接充电的模式。
 - 通过执行`adb shell dumpsys deviceidle step [light|deep]`强行进入`Doze`模式。
@@ -247,12 +247,16 @@ FCM/GCM中高优先级的任务配置中(`"priority" : "high"`) 的消息，在D
 
 - 获取设备状态:`adb shell dumpsys deviceidle get [light|deep|force|screen|charging|network]`。
 
-在Android Nougat Developer Preview 4中，Doze模式的状态周期是:
+在`Android Nougat Developer Preview 4`中，`Doze`模式的状态周期是:
 
 ```
 Light: ACTIVE -> IDLE -> IDLE_MAINTENANCE -> OVERRIDE
 Deep: ACTIVE -> IDLE_PENDING -> SENSING -> LOCATING -> IDLE -> IDLE_MAINTENANCE
 ```
+
+---
+
+本文已经发布到JackBlog公众号，可请直接访问: [Android后台调度任务与省电 - JacksBlog](http://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483685&idx=1&sn=7f548740be9dd4e5b8849b861cb75ec7)
 
 ---
 
