@@ -38,38 +38,69 @@ tags:
 `InputStream` | `BufferedInputStream`
 `Reader` | `BufferedReader`
 
+## II. 基础相关
 
-## II. 数据结构
-
+#### 1. 数据结构
 > 如果已知大概需要多大，就直接给初始大小，减少扩容时额外开销。
 
-### 1. List
+- `ArrayList`: 里面就一数组，内存小，有序取值快，扩容效率低
+- `LinkedList`: 里面就一双向链表，内存大，随机插入删除快，扩容效率高。
+- `HashSet`: 里面就一个`HashMap`，用key对外存储，目的就是不允许重复元素。
+- `ConcurrentHashMap`: 线程安全，采用细分锁，锁颗粒更小，并发性能更优
+- `Collections.synchronizedMap`: 线程安全，采用当前对象作为锁，颗粒较大，并发性能较差。
+- `SparseArray`、`SparseBooleanArray`、`SparseIntArray`:  针对Key为Int、Boolean进行了优化，采用二分法查找，简单数组存储。
 
-#### `ArrayList`
-里面就一数组，内存小，有序取值快，扩容效率低
+#### 2. 编码习惯
 
-#### `LinkedList`
-里面就一双向链表，内存大，随机插入删除快，扩容效率高。
+- 尽量简化，不要做不需要的操作。
+- 尽量避免分配内存(创建对象): 1) 如果一个方法返回一个`String`，并且这个方法的返回值始终都是被用来`append`到一个`StringBuffer`上，就改为传入`StringBuffer`直接`append`上去，避免创建一个短生命周期的临时对象；2) 如果使用的字符串是截取自某一个字符串，就直接从那个字符串上面`substring`，不要拷贝一份，因为通过`substring`虽然创建了新的`String`对象，但是共享了里面的`char`数组中的`char`对象，减少了这块对象的创建；量使用多个一维数组，其性能高于多维数组；`int`数组性能远大于`Integer`数组性能；
+- 如果你确定不需要访问类成员，让方法`static`，这样调用时可以提升15%~20%的速度，因为不需要切换对象状态。
+- 如果某个参数是常量，别忘了使用`static final`，这样可以让`Class`首次初始化时，不需要调用`<clinit>`来创建`static`方法，而是在编译时就直接将常量替换代码中使用的位置。
+- Android开发中，类内尽量避免通过`get/set`访问成员变量，虽然这在语言的开发中是一个好的习惯，但是Android虚拟机中，对方法的调用开销远大于对变量的直接访问。在没有JIT的情况下，直接的变量访问比调用方法快3倍，在JIT下，直接的变量访问更是比调用方法快7倍!
+- 当内部类需要访问外部类的私有`方法/变量`时，考虑将这些外部类的私有`方法/变量`改用包可见的方式。首先在编写代码的时候，通过内部类访问外部类的私有`方法/变量`是合法的，但是在编译的时候为了满足这个会将需要被内部类访问的私有`方法/变量`封装一层包可见的方法，实现让内部类访问这些私有的`方法/变量`，根据前面我们有提到说方法的调用开销大于变量的调用，因此这样使得性能变差，所以我们在编码的时候可以考虑直接将需要被内部类调用的外部类私有`方法/变量`，改为包可见。
+- 尽量少使用`float`。在很多现代设备中，`double`的性能与`float`的性能几乎没有差别，但是从大小上面`double`是`float`的两倍的大小。
+- 尽量考虑使用整型而非浮点数，在较好的Android设备中，浮点数比整型慢一倍。
+- 尽量不要使用除法操作，有很多处理器有乘法器，但是没有除法器，也就是说在这些设备中需要将除法分解为其他的计算方式速度会比较慢。
+- 尽量使用系统sdk中提供的方法，而非自己去实现。如`String.indexOf()`相关的API，Dalvik将会替换为内部方法；`System.arraycopy()`方法在Nexus One手机上，会比我们上层写的类似方法的执行速度快9倍。
+- 谨慎编写native，性能不一定更好，Native并不是用于使得性能更好，而是用于有些已经存在的库是使用native语言实现的，我们需要引入Android，这时才使用。1) 需要多出开销在维持Java-native的通信；2) 在native中创建的资源由于在native heap上面，因此需要主动的释放；3) 需要对不同的处理器架构进行支持，存在明显的兼容性问题需要解决。
+- 在没有JIT的设备中，面向接口编程的模式(如`Map map`)，相比直接访问对象类(如`HashMap map`)，会慢6%，但是在存在JIT的设备中，两者的速度差不多。
+- 在没有JIT的设备中，访问本地化变量相对与成员变量会快20%，但是在存在JIT的设备中，两者速度差不多。
 
-### 2. Hash
+##### 遍历优化
 
-#### `HashSet`
+> 尽量使用`Iterable`而不是通过长度判断来进行遍历。
 
-里面就一个`HashMap`，用key对外存储，目的就是不允许重复元素。
+```
+// 这种性能是最差的，JIT也无法对其优化。
+public void zero() {
+    int sum = 0;
+    for (int i = 0; i < mArray.length; ++i) {
+        sum += mArray[i].mSplat;
+    }
+}
 
-#### `ConcurrentHashMap`
+// 相对zero()来说，这种写法会更快些，在存在JIT的情况下速度几乎和two()速度一样快。
+public void one() {
+    int sum = 0;
+    // 1) 通过本地化变量，减少查询，在不存在JIT的手机下，优化较明显。
+    Foo[] localArray = mArray;
+    // 2) 获取队列长度，减少每次遍历访问变量的长度，有效优化。
+    int len = localArray.length;
 
-线程安全，采用细分锁，锁颗粒更小，并发性能更优
+    for (int i = 0; i < len; ++i) {
+        sum += localArray[i].mSplat;
+    }
+}
 
-#### `Collections.synchronizedMap`
+// 在无JIT的设备中，是最快的遍历方式，在存在JIT的设备中，与one()差不多快。
+public void two() {
+    int sum = 0;
+    for (Foo a : mArray) {
+        sum += a.mSplat;
+    }
+}
+```
 
-线程安全，采用当前对象作为锁，颗粒较大，并发性能较差。
-
-### 3. Int作为Key的Map
-
-> 针对该特性进行了优化，采用二分法查找，简单数组存储。
-
-`SparseArray`、`SparseBooleanArray`、`SparseIntArray`。
 
 ## III. 数据库相关
 
@@ -201,7 +232,13 @@ tags:
 - 结合Gitlab-CI与Slack(Incoming WebHooks)，快速实现，所有的push，Slack快速获知。
 - 结合Gradle中Android提供的`productFlavors`参数，定义不同的variations，快速批量打渠道包
 
-## X. 其他
+## X. 工具
+
+- [TraceView](https://developer.android.com/studio/profile/traceview.html)可以有效的更重一段时间内哪个方法最耗时，但是需要注意的是目前TraceView在录制过中，会关闭JIT，因此也许有些JIT的优化在TraceView过程被忽略了。
+- [Systrace](https://developer.android.com/studio/profile/systrace.html)可以有效的分析掉帧的原因。
+- [HierarchyViewer](https://developer.android.com/studio/profile/optimize-ui.html)可以有效的分析View层级以及布局每个节点`measure`、`layout`、`draw`的耗时。
+
+## XI. 其他
 
 - `final`能用就用（高效: 编译器在调用`final`方法时，会转入内嵌机制）
 - 懒预加载，如简单的ListView、RecyclerView等滑动列表控件，停留在当前页面的时候，可以考虑直接预加载下个页面所需图片
@@ -229,6 +266,7 @@ tags:
 - [新的Andriod Gradle插件可自动移除无用资源](http://www.infoq.com/cn/news/2014/11/new-android-gradle)
 - [Android安装包相关知识汇总](https://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&mid=208008519&idx=1&sn=278b7793699a654b51588319b15b3013)
 - [Android优化实践](http://gold.xitu.io/entry/55272f6be4b0da2c5deb7f36)
+- [Performance Tips](https://developer.android.com/training/articles/perf-tips.html)
 
 ---
 
