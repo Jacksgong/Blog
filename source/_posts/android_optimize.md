@@ -27,7 +27,7 @@ tags:
 
 #### 1. 传输数据格式选择
 
-- 如果是基本需要全量数据的，考虑使用[Protobuffers](https://developers.google.com/protocol-buffers/?hl=zh-cn) (序列化反序列化性能高于json)
+- 如果是需要全量数据的，考虑使用[Protobuffers](https://developers.google.com/protocol-buffers/?hl=zh-cn) (序列化反序列化性能高于json)，并且考虑使用[nano protocol buffer](https://android.googlesource.com/platform/external/protobuf/+/master/java/README.txt)。
 - 如果传输回来的数据不需要全量读取，考虑使用[Flatbuffers](https://github.com/google/flatbuffers) (序列化反序列化几乎不耗时，耗时是在读取对象时(就这一部分如果需要优化，可以参看[Flatbuffer Use Optimize](http://blog.dreamtobe.cn/2015/01/05/Flatbuffer-Use-Optimize/)
 
 #### 2. 输入流
@@ -48,7 +48,7 @@ tags:
 - `HashSet`: 里面就一个`HashMap`，用key对外存储，目的就是不允许重复元素。
 - `ConcurrentHashMap`: 线程安全，采用细分锁，锁颗粒更小，并发性能更优
 - `Collections.synchronizedMap`: 线程安全，采用当前对象作为锁，颗粒较大，并发性能较差。
-- `SparseArray`、`SparseBooleanArray`、`SparseIntArray`:  针对Key为Int、Boolean进行了优化，采用二分法查找，简单数组存储。
+- `SparseArray`、`SparseBooleanArray`、`SparseIntArray`:  针对Key为`Int`、`Boolean`进行了优化，采用二分法查找，简单数组存储。相比`HashMap`而言，`HashMap`每添加一个数据，大约会需要申请额外的32字节的数据，因此`Sparsexxx`在内存方面的开销会小很多。
 
 #### 2. 编码习惯
 
@@ -63,7 +63,7 @@ tags:
 - 尽量不要使用除法操作，有很多处理器有乘法器，但是没有除法器，也就是说在这些设备中需要将除法分解为其他的计算方式速度会比较慢。
 - 尽量使用系统sdk中提供的方法，而非自己去实现。如`String.indexOf()`相关的API，Dalvik将会替换为内部方法；`System.arraycopy()`方法在Nexus One手机上，会比我们上层写的类似方法的执行速度快9倍。
 - 谨慎编写native，性能不一定更好，Native并不是用于使得性能更好，而是用于有些已经存在的库是使用native语言实现的，我们需要引入Android，这时才使用。1) 需要多出开销在维持Java-native的通信；2) 在native中创建的资源由于在native heap上面，因此需要主动的释放；3) 需要对不同的处理器架构进行支持，存在明显的兼容性问题需要解决。
-- 在没有JIT的设备中，面向接口编程的模式(如`Map map`)，相比直接访问对象类(如`HashMap map`)，会慢6%，但是在存在JIT的设备中，两者的速度差不多。
+- 在没有JIT的设备中，面向接口编程的模式(如`Map map`)，相比直接访问对象类(如`HashMap map`)，会慢6%，但是在存在JIT的设备中，两者的速度差不多。但是内存占用方面面向接口变成会消耗更多内存，因此如果你的面向接口编程不是十分的必要的情况下可以考虑不用。
 - 在没有JIT的设备中，访问本地化变量相对与成员变量会快20%，但是在存在JIT的设备中，两者速度差不多。
 
 ##### 遍历优化
@@ -148,7 +148,8 @@ public void two() {
 ## V. 多进程抉择
 
 > 360 17个进程: [360手机卫士 Android开发 InfoQ视频 总结
-](http://blog.dreamtobe.cn/2015/03/17/360手机卫士-Android开发-InfoQ视频-总结/)
+](http://blog.dreamtobe.cn/2015/03/17/360手机卫士-Android开发-InfoQ视频-总结/)，但是考虑到多进程的消耗，我们更需要关注多个组件复用同一进程。
+> 在没有做任何操作的空进程而言，其大约需要额外暂用1.4MB的内存。
 
 - 充分独立，解耦部分
 - 大内存(如临时展示大量图片的Activity)、无法解决的crash、内存泄漏等问题，考虑通过独立进程解决
@@ -173,7 +174,7 @@ public void two() {
 
 > 可以参考Falcon Pro作者的推荐: [Falcon Pro 3如何完成独立开发演讲分析](http://blog.dreamtobe.cn/2015/06/14/Falcon-Pro-3-如何完成独立开发演讲分析/)
 
-#### 1. 代码编写习惯
+#### 1. 响应式编程
 
 [RxJava](https://github.com/ReactiveX/RxJava) (响应式编程，代码更加简洁，异步处理更快快捷、异常处理更加彻底、数据管道理念)
 
@@ -208,40 +209,84 @@ public void two() {
  - 代码质量: [phabricator 的arc diff](http://phabricator.org) (尽量小颗粒度的arc diff 与update review)，其实也可以看看Google是如何做的: [笔记-谷歌是如何做代码审查的](http://blog.dreamtobe.cn/2015/03/23/%5B笔记%5D谷歌是如何做代码审查的/)，还有一点的TODO要写好deadline与master
  - 编包管理: [Gitlab CI](https://about.gitlab.com/gitlab-ci/) (结合Gitlab，功能够用，方便)
 
+## VIII. 内存
 
-## VIII. 内存泄漏相关
+> 根据设备可用内存的不同，每个设备给应用限定的Heap大小是有限的，当达到对应限定值还申请空间时，就会收到`OutOfMemoryError`的异常。
+
+### 1. 内存管理
+
+> Android根据不同的进程优先级，对不同进程进行回收来满足内存的供求，可以参照这篇文章: [Android中线程、进程与组件的关系](http://blog.dreamtobe.cn/2015/04/08/android_thread_process_components/)。
+> 在后台进程的LRU队列中，除了LRU为主要的规则以外，系统也会根据杀死一个后台进程所获得的内存是否更多作为一定的参考依据，因此后台进程为了保活，尽量少的内存，尽可能的释放内存也是十分必要的。
+
+- 尽可能的缩短`Service`的存活周期（可以考虑直接使用执行完任务直接关闭自己的`IntentService`），也就是说在Service没有任何任务的时候，尽可能的将其关闭，以减少系统资源的浪费。
+- 可以通过系统服务`ActivityManager`中的`getMemoryClass()`获知当前设备允许每个应用大概可以有多少兆的内存使用(如果在`AndroidManifest`设置了`largeHeap=true`，使用`getLargeMemoryClass()`获知)，并且让应用中的内存始终低于这个值，避免OOM。
+- 相对于静态常量而言，通常`Enum`枚举需要大于两倍的内存空间来存储相同的数据。
+- Java中的每个`class`(或者匿名类)大约占用500字节。
+- 每个对象实例大约开销12~16字节的内存。
+
+#### `onTrimMemory()`回调处理
+
+> 监听`onTrimMemory()`的回调，根据不同的内存等级，做相应的释放以此让系统资源更好的利用，以及自己的进程可以更好的保活。
+
+##### 当应用还在前台
+
+- `TRIM_MEMORY_RUNNING_MODERATE`: 当前应用还在运行不会被杀，但是设备可运行的内存较低，系统正在从后台进程的LRU列表中杀死进程其他进程。
+- `TRIM_MEMORY_RUNNING_LOW`: 当前应用还在运行不会被杀，但是设备可运行内存很低了，会直接影响当前应用的性能，当前应用也需要考虑释放一些无用资源。
+- `TRIM_MEMORY_RUNNING_CRITICAL`: 当前应用还在运行中，但是系统已经杀死了后台进程LRU队列中绝大多数的进程了，当前应用需要考虑释放所有不重要的资源，否则很可能系统就会开始清理服务进程，可见进程等。也就说，如果内存依然不足以支撑，当前应用的服务也很有可能会被清理掉。
+
+##### `TRIM_MEMORY_UI_HIDDEN`
+
+当回调回来的时候，说明应用的UI对用户不可见的，此时释放UI使用的一些资源。这个不同于`onStop()`，`onStop()`的回调，有可能仅仅是当前应用中进入了另外一个`Activity`。
+
+##### 当应用处于后台
+
+- `TRIM_MEMORY_BACKGROUND`: 系统已经处于低可用内存的情况，并且当前进程处于后台进程LRU队列队头附近，因此还是比较安全的，但是系统可能已经开始从LRU队列中清理进程了，此时当前应用需要释放部分资源，以保证尽量的保活。
+- `TRIM_MEMORY_MODERATE`: 系统处于低可用内存的情况，并且当前进程处于后台进程LRU队列中间的位置，如果内存进一步紧缺，当前进程就有可能被清理掉，需要进一步释放资源。
+- `TRIM_MEMORY_COMPLETE`: 系统处于低可用内存的情况，并且当前进程处于后天进程LRU队列队首的位置，如果内存进一步紧缺，下一个清理的就是当前进程，需要释放尽可能的资源来保活当前进程。在API14之前，`onLowMemory()`就相当于这个级别的回调。
+
+### 2. 避免内存泄漏相关
 
 - 无法解决的泄漏（如系统底层引起的)移至独立进程(如2.x机器存在webview的内存泄漏)
 - 大图片资源/全屏图片资源，要不放在`assets`下，要不放在`nodpi`下，要不都带，否则缩放会带来额外耗时与内存问题
-- 4.x在AndroidManifest中配置`largeHeap=true`，一般dvm heep最大值可增大50%以上。
+- 4.x在`AndroidManifest`中配置`largeHeap=true`，一般dvm heep最大值可增大50%以上。但是没有特殊明确的需要，尽可能的避免这样设置，因为这样一来很可能隐藏了消耗了完全没有必要的内存的问题。
 - 在`Activity#onDestory`以后，遍历所有View，干掉所有View可能的引用(通常泄漏一个Activity，连带泄漏其上的View，然后就泄漏了大于全屏图片的内存)。
 - 万金油: 静态化内部类，使用`WeakReference`引用外部类，防止内部类长期存在，泄漏了外部类的问题。
 
 
-#### 图片Decode
+### 3. 图片
+
+> Android 2.3.x或更低版本的设备，是将所有的Bitmap对象存储在native heap，因此我们很难通过工具去检测其内存大小，在Android 3.0或更高版本的设备，已经调整为存储到了每个应用自身的Dalvik heap中了。
 
 - 全局统一`BitmapFactory#decode`出口，捕获此处decode oom，控制长宽（小于屏幕分辨率大小 ）
 - 如果采用RGB_8888 oom了，尝试RGB_565(相比内存小一半以上(w*h*2(bytes)))
 - 如果还考虑2.x机器的话，设置`BitmapFactory#options`的`InNativeAlloc`参数为true，此时decode的内存不会上报到dvm中，便不会oom。
+- 建议采用[lingochamp/QiniuImageLoader](https://github.com/lingochamp/QiniuImageLoader)的方式，所有图片的操作都放到云端处理，本地默认使用Webp，并且获取的每个位置的图片，尽量通过精确的大小按需获取，避免内存没必要的消耗。
 
 
-## IX. 编译与发布
+## IX. 线程
+
+- 采用全局线程池管理体系，有效避免野线程。可参照 [ThreadDebugger-demo/DemoThreadPoolCentral.java](https://github.com/Jacksgong/ThreadDebugger/blob/master/demo/src/main/java/cn/dreamtobe/threaddebugger/demo/DemoThreadPoolCentral.java)
+- 结合全局线程池管理体系，使用[ThreadDebugger](https://github.com/Jacksgong/ThreadDebugger)监控线程，避免线程泄漏的存在。
+
+## X. 编译与发布
 
 - 考虑采用DexGuard，或ProGuard结合相关资源混淆来提高安全与包大小，参考: [DexGuard、Proguard、Multi-dex](http://blog.dreamtobe.cn/2015/11/04/guard_multi_dex/)
 - 结合Gradle、Gitlab-CI 与Slack(Incoming WebHooks)，快速实现，打相关git上打相关Tag，自动编相关包通知Slack。
 - 结合Gitlab-CI与Slack(Incoming WebHooks)，快速实现，所有的push，Slack快速获知。
 - 结合Gradle中Android提供的`productFlavors`参数，定义不同的variations，快速批量打渠道包
+- 迭代过程中，包定期做多纬度扫描，如包大小、字节码大小变化、红线扫描、资源变化扫描、相同测试用例耗电量内存等等，更多的可以参考 [360手机卫士 Android开发 InfoQ视频 总结](http://blog.dreamtobe.cn/2015/03/17/360%E6%89%8B%E6%9C%BA%E5%8D%AB%E5%A3%AB-Android%E5%BC%80%E5%8F%91-InfoQ%E8%A7%86%E9%A2%91-%E6%80%BB%E7%BB%93/)
+- 迭代过程中，对关键`Activity`以及`Application`对打开的耗时进行统计，观察其变化，避免因为迭代导致某些页面非预期的打开变慢。
 
-## X. 工具
+## XI. 工具
 
 - [TraceView](https://developer.android.com/studio/profile/traceview.html)可以有效的更重一段时间内哪个方法最耗时，但是需要注意的是目前TraceView在录制过中，会关闭JIT，因此也许有些JIT的优化在TraceView过程被忽略了。
 - [Systrace](https://developer.android.com/studio/profile/systrace.html)可以有效的分析掉帧的原因。
 - [HierarchyViewer](https://developer.android.com/studio/profile/optimize-ui.html)可以有效的分析View层级以及布局每个节点`measure`、`layout`、`draw`的耗时。
 
-## XI. 其他
+## XII. 其他
 
 - `final`能用就用（高效: 编译器在调用`final`方法时，会转入内嵌机制）
-- 懒预加载，如简单的ListView、RecyclerView等滑动列表控件，停留在当前页面的时候，可以考虑直接预加载下个页面所需图片
+- 懒预加载，如简单的`ListView`、`RecyclerView`等滑动列表控件，停留在当前页面的时候，可以考虑直接预加载下个页面所需图片
 - 智能预加载，通过权重等方式结合业务层面，分析出哪些更有可能被用户浏览使用，然后再在某个可能的时刻进行预加载。如，进入朋友圈之前通过用户行为，智能预加载部分原图。
 - 做好有损体验的准备，在一些无法避免的问题面前做好有损体验（如，非UI进程crash，可以自己解决就不要让用户感知，或者UI进程crash了，做好场景恢复）
 - 做好各项有效监控：crash(注意还有JNI的)、anr(定期扫描文件)、掉帧(绘制监控、activity生命周期监控等)、异常状态监控(本地Log根据需要不同级别打Log并选择性上报监控)等
@@ -251,6 +296,11 @@ public void two() {
 - 谷歌建议，大于10M的大型应用考虑安装到SD卡上: [App Install Location](http://developer.android.com/intl/zh-cn/guide/topics/data/install-location.html)
 - 当然运维也是一方面: [Optimize Your App](http://developer.android.com/intl/zh-cn/distribute/essentials/optimizing-your-app.html)
 - 在已知并且不需要栈数据的情况下，就没有必要需要使用异常，或创建`Throwable`生成栈快照是一项耗时的工作。
+- 需要十分明确发布环境以及测试环境，明确仅仅为了方便测试的代码以及工具在发布环境不会被带上。
+
+---
+
+- 最后一次更新时间: 2016-9-19，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/android_optimize.md)。
 
 ---
 
@@ -267,6 +317,7 @@ public void two() {
 - [Android安装包相关知识汇总](https://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&mid=208008519&idx=1&sn=278b7793699a654b51588319b15b3013)
 - [Android优化实践](http://gold.xitu.io/entry/55272f6be4b0da2c5deb7f36)
 - [Performance Tips](https://developer.android.com/training/articles/perf-tips.html)
+- [Managing Your App's Memory](https://developer.android.com/training/articles/memory.html#YourApp)
 
 ---
 
