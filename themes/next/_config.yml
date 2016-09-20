@@ -146,7 +146,7 @@ social_icons:
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.jpg
 # in site  directory(source/uploads): /uploads/avatar.jpg
-avatar: http://7xjww9.com1.z0.glb.clouddn.com/IMG_20160209_131123_403_403.jpg
+avatar: /img/avatar.jpg
 
 
 # Table Of Contents in the Sidebar
