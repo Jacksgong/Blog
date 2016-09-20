@@ -2,7 +2,8 @@
 
 ![](https://img.shields.io/badge/Blog-hexo-orange.svg) ![](https://img.shields.io/badge/Blog-dreamtobe.cn-blue.svg)
 
-> 博客地址: http://blog.dreamtobe.cn
+> 博客地址: http://blog.jacksgong.com
+> P.S: 暂时由于腾讯CDN那边有坑正在处理(因此blog.dreamtobe.cn暂时访问会有问题)，所以目前可以通过 https://blog.jacksgong.com 这个没有走腾讯CDN的二级域名进行正常访问。
 
 ## 站点框架
 
@@ -27,6 +28,8 @@
 - 2015年6月 博客服务器迁到韩国，并接入腾讯云CDN。
 - 2016年1月 博客开源并两个远端，双备份。
 - 2016年5月 博客开通线上公众号(微信号: `jacksblog`)。
+- 2016年9月 为了防止国内万恶运营商的劫持，上了[HTTPS](https://www.ssllabs.com/ssltest/analyze.html?d=blog.jacksgong.com)。
+
 
 ## LICENSE
 
