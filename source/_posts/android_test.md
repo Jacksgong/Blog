@@ -1,5 +1,5 @@
 title: Android单元测试与模拟测试
-date: 2016-05-15 16:53:03
+date: 2016-10-18 13:53:03
 tags:
 - 单元测试
 - 模拟测试
@@ -23,7 +23,9 @@ tags:
 
 #### 2. 测什么?
 
-- 一般单元测试: 列出想要测试覆盖的异常情况，进行验证。
+- 一般单元测试:
+  - 列出想要测试覆盖的异常情况，进行验证。
+  - 性能测试。
 - 模拟测试: 根据需求，测试用户真正在使用过程中，界面的反馈与显示以及一些依赖系统架构的组件的应用测试。
 
 #### 3. 需要注意
@@ -32,9 +34,8 @@ tags:
 - 不要使用逻辑流关键字(If/else、for、do/while、switch/case)，在一个测试方法中，如果需要有这些，拆分到单独的每个测试方法里。
 - 测试真正需要测试的内容，需要覆盖的情况，一般情况只考虑验证输出（如某操作后，显示什么，值是什么）。
 - 考虑耗时，Android Studio默认会输出耗时。
-- 不需要考虑测试`private`的方法，将`private`方法当做黑盒内部组件，测试对其引用的`public`方法即可。
-- 尽可能的解耦对于不同的测试方法，不应该存在Test A与Test B存在时序性的情况。
-
+- 不需要考虑测试`private`的方法，将`private`方法当做黑盒内部组件，测试对其引用的`public`方法即可；不考虑测试琐碎的代码，如`getter`或者`setter`。
+- 每个单元测试方法，应没有先后顺序；尽可能的解耦对于不同的测试方法，不应该存在Test A与Test B存在时序性的情况。
 
 ## II. Android Studio中的单元测试与模拟测试
 
@@ -65,6 +66,23 @@ dependencies {
     testCompile 'org.mockito:mockito-core:1.10.19'
 }
 ```
+
+#### JUnit
+
+##### Annotation
+
+| Annotation | 描述
+| --- | ---
+| `@Test public void method()` | 定义所在方法为`单元测试方法`
+| `@Test (expected = Exception.class)` | 如果所在方法没有抛出`Annotation`中的`Exception.class`->失败
+| `@Test(timeout=100)` | 如果方法耗时超过`100`毫秒->失败
+| `@Before public void method()` | 这个方法在每个测试之前执行，用于准备测试环境(如: 初始化类，读输入流等)
+| `@After public void method()` | 这个方法在每个测试之后执行，用于清理测试环境数据
+| `BeforeClass public static void method()` | 这个方法在所有测试开始之前执行一次，用于做一些耗时的初始化工作(如: 连接数据库)
+| `AfterClass public static void method()` | 这个方法在所有测试结束之后执行一次，用于清理数据(如: 断开数据连接)
+| `@Ignore`或者`@Ignore("Why disabled")` | 忽略当前测试方法，一般用于测试方法还没有准备好，或者太耗时之类的
+| `@FixMethodOrder(MethodSorters.NAME_ASCENDING) public class TestClass{}`  | 使得该测试方法中的所有测试都按照方法中的字母顺序测试
+| `Assume.assumeFalse(boolean condition)` | 如果满足`condition`，就不执行对应方法
 
 ### 2. 模拟测试
 
@@ -183,6 +201,10 @@ Mockito.doReturn((long) 1363027600).when(myQueryObject).getCurrentTime();
 
 ---
 
+- 文章创建时间: 2016-5-15，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/android_test.md)。
+
+---
+
 本文已经发布到JackBlog公众号，可请直接访问: [Android单元测试与模拟测试 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483680&idx=1&sn=a81f0b86696f243bf32c032fc7b09574)
 
 ---
@@ -193,6 +215,7 @@ Mockito.doReturn((long) 1363027600).when(myQueryObject).getCurrentTime();
 - [timber/build.gradle](https://github.com/JakeWharton/timber/blob/master/timber/build.gradle)
 - [A BDD (RSpec-like) testing library for Java](http://stackoverflow.com/questions/30675748/a-bdd-rspec-like-testing-library-for-java)
 - [Open Sourcing Test Butler](https://engineering.linkedin.com/blog/2016/08/introducing-and-open-sourcing-test-butler--reliable-android-test)
+- [Unit Testing with JUnit -Tutorial](http://www.vogella.com/tutorials/JUnit/article.html)
 
 
 ---
