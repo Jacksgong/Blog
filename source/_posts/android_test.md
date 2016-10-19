@@ -1,5 +1,5 @@
 title: Android单元测试与模拟测试
-date: 2016-10-19 14:36:03
+date: 2016-10-19 15:58:03
 tags:
 - 单元测试
 - 模拟测试
@@ -142,17 +142,97 @@ assertEquals(View.GONE, view.getVisibility());
 assertThat(view).isGone();
 ```
 
-#### 2. Robolectric
+#### 2. Hamcrest
 
-> [Robolectric](http://robolectric.org/)
-> 让模拟测试直接在开发机上完成，而不需要在Android系统上。
+> [JavaHamcrest](https://github.com/hamcrest/JavaHamcrest)
+> 通过已有的通配方法，快速的对代码条件进行测试
 
-主要是解决模拟测试中耗时的缺陷，模拟测试需要安装以及跑在Android系统上，也就是需要在Android虚拟机或者设备上面，所以十分的耗时。基本上每次来来回回都需要几分钟时间。针对这类问题，业界其实已经有了一个现成的解决方案: Pivotal实验室推出的[Robolectric](http://robolectric.org/)。通过使用Robolectrict模拟Android系统核心库的`Shadow Classes`的方式，我们可以像写本地测试一样写这类测试，并且直接运行在工作环境的JVM上，十分方便。
+```java
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.equalTo;
 
+// 断言: a等于b
+assertThat(a, equalTo(b));
+assertThat(a, is(equalTo(b)));
+assertThat(a, is(b));
+// 断言: a不等于b
+assertThat(actual, is(not(equalTo(b))));
+
+List<Integer> list = Arrays.asList(5, 2, 4);
+// 断言: list有3个数据
+assertThat(list, hasSize(3));
+// 断言: list中有5,2,4，并且顺序也一致
+assertThat(list, contains(5, 2, 4));
+// 断言: list中包含5,2,4
+assertThat(list, containsInAnyOrder(2, 4, 5));
+// 断言: list中的每一个数据都大于1
+assertThat(list, everyItem(greaterThan(1)));
+// 断言: fellowship中包含有成员变量"race"，并且其值不是ORC
+assertThat(fellowship, everyItem(hasProperty("race", is(not((ORC))))));
+// 断言: object1中与object2相同的成员变量都是相同的值
+assertThat(object1, samePropertyValuesAs(object2));
+
+Integer[] ints = new Integer[] { 7, 5, 12, 16 };
+// 断言: 数组中包含7,5,12,16
+assertThat(ints, arrayContaining(7, 5, 12, 16));
+
+```
+
+##### 几个主要的匹配器:
+
+| Mather | 描述
+| --- | ---
+| `allOf` | 所有都匹配
+| `anyOf` | 任意一个匹配
+| `not` | 不是
+| `equalTo` | 对象等于
+| `is` | 是
+| `hasToString` | 包含`toString`
+| `instanceOf`,`isCompatibleType` | 类的类型是否匹配
+| `notNullValue`,`nullValue` | 测试null
+| `sameInstance` | 相同实例
+| `hasEntry`,`hasKey`,`hasValue` | 测试`Map`中的`Entry`、`Key`、`Value`
+| `hasItem`,`hasItems` | 测试集合(`collection`)中包含元素
+| `hasItemInArray` | 测试数组中包含元素
+| `closeTo` | 测试浮点数是否接近指定值
+| `greaterThan`,`greaterThanOrEqualTo`,`lessThan`,`lessThanOrEqualTo` | 数据对比
+| `equalToIgnoringCase` | 忽略大小写字符串对比
+| `equalToIgnoringWhiteSpace` | 忽略空格字符串对比
+| `containsString`,`endsWith`,`startsWith`,`isEmptyString`,`isEmptyOrNullString` | 字符串匹配
+
+##### 自定义匹配器
+
+```java
+// 自定义
+import org.hamcrest.Description;
+import org.hamcrest.TypeSafeMatcher;
+
+public class RegexMatcher extends TypeSafeMatcher<String> {
+    private final String regex;
+
+    public RegexMatcher(final String regex) { this.regex = regex; }
+    @Override
+    public void describeTo(final Description description) { description.appendText("matches regular expression=`" + regex + "`"); }
+
+    @Override
+    public boolean matchesSafely(final String string) { return string.matches(regex); }
+
+
+    // 上层调用的入口
+    public static RegexMatcher matchesRegex(final String regex) {
+        return new RegexMatcher(regex);
+    }
+}
+
+// 使用
+String s = "aaabbbaaa";
+assertThat(s, RegexMatcher.matchesRegex("a*b*a"));
+```
 #### 3. Mockito
 
 > [Mockito](https://code.google.com/archive/p/mockito/)
-> 快速模拟控制系统架构返回参数。
+> Mock对象，控制其返回值，监控其方法的调用。
 
 不同于Roblectric，Mockito可以通过模拟并控制或修改一些方法的行为。
 
@@ -248,14 +328,21 @@ class FooWraper{
 }
 ```
 
-#### 4. Robotium
+#### 4. Robolectric
+
+> [Robolectric](http://robolectric.org/)
+> 让模拟测试直接在开发机上完成，而不需要在Android系统上。
+
+主要是解决模拟测试中耗时的缺陷，模拟测试需要安装以及跑在Android系统上，也就是需要在Android虚拟机或者设备上面，所以十分的耗时。基本上每次来来回回都需要几分钟时间。针对这类问题，业界其实已经有了一个现成的解决方案: Pivotal实验室推出的[Robolectric](http://robolectric.org/)。通过使用Robolectrict模拟Android系统核心库的`Shadow Classes`的方式，我们可以像写本地测试一样写这类测试，并且直接运行在工作环境的JVM上，十分方便。
+
+#### 5. Robotium
 
 > [RobotiumTech/robotium](https://github.com/robotiumtech/robotium)
 > (Integration Tests)模拟用户操作，事件流测试。
 
 通过模拟用户的操作的行为事件流进行测试，这类测试无法避免需要在虚拟机或者设备上面运行的。是一些用户操作流程与视觉显示强相关的很好的选择。
 
-#### 5. Test Butler
+#### 6. Test Butler
 
 > [linkedin/test-butler](https://github.com/linkedin/test-butler)
 > 避免设备/模拟器系统或者环境的错误，导致测试的失败。
@@ -312,6 +399,7 @@ class FooWraper{
 - [Open Sourcing Test Butler](https://engineering.linkedin.com/blog/2016/08/introducing-and-open-sourcing-test-butler--reliable-android-test)
 - [Unit Testing with JUnit -Tutorial](http://www.vogella.com/tutorials/JUnit/article.html)
 - [Unit tests with Mockito - Tutorial](http://www.vogella.com/tutorials/Mockito/article.html)
+- [Using Hamcrest for testing - Tutorial](http://www.vogella.com/tutorials/Hamcrest/article.html)
 
 ---
 
