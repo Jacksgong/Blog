@@ -1,5 +1,5 @@
 title: Android单元测试与模拟测试
-date: 2016-10-18 13:53:03
+date: 2016-10-19 14:36:03
 tags:
 - 单元测试
 - 模拟测试
@@ -30,12 +30,19 @@ tags:
 
 #### 3. 需要注意
 
-- 考虑可读性，对于方法名使用表达能力强的方法名，对于测试范式可以考虑使用一种规范, 如 RSpec-style。
+- 考虑可读性，对于方法名使用表达能力强的方法名，对于测试范式可以考虑使用一种规范, 如 RSpec-style。方法名可以采用一种格式，如: `[测试的方法]_[测试的条件]_[符合预期的结果]`。
 - 不要使用逻辑流关键字(If/else、for、do/while、switch/case)，在一个测试方法中，如果需要有这些，拆分到单独的每个测试方法里。
 - 测试真正需要测试的内容，需要覆盖的情况，一般情况只考虑验证输出（如某操作后，显示什么，值是什么）。
 - 考虑耗时，Android Studio默认会输出耗时。
 - 不需要考虑测试`private`的方法，将`private`方法当做黑盒内部组件，测试对其引用的`public`方法即可；不考虑测试琐碎的代码，如`getter`或者`setter`。
 - 每个单元测试方法，应没有先后顺序；尽可能的解耦对于不同的测试方法，不应该存在Test A与Test B存在时序性的情况。
+
+#### 4. 创建测试
+
+- 选择对应的类
+- 将光标停留在类名上
+- 按下`ALT + ENTER`
+- 在弹出的弹窗中选择`Create Test`
 
 ## II. Android Studio中的单元测试与模拟测试
 
@@ -46,19 +53,17 @@ tags:
 > 直接在开发机上面进行运行测试。
 > 在没有依赖或者仅仅只需要简单的Android库依赖的情况下，有限考虑使用该类单元测试。
 
+`./gradlew check`
+
 #### 代码存储
 
 > 如果是对应不同的flavor或者是build type，直接在test后面加上对应后缀(如对应名为`myFlavor`的单元测试代码，应该放在`src/testMyFlavor/java`下面)。
 
 `src/test/java`
 
-#### 激活测试
-
-在一个功能测试或验证的测试方法前面添加`@Test`的annotation。
-
 #### Google官方推荐引用
 
-```
+```groovy
 dependencies {
     // Required -- JUnit 4 framework，用于单元测试，google官方推荐
     testCompile 'junit:junit:4.12'
@@ -76,6 +81,7 @@ dependencies {
 | `@Test public void method()` | 定义所在方法为`单元测试方法`
 | `@Test (expected = Exception.class)` | 如果所在方法没有抛出`Annotation`中的`Exception.class`->失败
 | `@Test(timeout=100)` | 如果方法耗时超过`100`毫秒->失败
+| `@Test(expected=Exception.class)` | 如果方法抛了Exception.class类型的异常->通过
 | `@Before public void method()` | 这个方法在每个测试之前执行，用于准备测试环境(如: 初始化类，读输入流等)
 | `@After public void method()` | 这个方法在每个测试之后执行，用于清理测试环境数据
 | `BeforeClass public static void method()` | 这个方法在所有测试开始之前执行一次，用于做一些耗时的初始化工作(如: 连接数据库)
@@ -90,13 +96,15 @@ dependencies {
 
 > 主要用于测试: 单元(Android SDK层引用关系的相关的单元测试)、UI、应用组件集成测试(Service、Content Provider等)。
 
+`./gradlew connectedAndroidTest`
+
 #### 代码存储:
 
 `src/androidTest/java`
 
 #### Google官方推荐引用
 
-```
+```groovy
 dependencies {
     androidTestCompile 'com.android.support:support-annotations:23.0.1'
     androidTestCompile 'com.android.support.test:runner:0.4.1'
@@ -127,7 +135,7 @@ dependencies {
 > [square/assertj-android](https://github.com/square/assertj-android)
 > 极大的提高可读性。
 
-```
+```java
 // 一般的JUnit
 assertEquals(View.GONE, view.getVisibility());
 // AssertJ Android
@@ -148,9 +156,96 @@ assertThat(view).isGone();
 
 不同于Roblectric，Mockito可以通过模拟并控制或修改一些方法的行为。
 
+```java
+// import如相关类
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
+// 创建一个Mock的对象
+ MyClass test = mock(MyClass.class);
+
+// 当调用test.getUniqueId()的时候返回43
+when(test.getUniqueId()).thenReturn(43);
+// 当调用test.compareTo()传入任意的Int值都返回43
+when(test.compareTo(anyInt())).thenReturn(43);
+// 当调用test.compareTo()传入的是Target.class类型对象时返回43
+when(test.compareTo(isA(Target.class))).thenReturn(43);
+// 当调用test.close()的时候，抛IOException异常
+doThrow(new IOException()).when(test).close();
+
+// 创建一个test对象的封装，对于spy中所有方法的调用都会直接委派到test对象中调用
+MyClass spy = spy(test);
+
+// 验证是否调用了两次test.getUniqueId()
+verify(test, times(2)).getUniqueId();
+// 验证是否没有调用过test.getUniqueId()
+verify(test, never()).getUniqueId();
+// 验证是否至少调用过两次test.getUniqueId()
+verify(test, atLeast(2)).getUniqueId();
+// 验证是否最多调用过三次test.getUniqueId()
+verify(test, atMost(3)).getUniqueId();
+// 验证是否这样调用过:test.query("test string")
+verify(test).query("test string");
+
+
+// 通过Mockito.spy() 封装List对象并返回将其mock的spy对象
+List list = new LinkedList();
+List spy = spy(list);
+
+// 指定spy.get(0)返回"foo"
+doReturn("foo").when(spy).get(0);
+
+assertEquals("foo", spy.get(0));
 ```
-// 无论什么时候调用 myQueryObject.getCurrentTime，返回值都会是 1363027600
-Mockito.doReturn((long) 1363027600).when(myQueryObject).getCurrentTime();
+
+##### 对访问方法时，传入参数进行快照
+
+```java
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import static org.junit.Assert.assertEquals;
+
+@Captor
+private ArgumentCaptor<Integer> captor;
+
+@Test
+public void testCapture(){
+  MyClass test = mock(MyClass.class);
+
+  test.compareTo(3);
+  verify(test).compareTo(captor.capture());
+
+  assertEquals(3, (int)captor.getValue());
+}
+```
+
+##### 对于静态的方法的Mock:
+
+可以使用 `PowerMock`:
+
+```java
+
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(NetworkReader.class)
+public class MyTest {
+
+  @Test
+  public void testSomething() {
+    mockStatic(NetworkUtil.class);
+    when(NetworkReader.getLocalHostname()).andReturn("localhost");
+  }
+}
+
+```
+
+或者是封装为非静态，然后用Mockito:
+
+```java
+class FooWraper{
+  void someMethod() {
+    Foo.someStaticMethod();
+  }
+}
 ```
 
 #### 4. Robotium
@@ -216,7 +311,7 @@ Mockito.doReturn((long) 1363027600).when(myQueryObject).getCurrentTime();
 - [A BDD (RSpec-like) testing library for Java](http://stackoverflow.com/questions/30675748/a-bdd-rspec-like-testing-library-for-java)
 - [Open Sourcing Test Butler](https://engineering.linkedin.com/blog/2016/08/introducing-and-open-sourcing-test-butler--reliable-android-test)
 - [Unit Testing with JUnit -Tutorial](http://www.vogella.com/tutorials/JUnit/article.html)
-
+- [Unit tests with Mockito - Tutorial](http://www.vogella.com/tutorials/Mockito/article.html)
 
 ---
 
