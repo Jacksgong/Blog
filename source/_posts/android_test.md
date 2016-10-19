@@ -1,5 +1,5 @@
 title: Android单元测试与模拟测试
-date: 2016-10-19 15:58:03
+date: 2016-10-19 16:52:03
 tags:
 - 单元测试
 - 模拟测试
@@ -136,10 +136,38 @@ dependencies {
 > 极大的提高可读性。
 
 ```java
-// 一般的JUnit
-assertEquals(View.GONE, view.getVisibility());
-// AssertJ Android
+import static org.assertj.core.api.Assertions.*;
+
+// 断言: view是GONE的
 assertThat(view).isGone();
+
+MyClass test = new MyClass("Frodo");
+MyClass test1 = new MyClass("Sauron");
+MyClass test2 = new MyClass("Jacks");
+
+List<MyClass> testList = new ArrayList<>();
+testList.add(test);
+testList.add(test1);
+
+// 断言: test.getName()等于"Frodo"
+assertThat(test.getName()).isEqualTo("Frodo");
+// 断言: test不等于test1并且在testList中
+assertThat(test).isNotEqualTo(test1)
+                 .isIn(testList);
+// 断言: test.getName()的字符串，是由"Fro"打头，以"do"结尾，忽略大小写会等于"frodo"
+assertThat(test.getName()).startsWith("Fro")
+                            .endsWith("do")
+                            .isEqualToIgnoringCase("frodo");
+// 断言: testList有2个数据，包含test，test1，不包含test2
+assertThat(list).hasSize(2)
+                .contains(test, test1)
+                .doesNotContain(test2);
+
+// 断言: 提取testList队列中所有数据中的成员变量名为name的变量，并且包含name为"Frodo"与"Sauron"
+//      并且不包含name为"Jacks"
+assertThat(testList).extracting("name")
+                    .contains("Frodo", "Sauron")
+                    .doesNotContain("Jacks");
 ```
 
 #### 2. Hamcrest
@@ -400,6 +428,7 @@ class FooWraper{
 - [Unit Testing with JUnit -Tutorial](http://www.vogella.com/tutorials/JUnit/article.html)
 - [Unit tests with Mockito - Tutorial](http://www.vogella.com/tutorials/Mockito/article.html)
 - [Using Hamcrest for testing - Tutorial](http://www.vogella.com/tutorials/Hamcrest/article.html)
+- [Testing with AssertJ assertions - Tutorial](http://www.vogella.com/tutorials/AssertJ/article.html)
 
 ---
 
