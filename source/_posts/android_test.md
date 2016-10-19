@@ -1,5 +1,5 @@
 title: Android单元测试与模拟测试
-date: 2016-10-19 16:52:03
+date: 2016-10-19 20:06:03
 tags:
 - 单元测试
 - 模拟测试
@@ -127,6 +127,168 @@ dependencies {
 1. UI加载好后展示的信息是否正确。
 2. 在用户某个操作后UI信息是否展示正确。
 3. 展示正确的页面供用户操作。
+
+#### Espresso
+
+> 谷歌官方提供用于UI交互测试
+
+```java
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+
+// 对于Id为R.id.my_view的View: 触发点击，检测是否显示
+onView(withId(R.id.my_view)).perform(click())               
+                            .check(matches(isDisplayed()));
+// 对于文本打头是"ABC"的View: 检测是否没有Enable
+onView(withText(startsWith("ABC"))).check(matches(not(isEnabled()));
+// 按返回键
+pressBack();
+// 对于Id为R.id.button的View: 检测内容是否是"Start new activity"
+onView(withId(R.id.button)).check(matches(withText(("Start new activity"))));
+// 对于Id为R.id.viewId的View: 检测内容是否不包含"YYZZ"
+onView(withId(R.id.viewId)).check(matches(withText(not(containsString("YYZZ")))));
+// 对于Id为R.id.inputField的View: 输入"NewText"，然后关闭软键盘
+onView(withId(R.id.inputField)).perform(typeText("NewText"), closeSoftKeyboard());
+// 对于Id为R.id.inputField的View: 清除内容
+onView(withId(R.id.inputField)).perform(clearText());
+```
+
+##### 启动一个打开`Activity`的`Intent`
+
+```java
+@RunWith(AndroidJUnit4.class)
+public class SecondActivityTest {
+    @Rule
+    public ActivityTestRule<SecondActivity> rule =
+            new ActivityTestRule(SecondActivity.class, true,
+                                  // 这个参数为false，不让SecondActivity自动启动
+                                  // 如果为true，将会在所有@Before之前启动，在最后一个@After之后关闭
+                                  false);
+    @Test
+    public void demonstrateIntentPrep() {
+        Intent intent = new Intent();
+        intent.putExtra("EXTRA", "Test");
+        // 启动SecondActivity并传入intent
+        rule.launchActivity(intent);
+        // 对于Id为R.id.display的View: 检测内容是否是"Text"
+        onView(withId(R.id.display)).check(matches(withText("Test")));
+    }
+}
+```
+
+##### 异步交互
+
+建议关闭设备中"设置->开发者选项中"的动画，因为这些动画可能会是的Espresso在检测异步任务的时候产生混淆: 窗口动画缩放(Window animation scale)、过渡动画缩放(Transition animation scale)、动画程序时长缩放(Animator duration scale)。
+
+> 针对`AsyncTask`，在测试的时候，如触发点击事件以后抛了一个`AsyncTask`任务，在测试的时候直接`onView(withId(R.id.update)).perform(click())`，然后直接进行检测，此时的检测就是在`AsyncTask#onPostExecute`之后。
+
+```java
+// 通过实现IdlingResource，block住当非空闲的时候，当空闲时进行检测，非空闲的这段时间处理异步事情
+public class IntentServiceIdlingResource implements IdlingResource {
+    ResourceCallback resourceCallback;
+    private Context context;
+
+    public IntentServiceIdlingResource(Context context) { this.context = context; }
+
+    @Override public String getName() { return IntentServiceIdlingResource.class.getName(); }
+
+    @Override public void registerIdleTransitionCallback( ResourceCallback resourceCallback) { this.resourceCallback = resourceCallback; }
+
+    @Override public boolean isIdleNow() {
+      // 是否是空闲
+      // 如果IntentService 没有在运行，就说明异步任务结束，IntentService特质就是启动以后处理完Intent中的事务，理解关闭自己
+        boolean idle = !isIntentServiceRunning();
+        if (idle && resourceCallback != null) {
+          // 回调告知异步任务结束
+            resourceCallback.onTransitionToIdle();
+        }
+        return idle;
+    }
+
+    private boolean isIntentServiceRunning() {
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        // Get all running services
+        List<ActivityManager.RunningServiceInfo> runningServices = manager.getRunningServices(Integer.MAX_VALUE);
+        // check if our is running
+        for (ActivityManager.RunningServiceInfo info : runningServices) {
+            if (MyIntentService.class.getName().equals(info.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+// 使用IntentServiceIdlingResource来测试，MyIntentService服务启动结束这个异步事务，之后的结果。
+@RunWith(AndroidJUnit4.class)
+public class IntegrationTest {
+
+    @Rule
+    public ActivityTestRule rule = new ActivityTestRule(MainActivity.class);
+    IntentServiceIdlingResource idlingResource;
+
+    @Before
+    public void before() {
+        Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
+        Context ctx = instrumentation.getTargetContext();
+        idlingResource = new IntentServiceIdlingResource(ctx);
+        // 注册这个异步监听
+        Espresso.registerIdlingResources(idlingResource);
+
+    }
+    @After
+    public void after() {
+        // 取消注册这个异步监听
+        Espresso.unregisterIdlingResources(idlingResource);
+
+    }
+
+    @Test
+    public void runSequence() {
+        // MainActivity中点击R.id.action_settings这个View的时候，会启动MyIntentService
+        onView(withId(R.id.action_settings)).perform(click());
+        // 这时候IntentServiceIdlingResource#isIdleNow会返回false，因为MyIntentService服务启动了
+        // 这个情况下，这里会block住.............
+        // 直到IntentServiceIdlingResource#isIdleNow返回true，并且回调了IntentServiceIdlingResource#onTransitionToIdle
+        // 这个情况下，继续执行，这时我们就可以测试异步结束以后的情况了。
+        onView(withText("Broadcast")).check(matches(notNullValue()));
+    }
+}
+
+```
+
+##### 自定义匹配器
+
+```java
+// 定义
+public static Matcher<View> withItemHint(String itemHintText) {
+  checkArgument(!(itemHintText.equals(null)));
+  return withItemHint(is(itemHintText));
+}
+
+public static Matcher<View> withItemHint(final Matcher<String> matcherText) {
+  checkNotNull(matcherText);
+  return new BoundedMatcher<View, EditText>(EditText.class) {
+
+    @Override
+    public void describeTo(Description description) {
+      description.appendText("with item hint: " + matcherText);
+    }
+
+    @Override
+    protected boolean matchesSafely(EditText editTextField) {
+      // 取出hint，然后比对下是否相同
+      return matcherText.matches(editTextField.getHint().toString());
+    }
+  };
+}
+
+// 使用
+onView(withItemHint("test")).check(matches(isDisplayed()));
+```
 
 ## III. 拓展工具
 
@@ -429,6 +591,8 @@ class FooWraper{
 - [Unit tests with Mockito - Tutorial](http://www.vogella.com/tutorials/Mockito/article.html)
 - [Using Hamcrest for testing - Tutorial](http://www.vogella.com/tutorials/Hamcrest/article.html)
 - [Testing with AssertJ assertions - Tutorial](http://www.vogella.com/tutorials/AssertJ/article.html)
+- [Android user interface testing with Espresso - Tutorial](http://www.vogella.com/tutorials/AndroidTestingEspresso/article.html)
+- [chiuki/espresso-samples](https://github.com/chiuki/espresso-samples)
 
 ---
 
