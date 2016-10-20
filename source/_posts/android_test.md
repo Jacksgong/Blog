@@ -423,6 +423,7 @@ assertThat(s, RegexMatcher.matchesRegex("a*b*a"));
 
 > [Mockito](https://code.google.com/archive/p/mockito/)
 > Mock对象，控制其返回值，监控其方法的调用。
+> `org.mockito:mockito-all:(version)`
 
 不同于Roblectric，Mockito可以通过模拟并控制或修改一些方法的行为。
 
@@ -491,7 +492,9 @@ public void testCapture(){
 
 ##### 对于静态的方法的Mock:
 
-可以使用 `PowerMock`:
+可以使用 [PowerMock](https://github.com/jayway/powermock/wiki/MockitoUsage):
+
+> `org.powermock:powermock-api-mockito:(version)`
 
 ```java
 
