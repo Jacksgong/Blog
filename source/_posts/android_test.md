@@ -1,5 +1,5 @@
 title: Android单元测试与模拟测试
-date: 2016-10-19 20:06:03
+date: 2016-10-20 19:14:03
 tags:
 - 单元测试
 - 模拟测试
@@ -494,18 +494,32 @@ public void testCapture(){
 
 可以使用 [PowerMock](https://github.com/jayway/powermock/wiki/MockitoUsage):
 
-> `org.powermock:powermock-api-mockito:(version)`
+> `org.powermock:powermock-api-mockito:(version)` & `org.powermock:powermock-module-junit4:(version)`(For `PowerMockRunner.class`)
 
 ```java
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(NetworkReader.class)
+@PrepareForTest({StaticClass1.class, StaticClass2.class})
 public class MyTest {
 
   @Test
   public void testSomething() {
-    mockStatic(NetworkUtil.class);
-    when(NetworkReader.getLocalHostname()).andReturn("localhost");
+    // mock完静态类以后，默认所有的方法都不做任何事情
+    mockStatic(StaticClass1.class);
+    when(StaticClass1.getStaticMethod()).andReturn("anything");
+
+    // 验证是否StaticClass1.getStaticMethod()这个方法被调用了一次
+    verifyStatic(time(1));
+    StaticClass1.getStaticMethod();
+
+    when(StaticClass1.getStaticMethod()).andReturn("what ever");
+
+    // 验证是否StaticClass2.getStaticMethod()这个方法被至少调用了一次
+    verifyStatic(atLeastOnce());
+    StaticClass2.getStaticMethod();
+
+    // 通过任何参数创建File的实力，都直接返回fileInstance对象
+    whenNew(File.class).withAnyArguments().thenReturn(fileInstance);
   }
 }
 
@@ -596,6 +610,7 @@ class FooWraper{
 - [Testing with AssertJ assertions - Tutorial](http://www.vogella.com/tutorials/AssertJ/article.html)
 - [Android user interface testing with Espresso - Tutorial](http://www.vogella.com/tutorials/AndroidTestingEspresso/article.html)
 - [chiuki/espresso-samples](https://github.com/chiuki/espresso-samples)
+- [Mock static methods from multiple class using PowerMock](http://stackoverflow.com/questions/10327612/mock-static-methods-from-multiple-class-using-powermock)
 
 ---
 
