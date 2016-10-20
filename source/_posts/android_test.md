@@ -1,5 +1,5 @@
 title: Android单元测试与模拟测试
-date: 2016-10-20 19:14:03
+date: 2016-10-20 22:32:03
 tags:
 - 单元测试
 - 模拟测试
@@ -443,9 +443,8 @@ when(test.compareTo(anyInt())).thenReturn(43);
 when(test.compareTo(isA(Target.class))).thenReturn(43);
 // 当调用test.close()的时候，抛IOException异常
 doThrow(new IOException()).when(test).close();
-
-// 创建一个test对象的封装，对于spy中所有方法的调用都会直接委派到test对象中调用
-MyClass spy = spy(test);
+// 当调用test.execute()的时候，什么都不做
+doNothing().when(test).execute();
 
 // 验证是否调用了两次test.getUniqueId()
 verify(test, times(2)).getUniqueId();
@@ -546,6 +545,29 @@ class FooWraper{
 
 > [RobotiumTech/robotium](https://github.com/robotiumtech/robotium)
 > (Integration Tests)模拟用户操作，事件流测试。
+
+```java
+
+@RunWith(RobolectricTestRunner.class)
+@Config(constants = BuildConfig.class)
+public class MyActivityTest{
+
+  @Test
+  public void doSomethingTests(){
+    // 获取Application对象
+    Application application = RuntimeEnvironment.application;
+
+    // 启动WelcomeActivity
+    WelcomeActivity activity = Robolectric.setupActivity(WelcomeActivity.class);
+    // 触发activity中Id为R.id.login的View的click事件
+    activity.findViewById(R.id.login).performClick();
+
+    Intent expectedIntent = new Intent(activity, LoginActivity.class);
+    // 在activity之后，启动的Activity是否是LoginActivity
+    assertThat(shadowOf(activity).getNextStartedActivity()).isEqualTo(expectedIntent);
+  }
+}
+```
 
 通过模拟用户的操作的行为事件流进行测试，这类测试无法避免需要在虚拟机或者设备上面运行的。是一些用户操作流程与视觉显示强相关的很好的选择。
 
