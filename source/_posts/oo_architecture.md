@@ -1,8 +1,11 @@
 title: 架构设计基础知识整理
-date: 2016-03-09 23:43:03
+date: 2016-10-25 22:41:03
 tags:
 - 架构
 - Android
+- MVC
+- MVP
+- MVVM
 
 ---
 
@@ -86,6 +89,8 @@ tags:
 
 ## II. 常见的模式
 
+### 1. MVC 与 MVP
+
 ![](/img/architecutre-mvp-mvc.gif)
 From http://msdn.microsoft.com/en-us/library/ff647859.aspx
 
@@ -93,6 +98,29 @@ From http://msdn.microsoft.com/en-us/library/ff647859.aspx
 
 - MVC中`Controller`控制全局事务，`View`将事件发送给`Controller`，`Controller`处理完事件同步给`Model`(数据库/数据模型)，`View`是通过所绑定的`Model`的改变来刷新自己。
 - MVP中`Presenter`从`View`中获取数据，刷新`Model`，当`Model`中的数据发生改变后，`Presenter`读取`Model`并刷新`View`。
+
+### 2. MVVM
+
+![](/img/architecture-mvvm.png)
+
+> MVVM(View<->ViewModel->Model)
+
+在Android中可以通过`DataBinding`，直接在`Layout`文件中绑定其`ViewModel`。
+
+- `View`: 布局
+- `ViewModel`: 负责显示数据(监听到`Model`中的数据变化进行显示)，以及处理用户交互(监听`View`布局中的用户Action)
+- `Model`: 存储内容
+
+### 3. MVVM-C
+
+![](/img/architecture-mvvm-c.png)
+
+> MVVM-C(View-ViewModel-Callback-Model)
+
+- `View`: 布局
+- `Callback`: 通常可以是`Fragment`或`Activity`，用于处理用户交互(监听`View`布局中的用户Action)
+- `ViewModel`: 显示数据(监听`Model`中的数据变化进行显示)
+- `Model`: 存储内容
 
 ## III. 设计模式
 
@@ -197,6 +225,10 @@ TODO
 
 ---
 
+- 文章创建时间: 2016-3-9，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/oo_architecture.md)。
+
+---
+
 - [Java之美[从菜鸟到高手演变]之设计模式](http://blog.csdn.net/zhangerqing/article/details/8194653)
 - [软件设计原则----合成/聚合复用原则（CARP）](http://blog.csdn.net/beyondhaven/article/details/6906050)
 - [【设计模式】之六大原则（二）](http://m.blog.csdn.net/article/details?id=48834109)
@@ -206,6 +238,7 @@ TODO
 - [Java之美[从菜鸟到高手演变]之设计模式二](http://blog.csdn.net/zhangerqing/article/details/8239539)
 - [Java之美[从菜鸟到高手演变]之设计模式三](http://blog.csdn.net/zhangerqing/article/details/8243942)
 - [Difference between asp.net MVC and MVP? are they both same?](http://stackoverflow.com/questions/19996963/difference-between-asp-net-mvc-and-mvp-are-they-both-same)
+- [Shades of MVVM](https://www.bignerdranch.com/blog/shades-of-mvvm/)
 
 
 ---
