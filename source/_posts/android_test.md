@@ -1,5 +1,5 @@
 title: Android单元测试与模拟测试
-date: 2016-10-20 22:32:03
+date: 2016-10-25 15:09:03
 tags:
 - 单元测试
 - 模拟测试
@@ -336,6 +336,7 @@ assertThat(testList).extracting("name")
 
 > [JavaHamcrest](https://github.com/hamcrest/JavaHamcrest)
 > 通过已有的通配方法，快速的对代码条件进行测试
+> `org.hamcrest:hamcrest-junit:(version)`
 
 ```java
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -633,6 +634,8 @@ public class MyActivityTest{
 - [Android user interface testing with Espresso - Tutorial](http://www.vogella.com/tutorials/AndroidTestingEspresso/article.html)
 - [chiuki/espresso-samples](https://github.com/chiuki/espresso-samples)
 - [Mock static methods from multiple class using PowerMock](http://stackoverflow.com/questions/10327612/mock-static-methods-from-multiple-class-using-powermock)
+- [rest-assured/rest-assured](https://github.com/rest-assured/rest-assured)
+- [skyscreamer/JSONassert](https://github.com/skyscreamer/JSONassert)
 
 ---
 
