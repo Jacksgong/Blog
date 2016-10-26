@@ -85,13 +85,11 @@ feed:
 deploy:
   type:
 
-#baidu_analytics: 4784cbc58febd16c08b3dc017f5d5c6c
-
 #for nexT
 
 duoshuo_shortname: jacksgong
 duoshuo_share: true
 duoshuo_hotartical: true
 
-baidu_analytics: e26ce8275e47e0826b4385b709462fef
+#baidu_analytics: e26ce8275e47e0826b4385b709462fef
 #swiftype_key: Hx3Ah255oWd8uKbfQ4AP
