@@ -1,5 +1,5 @@
 title: Android单元测试与模拟测试
-date: 2016-10-25 15:09:03
+date: 2016-10-28 11:32:03
 tags:
 - 单元测试
 - 模拟测试
@@ -483,10 +483,20 @@ private ArgumentCaptor<Integer> captor;
 public void testCapture(){
   MyClass test = mock(MyClass.class);
 
-  test.compareTo(3);
-  verify(test).compareTo(captor.capture());
+  test.compareTo(3, 4);
+  verify(test).compareTo(captor.capture(), eq(4));
 
   assertEquals(3, (int)captor.getValue());
+
+
+  // 需要特别注意，如果是可变数组(vargars)参数，如方法 test.doSomething(String... params)
+  // 此时是使用ArgumentCaptor<String>，而非ArgumentCaptor<String[]>
+  ArgumentCaptor<String> varArgs = ArgumentCaptor.forClass(String.class);
+  test.doSomething("param-1", "param-2");
+  verify(test).doSomething(varArgs.capture());
+
+  // 这里直接使用getAllValues()而非getValue()，来获取可变数组参数的所有传入参数
+  assertThat(varArgs.getAllValues()).contains("param-1", "param-2");
 }
 ```
 
