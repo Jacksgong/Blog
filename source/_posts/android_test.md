@@ -1,5 +1,5 @@
 title: Android单元测试与模拟测试
-date: 2016-10-28 11:32:03
+date: 2016-10-28 11:36:03
 tags:
 - 单元测试
 - 模拟测试
@@ -426,8 +426,6 @@ assertThat(s, RegexMatcher.matchesRegex("a*b*a"));
 > Mock对象，控制其返回值，监控其方法的调用。
 > `org.mockito:mockito-all:(version)`
 
-不同于Roblectric，Mockito可以通过模拟并控制或修改一些方法的行为。
-
 ```java
 // import如相关类
 import static org.mockito.Mockito.mock;
@@ -548,7 +546,7 @@ class FooWraper{
 #### 4. Robolectric
 
 > [Robolectric](http://robolectric.org/)
-> 让模拟测试直接在开发机上完成，而不需要在Android系统上。
+> 让模拟测试直接在开发机上完成，而不需要在Android系统上。所有需要使用到系统架构库的，如(`Handler`、`HandlerThread`)都需要使用Robolectric，或者进行模拟测试。
 
 主要是解决模拟测试中耗时的缺陷，模拟测试需要安装以及跑在Android系统上，也就是需要在Android虚拟机或者设备上面，所以十分的耗时。基本上每次来来回回都需要几分钟时间。针对这类问题，业界其实已经有了一个现成的解决方案: Pivotal实验室推出的[Robolectric](http://robolectric.org/)。通过使用Robolectrict模拟Android系统核心库的`Shadow Classes`的方式，我们可以像写本地测试一样写这类测试，并且直接运行在工作环境的JVM上，十分方便。
 
