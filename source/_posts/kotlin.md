@@ -17,7 +17,7 @@ Kotlin是一门为JVM、Android、前端开发的一门静态语言，相比Java
 
 - 增量编译，Kotlin更快些
 - 代码更精准有效，更可读
-- 支持与Java协同工作
+- 完全支持与Java的协同工作
 - 更加安全，更加稳定的编写方式
 
 #### 更加安全，更加稳定的编写方式
@@ -28,8 +28,17 @@ a = null; // 编译直接失败
 
 var b: String? = “abc”; // 定义一个可为null的字符串变量b
 b = null; // 编译通过
+
 val l = b.length; // 编译失败，因为b可能为null
-l = b?.length; // 编译通过，如果b不为null，就返回length，否则返回null
+l = b?.length ?: -1 // 如b为null，就返回-1
+l = b?.length; // 如b为null，就返回null
+l = b!!.length; // 如b为null，就会直接抛NPE错误
+b?.let { println(b) } // 如b为null，就不执行let后面的代码块
+
+val aInt: Int? = a as? Int // 如a不是Int类型，就回返回null
+
+val nullableList: List<Int?> = listOf(1, 2, null, 4)
+val intList: List<Int> = nullableList.filterNotNull() // 过滤出列表中所有不为null的数据，组成新的队列intList
 ```
 
 #### 代码更精准有效，更可读
@@ -62,6 +71,34 @@ listOf(1, 2, 3, 4) // 列出 1, 2, 3, 4
 // 通过as Button，进行转换，可读性更强
 val button = findViewById(R.id.fab) as Button
 button.setOnClickListener { view -> /* your code */} // lambda表达式
+
+// 可以直接在赋值中使用表达式，甚至内嵌执行语句
+val max = if (a > b) a else b
+val max = if (a > b) {
+    print("Choose a")
+    a
+} else {
+    print("Choose b")
+    b
+}
+
+// 支持when的表达式
+println(when (language) {
+    "EN" -> "Hello!"
+    "FR" -> "Salut!"
+    else -> "Sorry, I can't greet you in $language yet"
+})
+
+// 支持in，表达在一定的范围内作为条件
+when (x) {
+    in 1..10 -> print("x is in the range")
+    in validNumberArray -> print("x is valid")
+    else -> print("none of the above")
+}
+
+// 为Date类创建一个方法，方法名是isTuesday，执行内容是判断Date中的成员变量day是否等于2
+fun Date.isTuesday() = day == 2
+
 ```
 
 ## Kotlin使用
@@ -75,6 +112,8 @@ TODO
 ---
 
 - [Why You Must Try Kotlin For Android Development?](https://medium.com/@amitshekhar/why-you-must-try-kotlin-for-android-development-e14d00c8084b#.i677kd5qs)
+- [Null Safety](https://kotlinlang.org/docs/reference/null-safety.html)
+- [Advancing Android Development with Kotlin](https://realm.io/news/oredev-jake-wharton-kotlin-advancing-android-dev/)
 
 ---
 
