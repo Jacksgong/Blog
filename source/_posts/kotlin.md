@@ -1,5 +1,5 @@
 title: Kotlin
-date: 2016-11-17 00:36:03
+date: 2016-11-27 16:28:03
 tags:
 - Kotlin
 - Java
@@ -101,9 +101,19 @@ fun Date.isTuesday() = day == 2
 
 ```
 
-## Kotlin使用
+## Kotlin Unit-test
 
-> 小技巧: 如果是不知道各类Kotlin特性，可以写出对应的Java代码，再通过Kotlin的Idea插件，直接将其转为Kotlin，从中学习。
+### 遇到的问题
+
+#### 原因
+
+对于编程设计来说，非常好的实践就是对拓展开放，对修改关闭的"开闭原则"，因为在Java中，我们对继承实在是太滥用了(可以参考[架构设计基础知识整理](https://blog.dreamtobe.cn/2016/10/25/oo_architecture/)中"使用组合而非继承")，也正是因为想要Kotlin中使这个情况得到好转，**因此Kotlin默认对所有Class与Method都是`final`的**， 除非使用`open`主动申明。
+
+可是`final`的Class对于单元测试带来了困难，因为我们在写Java的单元测试的时候，已经习惯了使用类似Mockito这样的库，去mock一些类，以达到纯粹的单元测试(参考[Android单元测试与模拟测试](https://blog.dreamtobe.cn/2016/10/28/android_test/))，正因为`final`类是不支持继承的，因此Mockito对这样的类是无法mock的，虽然已经有了PowerMock，可以对静态方法进行mock，但是如果都使用PowerMock会显得很重，而且不灵活。
+
+#### 解决方法
+
+因为[Javassist](http://jboss-javassist.github.io/javassist/)这个开源库，支持在运行时修改Java字节码，因此刚好可以解决这个问题。dpreussler借助这个库写了一个[kotlin-testrunner](https://github.com/dpreussler/kotlin-testrunner)，创建一个ClassLoader，在加载指定类的时候将其`FINAL`的`modifiers`清除，并且通过`TestRunner`传入我们的ClassLoader，防止存在同一个Class在多个Loader中不唯一的问题(参考[Android 动态加载dex](https://blog.dreamtobe.cn/2015/12/07/android_dynamic_dex/))，以此解决该问题。
 
 ---
 
@@ -111,9 +121,15 @@ TODO
 
 ---
 
+- 文章创建时间: 2016-11-17，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/kotlin.md)。
+
+---
+
 - [Why You Must Try Kotlin For Android Development?](https://medium.com/@amitshekhar/why-you-must-try-kotlin-for-android-development-e14d00c8084b#.i677kd5qs)
 - [Null Safety](https://kotlinlang.org/docs/reference/null-safety.html)
 - [Advancing Android Development with Kotlin](https://realm.io/news/oredev-jake-wharton-kotlin-advancing-android-dev/)
+- [Classes and Inheritance](https://kotlinlang.org/docs/reference/classes.html)
+- [Never say final: mocking Kotlin classes in unit tests](https://medium.com/@dpreussler/never-say-final-mocking-kotlin-classes-in-unit-tests-314d275b82b1#.665w1rs47)
 
 ---
 
