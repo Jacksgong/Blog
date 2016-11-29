@@ -1,5 +1,5 @@
 title: Android单元测试与模拟测试
-date: 2016-10-28 11:36:03
+date: 2016-11-30 00:40:03
 tags:
 - 单元测试
 - 模拟测试
@@ -53,7 +53,22 @@ tags:
 > 直接在开发机上面进行运行测试。
 > 在没有依赖或者仅仅只需要简单的Android库依赖的情况下，有限考虑使用该类单元测试。
 
-`./gradlew check`
+`./gradlew test`
+
+通过添加以下脚本到对应module的`build.gradle`中，以便于在终端中也可以直接查看单元测试的各类测试信息:
+
+```groovy
+android {
+  ...
+  testOptions.unitTests.all {
+    testLogging {
+      events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+      outputs.upToDateWhen { false }
+      showStandardStreams = true
+    }
+  }
+}
+```
 
 #### 代码存储
 
@@ -644,6 +659,7 @@ public class MyActivityTest{
 - [Mock static methods from multiple class using PowerMock](http://stackoverflow.com/questions/10327612/mock-static-methods-from-multiple-class-using-powermock)
 - [rest-assured/rest-assured](https://github.com/rest-assured/rest-assured)
 - [skyscreamer/JSONassert](https://github.com/skyscreamer/JSONassert)
+- [Mastering the Terminal side of Android development](https://medium.com/@cesarmcferreira/mastering-the-terminal-side-of-android-development-e7520466c521#.e5vt3p3vl)
 
 ---
 
