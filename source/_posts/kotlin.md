@@ -125,11 +125,11 @@ Mockito 2.1.0 及之后的版本原生支持了对`final`的method与class进行
 
 **但是** 一旦Mockito升级到2.1.0之后，有一些问题:
 
-1. PowerMock的兼容问题:
+###### 1. PowerMock的兼容问题:
 
 最新版本的PowerMock 1.6.6对Mockito 2.1.0并不兼容，导致`PowerMockMaker`中对2.1.0中Mockito的`MockMaker`部分接口没有实现。
 
-2. Robolectric的兼容问题:
+###### 2. Robolectric的兼容问题:
 
 默认情况下，在`mock`时会遇到一个使用`Jdk1.8.0_21`以上的版本会遇到一个jdk的坑:
 
