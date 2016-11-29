@@ -113,7 +113,38 @@ fun Date.isTuesday() = day == 2
 
 #### 解决方法
 
+##### Javassist
+
+> 实际测试kotlin-testrunner并不work，抽空的时候再研究研究，如果已经解决了欢迎评论指点
+
 因为[Javassist](http://jboss-javassist.github.io/javassist/)这个开源库，支持在运行时修改Java字节码，因此刚好可以解决这个问题。dpreussler借助这个库写了一个[kotlin-testrunner](https://github.com/dpreussler/kotlin-testrunner)，创建一个ClassLoader，在加载指定类的时候将其`FINAL`的`modifiers`清除，并且通过`TestRunner`传入我们的ClassLoader，防止存在同一个Class在多个Loader中不唯一的问题(参考[Android 动态加载dex](https://blog.dreamtobe.cn/2015/12/07/android_dynamic_dex/))，以此解决该问题。
+
+##### Mockito 2.1.0 或更高版本
+
+Mockito 2.1.0 及之后的版本原生支持了对`final`的method与class进行了mock，使用方法与之前保持一致。 -- **实测是work的**。
+
+**但是** 一旦Mockito升级到2.1.0之后，有一些问题:
+
+1. PowerMock的兼容问题:
+
+最新版本的PowerMock 1.6.6对Mockito 2.1.0并不兼容，导致`PowerMockMaker`中对2.1.0中Mockito的`MockMaker`部分接口没有实现。
+
+2. Robolectric的兼容问题:
+
+默认情况下，在`mock`时会遇到一个使用`Jdk1.8.0_21`以上的版本会遇到一个jdk的坑:
+
+```
+Class JavaLaunchHelper is implemented in both /Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/bin/java (0x1021944c0) and /Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/jre/lib/libinstrument.dylib (0x10a4274e0). One of the two will be used. Which one is undefined.
+```
+
+如果将compile sdk 的版本调到24以下，并将jdk版本改为jdk1.8.0_21或以下版本还会遇到其他问题:
+
+```
+java.lang.NullPointerException
+    org.mockito.internal.configuration.plugins.Plugins.getStackTraceCleanerProvider(Plugins.java:22)
+```
+
+目前还没有更好的解决方案。
 
 ---
 
