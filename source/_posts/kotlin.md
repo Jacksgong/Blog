@@ -1,5 +1,5 @@
 title: Kotlin
-date: 2016-11-29 17:43:03
+date: 2016-11-30 15:36:03
 tags:
 - Kotlin
 - Java
@@ -39,6 +39,34 @@ val aInt: Int? = a as? Int // 如a不是Int类型，就回返回null
 
 val nullableList: List<Int?> = listOf(1, 2, null, 4)
 val intList: List<Int> = nullableList.filterNotNull() // 过滤出列表中所有不为null的数据，组成新的队列intList
+
+// 可以通过lateinit var(不可为val)，定义一个无需在申明时初始化的non-nullable的参数，这个参数不允许被赋值为空，并且在调用时如果没有初始化会抛异常
+lateinit var lateInitValue : String
+
+// 通过by lazy { ... } 表达式，让所定义的参数在第一次访问(get)的时候执行{...}这段代码块，并赋值
+val lazyValue: String by lazy {
+  doAnything()
+  "build lazy value"
+}
+
+// 通过by Delegates.observable("默认值")，在每次对该参数赋值的时候，都会回调回来
+// vetoable是赋值前回调；observable是赋值后回调
+var name: String by Delegates.observable("<no name>") {
+    prop, old, new ->
+    println("$old -> $new")
+}
+
+// 使用map来存储参数，通常是用于解析Json之类的键对数据结构
+class User(val map: MutableMap<String, Any?>) {
+        val name: String by map
+        var age: Int     by map
+}
+val user = User(mapOf(
+    "name" to "John Doe",
+    "age"  to 25
+))
+println(user.name) // Prints "John Doe"
+
 ```
 
 #### 代码更精准有效，更可读
@@ -161,6 +189,9 @@ TODO
 - [Advancing Android Development with Kotlin](https://realm.io/news/oredev-jake-wharton-kotlin-advancing-android-dev/)
 - [Classes and Inheritance](https://kotlinlang.org/docs/reference/classes.html)
 - [Never say final: mocking Kotlin classes in unit tests](https://medium.com/@dpreussler/never-say-final-mocking-kotlin-classes-in-unit-tests-314d275b82b1#.665w1rs47)
+- [Kotlin - lateinit VS Any? = null](http://stackoverflow.com/questions/35691123/kotlin-lateinit-vs-any-null)
+- [Delegated Properties](https://kotlinlang.org/docs/reference/delegated-properties.html)
+- [Kotlin - Property initialization using “by lazy” vs. “lateinit”](http://stackoverflow.com/questions/36623177/kotlin-property-initialization-using-by-lazy-vs-lateinit)
 
 ---
 
