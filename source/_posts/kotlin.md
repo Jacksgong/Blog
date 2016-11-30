@@ -67,6 +67,16 @@ val user = User(mapOf(
 ))
 println(user.name) // Prints "John Doe"
 
+// 定义final的变量
+val aFinalProperty : String = "final property"
+
+// 定义final static的变量
+class Values {
+  companion object {
+    val FINAL_STATIC_PROPERTY : String = "final static property"
+  }
+}
+val something = Values.FINAL_STATIC_PROPERTY
 ```
 
 #### 代码更精准有效，更可读
@@ -192,6 +202,7 @@ TODO
 - [Kotlin - lateinit VS Any? = null](http://stackoverflow.com/questions/35691123/kotlin-lateinit-vs-any-null)
 - [Delegated Properties](https://kotlinlang.org/docs/reference/delegated-properties.html)
 - [Kotlin - Property initialization using “by lazy” vs. “lateinit”](http://stackoverflow.com/questions/36623177/kotlin-property-initialization-using-by-lazy-vs-lateinit)
+- [Static data in Kotlin](http://stackoverflow.com/questions/37482378/static-data-in-kotlin#)
 
 ---
 
