@@ -1,5 +1,5 @@
-title: NDK
-date: 2015-11-08 01:44:03
+title: NDK | JNI
+date: 2016-12-24 23:16:03
 tags:
 - ndk
 - jni
@@ -283,7 +283,8 @@ include$(CLEAR_VARS)
 LOCAL_MODULE    := NDKBegining
 
 # 列出需要被编译的源码文件
-LOCAL_SRC_FILES := ndkBegining.c
+LOCAL_SRC_FILES := ndkBegining.c \
+                ndkBegining2.c
 
 # 将要输出的模块类型
 include$(BUILD_SHARED_LIBRARY)
@@ -389,6 +390,50 @@ NDK_APPLICATION_MK=<file>
 
 Cinar O. – Pro Android C++ with the NDK – 2012.
 
+## IV. JNI实践
+
+
+> - [Sample: hello-jni](https://developer.android.com/ndk/samples/sample_hellojni.html#ap)
+> - [Create Hello-JNI with Android Studio](https://codelabs.developers.google.com/codelabs/android-studio-jni/index.html#0)
+
+### 1. 简单的JNI
+
+> - [Sample: hello-jni](https://developer.android.com/ndk/samples/sample_hellojni.html#ap)
+> - [Create Hello-JNI with Android Studio](https://codelabs.developers.google.com/codelabs/android-studio-jni/index.html#0)
+
+#### 案例
+
+直接参照: https://github.com/Jacksgong/android-ndk#i-sample-try-hello-jni
+
+### 2. 引用已有库拓展
+
+> - [Using Prebuilt Libraries](https://developer.android.com/ndk/guides/prebuilts.html)
+> - [Android NDK with multiple pre-built libraries](http://labs.hyperandroid.com/android-ndk-with-multiple-pre-built-libraries)
+
+这里提到的引用已有库，是指引用已有的Shared libraries(`.so`)，或是引用已有的Static libraries(`.a`)。
+
+#### 相关知识
+
+##### Shared libraries
+
+> are `.so`(or in Windows `.dll`, or in OS X `.dylib`).
+
+**存储运行时引用它**。在Android中，我们只能通过`System.loadLibrary("..")`加载它，因此别妄想将多个`.so`合成为一个`.so`了。
+
+##### Static libraries
+
+> are `.a`(or in Windows .lib).
+
+**可以直接在编译期link它**。在Android中，我们可以直接在`Android.mk`中配置，在编译期直接拷贝其代码，与我们的代码合成一个`.so`。
+
+#### 案例
+
+直接参照: https://github.com/Jacksgong/android-ndk#ii-reference-prebuilt-libraries-hello-libs
+
+---
+
+- 文章创建时间: 2015-11-08，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/ndk.md)。
+
 ---
 - [Building Your Project](http://developer.android.com/intl/zh-cn/ndk/guides/build.html)
 - [Introduction to Android NDK](http://elekslabs.com/2013/12/introduction-into-android-ndk.html)
@@ -397,6 +442,8 @@ Cinar O. – Pro Android C++ with the NDK – 2012.
 - [Android NDK介绍（下）](http://www.importnew.com/8052.html)
 - [NDK Application.mk使用手册](http://www.oschina.net/question/565065_93983)
 - [Working Around JNI UTF-8 Strings](http://banachowski.com/deprogramming/2012/02/working-around-jni-utf-8-strings/)
+- [Java Fundamentals Tutorial: Java Native Interface (JNI)](https://newcircle.com/bookshelf/java_fundamentals_tutorial/_java_native_interface_jni)
+- [JNI Functions](http://docs.oracle.com/javase/6/docs/technotes/guides/jni/spec/functions.html)
 
 ---
 
