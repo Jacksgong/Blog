@@ -1,5 +1,5 @@
 title: Kotlin
-date: 2016-11-30 15:36:03
+date: 2016-12-26 12:04:03
 tags:
 - Kotlin
 - Java
@@ -139,7 +139,7 @@ fun Date.isTuesday() = day == 2
 
 ```
 
-## Kotlin Unit-test
+## II. Kotlin Unit-test
 
 ### 遇到的问题
 
@@ -165,7 +165,7 @@ Mockito 2.1.0 及之后的版本原生支持了对`final`的method与class进行
 
 ###### 1. PowerMock的兼容问题:
 
-由于Mockito推出2.1.0时，对代码进行了大量的重构，虽然PowerMock已经在计划中通过2.0版本来对其进行适配，但是由于Mockito 2.1.0的重构，工作量还是比较大，因此还在[计划中](https://github.com/jayway/powermock/issues/706) 。
+由于Mockito推出2.1.0时，对代码进行了大量的重构，虽然PowerMock已经在计划中通过2.0版本来对其进行适配，但是由于Mockito 2.1.0的重构，工作量还是比较大，因此还在[计划中](https://github.com/powermock/powermock/issues/706#issuecomment-264097614)。
 
 ###### 2. Robolectric的兼容问题:
 
@@ -184,9 +184,40 @@ java.lang.NullPointerException
 
 目前还没有更好的解决方案。
 
----
+## III. Java中实现Kotlin的特性
 
-TODO
+> 无论是多出736KB的Kotlin基本库大小，还是公司不允许，导致只能使用Java，但是又想使用一些Kotlin特性。可以看看接下来提到的。
+
+#### 1. Data classes
+
+> Kotlin中`Data classes`特性，是在类前申明`data`，就会自动生成`equals()`、`hashCode()`、`toString()`、`copy()`方法。
+
+Java中可以通过[Lombok - @Data](https://github.com/mplushnikov/lombok-intellij-plugin)实现这些特性。
+
+#### 2. Lambda
+
+> Kotlin支持绝大多数Java8的特性，但是Android目前还不支持Java8(虽然Jack&Jill编译器支持了，但是其在混淆等各方面的还不完善)。
+
+Java7中的推荐使用[retrolambda](https://github.com/orfjackal/retrolambda)进行解决。
+
+**需要特别注意的是**: Kotlin中采用`inline`Lambda是不会增加方法数的，但是使用Retrolambda/Jacks&Jill是会增加方法数的，可以参看下图([Jake Wharton在Exploring Java Hidden Costs演说](http://jakewharton.com/exploring-java-hidden-costs/)中提到的生成的方法数对比图):
+
+![](/img/kotlin-1.png)
+
+> P.S: Java对调用方法的开销可以参照: [Android优化 - 2.编码习惯](https://blog.dreamtobe.cn/2015/10/26/android_optimize/) 中的纂述。
+
+#### 3. 数据控制与操作
+
+> Kotlin中通过Streams(类似Java8的Streams)使得对数据的操作变得简单便捷，可读性高等特性。虽然Jack&Jill也提供了Streams的特性，但是要求最小sdk版本在24(`minSdkVersion = 24`)，不用考虑其他原因，就这一条目前就很难被接受。
+
+Java7中推荐使用[Lightweight-Stream-API](https://github.com/aNNiMON/Lightweight-Stream-API)实现这些特性。
+
+#### 4. 对类拓展函数
+
+> Kotlin中支持在类外对某个已有类申明函数，十分的方便。
+
+Java中可以通过[Lombok - @ExtensionMethod](https://github.com/mplushnikov/lombok-intellij-plugin)实现这些特性。
+
 
 ---
 
@@ -203,6 +234,7 @@ TODO
 - [Delegated Properties](https://kotlinlang.org/docs/reference/delegated-properties.html)
 - [Kotlin - Property initialization using “by lazy” vs. “lateinit”](http://stackoverflow.com/questions/36623177/kotlin-property-initialization-using-by-lazy-vs-lateinit)
 - [Static data in Kotlin](http://stackoverflow.com/questions/37482378/static-data-in-kotlin#)
+- [Living(Android) without Kotlin](https://hackernoon.com/living-android-without-kotlin-db7391a2b170#.dcvfz0j06)
 
 ---
 
