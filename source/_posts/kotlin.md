@@ -1,6 +1,6 @@
 title: Kotlin
-date: 2016-11-30 12:04:03
-permalink: 2016/11/30/kotlin
+date: 2016-12-26 12:04:03
+permalink: 2016/11/17/kotlin
 updated: 2016-12-26 12:04:03
 tags:
 - Kotlin

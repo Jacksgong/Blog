@@ -1,6 +1,6 @@
 title: Notification最佳实践
 date: 2016-10-25 15:06:03
-permalink: 2016/10/25/notification_best_practise
+permalink: 2016/01/09/notification_best_practise
 tags:
 - Notification
 - 最佳实践
