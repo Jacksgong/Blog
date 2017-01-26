@@ -1,5 +1,6 @@
 title: Android弱网通信探究
 date: 2016-08-16 09:14:03
+permalink: 2016/08/16/android_weak_network
 tags:
 - Android
 - 心跳

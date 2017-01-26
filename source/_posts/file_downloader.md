@@ -1,5 +1,6 @@
 title: FileDownloader
 date: 2015-12-23 11:18:03
+permalink: 2015/12/23/file_downloader
 tags:
 - Download
 - Parallel

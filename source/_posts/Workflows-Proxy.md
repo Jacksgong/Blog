@@ -1,5 +1,6 @@
 title: Workflows Proxy
 date: 2014-12-08 08:35:03
+permalink: 2014/12/08/Workflows-Proxy
 tags:
 - mac
 - proxy

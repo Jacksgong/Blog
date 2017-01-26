@@ -1,5 +1,6 @@
 title: 开源协议
 date: 2016-1-3 01:48:03
+permalink: 2016/1/3/license
 tags:
 - MIT
 - BSD

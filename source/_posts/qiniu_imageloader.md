@@ -1,5 +1,6 @@
 title: QiniuImageLoader
 date: 2015-12-16 01:37:03
+permalink: 2015/12/16/qiniu_imageloader
 tags:
 - android
 - Qiniu

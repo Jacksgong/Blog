@@ -1,5 +1,6 @@
 title: Falcon Pro 3 如何完成独立开发演讲分析
 date: 2015-06-14 08:35:03
+permalink: 2015/06/14/Falcon-Pro-3-如何完成独立开发演讲分析
 tags:
 - Falcon
 - Joaquim

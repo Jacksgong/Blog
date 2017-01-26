@@ -1,5 +1,6 @@
 title: ThreadDebugger And ThreadPool
 date: 2016-09-01 16:43:03
+permalink: 2016/09/01/thread_debugger_and_thread_pool
 tags:
 - ThreadDebugger
 - ThreadPool

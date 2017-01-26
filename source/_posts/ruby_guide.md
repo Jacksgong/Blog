@@ -1,5 +1,6 @@
 title: Ruby 入门
 date: 2015-07-26 20:39:03
+permalink: 2015/07/26/ruby_guide
 tags:
 - 后端
 - rails

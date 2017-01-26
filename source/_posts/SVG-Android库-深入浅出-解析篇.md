@@ -1,5 +1,6 @@
 title: SVG-Android库 深入浅出 解析篇
 date: 2014-12-10 08:35:03
+permalink: 2014/12/10/SVG-Android库-深入浅出-解析篇
 tags:
 - parse
 - svg

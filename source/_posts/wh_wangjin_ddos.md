@@ -1,5 +1,6 @@
 title: 从案件看国内DDOS现状
 date: 2015-07-17 21:35:03
+permalink: 2015/07/17/wh_wangjin_ddos
 tags:
 - 2015乌云白帽大会
 - 安全

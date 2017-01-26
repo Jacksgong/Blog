@@ -1,5 +1,6 @@
 title: Repair broken image url in wordpress posts
 date: 2015-01-22 14:13:03
+permalink: 2015/01/22/Repair-broken-image-url-in-wordpress-posts
 tags:
 - 项目
 - python

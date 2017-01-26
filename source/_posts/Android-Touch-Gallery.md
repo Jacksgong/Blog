@@ -1,5 +1,6 @@
 title: Android Touch Gallery
 date: 2014-12-14 08:35:03
+permalink: 2014/12/14/Android-Touch-Gallery
 tags:
 - imageview
 - viewpager

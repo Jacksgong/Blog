@@ -1,5 +1,6 @@
 title: Android绘制
 date: 2015-10-20 00:48:03
+permalink: 2015/10/20/android-view
 tags:
 - Android
 - 视图

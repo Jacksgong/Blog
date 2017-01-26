@@ -1,5 +1,6 @@
 title: PhotoGallery、Volley、Picasso 比较
 date: 2015-04-28 07:48:03
+permalink: 2015/04/28/PhotoGallery、Volley、Picasso-比较
 tags:
 - PhotoGallery
 - Vollery

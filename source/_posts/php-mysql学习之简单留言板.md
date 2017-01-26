@@ -1,5 +1,6 @@
 title: php mysql学习之简单留言板
 date: 2013-01-08 08:35:03
+permalink: 2013/01/08/php-mysql学习之简单留言板
 tags:
 - mysql
 - php

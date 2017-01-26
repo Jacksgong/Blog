@@ -1,5 +1,6 @@
 title: ConstraintLayout
 date: 2016-08-03 08:33:03
+permalink: 2016/08/03/constraint-layout
 tags:
 - Layout
 - Android

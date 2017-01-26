@@ -1,5 +1,6 @@
 title: SVG Android应用探究之路
 date: 2014-11-08 08:35:03
+permalink: 2014/11/08/SVG-Android应用探究之路
 tags:
 - svg
 - Android

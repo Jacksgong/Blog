@@ -1,5 +1,6 @@
 title: Android Touch Event派发分析
 date: 2016-03-10 09:49:03
+permalink: 2016/03/10/touch_event
 tags:
 - Android
 - Touch

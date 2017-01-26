@@ -1,5 +1,6 @@
 title: Android 数据库架构 — JLibrary
 date: 2014-09-06 08:35:03
+permalink: 2014/09/06/Android-数据库架构-—-JLibrary
 tags:
 - 数据库
 - 架构

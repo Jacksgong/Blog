@@ -1,5 +1,6 @@
 title: MessageHandler
 date: 2016-01-16 17:36:03
+permalink: 2016/01/16/message_handler
 tags:
 - Handler
 - Message
