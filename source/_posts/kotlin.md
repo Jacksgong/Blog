@@ -1,11 +1,11 @@
 title: Kotlin
-date: 2016-12-26 12:04:03
+date: 2017-01-30 22:37:03
 permalink: 2016/11/30/kotlin
-updated: 2016-12-26 12:04:03
 tags:
 - Kotlin
 - Java
 - Programing
+- Effective Java
 
 ---
 
@@ -22,7 +22,96 @@ Kotlin是一门为JVM、Android、前端开发的一门静态语言，相比Java
 - 完全支持与Java的协同工作
 - 更加安全，更加稳定的编写方式
 
-#### 更加安全，更加稳定的编写方式
+Kotlin语言是2010年Jetbrains团队为自己的团队打造的。宗旨是希望能够更简明并且消除一些Java的缺陷。由于Jetbrains团队原本打造的一系列的IDE都已经使用了Java，因此他们设计之初就考虑到Kotlin需要能够与Java协同工作，因此Kotlin是编译为Java字节码并且就考虑了如何才能让到Java工程师快速入门Kotlin。
+
+
+### 根据《Effective Java》Kotlin的优化
+
+#### 1. 不再需要builder:
+
+在构造函数如果需要传入大量参数时，考虑到可读性，"Effective Java"在第二章中的谈到了[Builder Pattern](https://en.wikipedia.org/wiki/Builder_pattern)，以此构造与对象分离，达到更灵活、更可读。
+
+在Kotlin中，由于它支持了为方法参数指定默认参数，以及支持在传入参数时，申明所赋值的参数名:
+
+```kotlin
+class KotlinNutritionFacts(
+        private val servingSize: Int,
+        private val servings: Int,
+        private val calories: Int = 0,
+        private val fat: Int = 0,
+        private val sodium: Int = 0,
+        private val carbohydrates: Int = 0)
+```
+
+```kotlin
+val cocaCola = KotlinNutritionFacts(240,8,
+                calories = 100,
+                sodium = 35,
+                carbohydrates = 27)
+```
+
+#### 2. 单例
+
+在"Effective Java"的第三章中描述了单例，使得该对象在全局只有一个实例，十分的使用。
+
+在Kotlin中，由于它支持了[Object declarations](https://kotlinlang.org/docs/reference/object-declarations.html#object-declarations)，因此可以非常简明的实现单例:
+
+```kotlin
+object KotlinElvis {
+
+    fun leaveTheBuilding() {}
+}
+```
+
+#### 3. 不用再主动编写`equals()`、`hashCode()`
+
+在"Effective Java"的第十五章中建议到"除非有非常明确的理由，否则类都尽可能的定义为不可变"，在Java定义这么一个类是一件十分繁琐的事情，因为每一个对象都需要覆写他们的`equals()`与`hashCode()`，因此"Effective Java"在第8章与第9章通过了18页来篆述如何更好的完成这个。
+
+在Kotlin中，由于它默认的[data classes](https://kotlinlang.org/docs/reference/data-classes.html)就已经默认实现了`equals()`、`hashCode()`等方法:
+
+```kotlin
+data class Person(val name: String, val age: Integer)
+```
+
+> P.S [AutoValue](https://github.com/google/auto/tree/master/value)为Java实现了类似的功能。
+
+
+#### 4. 自动化`getter`与`setter`
+
+在"Effective Java"的第十四章中建议到对于成员变量尽量使用方法可见而非`public`，需要对外提供读写的，封装其`getter`与`setter`方法，而非直接访问。
+
+在Kolin中，由于所有的成员变量，默认都是[property](https://kotlinlang.org/docs/reference/properties.html)，默认的对其的访问都是自动转为对其的`getter`与`setter`的访问，十分的简明:
+
+```kotlin
+class KotlinPerson {
+
+    var name: String? = null
+
+    var age: Int? = null
+    set(value) {
+        if (value in 0..120){
+            field = value
+        } else{
+            throw IllegalArgumentException()
+        }
+    }
+}
+
+// 访问KotlinPerson
+
+val person = KotlinPerson()
+person.name = "Jacks"
+person.age = 27
+```
+
+#### 5. `Overried`变为强制性注解
+
+在Java 1.5中引入了`Overried`关键字，但这个关键字是`option`的，在"Effective Java"的第三十六章中说明了一定要加上这个注解一旦是覆写方法，否则在后期维护时会引来各种问题。
+
+在Kotlin中，`override`变为了强制性的注解以避免类似的问题。
+
+
+### 更加安全，更加稳定的编写方式
 
 ```kotlin
 var a: String = “abc”; // 定义个一个非null的字符串变量a
@@ -81,7 +170,7 @@ class Values {
 val something = Values.FINAL_STATIC_PROPERTY
 ```
 
-#### 代码更精准有效，更可读
+### 代码更精准有效，更可读
 
 ```kotlin
 // 智能cast
@@ -237,6 +326,7 @@ Java中可以通过[Lombok - @ExtensionMethod](https://github.com/mplushnikov/lo
 - [Kotlin - Property initialization using “by lazy” vs. “lateinit”](http://stackoverflow.com/questions/36623177/kotlin-property-initialization-using-by-lazy-vs-lateinit)
 - [Static data in Kotlin](http://stackoverflow.com/questions/37482378/static-data-in-kotlin#)
 - [Living(Android) without Kotlin](https://hackernoon.com/living-android-without-kotlin-db7391a2b170#.dcvfz0j06)
+- [How “Effective Java” may have influenced the design of Kotlin — Part 1](https://medium.com/@lukleDev/how-effective-java-may-have-influenced-the-design-of-kotlin-part-1-45fd64c2f974#.r7qt7y819)
 
 ---
 
