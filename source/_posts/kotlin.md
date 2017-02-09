@@ -1,5 +1,5 @@
 title: Kotlin
-date: 2017-02-09 11:51:03
+date: 2017-02-10 01:13:03
 permalink: 2016/11/30/kotlin
 tags:
 - Kotlin
@@ -9,13 +9,11 @@ tags:
 
 ---
 
-> 最近入职支付宝性能架构组，本想沉下心来，做前沿技术研究以及做架构、性能优化等事宜，于是乎在上家公司离职前，为最后造的打点轮子(Stamper)全面覆盖了Unit-test，打算进入支付宝后，所有的经我手的项目都有一定的单元测试保障，并且由于近三个月陆陆续续受到Realm News、Android Weekly、Jake Wharton等对新语言Kotlin的灌溉，打算在接下来一些新组件开发中采用Kotlin进行编写，却没曾想刚进支付宝，就赶上组内要出团队组件的demo、文档，并且已经被评估好时间，略有无奈与失望。今天偷偷早点回来(虽然到家已经不早了)，做点Kotlin的总结，保持学习吧。
-
 Kotlin是一门为JVM、Android、前端开发的一门静态语言，相比Java8，它有太多的前瞻性的功能并且非常极客。
 
-<!-- more -->
-
 > P.S 因为其标准库有700Kb左右，所以暂时没有考虑在生产环境用，前段时间, 刚好接了支付宝几个内部组件，因此都用Kotlin写了，整体感觉很不错。
+
+<!-- more -->
 
 ## I. 相比Java优势:
 
@@ -53,7 +51,7 @@ val cocaCola = KotlinNutritionFacts(240,8,
 
 #### 2. 单例
 
-在"Effective Java"的第三章中描述了单例，使得该对象在全局只有一个实例，十分的使用。
+在"Effective Java"的第三章中描述了单例，使得该对象在全局只有一个实例，十分的实用。
 
 在Kotlin中，由于它支持了[Object declarations](https://kotlinlang.org/docs/reference/object-declarations.html#object-declarations)，因此可以非常简明的实现单例:
 
@@ -79,7 +77,7 @@ data class Person(val name: String, val age: Integer)
 
 #### 4. 自动化`getter`与`setter`
 
-在"Effective Java"的第十四章中建议到对于成员变量尽量使用方法可见而非`public`，需要对外提供读写的，封装其`getter`与`setter`方法，而非直接访问。
+在"Effective Java"的第十四章中建议到对于成员变量尽量使用方法可见(通常通过提供`getter`与`setter`实现)而非直接`public`。
 
 在Kolin中，由于所有的成员变量，默认都是[property](https://kotlinlang.org/docs/reference/properties.html)，默认的对其的访问都是自动转为对其的`getter`与`setter`的访问，十分的简明:
 
@@ -107,7 +105,7 @@ person.age = 27
 
 #### 5. `Overried`变为强制性注解
 
-在Java 1.5中引入了`Overried`关键字，但这个关键字是`option`的，在"Effective Java"的第三十六章中说明了一定要加上这个注解一旦是覆写方法，否则在后期维护时会引来各种问题。
+在Java 1.5中引入了`Overried`关键字，但这个关键字是`option`的，在"Effective Java"的第三十六章中说明了一定要加上这个注解一旦是覆写方法，否则在后期维护时很可能将覆写方法当做非覆写方法从而引来各种问题。
 
 在Kotlin中，`override`变为了强制性的注解以避免类似的问题。
 
@@ -235,8 +233,6 @@ fun Date.isTuesday() = day == 2
 
 ## II. Kotlin Unit-test
 
-> 可以借助[nhaarman/mockito-kotlin](https://github.com/nhaarman/mockito-kotlin)使得用Kotlin写单元测试把Kotlin的各类优势更好
-
 #### 1. 遇到的问题
 
 对于编程设计来说，非常好的实践就是对拓展开放，对修改关闭的"开闭原则"，因为在Java中，我们对继承实在是太滥用了(可以参考[架构设计基础知识整理](https://blog.dreamtobe.cn/2016/10/25/oo_architecture/)中"使用组合而非继承")，也正是因为想要Kotlin中使这个情况得到好转，**因此Kotlin默认对所有Class与Method都是`final`的**， 除非使用`open`主动申明。
@@ -253,7 +249,7 @@ fun Date.isTuesday() = day == 2
 
 ##### 2.2 Mockito 2.1.0 或更高版本
 
-Mockito 2.1.0 及之后的版本原生支持了对`final`的method与class进行了mock，使用方法与之前保持一致。 -- **实测是work的**。
+Mockito 2.1.0 及之后的版本原生支持了对`final`的method与class进行mock，使用方法与之前保持一致。 -- **实测是work的**。
 
 **但是** 由于Mockito推出2.1.0时，对代码进行了大量的重构，虽然PowerMock已经在计划中通过2.0版本来对其进行适配，但是由于Mockito 2.1.0的重构，工作量还是比较大，因此还在[计划中](https://github.com/powermock/powermock/issues/706#issuecomment-264097614)。
 
@@ -261,7 +257,7 @@ Mockito 2.1.0 及之后的版本原生支持了对`final`的method与class进行
 
 由于PowerMock还未适配Mockito v2.1.0，因此目前Kotlin中如果需要mock `static`的方法会麻烦些（可以使用通用方法: 封装一层`非static`的方法，在里面调用原本的`static`方法，然后对这个封装后的方法进行mock）。其他都比较流畅。
 
-> P.S. 可以借助[nhaarman/mockito-kotlin](https://github.com/nhaarman/mockito-kotlin)用Kotlin写单元测试更加make sense。
+> 可以借助[nhaarman/mockito-kotlin](https://github.com/nhaarman/mockito-kotlin)使得更好的用Kotlin写单元测试。
 
 ## III. Java中实现Kotlin的特性
 
