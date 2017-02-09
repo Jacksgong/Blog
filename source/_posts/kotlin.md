@@ -1,5 +1,5 @@
 title: Kotlin
-date: 2017-01-30 22:37:03
+date: 2017-02-09 11:51:03
 permalink: 2016/11/30/kotlin
 tags:
 - Kotlin
@@ -15,6 +15,8 @@ Kotlin是一门为JVM、Android、前端开发的一门静态语言，相比Java
 
 <!-- more -->
 
+> P.S 因为其标准库有700Kb左右，所以暂时没有考虑在生产环境用，前段时间, 刚好接了支付宝几个内部组件，因此都用Kotlin写了，整体感觉很不错。
+
 ## I. 相比Java优势:
 
 - 增量编译，Kotlin更快些
@@ -23,7 +25,6 @@ Kotlin是一门为JVM、Android、前端开发的一门静态语言，相比Java
 - 更加安全，更加稳定的编写方式
 
 Kotlin语言是2010年Jetbrains团队为自己的团队打造的。宗旨是希望能够更简明并且消除一些Java的缺陷。由于Jetbrains团队原本打造的一系列的IDE都已经使用了Java，因此他们设计之初就考虑到Kotlin需要能够与Java协同工作，因此Kotlin是编译为Java字节码并且就考虑了如何才能让到Java工程师快速入门Kotlin。
-
 
 ### 根据《Effective Java》Kotlin的优化
 
@@ -111,7 +112,9 @@ person.age = 27
 在Kotlin中，`override`变为了强制性的注解以避免类似的问题。
 
 
-### 更加安全，更加稳定的编写方式
+### 常用语法与特性
+
+#### 1. 更加安全，更加稳定的编写方式
 
 ```kotlin
 var a: String = “abc”; // 定义个一个非null的字符串变量a
@@ -170,7 +173,7 @@ class Values {
 val something = Values.FINAL_STATIC_PROPERTY
 ```
 
-### 代码更精准有效，更可读
+#### 2. 代码更精准有效，更可读
 
 ```kotlin
 // 智能cast
@@ -232,52 +235,37 @@ fun Date.isTuesday() = day == 2
 
 ## II. Kotlin Unit-test
 
-### 遇到的问题
+> 可以借助[nhaarman/mockito-kotlin](https://github.com/nhaarman/mockito-kotlin)使得用Kotlin写单元测试把Kotlin的各类优势更好
 
-#### 原因
+#### 1. 遇到的问题
 
 对于编程设计来说，非常好的实践就是对拓展开放，对修改关闭的"开闭原则"，因为在Java中，我们对继承实在是太滥用了(可以参考[架构设计基础知识整理](https://blog.dreamtobe.cn/2016/10/25/oo_architecture/)中"使用组合而非继承")，也正是因为想要Kotlin中使这个情况得到好转，**因此Kotlin默认对所有Class与Method都是`final`的**， 除非使用`open`主动申明。
 
-可是`final`的Class对于单元测试带来了困难，因为我们在写Java的单元测试的时候，已经习惯了使用类似Mockito这样的库，去mock一些类，以达到纯粹的单元测试(参考[Android单元测试与模拟测试](https://blog.dreamtobe.cn/2016/10/28/android_test/))，正因为`final`类是不支持继承的，因此Mockito对这样的类是无法mock的，虽然已经有了PowerMock，可以对静态方法进行mock，但是如果都使用PowerMock会显得很重，而且不灵活。
+可是`final`的Class对于单元测试带来了一定的困难，因为我们在写Java的单元测试的时候，已经习惯了使用类似Mockito这样的库，去mock一些类，以达到纯粹的单元测试(参考[Android单元测试与模拟测试](https://blog.dreamtobe.cn/2016/10/28/android_test/))，正因为`final`类是不支持继承的，因此Mockito 2.1.0之前的版本对这样的类是无法mock的，虽然已经有了PowerMock，可以对静态方法进行mock，但是如果都使用PowerMock会显得很重，而且不灵活。
 
-#### 解决方法
+#### 2. 解决方法
 
-##### Javassist
+##### 2.1 Javassist
 
 > 实际测试kotlin-testrunner并不work，抽空的时候再研究研究，如果已经解决了欢迎评论指点
 
 因为[Javassist](http://jboss-javassist.github.io/javassist/)这个开源库，支持在运行时修改Java字节码，因此刚好可以解决这个问题。dpreussler借助这个库写了一个[kotlin-testrunner](https://github.com/dpreussler/kotlin-testrunner)，创建一个ClassLoader，在加载指定类的时候将其`FINAL`的`modifiers`清除，并且通过`TestRunner`传入我们的ClassLoader，防止存在同一个Class在多个Loader中不唯一的问题(参考[Android 动态加载dex](https://blog.dreamtobe.cn/2015/12/07/android_dynamic_dex/))，以此解决该问题。
 
-##### Mockito 2.1.0 或更高版本
+##### 2.2 Mockito 2.1.0 或更高版本
 
 Mockito 2.1.0 及之后的版本原生支持了对`final`的method与class进行了mock，使用方法与之前保持一致。 -- **实测是work的**。
 
-**但是** 一旦Mockito升级到2.1.0之后，有一些问题:
+**但是** 由于Mockito推出2.1.0时，对代码进行了大量的重构，虽然PowerMock已经在计划中通过2.0版本来对其进行适配，但是由于Mockito 2.1.0的重构，工作量还是比较大，因此还在[计划中](https://github.com/powermock/powermock/issues/706#issuecomment-264097614)。
 
-###### 1. PowerMock的兼容问题:
+#### 3. Kotlin单元测试总结
 
-由于Mockito推出2.1.0时，对代码进行了大量的重构，虽然PowerMock已经在计划中通过2.0版本来对其进行适配，但是由于Mockito 2.1.0的重构，工作量还是比较大，因此还在[计划中](https://github.com/powermock/powermock/issues/706#issuecomment-264097614)。
+由于PowerMock还未适配Mockito v2.1.0，因此目前Kotlin中如果需要mock `static`的方法会麻烦些（可以使用通用方法: 封装一层`非static`的方法，在里面调用原本的`static`方法，然后对这个封装后的方法进行mock）。其他都比较流畅。
 
-###### 2. Robolectric的兼容问题:
-
-默认情况下，在`mock`时会遇到一个使用`Jdk1.8.0_21`以上的版本会遇到一个jdk的坑:
-
-```
-Class JavaLaunchHelper is implemented in both /Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/bin/java (0x1021944c0) and /Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/jre/lib/libinstrument.dylib (0x10a4274e0). One of the two will be used. Which one is undefined.
-```
-
-如果将compile sdk 的版本调到24以下，并将jdk版本改为jdk1.8.0_21或以下版本还会遇到其他问题:
-
-```
-java.lang.NullPointerException
-    org.mockito.internal.configuration.plugins.Plugins.getStackTraceCleanerProvider(Plugins.java:22)
-```
-
-目前还没有更好的解决方案。
+> P.S. 可以借助[nhaarman/mockito-kotlin](https://github.com/nhaarman/mockito-kotlin)用Kotlin写单元测试更加make sense。
 
 ## III. Java中实现Kotlin的特性
 
-> 无论是多出736KB的Kotlin基本库大小，还是公司不允许，导致只能使用Java，但是又想使用一些Kotlin特性。可以看看接下来提到的。
+> 无论是多出736KB的Kotlin基本库大小，还是公司不允许，**导致只能使用Java，但是又想使用一些Kotlin特性**。可以看看接下来提到的。
 
 #### 1. Data classes
 
@@ -327,6 +315,7 @@ Java中可以通过[Lombok - @ExtensionMethod](https://github.com/mplushnikov/lo
 - [Static data in Kotlin](http://stackoverflow.com/questions/37482378/static-data-in-kotlin#)
 - [Living(Android) without Kotlin](https://hackernoon.com/living-android-without-kotlin-db7391a2b170#.dcvfz0j06)
 - [How “Effective Java” may have influenced the design of Kotlin — Part 1](https://medium.com/@lukleDev/how-effective-java-may-have-influenced-the-design-of-kotlin-part-1-45fd64c2f974#.r7qt7y819)
+- [Android Testing with Kotlin](http://fernandocejas.com/2017/02/03/android-testing-with-kotlin/)
 
 ---
 
