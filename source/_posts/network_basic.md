@@ -1,25 +1,85 @@
-title: 网络常见API、协议与工具
-date: 2017-02-12 11:54:03
+title: 常见网络协议优化与区分
+date: 2017-02-14 14:18:03
 tags:
 - Socket
-- HTTP2.0
 - HTTP
 - HTTPS
 - SPDY
-- tcpdump
+- HTTP/2
+- QUIC
 
 ---
 
-
 ## I. 优化入口
 
-- 带宽: 目前的网络基建越来越好，因此带宽的已经不再是瓶颈
-- 延迟: 1. 策略性阻塞(如一般的浏览器内核只允许6个连接，更多的请求会被阻塞); 2. DNS查询阻塞(目前多数通过本地DNS缓存(存在有效时间间隔)); 3. 建连: TCP与SSL都需要在握手以后以后才开始传输数据; 4. 维连接: 读写超时如何快速有效恢复
-- 冗余数据: 通常的一般的Http请求，每次请求header基本上没什么变化；
-- 负载均衡: 收益较小的长连接，带来服务端没必要的性能开销
-- 预准备: DNS-Prefetch、Preconnect、Prefetch、Flush HTML early、PreRender
+### 1. 带宽与拥塞
+
+#### 现状
+
+目前的网络基建越来越好，因此带宽的已经不再是瓶颈， 但是由于相关协议(如TCP)的拥塞窗口(CWND, congestion window)控制，很多时候并没有将带宽有效的利用，因此更有效的利用带宽是一个优化方向，特别针对视频、游戏等应用。
+
+#### 应对
+
+- **QUIC:** 基于UDP，QUIC可以支持无序的递交，因此通常单个丢包最多只会影响1个请求stream，并且QUIC中一定程度上拆分拥塞窗口来更好的适配多个多路复用的连接，来尽可能的利用带宽，目前已经在Youtube以及一些Google通用库(如字体库)上应用
+- **HTTP:** 通过同时建立多个连接通道，由于每个通道有单独的拥塞窗口保证一个丢包最多只拥塞一个连接通道
+- **BBR:** Google推出的全新的阻塞策略方案，从根本上解决该问题，通过交替测量带宽和激进的估算算法尽可能的占满带宽与降低延迟（此方式极大的提高了带宽利用率），目前已经在Youtube上应用
 
 <!-- more -->
+
+#### 存在该缺陷的协议
+
+- **TCP:** 由于采用"加性增，乘性减"的拥塞控制算法，错误的将网络中的错误丢包也认为是拥塞丢包，导致拥塞窗口被收敛的很小，带宽无法有效利用
+- **SPDY:** 由于SPDY基于TCP，因此存在TCP相同的缺陷问题，并且虽然SPDY采用了多路复用，也做个各类优化，但是由于一个TCP连接只有一个拥塞窗口，因此一个请求stream丢包，就会导致整个通道被阻塞
+
+### 2. 安全的N-RTT的开销
+
+#### 现状
+
+目前应用最广泛的HTTPS中基于的TLS1.2，每次建联需要额外的1到2次RTT，导致建连效率下降，目前由Google牵头，Facebook、Tencent(Wechat)等公司推出了各类优化策略。
+
+#### 应对
+
+- **TLS1.3:** 提出了0-RTT
+- **QUIC:** 通过实现自己的安全模块，采用全新的0-RTT，并计划当完成时适配到TLS1.3中
+- **Proxygen** Facebook基于QUIC的0-RTT协议进行优化，并运用在TCP中 ，并将贡献各类优化成果给TLS1.3
+- **mmtls:** Wechat基于TLS1.3草案中的0-RTT推出自己的mmtls，对于长连接保障1-RTT，对于短连接尽可能使用0-RTT
+
+#### 存在该缺陷的协议
+
+- **TLS1.2:**  在TLS1.2中，需要2~1-RTT(全握手需要2-RTT)
+
+### 3. 冗余数据
+
+#### 现状
+
+通常的一般的Http请求，每次请求header基本上没什么变化；在一些情况下多个页面使用相同静态资源(js、logo等)，却每次都重复下载。
+
+#### 应对
+
+- **SPDY:** 采用[DEFLATE](http://zh.wikipedia.org/wiki/DEFLATE)对请求头/响应头进行压缩
+- **HTTP/2:**采用[HPACK](http://http2.github.io/http2-spec/compression.html)算法对请求头/响应头进行压缩，并且通讯双方各自cache一份header fields表，避免了重复header的传输
+- **QUIC:** 目前版本采用[HPACK](http://http2.github.io/http2-spec/compression.html)算法对请求头/响应头进行压缩
+- **HTTP/1.1、HTTP/2:** 支持`Cache-Control`用于控制资源有效时间,支持`Last-Modified`来控制资源是否可复用
+- **Facebook geek方案:**  将`expiration time`全部设置为1年，所有的资源请求链接，采用概念性的连接(在请求链接后加上资源名的md5，再做mapping)，在宝成重复下载资源能被有效利用的同时，避免重复检测资源有效性
+- **浏览器优化:** Facebook联系Chrome与Firefox，针对复用资源检测策略进行调整(如firefox支持在`cache-control`中的`immutable`关键字表示资源不可变不用重复检测)
+
+#### 存在该缺陷的协议
+
+- **HTTP/1:** 请求头未做压缩，不支持`Cache-Control`与`Last-Modified`因此存在冗余资源重复下载问题
+- **HTTP/1.1:** 请求头未做压缩
+
+
+### 4. 预准备
+
+- **Taobao:** DNS-Prefetch、Preconnect、Prefetch、Flush HTML early、PreRender
+- **SPDY、HTTP/2、QUIC:**: 允许服务端主动推服务端认为客户端需要的静态资源
+
+### 5. 负载均衡、超时策略优化与其他
+
+- **负载均衡:** 收益较小的长连接，带来服务端没必要的性能开销
+- **超时策略:** 策略性的调整建连与维连时的超时重连的频率、时间、IP/端口，来应对弱网状况，何时快速放弃节约资源(无网状态)，何时找到可用资源快速恢复连接(被劫持、服务器某端口/IP故障、基站繁忙、连接信号弱、丢包率高)
+- **策略性阻塞:** 根据网络情况、请求数目动态调整连接数来保证吞吐量与稳定性（如SPDY、HTTP/2、QUIC中的多路复用）
+- **DNS:** 结合TTL有效管理本地DNS缓存的有效时间、以及缓存大小来减少DNS查询的阻塞
 
 ## II. 常见网络协议与API
 
@@ -73,7 +133,7 @@ tags:
 - 采用多路复用(multiplexing)，多个请求stream共享一个tcp连接: 降低延时、提高带宽利用率
 - 请求优先级: 允许给每个请求设置优先级，使得重要的请求得到优先响应
 - 基于HTTPS的加密传输: 提高数据安全可靠性
-- 允许`客户端/服务端`压缩`请求头/响应头`：当多个请求重复发送类似请求头时会得到压缩
+- 允许`客户端/服务端`压缩`请求头/响应头`: 通过DEFLATE或gzip算法进行压缩
 - 允许同时发送多个请求，而非通过当个连接：减少服务端与客户端来回的耗时，并且避免了低优先级请求阻塞住高优先级请求
 - 允许服务端主动的推送资源(js、css)给客户端，当知道客户端将会需要时，而不同客户端请求: 以此利用起空闲带宽
 - SPDY兼容性: http://caniuse.com/#feat=spdy
@@ -82,32 +142,33 @@ tags:
 
 ![image_1b8jj8l511lag13eslpm1al918krm.png-23.8kB][4]
 
-### 6. HTTP2.0
+### 6. HTTP/2
 
-> HTTP2.0基于SPDY设计
+> HTTP/2基于SPDY设计
 
-#### HTTP2.0 vs SPDY
+#### HTTP/2 vs SPDY
 
-- SPDY强制使用HTTPS，HTTP2.0支持明文HTTP传输
-- HTTP2.0消息头压缩算法采用[HPACK](http://http2.github.io/http2-spec/compression.html)，SPDY采用[DEFLATE](http://zh.wikipedia.org/wiki/DEFLATE)
-- HTTP2.0传输采用二进制而非HTTP的文本: 文本形式众多很难权衡健壮、性能与复杂度，二进制弥补了这个缺陷
+- SPDY强制使用HTTPS，HTTP/2支持明文HTTP传输
+- HTTP/2消息头压缩算法采用[HPACK](http://http2.github.io/http2-spec/compression.html)，SPDY采用[DEFLATE](http://zh.wikipedia.org/wiki/DEFLATE)
+- HTTP/2传输采用二进制而非HTTP的文本: 文本形式众多很难权衡健壮、性能与复杂度，二进制弥补了这个缺陷
 - 都采用了多路复用，都允许服务端主动推送资源
 ![image_1b8jku3ol1rbveu4es1tp8rk61j.png-125kB][5]
-
-
-## III. 工具
-
-### 1. tcpdump
-
-> [Linux抓包工具tcpdump详解 - 五、举例](http://www.ha97.com/4550.html)
-
-需要监听所有来往`10.15.71.165`ip的TCP: `sudo tcpdump host 10.15.71.165`
 
 ---
 
 - [从tcp原理角度理解Broken pipe和Connection Reset by Peer的区别](http://lovestblog.cn/blog/2014/05/20/tcp-broken-pipe/)
 - [淘宝HTTPS探索](http://velocity.oreilly.com.cn/2015/ppts/lizhenyu.pdf)
-- [HTTP,HTTP2.0,SPDY,HTTPS你应该知道的一些事](http://www.alloyteam.com/2016/07/httphttp2-0spdyhttps-reading-this-is-enough/)
+- [HTTP,HTTP/2,SPDY,HTTPS你应该知道的一些事](http://www.alloyteam.com/2016/07/httphttp2-0spdyhttps-reading-this-is-enough/)
+- [QUIC Geek FAQ](https://docs.google.com/document/d/1lmL9EF6qKrk7gbazY8bIdvq3Pno2Xj_l_YShP40GLQE)
+- [google/bbr](https://github.com/google/bbr)
+- [滑动窗口和拥塞窗口简述](http://www.cnblogs.com/mydomain/archive/2013/04/18/3027668.html)
+- [BBR算法原理 - 李博杰](https://www.zhihu.com/question/53559433)
+- [QUIC - Next generation multiplexed transport over UDP](https://www.nanog.org/sites/default/files/meetings/NANOG64/1051/20150603_Rogan_Quic_Next_Generation_v1.pdf)
+- [Building Zero protocol for fast, secure mobile connections](https://code.facebook.com/posts/608854979307125/building-zero-protocol-for-fast-secure-mobile-connections/)
+- [基于TLS1.3的微信安全通信协议mmtls介绍](https://github.com/WeMobileDev/article/blob/master/%E5%9F%BA%E4%BA%8ETLS1.3%E7%9A%84%E5%BE%AE%E4%BF%A1%E5%AE%89%E5%85%A8%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AEmmtls%E4%BB%8B%E7%BB%8D.md)
+- [QUIC Wire Layout Specification](https://docs.google.com/document/d/1WJvyZflAO2pq77yOLbp9NsGjC1CHetAXV8I0fQe-B_U/edit)
+- [SPDY - Wiki](https://en.wikipedia.org/wiki/SPDY)
+- [This browser tweak saved 60% of requests to Facebook](https://code.facebook.com/posts/557147474482256/this-browser-tweak-saved-60-of-requests-to-facebook/)
 
 ---
 
