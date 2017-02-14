@@ -5,7 +5,7 @@
 # Site
 title: Jacks Blog
 subtitle: 我尝试过很多的开发，目前就职于支付宝Android性能架构组。
-description: 本博客内容均为原创，大多数是为了便于日后翻阅快速定位知识点。
+description: 本博客内容均为原创，站点已开源(github.com/Jacksgong/Blog)
 author: Jacksgong
 language: zh-Hans
 timezone:
