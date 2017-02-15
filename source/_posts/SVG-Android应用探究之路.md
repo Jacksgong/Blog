@@ -149,7 +149,7 @@ http://play.google.com/store/apps/details?id=com.whisperarts.kids.forms
 
 ---
 
-- 文章创建时间: 2014-11-08，[本文迭代日志](https://github.com/Jacksgong/Blog/blob/master/source/_posts/SVG-Android%E5%BA%94%E7%94%A8%E6%8E%A2%E7%A9%B6%E4%B9%8B%E8%B7%AF.md)。
+- 文章创建时间: 2014-11-08，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/SVG-Android%E5%BA%94%E7%94%A8%E6%8E%A2%E7%A9%B6%E4%B9%8B%E8%B7%AF.md)。
 
 ---
 
