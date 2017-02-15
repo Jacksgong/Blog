@@ -1,5 +1,5 @@
 title: 常见网络协议优化与区分
-date: 2017-02-14 14:18:03
+date: 2017-02-16 00:38:03
 tags:
 - Socket
 - HTTP
@@ -7,6 +7,7 @@ tags:
 - SPDY
 - HTTP/2
 - QUIC
+- BBR
 
 ---
 
@@ -16,7 +17,7 @@ tags:
 
 #### 现状
 
-目前的网络基建越来越好，因此带宽的已经不再是瓶颈， 但是由于相关协议(如TCP)的拥塞窗口(CWND, congestion window)控制，很多时候并没有将带宽有效的利用，因此更有效的利用带宽是一个优化方向，特别针对视频、游戏等应用。
+目前的网络基建越来越好，因此带宽的已经不再是瓶颈， 但是由于相关协议(如TCP)的拥塞窗口(CWND, congestion window)控制，很多时候并没有将带宽有效的利用，因此更有效的利用带宽是一个优化方向，特别针对视频、游戏等领域。
 
 #### 应对
 
@@ -39,9 +40,9 @@ tags:
 
 #### 应对
 
-- **TLS1.3:** 提出了0-RTT
+- **TLS1.3:** 提出了0-RTT草案
 - **QUIC:** 通过实现自己的安全模块，采用全新的0-RTT，并计划当完成时适配到TLS1.3中
-- **Proxygen** Facebook基于QUIC的0-RTT协议进行优化，并运用在TCP中 ，并将贡献各类优化成果给TLS1.3
+- **Proxygen:** Facebook基于QUIC的0-RTT协议进行优化，并运用在TCP中 ，并将贡献各类优化成果给TLS1.3
 - **mmtls:** Wechat基于TLS1.3草案中的0-RTT推出自己的mmtls，对于长连接保障1-RTT，对于短连接尽可能使用0-RTT
 
 #### 存在该缺陷的协议
@@ -60,8 +61,8 @@ tags:
 - **HTTP/2:**采用[HPACK](http://http2.github.io/http2-spec/compression.html)算法对请求头/响应头进行压缩，并且通讯双方各自cache一份header fields表，避免了重复header的传输
 - **QUIC:** 目前版本采用[HPACK](http://http2.github.io/http2-spec/compression.html)算法对请求头/响应头进行压缩
 - **HTTP/1.1、HTTP/2:** 支持`Cache-Control`用于控制资源有效时间,支持`Last-Modified`来控制资源是否可复用
-- **Facebook geek方案:**  将`expiration time`全部设置为1年，所有的资源请求链接，采用概念性的连接(在请求链接后加上资源名的md5，再做mapping)，在宝成重复下载资源能被有效利用的同时，避免重复检测资源有效性
-- **浏览器优化:** Facebook联系Chrome与Firefox，针对复用资源检测策略进行调整(如firefox支持在`cache-control`中的`immutable`关键字表示资源不可变不用重复检测)
+- **Facebook geek方案:**  将`expiration time`全部设置为1年，所有的资源请求链接，都采用概念性的连接(在请求链接后加上资源名的md5，再做mapping)(只要资源不变化链接就不变化)，保证已下载资源能被有效利用的同时，避免重复检测资源有效性
+- **浏览器优化:** Facebook联系Chrome与Firefox，针对复用资源可复用检测频率进行调整(如firefox支持在`cache-control`中的`immutable`关键字表示资源不可变不用重复检测)
 
 #### 存在该缺陷的协议
 
@@ -98,7 +99,6 @@ tags:
 
 ![image_1b8j21mft14qk1djgsom1ad58kfp.png-175.3kB][2]
 
-
 ### 3. HTTP
 
 #### `HTTP1.1` vs `HTTP1.0`
@@ -115,8 +115,7 @@ tags:
 最新的HTTPS在2000年5月公布的`RFC 2818`正式确定
 
 - 早期HTTPS与SSL一起使用，后SSL逐渐演变为现在的TLS
-- HTTP是运行在TCP上，SSL/TLS运行也是在TCP上，HTTPS运行在SSL/TLS上
-- 由于需要SSL握手，可能会比HTTP慢，但是如果使用SPDY，HTTPS的速度甚至比HTTP快(SPDY 与 HTTP/2极大提高速度)
+- 由于需要SSL握手，可能会比HTTP慢，但是如果使用SPDY，建连速度甚至比HTTP快(SPDY 与 HTTP/2极大提高速度)
 - 请求端口443
 - 可以通过SNI(Server Name Indication)以达到一个IP部署多个证书
 - 尽可能降低TLS新建的⽐率
@@ -130,12 +129,13 @@ tags:
 
 是谷歌开发为了加快网页加载速度的网络协议。
 
-- 采用多路复用(multiplexing)，多个请求stream共享一个tcp连接: 降低延时、提高带宽利用率
+- 采用多路复用(multiplexing): 多个请求stream共享一个tcp连接: 降低延时、提高带宽利用率
 - 请求优先级: 允许给每个请求设置优先级，使得重要的请求得到优先响应
 - 基于HTTPS的加密传输: 提高数据安全可靠性
 - 允许`客户端/服务端`压缩`请求头/响应头`: 通过DEFLATE或gzip算法进行压缩
-- 允许同时发送多个请求，而非通过当个连接：减少服务端与客户端来回的耗时，并且避免了低优先级请求阻塞住高优先级请求
-- 允许服务端主动的推送资源(js、css)给客户端，当知道客户端将会需要时，而不同客户端请求: 以此利用起空闲带宽
+- 有请求优先级，并且避免了低优先级请求阻塞住高优先级请求
+- 支持Server Push: 允许服务端主动的推送资源(js、css)给客户端，当分析获知客户端将会需要时: 以此利用起空闲带宽
+- 支持Server Hints: 允许服务端可以在客户端还没有发现将需要哪些资源的时候，主动通知客户端: 以便于客户端实现准备好相关资源的缓存
 - SPDY兼容性: http://caniuse.com/#feat=spdy
 
 #### 层级:
@@ -146,13 +146,15 @@ tags:
 
 > HTTP/2基于SPDY设计
 
+![image_1b90ik3e01di41tgr16hc12ks19uvp.png-129.5kB][5]
+
 #### HTTP/2 vs SPDY
 
-- SPDY强制使用HTTPS，HTTP/2支持明文HTTP传输
-- HTTP/2消息头压缩算法采用[HPACK](http://http2.github.io/http2-spec/compression.html)，SPDY采用[DEFLATE](http://zh.wikipedia.org/wiki/DEFLATE)
-- HTTP/2传输采用二进制而非HTTP的文本: 文本形式众多很难权衡健壮、性能与复杂度，二进制弥补了这个缺陷
+- SPDY强制使用TLS，HTTP/2非强制(但是部分浏览器(如Chrome)不允许，所以目前如果使用HTTP/2最好都支持HTTPS)
+- HTTP/2消息头压缩算法采用[HPACK](http://http2.github.io/http2-spec/compression.html)，SPDY采用[DEFLATE](http://zh.wikipedia.org/wiki/DEFLATE)，一般情况下HPACK的压缩率会高于DEFLATE。
+- HTTP/2传输采用二进制而非文本，因此HTTP/2中的基本单位是帧: 文本形式众多很难权衡健壮、性能与复杂度，二进制弥补了这个缺陷，并且是无序的帧，最终根据头帧重新组装
 - 都采用了多路复用，都允许服务端主动推送资源
-![image_1b8jku3ol1rbveu4es1tp8rk61j.png-125kB][5]
+![image_1b8jku3ol1rbveu4es1tp8rk61j.png-125kB][6]
 
 ---
 
@@ -169,6 +171,12 @@ tags:
 - [QUIC Wire Layout Specification](https://docs.google.com/document/d/1WJvyZflAO2pq77yOLbp9NsGjC1CHetAXV8I0fQe-B_U/edit)
 - [SPDY - Wiki](https://en.wikipedia.org/wiki/SPDY)
 - [This browser tweak saved 60% of requests to Facebook](https://code.facebook.com/posts/557147474482256/this-browser-tweak-saved-60-of-requests-to-facebook/)
+- [HTTP2学习(四)—HTTP2的新特性](http://jiaolonghuang.github.io/2015/08/16/http2/)
+- [Server Push and Server Hints](https://www.chromium.org/spdy/link-headers-and-server-hint)
+
+---
+
+- 文章创建时间: 2017-02-12，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/network_basic.md)。
 
 ---
 
@@ -181,3 +189,4 @@ tags:
   [3]: /img/network_basic-3.png
   [4]: /img/network_basic-4.png
   [5]: /img/network_basic-5.png
+  [6]: /img/network_basic-6.png
