@@ -1,5 +1,5 @@
 # Hexo Configuration
-## Docs: http://hexo.io/docs/configuration.html
+## Docs: https://hexo.io/docs/configuration.html
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
@@ -12,7 +12,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://blog.dreamtobe.cn
+url: https://blog.dreamtobe.cn
 root: /
 permalink: :title/
 permalink_defaults:
@@ -61,35 +61,18 @@ per_page: 8
 pagination_dir: page
 
 # Extensions
-## Plugins: http://hexo.io/plugins/
-plugins:
-- hexo-generator-feed
-
-## Themes: http://hexo.io/themes/
+## Plugins: https://hexo.io/plugins/
+## Themes: https://hexo.io/themes/
 theme: next
-
-# Disqus Comments
-#disqus_short_name: jacksgong
-#disqus_show_comment_count: true
 
 sitemap:
    path: sitemap.xml
 
-feed:
-  type: atom
-  path: atom.xml
-  limit: 20
-
 # Deployment
-## Docs: http://hexo.io/docs/deployment.html
+## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type:
-
-#for nexT
 
 duoshuo_shortname: jacksgong
 duoshuo_share: true
 duoshuo_hotartical: true
-
-#baidu_analytics: e26ce8275e47e0826b4385b709462fef
-#swiftype_key: Hx3Ah255oWd8uKbfQ4AP
