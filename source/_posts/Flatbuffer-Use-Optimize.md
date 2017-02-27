@@ -1,6 +1,8 @@
 title: Flatbuffer Use Optimize
 date: 2015-01-05 08:35:03
 permalink: 2015/01/05/Flatbuffer-Use-Optimize
+categories:
+- 开源项目
 tags:
 - flatbuffer
 - optimize
@@ -56,10 +58,12 @@ public boolean hasSet_fontFamily() { if ( list_fontFamily_offset != -1 ) { retur
 ```
 
 ### 五. Tips
+
 Flatbuffer is very fast from flatbuffer instream to avaliable object, but `__offset()` is very slow, so very frequently invoked almost not recommended. I tested 100,000 times `__offset()`, consuming greater than 50ms, but Java object directly accesse the same time only need 2~3ms. So such tool is come, but you need to pay attention to the increase of the GC.
 
 
 ### 六. Tool Source
+
 GitHub: [https://github.com/Jacksgong/FlatBuffer-Optimize](https://github.com/Jacksgong/FlatBuffer-Optimize)
 
 ```

@@ -1,6 +1,8 @@
 title: Notification最佳实践
 date: 2016-10-25 15:06:03
 permalink: 2016/01/09/notification_best_practise
+categories:
+- Android最佳实践
 tags:
 - Notification
 - 最佳实践

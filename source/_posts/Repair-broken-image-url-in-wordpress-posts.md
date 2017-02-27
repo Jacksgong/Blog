@@ -1,6 +1,8 @@
 title: Repair broken image url in wordpress posts
 date: 2015-01-22 14:13:03
 permalink: 2015/01/22/Repair-broken-image-url-in-wordpress-posts
+categories:
+- 开源项目
 tags:
 - 项目
 - python
@@ -14,21 +16,22 @@ tags:
 
 ---
 ### How to use
-####一、 Just run python:
+#### 一、 Just run python:
 
-```
+```bash
 python wordpress_fix_img.py
 ```
-####二、 Input data:
 
-```
+#### 二、 Input data:
+
+```bash
 wordpress path(example: /var/www/blog.dreamtobe.cn/html/): [your wordpress absolute path]
 domain(example: http://blog.dreamtobe.cn): [your wordpress blog domain]
 mysql user name: [your wordpress blog mysql user name]
 mysql password: [your wordpress blog mysql password]
 mysql blog database: [your wordpress blog mysql database name]
 ```
-####三、Auto find broken image
+#### 三、Auto find broken image
 
 In this phase, will auto find break image by python and print all image url in posts. Just like:
 
@@ -60,7 +63,9 @@ http://blog.dreamtobe.cn/wp-content/uploads/2012/12/2493868293673906770.jpg
 2096在activity中实例化 layout（利用xml创建layout)
 ---------------------
 ```
-####四、Provide right image name
+
+#### 四、Provide right image name
+
 In 3 phase, you need provide right image file name when find break image, such as:
 
 ```
@@ -69,17 +74,21 @@ http://blog.dreamtobe.cn/wp-content/uploads/2014/12/endDocument1.jpg
 
 file not exist, new image file name: [enter right image file name](e.g endDocument.jpg)
 ```
+
 Press enter, and python will autocompleted image right url, and output:
 
 ```
 new image url:http://blog.dreamtobe.cn/wp-content/uploads/2014/12/endDocument.jpg
 ```
+
 And after the completion of the full content of the post scan output:
 
 ```
 update done. ID =2160L
 ```
+
 #### 五、Repeate 3~4 & end
+
 As end will output:
 
 ```

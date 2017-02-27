@@ -1,6 +1,8 @@
 title: Hybrid Apps
 date: 2016-01-20 20:45:03
 permalink: 2016/01/20/hybrid
+categories:
+- Html5
 tags:
 - platform
 - hybrid

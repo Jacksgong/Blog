@@ -1,6 +1,8 @@
 title: zsh[oh my zsh]
 date: 2015-03-29 15:08:03
 permalink: 2015/03/29/zsh[oh-my-zsh]学习整理
+categories:
+- 工程师技能
 tags:
 - zsh
 - Linux

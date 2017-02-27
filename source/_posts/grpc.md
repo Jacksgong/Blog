@@ -1,5 +1,7 @@
 title: gRPC
 date: 2017-02-16 22:38:03
+categories:
+- 网络
 tags:
 - gRPC
 - Thrift

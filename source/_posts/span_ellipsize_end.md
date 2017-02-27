@@ -1,6 +1,8 @@
 title: Span省略号处理
 date: 2015-09-17 08:35:03
 permalink: 2015/09/17/span_ellipsize_end
+categories:
+- 开源项目
 tags:
 - Android
 - SpannableString

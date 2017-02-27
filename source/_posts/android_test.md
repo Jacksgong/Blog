@@ -1,6 +1,8 @@
 title: Android单元测试与模拟测试
 date: 2016-11-30 00:40:03
 permalink: 2016/05/15/android_test
+categories:
+- Android测试
 tags:
 - 单元测试
 - 模拟测试

@@ -1,6 +1,9 @@
 title: APK漏洞 "Shadows Everywhere"
 date: 2015-12-06 00:46:03
 permalink: 2015/12/06/shadows_everywhere
+categories:
+- 安全
+- Android安全
 tags:
 - Android
 - 安全

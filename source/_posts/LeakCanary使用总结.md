@@ -1,6 +1,8 @@
 title: LeakCanary使用总结
 date: 2015-05-18 08:35:03
 permalink: 2015/05/18/LeakCanary使用总结
+categories:
+- Android内存
 tags:
 - LeakCanary
 - 内存泄漏

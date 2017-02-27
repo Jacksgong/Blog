@@ -1,6 +1,8 @@
 title: 去哪儿安全0~1
 date: 2015-07-17 21:35:03
 permalink: 2015/07/17/wh_qunaer0_1
+categories:
+- 安全
 tags:
 - 2015乌云白帽大会
 - 安全

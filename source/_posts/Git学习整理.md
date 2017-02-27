@@ -1,6 +1,8 @@
 title: Git
 date: 2015-03-16 07:51:03
 permalink: 2015/03/16/Git学习整理
+categories:
+- 工程师技能
 tags:
 - git
 - 管理

@@ -1,6 +1,8 @@
 title: OpenWrt通过迅雷快鸟提速
 date: 2016-05-29 14:30:03
 permalink: 2016/05/29/openwrt_xunlei_fastdick
+categories:
+- OpenWrt
 tags:
 - OpenWrt
 - 迅雷快鸟

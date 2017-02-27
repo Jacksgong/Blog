@@ -1,6 +1,8 @@
 title: ActivityManagerService
 date: 2015-11-26 20:49:03
 permalink: 2015/11/26/activitymanagerservice
+categories:
+- Android机制
 tags:
 - ActivityManagerService
 - ActivityThread

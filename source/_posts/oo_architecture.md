@@ -1,6 +1,8 @@
 title: 架构设计基础知识整理
 date: 2016-10-25 22:41:03
 permalink: 2016/03/09/oo_architecture
+categories:
+- 架构
 tags:
 - 架构
 - Android

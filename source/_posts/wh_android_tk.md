@@ -1,6 +1,9 @@
 title: Android应用程序通用自动脱壳方法研究
 date: 2015-07-17 21:35:03
 permalink: 2015/07/17/wh_android_tk
+categories:
+- 安全
+- Android安全
 tags:
 - 2015乌云白帽大会
 - 安全

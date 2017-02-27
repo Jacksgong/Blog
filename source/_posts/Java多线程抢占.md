@@ -1,6 +1,8 @@
 title: Java多线程抢占
 date: 2015-03-25 08:35:03
 permalink: 2015/03/25/Java多线程抢占
+categories:
+- 编程语言
 tags:
 - java
 - 多线程

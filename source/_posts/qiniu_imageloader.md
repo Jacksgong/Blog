@@ -1,6 +1,8 @@
 title: QiniuImageLoader
 date: 2015-12-16 01:37:03
 permalink: 2015/12/16/qiniu_imageloader
+categories:
+- 开源项目
 tags:
 - android
 - Qiniu

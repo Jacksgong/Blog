@@ -1,6 +1,8 @@
 title: Android简单录音
 date: 2015-10-23 11:18:03
 permalink: 2015/10/23/android_record
+categories:
+- Android最佳实践
 tags:
 - Record
 - MediaRecorder

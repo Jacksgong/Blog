@@ -1,5 +1,7 @@
 title: 我心目中的支付宝架构
 date: 2017-01-26 13:56:03
+categories:
+- 架构
 tags:
 - Alipay
 - Architecture

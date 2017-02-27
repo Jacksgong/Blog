@@ -1,6 +1,8 @@
 title: 快速集成平滑进度条
 date: 2016-05-15 18:50:03
 permalink: 2016/05/15/percent_smooth_handler
+categories:
+- 开源项目
 tags:
 - android
 - Percent

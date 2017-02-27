@@ -1,6 +1,8 @@
 title: Java Synchronised机制
 date: 2015-11-13 21:14:03
 permalink: 2015/11/13/java_synchronized
+categories:
+- Android机制
 tags:
 - Android
 - JDK

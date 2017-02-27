@@ -1,6 +1,8 @@
 title: NDK | JNI
 date: 2016-12-24 23:16:03
 permalink: 2016/11/08/ndk
+categories:
+- Android Native Develop
 tags:
 - ndk
 - jni

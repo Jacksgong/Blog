@@ -1,6 +1,8 @@
 title: Kotlin
 date: 2017-02-10 11:30:03
 permalink: 2016/11/30/kotlin
+categories:
+- 编程语言
 tags:
 - Kotlin
 - Java

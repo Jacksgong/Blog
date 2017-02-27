@@ -1,6 +1,8 @@
 title: Android 切图与标注
 date: 2015-11-08 22:35:03
 permalink: 2015/11/08/density_dpi
+categories:
+- Android UI交互
 tags:
 - 9patch
 - density

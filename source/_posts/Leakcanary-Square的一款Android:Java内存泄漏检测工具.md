@@ -1,6 +1,8 @@
 title: Leakcanary Square的一款Android/Java内存泄漏检测工具
 date: 2015-05-12 08:35:03
 permalink: 2015/05/12/Leakcanary-Square的一款Android:Java内存泄漏检测工具
+categories:
+- Android内存
 tags:
 - Square
 - 内存泄漏

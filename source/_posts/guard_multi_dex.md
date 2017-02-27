@@ -1,6 +1,8 @@
 title: DexGuard、Proguard、Multi-dex
 date: 2015-11-04 19:26:03
 permalink: 2015/11/04/guard_multi_dex
+categories:
+- Android机制
 tags:
 - Android
 - Build

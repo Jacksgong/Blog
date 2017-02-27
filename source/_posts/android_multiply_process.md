@@ -1,6 +1,8 @@
 title: Android Binder IPC机制
 date: 2015-11-25 23:54:03
 permalink: 2015/11/25/android_multiply_process
+categories:
+- Android机制
 tags:
 - Android
 - 多进程

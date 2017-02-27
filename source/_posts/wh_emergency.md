@@ -1,6 +1,8 @@
 title: 应急响应
 date: 2015-07-17 21:35:03
 permalink: 2015/07/17/wh_emergency
+categories:
+- 安全
 tags:
 - 2015乌云白帽大会
 - 安全

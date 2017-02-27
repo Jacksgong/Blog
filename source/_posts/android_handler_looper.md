@@ -1,6 +1,8 @@
 title: Android Handler Looper机制
 date: 2016-03-11 14:36:03
 permalink: 2016/03/11/android_handler_looper
+categories:
+- Android机制
 tags:
 - Handler
 - Looper

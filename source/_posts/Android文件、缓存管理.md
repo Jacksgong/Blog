@@ -1,6 +1,8 @@
 title: Android文件、缓存管理
 date: 2013-12-17 08:35:03
 permalink: 2013/12/17/Android文件、缓存管理
+categories:
+- 开源项目
 tags:
 - 文件管理
 - 缓存管理
