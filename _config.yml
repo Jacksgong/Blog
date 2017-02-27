@@ -76,3 +76,10 @@ deploy:
 duoshuo_shortname: jacksgong
 duoshuo_share: true
 duoshuo_hotartical: true
+
+# Next theme search configuration
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
