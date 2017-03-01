@@ -98,6 +98,9 @@ tags:
 
 其中的api与impl的打包可以参照[gradle-sample](https://github.com/Jacksgong/gralde-sample)。
 
+---
+
+本文已经发布到JackBlog公众号: [Android大项目开发 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483691&idx=1&sn=a1fef6b8842b63b99457afe552a70654)
 
 ---
 
