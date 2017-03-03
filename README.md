@@ -29,6 +29,7 @@
 - 2016年5月 博客开通线上公众号(微信号: `jacksblog`)。
 - 2016年9月 为了防止国内万恶运营商的劫持，上了[HTTPS-ORIGIN](https://www.ssllabs.com/ssltest/analyze.html?d=blog.jacksgong.com)，[HTTPS-CDN](https://www.ssllabs.com/ssltest/analyze.html?d=blog.dreamtobe.cn)。
 - 2017年2月 网站源支持了HTTP/2: https://nocdn.dreamtobe.cn/ (腾讯CDN要在2017年第二个季度才支持HTTP/2)
+- 2017年3月 博客服务器迁到日本，并改用KVM架构VPS，并将TCP拥塞控制算法改为BBR: https://nocdn.dreamtobe.cn/
 
 
 ## LICENSE
