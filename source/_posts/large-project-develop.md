@@ -1,5 +1,5 @@
 title: Android大项目开发
-date: 2017-02-28 22:14:03
+date: 2017-03-04 12:48:03
 categories:
 - 架构
 tags:
@@ -21,13 +21,13 @@ tags:
 <!-- more -->
 ##### Unit Test
 
-在大项目中的单元测试尤为重要，避免代码裸奔，还可以结合Android Studio顺便做代码覆盖，目前Android的单元测试社区已经十分成熟活跃，可以参考[Android单元测试与模拟测试](https://blog.dreamtobe.cn/2016/05/15/android_test/)，在提交Review之前，先本地强制跑过相关代码的单元测试(推荐使用[Facebook phabricator的Arc Diff](www.phacility.com)便于这块流程配置)
+在大项目中的单元测试尤为重要，避免代码裸奔，还可以结合Android Studio顺便做代码覆盖，目前Android的单元测试社区已经十分成熟活跃，可以参考[Android单元测试与模拟测试](https://blog.dreamtobe.cn/2016/05/15/android_test/)，在提交Review之前，先本地强制跑过相关代码的单元测试(推荐使用[Facebook phabricator的Arc Diff](https://www.phacility.com)便于这块流程配置)
 
 ### 2. 版本管理
 
 #### Review
 
-代码的Review是十分的必要的，通常我们需要在提交Review前，自己先Review修改，然后在提交给相关人员Review(推荐使用[Facebook phabricator的Arc Diff](www.phacility.com)便于这块流程配置)，需要尽可能的保证以下规范:Gk
+代码的Review是十分的必要的，通常我们需要在提交Review前，自己先Review修改，然后在提交给相关人员Review(推荐使用[Facebook phabricator的Arc Diff](https://www.phacility.com)便于这块流程配置)，需要尽可能的保证以下规范:Gk
 
 - 尽量细的提交，保证代码尽可能的可追溯
 - 如果多个Commit一起提交Review时，尽量保证相关性，以及可拆分性
@@ -97,6 +97,10 @@ tags:
 ![](/img/large-project-develop-3.png)
 
 其中的api与impl的打包可以参照[gradle-sample](https://github.com/Jacksgong/gralde-sample)。
+
+---
+
+- 文章创建时间: 2017-03-01，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/large-project-develop.md)。
 
 ---
 
