@@ -1,5 +1,5 @@
 title: 站点与服务器维护
-date: 2017-03-06 14:47:03
+date: 2017-03-06 23:26:03
 categories:
 - 服务器
 tags:
@@ -66,7 +66,15 @@ tags:
 > 考虑到gitlab等应用对内存使用比较多，因此可以通过`top`工具来查看内存的使用情况，考虑到有可能会有内存不足导致500，可以配置Swap来避免该问题的发生
 > 在以前考虑到SSD硬盘的写入次数太过频繁很容易缩短使用寿命，因此不建议使用SSD做Swap，但是现在的[SSD已经逐渐改善](http://askubuntu.com/questions/652337/why-no-swap-partitions-on-ssd-drives/652342#652342?newreg=237ae587907241919402075b80ab6fa3)了类似的情况
 
-通过下面的命令从`检测情况`、`安装`、`固化`、`调优`，一步一步配置Swap，需要注意的是一般来说比较好的Swap大小是等于现有RAM大小或是现有RAM的两倍
+快速执行配置:
+
+<script src="https://gist.dreamtobe.cn/Jacksgong/5fab6a7d6cf7ee21c44d6cfeaecb400d.js"></script>
+
+快速执行配置时，所执行的脚本:
+
+<script src="https://gist.dreamtobe.cn/Jacksgong/58a8421fb362b9763cfae050245e5577.js"></script>
+
+也可以通过通过下面的命令从`检测情况`、`安装`、`固化`、`调优`，手动的一步一步配置Swap，需要注意的是一般来说比较好的Swap大小是等于现有RAM大小或是现有RAM的两倍:
 
 <script src="https://gist.dreamtobe.cn/Jacksgong/d54e2b68e2b66faec7e671338ac4b85b.js"></script>
 
@@ -187,6 +195,7 @@ sudo crontab -e
 - [本博客 Nginx 配置之完整篇](https://imququ.com/post/my-nginx-conf.html)
 - [一键安装最新内核并开启 BBR 脚本](https://teddysun.com/489.html)
 - [How To Secure Nginx with Let's Encrypt on Ubuntu 14.04](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-14-04)
+- [How To Add Swap Space on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-16-04)
 
 ---
 
