@@ -51,11 +51,15 @@ tags:
 
 安装:
 
-<script src="https://gist.github.com/Jacksgong/bb011a5c48ef47ef6df0b3333c02b54f.js"></script>
+<script src="https://gist.dreamtobe.cn/Jacksgong/bb011a5c48ef47ef6df0b3333c02b54f.js"></script>
 
 检测安装结果:
 
 <script src="https://gist.dreamtobe.cn/Jacksgong/684f423d5be270ce9610a053483e7a8b.js"></script>
+
+检测安装结果时，所执行的脚本:
+
+<script src="https://gist.dreamtobe.cn/Jacksgong/383df6722917610a4dd42308666703c4.js"></script>
 
 #### 4. 配置Swap
 
