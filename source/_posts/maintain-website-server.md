@@ -25,6 +25,8 @@ tags:
 
 > 由于MacBook上对zsh长期的使用习惯，因此使用统一风格的zsh，并使用oh-my-zsh管理
 
+![](/img/zsh-1.png)
+
 快速执行配置:
 
 <script src="https://gist.dreamtobe.cn/Jacksgong/12b7d677e6ce47e7684bb1afc0c5c629.js"></script>
