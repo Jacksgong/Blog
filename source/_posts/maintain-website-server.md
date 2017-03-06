@@ -49,6 +49,12 @@ tags:
 
 快速执行配置，安装与检测安装算法(需要OpenVZ以外虚拟技术的VPS平台):
 
+安装:
+
+<script src="https://gist.github.com/Jacksgong/bb011a5c48ef47ef6df0b3333c02b54f.js"></script>
+
+检测安装结果:
+
 <script src="https://gist.dreamtobe.cn/Jacksgong/684f423d5be270ce9610a053483e7a8b.js"></script>
 
 #### 4. 配置Swap
