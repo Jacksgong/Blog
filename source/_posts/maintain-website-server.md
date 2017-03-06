@@ -27,11 +27,11 @@ tags:
 
 快速执行配置:
 
-<script src="https://gist.github.com/Jacksgong/12b7d677e6ce47e7684bb1afc0c5c629.js"></script>
+<script src="https://gist.dreamtobe.cn/Jacksgong/12b7d677e6ce47e7684bb1afc0c5c629.js"></script>
 
 快速执行配置时，所执行的脚本:
 
-<script src="https://gist.github.com/Jacksgong/9d0519f68b7940a07075a834b3178979.js"></script>
+<script src="https://gist.dreamtobe.cn/Jacksgong/9d0519f68b7940a07075a834b3178979.js"></script>
 
 #### 2. 防火墙配置
 
@@ -39,17 +39,17 @@ tags:
 
 快速执行配置:
 
-<script src="https://gist.github.com/Jacksgong/7369e03bce09bab7d9e432012660094f.js"></script>
+<script src="https://gist.dreamtobe.cn/Jacksgong/7369e03bce09bab7d9e432012660094f.js"></script>
 
 快速执行配置时，所执行的脚本:
 
-<script src="https://gist.github.com/Jacksgong/1151255d4bbcf10269b781820bf74531.js"></script>
+<script src="https://gist.dreamtobe.cn/Jacksgong/1151255d4bbcf10269b781820bf74531.js"></script>
 
 #### 3. 配置TCP BBR拥塞算法
 
 快速执行配置，安装与检测安装算法(需要OpenVZ以外虚拟技术的VPS平台):
 
-<script src="https://gist.github.com/Jacksgong/684f423d5be270ce9610a053483e7a8b.js"></script>
+<script src="https://gist.dreamtobe.cn/Jacksgong/684f423d5be270ce9610a053483e7a8b.js"></script>
 
 #### 4. 配置Swap
 
@@ -58,23 +58,23 @@ tags:
 
 通过下面的命令从`检测情况`、`安装`、`固化`、`调优`，一步一步配置Swap，需要注意的是一般来说比较好的Swap大小是等于现有RAM大小或是现有RAM的两倍
 
-<script src="https://gist.github.com/Jacksgong/d54e2b68e2b66faec7e671338ac4b85b.js"></script>
+<script src="https://gist.dreamtobe.cn/Jacksgong/d54e2b68e2b66faec7e671338ac4b85b.js"></script>
 
 #### 5. 安装与配置Nginx
 
 快速执行配置:
 
-<script src="https://gist.github.com/Jacksgong/4759813f74070cf123afdc683e0fcd0a.js"></script>
+<script src="https://gist.dreamtobe.cn/Jacksgong/4759813f74070cf123afdc683e0fcd0a.js"></script>
 
 快速执行配置时，所执行的脚本:
 
-<script src="https://gist.github.com/Jacksgong/b582591df46dc6d2da43bbf8018f4e1c.js"></script>
+<script src="https://gist.dreamtobe.cn/Jacksgong/b582591df46dc6d2da43bbf8018f4e1c.js"></script>
 
 #### 6. 安装PHP7
 
 快速执行配置:
 
-<script src="https://gist.github.com/Jacksgong/bcc821847daa693dbb49452bdd0deb25.js"></script>
+<script src="https://gist.dreamtobe.cn/Jacksgong/bcc821847daa693dbb49452bdd0deb25.js"></script>
 
 ## 站点安装
 
@@ -100,7 +100,7 @@ tags:
 
 快速执行配置:
 
-<script src="https://gist.github.com/Jacksgong/770871658d3511012a3b9decbf7b4454.js"></script>
+<script src="https://gist.dreamtobe.cn/Jacksgong/770871658d3511012a3b9decbf7b4454.js"></script>
 
 #### 配置使用自己的Nginx
 
@@ -108,11 +108,11 @@ tags:
 
 快速执行配置:
 
-<script src="https://gist.github.com/Jacksgong/c5b1efd6da187e5ccd543e5461641bf8.js"></script>
+<script src="https://gist.dreamtobe.cn/Jacksgong/c5b1efd6da187e5ccd543e5461641bf8.js"></script>
 
 快速执行配置时，所执行的脚本:
 
-<script src="https://gist.github.com/Jacksgong/599385bc7abc4b0c5b9aa6c91fde4082.js"></script>
+<script src="https://gist.dreamtobe.cn/Jacksgong/599385bc7abc4b0c5b9aa6c91fde4082.js"></script>
 
 #### 配置HTTPS
 
