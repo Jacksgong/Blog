@@ -1,5 +1,5 @@
 title: 站点与服务器维护
-date: 2017-03-06 23:26:03
+date: 2017-03-08 00:40:03
 categories:
 - 服务器
 tags:
@@ -35,6 +35,10 @@ tags:
 
 <script src="https://gist.dreamtobe.cn/Jacksgong/9d0519f68b7940a07075a834b3178979.js"></script>
 
+执行效果图:
+
+<img src="/img/conf-zsh.jpg" width="400px">
+
 #### 2. 防火墙配置
 
 > 内对外完全放开，外对内只开启22,80,443端口
@@ -47,6 +51,10 @@ tags:
 
 <script src="https://gist.dreamtobe.cn/Jacksgong/1151255d4bbcf10269b781820bf74531.js"></script>
 
+执行效果图:
+
+<img src="/img/conf-firewall.jpg" width="400px">
+
 #### 3. 配置TCP BBR拥塞算法
 
 快速执行配置，安装与检测安装算法(需要OpenVZ以外虚拟技术的VPS平台):
@@ -55,6 +63,10 @@ tags:
 
 <script src="https://gist.dreamtobe.cn/Jacksgong/bb011a5c48ef47ef6df0b3333c02b54f.js"></script>
 
+执行效果图:
+
+<img src="/img/install-bbr.jpg" width="400px">
+
 检测安装结果:
 
 <script src="https://gist.dreamtobe.cn/Jacksgong/684f423d5be270ce9610a053483e7a8b.js"></script>
@@ -62,6 +74,10 @@ tags:
 检测安装结果时，所执行的脚本:
 
 <script src="https://gist.dreamtobe.cn/Jacksgong/383df6722917610a4dd42308666703c4.js"></script>
+
+执行效果图:
+
+<img src="/img/check-bbr.png" width="400px">
 
 #### 4. 配置Swap
 
@@ -76,6 +92,10 @@ tags:
 
 <script src="https://gist.dreamtobe.cn/Jacksgong/58a8421fb362b9763cfae050245e5577.js"></script>
 
+执行效果图:
+
+<img src="/img/conf-swap.png" width="400px">
+
 也可以通过通过下面的命令从`检测情况`、`安装`、`固化`、`调优`，手动的一步一步配置Swap，需要注意的是一般来说比较好的Swap大小是等于现有RAM大小或是现有RAM的两倍:
 
 <script src="https://gist.dreamtobe.cn/Jacksgong/d54e2b68e2b66faec7e671338ac4b85b.js"></script>
@@ -89,6 +109,10 @@ tags:
 快速执行配置时，所执行的脚本:
 
 <script src="https://gist.dreamtobe.cn/Jacksgong/b582591df46dc6d2da43bbf8018f4e1c.js"></script>
+
+执行效果图:
+
+<img src="/img/install-nginx.jpg" width="400px">
 
 #### 6. 安装PHP7
 
@@ -134,7 +158,11 @@ tags:
 
 <script src="https://gist.dreamtobe.cn/Jacksgong/599385bc7abc4b0c5b9aa6c91fde4082.js"></script>
 
-#### 配置HTTPS
+执行效果图:
+
+<img src="/img/conf-gitlab-non-bundled-nginx.png" width="400px">
+
+#### 配置Gitlab的HTTPS
 
 - 参考本文下面提到的配置SSL(HTTPS)https来生成对应用于gitlab访问域名的证书
 - 将nginx配置文件调整为: [gitlab-omnibus-ssl-nginx.conf](https://gitlab.com/gitlab-org/gitlab-recipes/blob/master/web-server/nginx/gitlab-omnibus-ssl-nginx.conf)
@@ -163,6 +191,11 @@ gitlab-rake gitlab:check SANITIZE=true
 快速执行配置时，所执行的脚本:
 
 <script src="https://gist.dreamtobe.cn/Jacksgong/012b8be66ff15b2bfbcba81e21e73c40.js"></script>
+
+执行效果图:
+
+<img src="/img/conf-https.jpg" width="400px">
+
 
 #### 安全检验
 
@@ -193,7 +226,7 @@ sudo crontab -e
 
 ---
 
-> *目前有部分脚本并未经过测试，是根据我的印象编写的，有时间会一一测试，也欢迎反馈*
+- 文章创建时间: 2017-03-06，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/maintain-website-server.md)。
 
 ---
 
