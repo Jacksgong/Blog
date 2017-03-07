@@ -25,7 +25,7 @@ tags:
 
 > 由于MacBook上对zsh长期的使用习惯，因此使用统一风格的zsh，并使用oh-my-zsh管理
 
-![](/img/zsh-1.png)
+![](/img/maintain-website-server-1.png)
 
 快速执行配置:
 
@@ -149,6 +149,10 @@ gitlab-rake gitlab:check SANITIZE=true
 ## 站点维护
 
 ### 1. 配置SSL(HTTPS)
+
+通过配置如该博客的情况:
+
+![](/img/maintain-website-server-2.png)
 
 > 使用Let's Encrypt免费证书
 
