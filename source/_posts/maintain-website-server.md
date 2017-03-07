@@ -203,26 +203,9 @@ gitlab-rake gitlab:check SANITIZE=true
 
 #### 自动化刷新证书
 
-> TODO 有时间以后，考虑也将这个写成自动化bash脚本
+由于Let's Encrypt的证书默认有效期是90天， 因此我们可以自己写一个计时器检测更加可靠(每周检查)，下面的脚本是每周一上午2:30自动执行`certbot-auto renew`，日志会写入`/var/log/le-renewal.log`，并且在随后5分钟重新加载nginx:
 
-Let's Encrypt的证书默认有效期是90天， 不过我们可以通过`certbot-auto`进行`renew`
-
-```
-certbot-auto renew
-```
-
-由于这个是失效30天内重新执行生成的，因此我们可以自己写一个计时器检测更加可靠(每周检查):
-
-```
-sudo crontab -e
-```
-
-添加(每周一上午2:30自动执行`certbot-auto renew`并且在2:35重新加载Nginx)，日志会写入`/var/log/le-renewal.log`
-
-```
-30 2 * * 1 /usr/local/sbin/certbot-auto renew >> /var/log/le-renew.log
-35 2 * * 1 /etc/init.d/nginx reload
-```
+<script src="https://gist.dreamtobe.cn/Jacksgong/b9cc015e17ca259349caf97fef2a39bb.js"></script>
 
 ---
 
