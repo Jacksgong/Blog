@@ -1,5 +1,5 @@
 title: 站点与服务器维护
-date: 2017-03-08 00:40:03
+date: 2017-03-08 01:15:03
 categories:
 - 服务器
 tags:
@@ -37,7 +37,7 @@ tags:
 
 执行效果图:
 
-<img src="/img/conf-zsh.jpg" width="400px">
+<img src="/img/conf-zsh.jpg" width="450px">
 
 #### 2. 防火墙配置
 
@@ -53,7 +53,7 @@ tags:
 
 执行效果图:
 
-<img src="/img/conf-firewall.jpg" width="400px">
+<img src="/img/conf-firewall.jpg" width="450px">
 
 #### 3. 配置TCP BBR拥塞算法
 
@@ -65,7 +65,7 @@ tags:
 
 执行效果图:
 
-<img src="/img/install-bbr.jpg" width="400px">
+<img src="/img/install-bbr.jpg" width="450px">
 
 检测安装结果:
 
@@ -77,7 +77,7 @@ tags:
 
 执行效果图:
 
-<img src="/img/check-bbr.png" width="400px">
+<img src="/img/check-bbr.png" width="450px">
 
 #### 4. 配置Swap
 
@@ -94,7 +94,7 @@ tags:
 
 执行效果图:
 
-<img src="/img/conf-swap.png" width="400px">
+<img src="/img/conf-swap.png" width="450px">
 
 也可以通过通过下面的命令从`检测情况`、`安装`、`固化`、`调优`，手动的一步一步配置Swap，需要注意的是一般来说比较好的Swap大小是等于现有RAM大小或是现有RAM的两倍:
 
@@ -112,7 +112,7 @@ tags:
 
 执行效果图:
 
-<img src="/img/install-nginx.jpg" width="400px">
+<img src="/img/install-nginx.jpg" width="450px">
 
 #### 6. 安装PHP7
 
@@ -160,7 +160,7 @@ tags:
 
 执行效果图:
 
-<img src="/img/conf-gitlab-non-bundled-nginx.png" width="400px">
+<img src="/img/conf-gitlab-non-bundled-nginx.png" width="450px">
 
 #### 配置Gitlab的HTTPS
 
@@ -194,7 +194,7 @@ gitlab-rake gitlab:check SANITIZE=true
 
 执行效果图:
 
-<img src="/img/conf-https.jpg" width="400px">
+<img src="/img/conf-https.jpg" width="450px">
 
 
 #### 安全检验
