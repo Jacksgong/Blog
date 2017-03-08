@@ -8,6 +8,7 @@
 
 - 基于框架: [Hexo](https://github.com/hexojs/hexo)
 - 基于主题: [NexT.Mist](https://github.com/iissnan/hexo-theme-next)
+- 本站点服务器搭建教程: [站点与服务器维护](https://blog.dreamtobe.cn/maintain-website-server/)
 
 ## 博客索引
 
