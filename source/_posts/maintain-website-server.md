@@ -170,9 +170,7 @@ tags:
 
 #### 各类状态检测与修复
 
-```
-gitlab-rake gitlab:check SANITIZE=true
-```
+<script src="https://gist.dreamtobe.cn/Jacksgong/c3976d9e7e53a4ef81b22efcba7388d4.js"></script>
 
 ## 站点维护
 
