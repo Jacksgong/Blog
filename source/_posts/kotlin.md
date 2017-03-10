@@ -1,5 +1,5 @@
 title: Kotlin
-date: 2017-02-10 11:30:03
+date: 2017-03-10 14:02:03
 permalink: 2016/11/30/kotlin
 categories:
 - 编程语言
@@ -256,6 +256,8 @@ Mockito 2.1.0 及之后的版本原生支持了对`final`的method与class进行
 **但是** 由于Mockito推出2.1.0时，对代码进行了大量的重构，虽然PowerMock已经在计划中通过2.0版本来对其进行适配，但是由于Mockito 2.1.0的重构，工作量还是比较大，因此还在[计划中](https://github.com/powermock/powermock/issues/706#issuecomment-264097614)。
 
 #### 3. Kotlin单元测试总结
+
+> 对于Kotlin Android项目的单元测试案例，可以参考[这里](https://github.com/Jacksgong/grpc-android-kotlin/tree/master/client-android/app/src/test/kotlin)
 
 由于PowerMock还未适配Mockito v2.1.0，因此目前Kotlin中如果需要mock `static`的方法会麻烦些（可以使用通用方法: 封装一层`非static`的方法，在里面调用原本的`static`方法，然后对这个封装后的方法进行mock）。其他都比较流畅。
 
