@@ -94,13 +94,34 @@ nofollow:
     - jacksgong.com
     - dreamtobe.cn
 
-clean_css:
-  exclude:
-  - '*.min.css'
-
 uglify:
   mangle: true
   output:
   compress:
   exclude:
   - '*.min.js'
+
+html_minifier:
+  enable: true
+  exclude:
+
+css_minifier:
+  enable: true
+  exclude:
+    - '*.min.css'
+
+js_minifier:
+  enable: true
+  mangle: true
+  output:
+  compress:
+  exclude:
+    - '*.min.js'
+
+image_minifier:
+  enable: true
+  interlaced: true
+  multipass: false
+  optimizationLevel: 0
+  pngquant: false
+  progressive: false
