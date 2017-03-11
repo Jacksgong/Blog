@@ -10,3 +10,6 @@ Disallow: /css/
 Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
+
+Sitemap: https://blog.dreamtobe.cn/sitemap.xml
+Sitemap: https://blog.dreamtobe.cn/baidusitemap.xml
