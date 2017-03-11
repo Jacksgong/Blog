@@ -31,6 +31,7 @@
 - 2016年9月 为了防止国内万恶运营商的劫持，上了[HTTPS-ORIGIN](https://www.ssllabs.com/ssltest/analyze.html?d=blog.jacksgong.com)，[HTTPS-CDN](https://www.ssllabs.com/ssltest/analyze.html?d=blog.dreamtobe.cn)。
 - 2017年2月 网站源支持了HTTP/2: https://nocdn.dreamtobe.cn/ (腾讯CDN要在2017年第二个季度才支持HTTP/2)
 - 2017年3月 博客服务器迁到日本，并改用KVM架构VPS，并将TCP拥塞控制算法改为BBR: https://nocdn.dreamtobe.cn/
+- 2017年3月 压缩站点，考虑到腾讯CDN优化缓慢(BBR、HTTP2等)，深受牵制，只将js/css图片等放到CDN，站点地址直接解析回自己的VPS
 
 
 ## LICENSE
