@@ -15,9 +15,9 @@ tags:
 
 <!-- more -->
 
-> 下面的所有配置都是基于Ubuntu 16.04
+{% note warning %} 下面的所有配置都是基于Ubuntu 16.04
 
-> 如果你的服务器在国内，`gist.github.com`已经被墙，你可以将下面快速执行脚本中的`gist.github.com`改为`gist.dreamtobe.cn`即可(我架了一个代理)
+如果你的服务器在国内，`gist.github.com`已经被墙，你可以将下面快速执行脚本中的`gist.github.com`改为`gist.dreamtobe.cn`即可(我架了一个代理) {% endnote %}
 
 ## Ubuntu 16.04环境
 
