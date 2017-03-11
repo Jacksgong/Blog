@@ -28,3 +28,5 @@ tags:
 ## Demo
 
 ![demo gif](/img/magic_progress.gif)
+
+---

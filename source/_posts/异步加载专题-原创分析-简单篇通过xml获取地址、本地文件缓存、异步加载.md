@@ -18,7 +18,7 @@ tags:
 //下一篇将分析：[异步加载专题][原创分析]中级篇本地缓存、ListView滑动停止加载、利用synchronized控制线程数机制、很好的文件结构
 下面我们开始分析MainActivity:
 
-```
+```java
 package com.example.synctask;
 
 import java.io.File;
@@ -98,7 +98,7 @@ public class MainActivity extends Activity {
 
 其中Contact用于存储从xml中读取到的对象类型：
 
-```
+```java
 package com.example.synctask;
 
 public class Contact {
@@ -138,7 +138,7 @@ public class Contact {
 
 ContactService 用于获取网络资源:
 
-```
+```java
 package com.example.synctask;
 
 import java.io.File;
@@ -250,7 +250,7 @@ public class ContactService {
 
 其中MainActivity中的线程：
 
-```
+```java
 //获取数据，主UI线程是不能做耗时操作的，所以启动子线程来做
         new Thread(){
         	public void run() {
@@ -273,14 +273,14 @@ public class ContactService {
 
 先通过
 
-```
+```java
 contacts = service.getContactAll();
 ```
 
 获得解析后的所有的Contact.
 通过Hanlder的Message
 
-```
+```java
 Message msg = new Message();
         		msg.what = SUCCESS_GET_CONTACT;
         		msg.obj = contacts;
@@ -289,7 +289,7 @@ Message msg = new Message();
 
 发送到
 
-```
+```java
 private Handler mHandler = new Handler(){
 		public void handleMessage(android.os.Message msg) {
 			if(msg.what == SUCCESS_GET_CONTACT){
@@ -304,7 +304,7 @@ private Handler mHandler = new Handler(){
 在handleMessage中创建ListView的Adapter.
 在ImageAdapter中：
 
-```
+```java
 @Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// 1获取item,再得到控件
@@ -337,7 +337,7 @@ private Handler mHandler = new Handler(){
 
 调用asyncloadImage顾名思义异步加载图片:
 
-```
+```java
 private void asyncloadImage(ImageView iv_header, String path) {
 		ContactService service = new ContactService();
 		AsyncImageTask task = new AsyncImageTask(service, iv_header);
@@ -347,7 +347,7 @@ private void asyncloadImage(ImageView iv_header, String path) {
 
 在其中创建联网下载图片的对象service传入以AsyncTask 为父类（暂且理解为可以更新UI的线程）的task对象.
 
-```
+```java
 private final class AsyncImageTask extends AsyncTask<string, Integer, Uri> {
 
 		private ContactService service;
@@ -387,7 +387,7 @@ private final class AsyncImageTask extends AsyncTask<string, Integer, Uri> {
 而这个线程的请求应该是通过：task.execute(path);
 我们看下protected Uri doInBackground(String… params)
 
-```
+```java
 // 后台运行的子线程子线程
 		@Override
 		protected Uri doInBackground(String... params) {
@@ -401,8 +401,9 @@ private final class AsyncImageTask extends AsyncTask<string, Integer, Uri> {
 ```
 
 这个在后台运行的子线程子线程调通过getImageURI返回获取Uri.
-我们看下：getImageURI:
-```
+我们看下：`getImageURI`:
+
+```java
 /*
 	 * 从网络上获取图片，如果图片在本地存在的话就直接拿，如果不存在再去服务器上下载图片
 	 * 这里的path是图片的地址
@@ -442,7 +443,7 @@ private final class AsyncImageTask extends AsyncTask<string, Integer, Uri> {
 这里已经备注的很清晰了，需要提到的是这里通过MD5来加密了获取到的图片的名字.
 就是项目中涉及到的：
 
-```
+```java
 package com.example.synctask;
 
 import java.security.MessageDigest;
@@ -474,7 +475,7 @@ public class MD5 {
 
 此时更新ui
 
-```
+```java
 // 这个放在在ui线程中执行
 		@Override
 		protected void onPostExecute(Uri result) {
@@ -487,9 +488,5 @@ public class MD5 {
 ```
 
 至此简单的异步加载就实现了。
-
----
-
-> © 2012 - 2017, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
 
 ---

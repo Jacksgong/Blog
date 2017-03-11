@@ -154,7 +154,3 @@ http://play.google.com/store/apps/details?id=com.whisperarts.kids.forms
 - 文章创建时间: 2014-11-08，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/SVG-Android%E5%BA%94%E7%94%A8%E6%8E%A2%E7%A9%B6%E4%B9%8B%E8%B7%AF.md)。
 
 ---
-
-> © 2012 - 2017, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
-
----

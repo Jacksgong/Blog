@@ -74,7 +74,3 @@ tags:
 本文已经发布到JackBlog公众号，可请直接访问: [Android Touch Event派发分析 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483664&idx=1&sn=9871b049b89ec0b5198e85759986f50b)
 
 ---
-
-> © 2012 - 2017, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
-
----

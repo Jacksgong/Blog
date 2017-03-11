@@ -43,39 +43,43 @@ tags:
 
 因此我们两个缓存池如下：
 
-    /**
-    * 小于0抛错
-    */
-    private final int INIT_CAPACITY = 10;
-    private final float LOAD_FACTOR = 0.75f;
-    /**
-    * 对于LinkedHashMap而言，它继承于HashMap、底层使用哈希表与双向链表(重新定义保存元素的Entry实现双向)来保存所有元素
-    * 参数说明
-    * int 初始链表容量
-    * float 负载因子 当前数据容量/总容量 （作用：超过此值自动扩张原容量的一倍）（注意：最大值为0.75，超过此值，底层会修改为此值）
-    * boolean true 从后往前 使用频率逐渐减少(LRU) ; false 存放循环队列按照插入顺序
-    */
-    private Map<String, byte[]> mCache = Collections.synchronizedMap(new LinkedHashMap<String, byte[]>(INIT_CAPACITY, LOAD_FACTOR, true));
-    private Map<String, WeakReference<byte[]>> mWeakCache = new ConcurrentHashMap<String, WeakReference<byte[]>>();
+```java
+/**
+* 小于0抛错
+*/
+private final int INIT_CAPACITY = 10;
+private final float LOAD_FACTOR = 0.75f;
+/**
+* 对于LinkedHashMap而言，它继承于HashMap、底层使用哈希表与双向链表(重新定义保存元素的Entry实现双向)来保存所有元素
+* 参数说明
+* int 初始链表容量
+* float 负载因子 当前数据容量/总容量 （作用：超过此值自动扩张原容量的一倍）（注意：最大值为0.75，超过此值，底层会修改为此值）
+* boolean true 从后往前 使用频率逐渐减少(LRU) ; false 存放循环队列按照插入顺序
+*/
+private Map<String, byte[]> mCache = Collections.synchronizedMap(new LinkedHashMap<String, byte[]>(INIT_CAPACITY, LOAD_FACTOR, true));
+private Map<String, WeakReference<byte[]>> mWeakCache = new ConcurrentHashMap<String, WeakReference<byte[]>>();
+```
 
 也许你会问为什么做了这些分析，强引用缓存池还使用Collections.synchronizedMap，我想coderanch.com论坛的Steve已经给我做出了答复：
 
-    You will have to come up with the requirements for your storage structure to figure out which one is best. There are two big differences:
+```
+You will have to come up with the requirements for your storage structure to figure out which one is best. There are two big differences:
 
-    1) The LinkedHashMap is ordered but not thread safe
+1) The LinkedHashMap is ordered but not thread safe
 
-    2) The ConcurrentHashMap is thread safe but not ordered
+2) The ConcurrentHashMap is thread safe but not ordered
 
-    If you need an ordered thread safe map, then maybe ConcurrentSkipListMap might be a better choice (but maybe not...).
+If you need an ordered thread safe map, then maybe ConcurrentSkipListMap might be a better choice (but maybe not...).
 
-    If you wanted the ordering of LinkedHashMap in a thread safe structure, your concerns should be:
-    - How much work would it take to make LinkedHashMap thread safe?
-    - Do you trust yourself to be able to make it thread safe?
-    - Can you make it thread safe and still efficient?
+If you wanted the ordering of LinkedHashMap in a thread safe structure, your concerns should be:
+- How much work would it take to make LinkedHashMap thread safe?
+- Do you trust yourself to be able to make it thread safe?
+- Can you make it thread safe and still efficient?
 
-    versus
-    - How much work would it take to make ConcurrentSkipListMap (or ConcurrentHashMap) sort like the LinkedHashMap?At first blush, this might seem easy (CSKLM uses a comparator, so just make a comparator for access time) but it won't be (you would be sorting on something other than the Key (insertion/access order), your structure would have to change with access, not just insertion, iteration would be affected...).
-    - Is the Map you come up with efficient enough to use?
+versus
+- How much work would it take to make ConcurrentSkipListMap (or ConcurrentHashMap) sort like the LinkedHashMap?At first blush, this might seem easy (CSKLM uses a comparator, so just make a comparator for access time) but it won't be (you would be sorting on something other than the Key (insertion/access order), your structure would have to change with access, not just insertion, iteration would be affected...).
+- Is the Map you come up with efficient enough to use?
+```
 
 因此目前强引用缓存池，这么做是折中的选择，当然还有很大的优化空间。我承认这里完全可以我们自己写一个线程安全的LinkedHashMap或支持LRU的ConcurrenthashMap，因为我们有他们的源码与详细的分析文稿。暂时如此，以后抽空优化。
 
@@ -83,186 +87,189 @@ tags:
 
 ### 对于文件缓存而言，我希望这里我们通过代理类一并说。看看代理类吧：
 
-    package cn.dreamtobe.library.cache.proxy;
+```java
+package cn.dreamtobe.library.cache.proxy;
 
-    import android.graphics.Bitmap;
-    import android.os.Parcel;
-    import android.os.Parcelable;
-    import cn.dreamtobe.library.cache.FileCache;
-    import cn.dreamtobe.library.cache.MemoryCache;
-    import cn.dreamtobe.library.cache.util.TransUtil;
+import android.graphics.Bitmap;
+import android.os.Parcel;
+import android.os.Parcelable;
+import cn.dreamtobe.library.cache.FileCache;
+import cn.dreamtobe.library.cache.MemoryCache;
+import cn.dreamtobe.library.cache.util.TransUtil;
 
-    /**
-     *
-     * @describe Proxy
-     *
-     * @author Jacksgong
-     * @since 2013-12-16 下午8:47:17
-     * @Web http://blog.dreamtobe.cn/1470.html
-     */
-    public class CacheProxy {
+/**
+ *
+ * @describe Proxy
+ *
+ * @author Jacksgong
+ * @since 2013-12-16 下午8:47:17
+ * @Web http://blog.dreamtobe.cn/1470.html
+ */
+public class CacheProxy {
 
-	private final static class HoldClass {
-		private final static MemoryCache MEMORY_CACHE = MemoryCache.getInstance();
-		private final static FileCache FILE_CACHE = FileCache.getInstance();
-	}
+ private final static class HoldClass {
+ 	private final static MemoryCache MEMORY_CACHE = MemoryCache.getInstance();
+ 	private final static FileCache FILE_CACHE = FileCache.getInstance();
+ }
 
-	// ---------------- get
-	// *File
-	public byte[] getBtsFromFile(String absolutePath) {
-		return HoldClass.FILE_CACHE.getFile(absolutePath);
-	}
+ // ---------------- get
+ // *File
+ public byte[] getBtsFromFile(String absolutePath) {
+ 	return HoldClass.FILE_CACHE.getFile(absolutePath);
+ }
 
-	// *Strong
-	public byte[] getBtsFromMemory(String key) {
-		return HoldClass.MEMORY_CACHE.getBytes(key);
-	}
+ // *Strong
+ public byte[] getBtsFromMemory(String key) {
+ 	return HoldClass.MEMORY_CACHE.getBytes(key);
+ }
 
-	public Bitmap getBmpFromMemory(String key) {
-		return TransUtil.bytes2Bimap(getBtsFromMemory(key));
-	}
+ public Bitmap getBmpFromMemory(String key) {
+ 	return TransUtil.bytes2Bimap(getBtsFromMemory(key));
+ }
 
-	public Parcel getPclFromMemory(String key) {
-		return TransUtil.bytes2Parcelable(getBtsFromMemory(key));
-	}
+ public Parcel getPclFromMemory(String key) {
+ 	return TransUtil.bytes2Parcelable(getBtsFromMemory(key));
+ }
 
-	// *Weak
-	public byte[] getBtsFromWeakM(String key) {
-		return HoldClass.MEMORY_CACHE.getWeakBytes(key);
-	}
+ // *Weak
+ public byte[] getBtsFromWeakM(String key) {
+ 	return HoldClass.MEMORY_CACHE.getWeakBytes(key);
+ }
 
-	public Bitmap getBmpFromWeakM(String key) {
-		return TransUtil.bytes2Bimap(getBtsFromWeakM(key));
-	}
+ public Bitmap getBmpFromWeakM(String key) {
+ 	return TransUtil.bytes2Bimap(getBtsFromWeakM(key));
+ }
 
-	public Parcel getPclFromWeakM(String key) {
-		return TransUtil.bytes2Parcelable(getBtsFromWeakM(key));
-	}
+ public Parcel getPclFromWeakM(String key) {
+ 	return TransUtil.bytes2Parcelable(getBtsFromWeakM(key));
+ }
 
-	// --------------- InCache
-	// byte[]
-	public String putIntoMemory(String key, byte[] b) {
-		return HoldClass.MEMORY_CACHE.inCache(key, b);
-	}
+ // --------------- InCache
+ // byte[]
+ public String putIntoMemory(String key, byte[] b) {
+ 	return HoldClass.MEMORY_CACHE.inCache(key, b);
+ }
 
-	public String putIntoMemory(byte[] b) {
-		return putIntoMemory(null, b);
-	}
+ public String putIntoMemory(byte[] b) {
+ 	return putIntoMemory(null, b);
+ }
 
-	// Bitmap
-	public String putIntoMemory(String key, Bitmap b) {
-		return HoldClass.MEMORY_CACHE.inCache(key, TransUtil.bitmap2Bytes(b));
-	}
+ // Bitmap
+ public String putIntoMemory(String key, Bitmap b) {
+ 	return HoldClass.MEMORY_CACHE.inCache(key, TransUtil.bitmap2Bytes(b));
+ }
 
-	public String putIntoMemory(Bitmap b) {
-		return putIntoMemory(null, b);
-	}
+ public String putIntoMemory(Bitmap b) {
+ 	return putIntoMemory(null, b);
+ }
 
-	// Parcelable
-	/**
-	 *
-	 * @param key
-	 * @param p
-	 *            这里选用Parcelable的原因
-	 *            *1. Object必须为可序列化对象才可存储为byte[]
-	 *            2.在使用内存的时候，Parcelable 类比Serializable性能高，所以推荐使用Parcelable类。
-	 *            3.Serializable在序列化的时候会产生大量的临时变量，从而引起频繁的GC。
-	 *            4.Parcelable不能使用在要将数据存储在磁盘上的情况，因为Parcelable不能很好的保证数据的持续性在外界有变化的情况下。尽管Serializable效率低点， 也不提倡用，但在这种情况下，还是建议你用Serializable 。
-	 * @return
-	 */
-	public String putIntoMemory(String key, Parcelable p) {
-		return HoldClass.MEMORY_CACHE.inCache(key, TransUtil.parcelable2Bytes(p));
-	}
+ // Parcelable
+ /**
+  *
+  * @param key
+  * @param p
+  *            这里选用Parcelable的原因
+  *            *1. Object必须为可序列化对象才可存储为byte[]
+  *            2.在使用内存的时候，Parcelable 类比Serializable性能高，所以推荐使用Parcelable类。
+  *            3.Serializable在序列化的时候会产生大量的临时变量，从而引起频繁的GC。
+  *            4.Parcelable不能使用在要将数据存储在磁盘上的情况，因为Parcelable不能很好的保证数据的持续性在外界有变化的情况下。尽管Serializable效率低点， 也不提倡用，但在这种情况下，还是建议你用Serializable 。
+  * @return
+  */
+ public String putIntoMemory(String key, Parcelable p) {
+ 	return HoldClass.MEMORY_CACHE.inCache(key, TransUtil.parcelable2Bytes(p));
+ }
 
-	public String putIntoMemory(Parcelable p) {
-		return putIntoMemory(null, p);
-	}
+ public String putIntoMemory(Parcelable p) {
+ 	return putIntoMemory(null, p);
+ }
 
-	// *Weak
-	// bytes
-	public String putIntoWeakM(String key, byte[] b) {
-		return HoldClass.MEMORY_CACHE.inWeakCache(key, b);
-	}
+ // *Weak
+ // bytes
+ public String putIntoWeakM(String key, byte[] b) {
+ 	return HoldClass.MEMORY_CACHE.inWeakCache(key, b);
+ }
 
-	public String putIntoWeakM(byte[] b) {
-		return putIntoWeakM(null, b);
-	}
+ public String putIntoWeakM(byte[] b) {
+ 	return putIntoWeakM(null, b);
+ }
 
-	// Bitmap
-	public String putIntoWeakM(String key, Bitmap b) {
-		return HoldClass.MEMORY_CACHE.inWeakCache(key, TransUtil.bitmap2Bytes(b));
-	}
+ // Bitmap
+ public String putIntoWeakM(String key, Bitmap b) {
+ 	return HoldClass.MEMORY_CACHE.inWeakCache(key, TransUtil.bitmap2Bytes(b));
+ }
 
-	public String putIntoWeakM(Bitmap b) {
-		return putIntoWeakM(null, b);
-	}
+ public String putIntoWeakM(Bitmap b) {
+ 	return putIntoWeakM(null, b);
+ }
 
-	// Parcelable
-	public String putIntoWeakM(String key, Parcelable p) {
-		return HoldClass.MEMORY_CACHE.inWeakCache(key, TransUtil.parcelable2Bytes(p));
-	}
+ // Parcelable
+ public String putIntoWeakM(String key, Parcelable p) {
+ 	return HoldClass.MEMORY_CACHE.inWeakCache(key, TransUtil.parcelable2Bytes(p));
+ }
 
-	public String putIntoWeakM(Parcelable p) {
-		return putIntoWeakM(null, p);
-	}
+ public String putIntoWeakM(Parcelable p) {
+ 	return putIntoWeakM(null, p);
+ }
 
-	// --------- remove
-	public boolean deleteFile(String absolutePath) {
-		return HoldClass.FILE_CACHE.deleteFile(absolutePath);
-	}
+ // --------- remove
+ public boolean deleteFile(String absolutePath) {
+ 	return HoldClass.FILE_CACHE.deleteFile(absolutePath);
+ }
 
-	public byte[] removeCache(String key) {
-		return HoldClass.MEMORY_CACHE.removeCache(key);
-	}
+ public byte[] removeCache(String key) {
+ 	return HoldClass.MEMORY_CACHE.removeCache(key);
+ }
 
-	// ---------- Memory Tool.
-	public void setMemoryLimit(long limit) {
-		if (limit <= 0) {
-			// Warn
-			return;
-		}
-		HoldClass.MEMORY_CACHE.setLimit(limit);
-	}
+ // ---------- Memory Tool.
+ public void setMemoryLimit(long limit) {
+ 	if (limit <= 0) {
+ 		// Warn
+ 		return;
+ 	}
+ 	HoldClass.MEMORY_CACHE.setLimit(limit);
+ }
 
-	public boolean isMemoryContain(String key) {
-		return HoldClass.MEMORY_CACHE.containsKey(key);
-	}
+ public boolean isMemoryContain(String key) {
+ 	return HoldClass.MEMORY_CACHE.containsKey(key);
+ }
 
-	public void clearMemoryCache() {
-		HoldClass.MEMORY_CACHE.clear();
-	}
+ public void clearMemoryCache() {
+ 	HoldClass.MEMORY_CACHE.clear();
+ }
 
-	// ------------ File Tool.
+ // ------------ File Tool.
 
-	public boolean isFileExist(String absolutePath) {
-		return HoldClass.FILE_CACHE.isFileExist(absolutePath);
-	}
+ public boolean isFileExist(String absolutePath) {
+ 	return HoldClass.FILE_CACHE.isFileExist(absolutePath);
+ }
 
-	public boolean autoDeleteFile(String absolutePath, int KeepNum) {
-		return HoldClass.FILE_CACHE.autoDeleteCache(absolutePath, KeepNum);
-	}
+ public boolean autoDeleteFile(String absolutePath, int KeepNum) {
+ 	return HoldClass.FILE_CACHE.autoDeleteCache(absolutePath, KeepNum);
+ }
 
-	}
+}
+```
 
 
 对于缓存而言。我们分别为弱引用缓存池与强引用缓存池分别提供了三种类型的输入、输出：
+
+```java
     byte[]、Bitmap、Parcelable
+```
 
 这里选用这三种类型，做了些考究，byte[]与Bitmap是考虑到使用频率而言，就Parcelable做了以下分析:
 
-    *1. Object必须为可序列化对象才可存储为byte[]
-     2.在使用内存的时候，Parcelable 类比Serializable性能高，所以推荐使用Parcelable类。
-     3.Serializable在序列化的时候会产生大量的临时变量，从而引起频繁的GC。
-     4.Parcelable不能使用在要将数据存储在磁盘上的情况，因为Parcelable不能很好的保证数据的持续性在外界有变化的情况下。尽管Serializable效率低点， 也不提倡用，但在这种情况下，还是建议用Serializable 。
-归根结底是需要存储对象的需求的折中处理。
+1. Object必须为可序列化对象才可存储为byte[]
+2.在使用内存的时候，Parcelable 类比Serializable性能高，所以推荐使用Parcelable类。
+3.Serializable在序列化的时候会产生大量的临时变量，从而引起频繁的GC。
+4.Parcelable不能使用在要将数据存储在磁盘上的情况，因为Parcelable不能很好的保证数据的持续性在外界有变化的情况下。尽管Serializable效率低点， 也不提倡用，但在这种情况下，还是建议用Serializable 。
+
+根结底是需要存储对象的需求的折中处理。
 
 文件缓存除了一些常用的方法，有一个工具方法是提供按修改日期，保证某目录下需要保留的的文件个数。在文件缓存这块还有很多需要拓展与智能化。抽空进行优化，并希望得到各类建议。
 
 ### 最后，作为缓存入口，它的功能绝非止于此。
+
 抽空我会进行数据分块处理等拓展（对外提供接口），并且优化弱引用池类型与文件缓存处理，并做一些考究。
-
----
-
-> © 2012 - 2017, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
 
 ---

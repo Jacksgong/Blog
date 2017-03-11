@@ -148,9 +148,4 @@ JVM会为每个对象分配一个`monitor`，而同时只能有一个线程可�
 - [Java锁Synchronized之偏向锁](http://blog.sina.com.cn/s/blog_c038e9930102v2hs.html)
 - [MySQL中的共享锁与排他锁](http://www.hollischuang.com/archives/923)
 
-
----
-
-> © 2012 - 2017, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
-
 ---

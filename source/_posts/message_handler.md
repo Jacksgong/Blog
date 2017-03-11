@@ -44,3 +44,5 @@ tags:
 [bintray_svg]: https://api.bintray.com/packages/jacksgong/maven/MessageHandler/images/download.svg
 [bintray_url]: https://bintray.com/jacksgong/maven/MessageHandler/_latestVersion
 [demo_gif]: https://github.com/Jacksgong/MessageHandler/raw/master/art/demo.gif
+
+---

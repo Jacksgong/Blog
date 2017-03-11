@@ -50,7 +50,3 @@ tags:
 - [APK 漏洞“黑影无处不在(Shadows Everywhere)”详解](http://jaq.alibaba.com/blog.htm?spm=0.0.0.0.Ioo2FE&id=77)
 
 ---
-
-> © 2012 - 2017, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
-
----

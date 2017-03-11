@@ -205,7 +205,3 @@ tags:
 在各类大小架构的支撑下，英语流利说的整体架构目前已经趋于稳定，但是，前方还有很多需要我们去做的，如单元测试在架构层保证规范化与常规化；如策略型需求在架构层保证可配置化；如在架构层面基于Annotation Processing封装实现快速减少重复Coding等等。无论如何，我们始终秉承，在不断发展与演进的过程中，也能不断的回馈社区。无论是源码还是架构思想本身都是在快速的贬值，唯有不断的实践、不断的迭代，不断的发展，才能使得世界更加美好。
 
 ---
-
-> © 2016, 流利说技术团队(https://www.liulishuo.com/). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
-
----

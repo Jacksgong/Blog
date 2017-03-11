@@ -40,3 +40,5 @@ tags:
 ![](/img/filedownloader-tasks_manager_demo.gif)
 ![](/img/filedownloader-mix_tasks_demo.gif)
 ![](/img/filedownloader-avoid_drop_frames1.gif)
+
+---

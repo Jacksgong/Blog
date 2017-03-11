@@ -256,12 +256,9 @@ private class GalleryItemAdapter extends ArrayAdapter<GalleryItem> {
 
 
 #### 作者建议：
+
 - 如果已经有一个稳定的，大型的项目，那么Picasso是更好的选择。
 
 - 另一方面，如果是一个新的app，或者项目很小，可以直接让Volley充当后端网络架构，它可以解决绝大多数HTTP的负担。（这里不是很认同作者，如果是网络框架这边，我个人建议先看看Retrofit，具体可以看看这篇[Retrofit开发指南](https://github.com/bboyfeiyu/android-tech-frontier/tree/master/issue-7/Retrofit开发指南)）
-
----
-
-> © 2012 - 2017, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
 
 ---

@@ -78,7 +78,3 @@ POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 - 文章创建时间: 2015-03-29，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/0a3e3bdc2378a5bd72652cd988c9ff3cbfc3d05f/source/_posts/zsh%5Boh-my-zsh%5D%E5%AD%A6%E4%B9%A0%E6%95%B4%E7%90%86.md)。
 
 ---
-
-> © 2012 - 2017, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
-
----

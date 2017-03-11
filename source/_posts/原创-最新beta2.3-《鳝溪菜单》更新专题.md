@@ -48,9 +48,4 @@ tags:
 3.修复在首页进入菜单搜索，搜索菜名时获得错误的店名Extra导致，进入店铺页面加载内容失败.
 4.首页搜索操作优化，当点击记录时，键盘进行隐藏。
 
-
----
-
-> © 2012 - 2017, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
-
 ---

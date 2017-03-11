@@ -49,3 +49,5 @@ mDemoTv.setText(SpanEllipsizeEndHelper.matchMaxWidth(demoSS, mDemoTv));
 ## IV. GitHub
 
 [SpanEllipsizeEnd](https://github.com/lingochamp/SpanEllipsizeEnd)
+
+---

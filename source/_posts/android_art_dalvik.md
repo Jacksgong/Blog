@@ -323,7 +323,3 @@ static void run_dex2oat(int zip_fd, int oat_fd, const char* input_file_name,
 - [浅谈为什么Java运行环境是虚拟机，而Python运行环境是解释器](http://www.xrpmoon.com/blog/archives/jripple1105.html)
 
 ---
-
-> © 2012 - 2017, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
-
----

@@ -129,3 +129,5 @@ Android Wear 2.0
 
 
 不用安装Apps，只需要Google play下载其中需要用到的代码，然后运行，速度非常的快。应该是需要Apk根据api简单的适配。
+
+---

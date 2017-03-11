@@ -91,7 +91,3 @@ killall -9 swjsq
 - [加速你的带宽—迅雷快鸟OPENWRT插件](http://www.openwrt.org.cn/bbs/thread-19695-1-1.html)
 
 ---
-
-> © 2012 - 2017, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
-
----

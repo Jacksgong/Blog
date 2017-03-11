@@ -129,7 +129,3 @@ tags:
 4. 组织架构: 小团队；少开大会；专人维护Build系统；专门的架构组；专门的质量改进组（高手重点）；专门的自动化测试组；每周召开质量会
 
 ---
-
-> © 2012 - 2017, Jacksgong(blog.dreamtobe.cn). Licensed under the Creative Commons Attribution-NonCommercial 3.0 license (This license lets others remix, tweak, and build upon a work non-commercially, and although their new works must also acknowledge the original author and be non-commercial, they don’t have to license their derivative works on the same terms). http://creativecommons.org/licenses/by-nc/3.0/
-
----

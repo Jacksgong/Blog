@@ -32,3 +32,5 @@ tags:
 ## Demo
 
 ![demo gif](/img/percent_smooth.gif)
+
+---
