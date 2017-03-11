@@ -85,3 +85,20 @@ search:
   limit: 10000
 
 sort_by: updated
+
+nofollow:
+    enable: true
+    exclude:
+    - jacksgong.com
+    - dreamtobe.cn
+
+clean_css:
+  exclude:
+  - '*.min.css'
+
+uglify:
+  mangle: true
+  output:
+  compress:
+  exclude:
+  - '*.min.js'
