@@ -5,6 +5,8 @@
 #
 # For deplay public folder.
 
+rm -rf public/.git
+cp -r ../.blog-deploy-git public/.git
 cd public
 echo "$(tput setaf 3)---------Public-Release v1.0--------- $(tput sgr 0)"
 
@@ -20,4 +22,6 @@ git rebase -Xtheirs origin/master
 git push
 
 echo "$(tput setaf 3)Has successfully cimmit: $commit_msg$(tput sgr 0)"
-
+cd ..
+rm -rf ../.blog-deploy-git
+cp public/.git ../.blog-deploy-git
