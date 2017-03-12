@@ -57,7 +57,7 @@ sudo shutdown -r 0
 
 这是我目前的主题配置情况:
 
-![](/img/zsh-1.png)
+![](/img/maintain-website-server-1.png)
 
 采用的是[powerlevel9k](https://github.com/bhilburn/powerlevel9k)主题，色系是[Neutron](https://github.com/Ch4s3/iTerm2-Neutron)。
 

@@ -102,7 +102,7 @@ uglify:
   - '*.min.js'
 
 html_minifier:
-  enable: true
+  enable: false
   exclude:
 
 css_minifier:
