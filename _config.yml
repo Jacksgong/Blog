@@ -103,6 +103,7 @@ uglify:
 
 html_minifier:
   enable: true
+  ignore_error: true
   exclude:
 
 css_minifier:
