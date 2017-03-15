@@ -13,11 +13,13 @@ tags:
 
 ## I. 微信心跳机制
 
-![](/img/android-weak-network-1.png)
+> 其中的有考虑到如何让手机更省电，因此有与Android的alarm对齐唤醒的处理(可以参见已经[开源的mars](https://github.com/Tencent/mars)的`smart_heartbeat.cc`)
 
 <!-- more -->
 
-> 其中的有考虑到如何让手机更省电，因此有与Android的alarm对齐唤醒的处理(可以参见已经[开源的mars](https://github.com/Tencent/mars)的`smart_heartbeat.cc`)
+![](/img/android-weak-network-1.png)
+
+
 
 ---
 
