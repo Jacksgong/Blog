@@ -1,5 +1,5 @@
 title: 敲开TensorFlow的大门
-date: 2017-03-17 02:31:03
+date: 2017-03-17 23:58:03
 categories:
 - 编程语言
 tags:
@@ -59,6 +59,13 @@ AI的模型训练其实就是: 对模型变量的值进行不断调整，直到�
 
 该次模型训练的性能决定因素是: 优化器选择、精度选择、训练数据
 
+#### 通过高级的接口快速的实现上面的模型训练
+
+<script src="https://gist.dreamtobe.cn/Jacksgong/1d9fc40f9affe4478c06cb71004f957a.js"></script>
+
+当然我们也可以通过`tf.contrib.learn.Estimator`这个高级接口，再使用低级接口来定制Linear Regressor算法模型(实际上内置的`tf.contrib.learn.LinearRegressor`也是继承自`tf.contrib.learn.Estimator`的)。当然我们不是通过继承，是通过提供`model_fn`来告诉他训练的步骤、如果评估等:
+
+<script src="https://gist.dreamtobe.cn/Jacksgong/355d0129457eec50ffe2dcbd15763352.js"></script>
 
 ## III. 常见的API
 
