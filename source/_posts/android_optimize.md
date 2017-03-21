@@ -1,5 +1,5 @@
 title: Android优化
-date: 2015-10-26 00:26:03
+date: 2017-03-21 15:32:03
 permalink: 2015/10/26/android_optimize
 categories:
 - Android性能与优化
@@ -12,38 +12,14 @@ tags:
 
 ---
 
-## I. 网络相关
-
-> 更多网络优化，可参考: [Android网络](http://blog.dreamtobe.cn/2015/03/28/Android网络学习笔记整理/)
-
-- http头信息带Cache-Control域 确定缓存过期时间  防止重复请求
-- 直接用IP直连，不用域名，策略性跟新本地IP列表。 -- DNS解析过程耗时在百毫秒左右，并且还有可能存在DNS劫持。
-- 图片、JS、CSS等静态资源，采用CDN（当然如果是使用7牛之类的服务就已经给你搭建布置好了）
-- 全局图片处理采用漏斗模型全局管控，所请求的图片大小最好依照业务大小提供/最大不超过屏幕分辨率需要，如果请求原图，也不要超过`GL10.GL_MAX_TEXTURE_SIZE`
-- 全局缩略图直接采用webp，在尽可能不损失图片质量的前提下，图片大小与png比缩小30% ~ 70%
-- 如果列表里的缩略图服务器处理好的小图，可以考虑直接在列表数据请求中，直接以base64在列表数据中直接带上图片（国内还比较少，海外有些这种做法，好像web端比较常见）
-- 轮询或者socket心跳采用系统`AlarmManager`提供的闹钟服务来做，保证在系统休眠的时候cpu可以得到休眠，在需要唤醒时可以唤醒（持有cpu唤醒锁）
-- 可以通过将零散的网路的请求打包进行一次操作，避免过多的无线信号引起电量消耗。
+{% note info %} 本文比较全面的描述了一般项目在Android开发中如何提高性能，如何着手调优项目，如果你目前正在优化你的Android项目，恭喜你，这正是你要的，也十分欢迎拍砖，本文也会持续迭代。 {% endnote %}
 
 <!-- more -->
 
+## I. 基础相关
 
-#### 1. 传输数据格式选择
+### 1. 老生常谈的数据结构
 
-- 如果是需要全量数据的，考虑使用[Protobuffers](https://developers.google.com/protocol-buffers/?hl=zh-cn) (序列化反序列化性能高于json)，并且考虑使用[nano protocol buffer](https://android.googlesource.com/platform/external/protobuf/+/master/java/README.txt)。
-- 如果传输回来的数据不需要全量读取，考虑使用[Flatbuffers](https://github.com/google/flatbuffers) (序列化反序列化几乎不耗时，耗时是在读取对象时(就这一部分如果需要优化，可以参看[Flatbuffer Use Optimize](http://blog.dreamtobe.cn/2015/01/05/Flatbuffer-Use-Optimize/)
-
-#### 2. 输入流
-> 使用具有缓存策略的输入流
-
-原 | 建议替换为
--|-
-`InputStream` | `BufferedInputStream`
-`Reader` | `BufferedReader`
-
-## II. 基础相关
-
-#### 1. 数据结构
 > 如果已知大概需要多大，就直接给初始大小，减少扩容时额外开销。
 
 - `ArrayList`: 里面就一数组，内存小，有序取值快，扩容效率低
@@ -53,27 +29,72 @@ tags:
 - `Collections.synchronizedMap`: 线程安全，采用当前对象作为锁，颗粒较大，并发性能较差。
 - `SparseArray`、`SparseBooleanArray`、`SparseIntArray`:  针对Key为`Int`、`Boolean`进行了优化，采用二分法查找，简单数组存储。相比`HashMap`而言，`HashMap`每添加一个数据，大约会需要申请额外的32字节的数据，因此`Sparsexxx`在内存方面的开销会小很多。
 
-#### 2. 编码习惯
+### 2. 编码习惯
 
-- 尽量简化，不要做不需要的操作。
-- 尽量避免分配内存(创建对象): 1) 如果一个方法返回一个`String`，并且这个方法的返回值始终都是被用来`append`到一个`StringBuffer`上，就改为传入`StringBuffer`直接`append`上去，避免创建一个短生命周期的临时对象；2) 如果使用的字符串是截取自某一个字符串，就直接从那个字符串上面`substring`，不要拷贝一份，因为通过`substring`虽然创建了新的`String`对象，但是共享了里面的`char`数组中的`char`对象，减少了这块对象的创建；量使用多个一维数组，其性能高于多维数组；`int`数组性能远大于`Integer`数组性能；
-- 如果你确定不需要访问类成员，让方法`static`，这样调用时可以提升15%~20%的速度，因为不需要切换对象状态。
-- 如果某个参数是常量，别忘了使用`static final`，这样可以让`Class`首次初始化时，不需要调用`<clinit>`来创建`static`方法，而是在编译时就直接将常量替换代码中使用的位置。
-- Android开发中，类内尽量避免通过`get/set`访问成员变量，虽然这在语言的开发中是一个好的习惯，但是Android虚拟机中，对方法的调用开销远大于对变量的直接访问。在没有JIT的情况下，直接的变量访问比调用方法快3倍，在JIT下，直接的变量访问更是比调用方法快7倍!
-- 当内部类需要访问外部类的私有`方法/变量`时，考虑将这些外部类的私有`方法/变量`改用包可见的方式。首先在编写代码的时候，通过内部类访问外部类的私有`方法/变量`是合法的，但是在编译的时候为了满足这个会将需要被内部类访问的私有`方法/变量`封装一层包可见的方法，实现让内部类访问这些私有的`方法/变量`，根据前面我们有提到说方法的调用开销大于变量的调用，因此这样使得性能变差，所以我们在编码的时候可以考虑直接将需要被内部类调用的外部类私有`方法/变量`，改为包可见。
+>  尽量简化，不要做不需要的操作。
+
+#### 尽量避免分配内存(创建对象)
+
+- 1) 如果一个方法返回一个`String`，并且这个方法的返回值始终都是被用来`append`到一个`StringBuffer`上，就改为传入`StringBuffer`直接`append`上去，避免创建一个短生命周期的临时对象；
+- 2) 如果使用的字符串是截取自某一个字符串，就直接从那个字符串上面`substring`，不要拷贝一份，因为通过`substring`虽然创建了新的`String`对象，但是共享了里面的`char`数组中的`char`对象，减少了这块对象的创建；
+- 3) 量使用多个一维数组，其性能高于多维数组；`int`数组性能远大于`Integer`数组性能；
+
+#### 尽可能`static`方法
+
+如果你确定不需要访问类成员，让方法`static`，这样调用时可以提升15%~20%的速度，因为不需要切换对象状态。
+
+#### 尽可能使用常量而非变量
+
+如果某个参数是常量，别忘了使用`static final`，这样可以让`Class`首次初始化时，不需要调用`<clinit>`来创建`static`方法，而是在编译时就直接将常量替换代码中使用的位置。
+
+#### 从性能层面出发，尽可能直接访问变量而非方法
+
+Android开发中，类内尽量避免通过`get/set`访问成员变量，虽然这在语言的开发中是一个好的习惯，但是Android虚拟机中，对方法的调用开销远大于对变量的直接访问。在没有JIT的情况下，直接的变量访问比调用方法快3倍，在JIT下，直接的变量访问更是比调用方法快7倍!
+
+#### 对被内部类调用的`方法/变量`改为包可见
+
+当内部类需要访问外部类的私有`方法/变量`时，考虑将这些外部类的私有`方法/变量`改用包可见的方式。首先在编写代码的时候，通过内部类访问外部类的私有`方法/变量`是合法的，但是在编译的时候为了满足这个会将需要被内部类访问的私有`方法/变量`封装一层包可见的方法，实现让内部类访问这些私有的`方法/变量`，根据前面我们有提到说方法的调用开销大于变量的调用，因此这样使得性能变差，所以我们在编码的时候可以考虑直接将需要被内部类调用的外部类私有`方法/变量`，改为包可见。
+
+#### 少用`float`
+
 - 尽量少使用`float`。在很多现代设备中，`double`的性能与`float`的性能几乎没有差别，但是从大小上面`double`是`float`的两倍的大小。
 - 尽量考虑使用整型而非浮点数，在较好的Android设备中，浮点数比整型慢一倍。
-- 尽量不要使用除法操作，有很多处理器有乘法器，但是没有除法器，也就是说在这些设备中需要将除法分解为其他的计算方式速度会比较慢。
-- 尽量使用系统sdk中提供的方法，而非自己去实现。如`String.indexOf()`相关的API，Dalvik将会替换为内部方法；`System.arraycopy()`方法在Nexus One手机上，会比我们上层写的类似方法的执行速度快9倍。
-- 谨慎编写native，性能不一定更好，Native并不是用于使得性能更好，而是用于有些已经存在的库是使用native语言实现的，我们需要引入Android，这时才使用。1) 需要多出开销在维持Java-native的通信；2) 在native中创建的资源由于在native heap上面，因此需要主动的释放；3) 需要对不同的处理器架构进行支持，存在明显的兼容性问题需要解决。
-- 在没有JIT的设备中，面向接口编程的模式(如`Map map`)，相比直接访问对象类(如`HashMap map`)，会慢6%，但是在存在JIT的设备中，两者的速度差不多。但是内存占用方面面向接口变成会消耗更多内存，因此如果你的面向接口编程不是十分的必要的情况下可以考虑不用。
-- 在没有JIT的设备中，访问本地化变量相对与成员变量会快20%，但是在存在JIT的设备中，两者速度差不多。
 
-##### 遍历优化
+#### 使用乘法代替除法
+
+尽量不要使用除法操作，有很多处理器有乘法器，但是没有除法器，也就是说在这些设备中需要将除法分解为其他的计算方式速度会比较慢。
+
+#### 使用内部实现，而非上层实现
+
+尽量使用系统sdk中提供的方法，而非自己去实现。如`String.indexOf()`相关的API，Dalvik将会替换为内部方法；`System.arraycopy()`方法在Nexus One手机上，会比我们上层写的类似方法的执行速度快9倍。
+
+#### 谨慎编写Native
+
+> Android JVM相关知识，可参看: [ART、Dalvik](http://blog.dreamtobe.cn/2015/11/01/android_art_dalvik/)
+> Android JNI、NDK相关知识，可参看: [NDK](http://blog.dreamtobe.cn/2015/11/08/ndk/)
+
+写native性能不一定更好，Native并不是用于使得性能更好，而是用于有些已经存在的库是使用native语言实现的，我们需要引入Android，这时才使用。
+
+- 需要多出开销在维持Java-native的通信，Java调用JNI的耗时较Java调用Java肯定更慢，虽然随着JDK版本的升级，差距已经越来越小(JDK1.6版本是5倍Java调用Java方法的耗时
+- 在native中创建的资源由于在native heap上面，因此需要主动的释放，但也因此对应用而言没有OOM的问题，并且不需要考虑GC时锁线程带来的掉帧，如Facebook的Fresco就是将图片缓存到Native Heap中
+- 需要对不同的处理器架构进行支持，存在明显的兼容性问题需要解决
+- 如果是Dalvik，将省去了由JIT编译期转为本地代码的这个步骤
+
+> 一些重要的参数之类，也可以考虑放在Native层，保证安全性。参考: [Android应用程序通用自动脱壳方法研究](http://blog.dreamtobe.cn/2015/07/17/wh_android_tk/)
+
+#### 权衡面向接口编程
+
+在没有JIT的设备中，面向接口编程的模式(如`Map map`)，相比直接访问对象类(如`HashMap map`)，会慢6%，但是在存在JIT的设备中，两者的速度差不多。但是内存占用方面面向接口变成会消耗更多内存，因此如果你的面向接口编程不是十分的必要的情况下可以考虑不用。
+
+#### 重复访问的变量，赋值为本地变量
+
+在没有JIT的设备中，访问本地化变量相对与成员变量会快20%，但是在存在JIT的设备中，两者速度差不多。
+
+#### 遍历优化
 
 > 尽量使用`Iterable`而不是通过长度判断来进行遍历。
 
-```
+```java
 // 这种性能是最差的，JIT也无法对其优化。
 public void zero() {
     int sum = 0;
@@ -103,9 +124,7 @@ public void two() {
     }
 }
 ```
-
-
-## III. 数据库相关
+## II. 数据库相关
 
 > 建多索引的原则: 哪个字段可以最快的**减少查询**结果，就把该字段放在最前面
 
@@ -130,25 +149,56 @@ public void two() {
 - 查询需要多少就limit多少（如判断是否含有啥，就limit 1就行了嘛）
 - 如果出现很宽的列(如blob类型)，考虑放在单独表中(在查询或者更新其他列数据时防止不必要的大数据i/o影响性能)
 
+## III. 网络调优
 
-## IV. JNI抉择
+> 更多网络优化，可移步[微信Mars与其策略](https://blog.dreamtobe.cn/mars/)
 
-> Android JVM相关知识，可参看: [ART、Dalvik](http://blog.dreamtobe.cn/2015/11/01/android_art_dalvik/)
+> 当然无论是网速评估、心跳间隔、超时间隔，我认为这些在往常是基于特定环境下指定算法，然后结合自己的经验值给出的结果（如微信中的网速评估、超时间隔等），都能够借助AI整合原本的经验数据，给出一个更优数据的可能性(如某环境下超时间隔为5s为最优值的可能性为80%)，来替代人的经验值。但是目前可预见的难点是在于如何去区分以及定义训练的数据，如:网速评估，其实是根据不同的环境(2G、3G、LTE、4G、千兆4G、5G、Wifi、之类的)，之前微信其实有自己的一个评估策略，但是如果要接入AI，是因为网速这个评估的结果一直不是一个准确值，之前只是根据我们自己的经验给一个粗略的算法；可能这块要结合各类网络因素，参考RTT(这块的计算算法)，输入的因素越多，对应我们能够确定的结果越少，应该训练出来的模型能够越有效，这样可以结合AI给出的”经验”，让网速评估更准确些。这也是目前我在探究的，所以才有了前几天写的[敲开TensorFlow的大门](https://blog.dreamtobe.cn/tensorflow-sample/)。
 
-> Android JNI、NDK相关知识，可参看: [NDK](http://blog.dreamtobe.cn/2015/11/08/ndk/)
+### 策略层面优化
 
-> JNI不一定显得更快，有些会更慢。
+#### 1. 通过`If-Modified-Since`与`Last-Modified`
 
-> 特点: 不用在虚拟机的框子下写代码
+- 第一次请求时，服务端在头部通过`Last-Modified`带下来最后一次修改的时间。
+- 之后的请求，在请求头中通过`If-Modified-Since`带上之前服务端返回的`Last-Modified`的值
+- 如果服务端判断最后一次修改的时间距离目前数据没有修改过，就直接返回`304 NOT MODIFIED`的状态码，此时客户端直接呈现之前的数据，由于不需要带下来重复的数据，减少用户流量的同时也提高了响应速度。
 
-- 可以调用更底层的高性能的代码库 -- Good
-- 如果是Dalvik，将省去了由JIT编译期转为本地代码的这个步骤。 -- Good
-- Java调用JNI的耗时较Java调用Java肯定更慢，虽然随着JDK版本的升级，差距已经越来越小(JDK1.6版本是5倍Java调用Java方法的耗时) -- Bad
-- 内存不在Java Heap，没有OOM风险，有效减少gc。 -- Good
+#### 2. 通过`Etag`与`If-None-Match`
 
-> 一些重要的参数之类，也可以考虑放在Native层，保证安全性。参考: [Android应用程序通用自动脱壳方法研究](http://blog.dreamtobe.cn/2015/07/17/wh_android_tk/)
+- 第一次请求时，服务端在头部通过`Etag`带下来请求数据的hash值
+- 之后的请求，在请求头中通过`If-None-Match`带上之前服务端返回的`Etag`的值
+- 如果服务端判断文件没有修改过，就直接返回`304 NOT MODIFIED`，此时客户端直接呈现之前的数据，由于不需要带下来重复的数据，减少用户流量的同时也提高了响应速度。
 
-## V. 多进程抉择
+如果你使用Okhttp3与Retrofit2，对于`304 NOT MODIFIED`的缓存便可以直接通过下面的代码直接创建一个2M缓存文件来户缓存这类数据。一旦是`304  NOT MODIFIED`, Retrofit2与Okhttp3将会伪装一个与之前一样的响应给上层，因此对上层是透明的。
+
+```java
+private final static int CACHE_SIZE_BYTES = 1024 * 1024 * 2;
+public static Retrofit getAdapter(Context context, String baseUrl) {
+    OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
+    builder.cache(
+        new Cache(context.getCacheDir(), CACHE_SIZE_BYTES));
+    Retrofit.Builder retrofitBuilder = new Retrofit.Builder();
+    retrofitBuilder.baseUrl(baseUrl).client(client);
+    return retrofitBuilder.build();
+}
+```
+
+### 数据结构层面
+
+- 如果是需要全量数据的，考虑使用[Protobuffers](https://developers.google.com/protocol-buffers/?hl=zh-cn) (序列化反序列化性能高于json)，并且考虑使用[nano protocol buffer](https://android.googlesource.com/platform/external/protobuf/+/master/java/README.txt)。
+- 如果传输回来的数据不需要全量读取，考虑使用[Flatbuffers](https://github.com/google/flatbuffers) (序列化反序列化几乎不耗时，耗时是在读取对象时(就这一部分如果需要优化，可以参看[Flatbuffer Use Optimize](http://blog.dreamtobe.cn/2015/01/05/Flatbuffer-Use-Optimize/)
+
+###  其他层面优化
+
+- 通过自实现DNS(如实现自己的HTTPDNS)，来降低没必要的DNS更新(由于DNS常见策略是与文件大小以及TTL相关，如果我们分文件以及分域名协商TTL有效期，可能case by case有效这块的刷新率)，甚至防止DNS劫持
+- 图片、JS、CSS等静态资源，采用CDN（当然如果是使用7牛之类的服务就已经给你搭建布置好了）
+- 全局图片处理采用漏斗模型全局管控，所请求的图片大小最好依照业务大小提供/最大不超过屏幕分辨率需要，如果请求原图，也不要超过`GL10.GL_MAX_TEXTURE_SIZE`
+- 全局缩略图直接采用webp，在尽可能不损失图片质量的前提下，图片大小与png比缩小30% ~ 70%
+- 如果列表里的缩略图服务器处理好的小图，考虑到减少下载时的RTT，可以考虑直接在列表数据请求中，直接以base64在列表数据中直接带上图片(但是需要注意的是通常base64后的图片大小会大于原图片大小，适当权衡)（国内还比较少，海外有些这种做法，好像web端比较常见）
+- 轮询或者socket心跳采用系统`AlarmManager`提供的闹钟服务来做，保证在系统休眠的时候cpu可以得到休眠，在需要唤醒时可以唤醒（持有cpu唤醒锁），这块考虑到省点等问题可以参考[这篇文章](https://blog.dreamtobe.cn/2016/08/15/android_scheduler_and_battery/)
+- 在一些异步的任务时，可以考虑合并请求
+
+## IV. 多进程抉择
 
 > 360 17个进程: [360手机卫士 Android开发 InfoQ视频 总结
 ](http://blog.dreamtobe.cn/2015/03/17/360手机卫士-Android开发-InfoQ视频-总结/)，但是考虑到多进程的消耗，我们更需要关注多个组件复用同一进程。
@@ -161,58 +211,18 @@ public void two() {
 
 > 最后，多进程存在的两个问题: 1. 由于进程间通讯或者首次调起进程的消耗等，带来的cpu、i/o等的资源竞争。2. 也许对于部分同事来说，会还有可读性问题吧，毕竟多了层IPC绕了点。
 
-## VI. UI层面
+## V. UI层面
 
 > 相关深入优化，可参看[Android绘制布局相关](http://blog.dreamtobe.cn/2015/10/20/android-view/)
-
 > 对于卡顿相关排查推荐参看: [Android性能优化案例研究(上)](http://www.importnew.com/3784.html)与[Android性能优化案例研究（下）](http://www.importnew.com/4065.html)
 
+- 可以考虑使用[ConstraintLayout](https://blog.dreamtobe.cn/2016/08/03/constraint-layout/)，有效减少了布局的层级，提高了性能
 - 减少不必要的不透明背景相互覆盖，减少重绘，因为GPU不得不一遍又一遍的画这些图层
 - 保证UI线程一次完整的绘制(measure、layout、draw)不超过16ms(60Hz)，否则就会出现掉帧，卡顿的现象
 - 在UI线程中频繁的调度中，尽量少的对象创建，减少gc等。
 - 分步加载（减少任务颗粒）、预加载、异步加载(区别出耗时任务，采用异步加载)
 
-
-## VII. 库推荐
-
-> 可以参考Falcon Pro作者的推荐: [Falcon Pro 3如何完成独立开发演讲分析](http://blog.dreamtobe.cn/2015/06/14/Falcon-Pro-3-如何完成独立开发演讲分析/)
-
-#### 1. 响应式编程
-
-[RxJava](https://github.com/ReactiveX/RxJava) (响应式编程，代码更加简洁，异步处理更快快捷、异常处理更加彻底、数据管道理念)
-
-相关了解可以参看: [RxJava](http://blog.dreamtobe.cn/2015/04/29/RxJava学习整理/)
-
-#### 2. 图片加载:
-- 小型快捷: [Picasso](https://github.com/square/picasso) (接口干净、支持okhttp、功能强大、稳定、高效, 可以延读: [PhotoGallery、Volley、Picasso 比较](http://blog.dreamtobe.cn/2015/04/28/PhotoGallery%E3%80%81Volley%E3%80%81Picasso-%E6%AF%94%E8%BE%83/))
-- 大项目考虑: [Fresco](http://fresco-cn.org) (2.5M，pipeline解决资源竞争、Native Heep解决OOM，的同时减少GC)
-
-#### 3. 网络底层库:
-
-[Okhttp](https://github.com/square/okhttp): 默认gzip、缓存、安全等
-
-#### 4. 网络基层:
-
-[Retrofit](https://github.com/square/retrofit): 非常好用的REST Client，结合RxJava简单API实现、类型安全，简单快捷
-
-#### 5. 数据库层:
-
-[Realm](https://realm.io): 效率极高(Falcon Pro 3的作者Joaquim用了该库以后，所有数据库操作都放到了UI线程)（基于TightDB，底层C++闭源，Java层开源，简单使用，性能远高于SQLite等）
-
-#### 6. Crash上报:
-
-[Fabric](https://fabric.io): 全面的信息(新版本还支持JNI Crash获取和上报)、稳定的数据、及时的通知、强大的反混淆(其实在混淆后有上传mapping)
-
-#### 7. 内存泄漏自动化检测
-
-[LeakCanary](https://github.com/square/leakcanary): 自动化泄漏检测与分析 ( 可以看看这个[LeakCanary使用总结](http://blog.dreamtobe.cn/2015/05/18/LeakCanary%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/)与[Leakcanary Square的一款Android/Java内存泄漏检测工具](http://blog.dreamtobe.cn/2015/05/12/Leakcanary-Square%E7%9A%84%E4%B8%80%E6%AC%BEAndroid:Java%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E6%A3%80%E6%B5%8B%E5%B7%A5%E5%85%B7/))
-
-#### 8. 其他
-
- - 代码质量: [phabricator 的arc diff](http://phabricator.org) (尽量小颗粒度的arc diff 与update review)，其实也可以看看Google是如何做的: [笔记-谷歌是如何做代码审查的](http://blog.dreamtobe.cn/2015/03/23/%5B笔记%5D谷歌是如何做代码审查的/)，还有一点的TODO要写好deadline与master
- - 编包管理: [Gitlab CI](https://about.gitlab.com/gitlab-ci/) (结合Gitlab，功能够用，方便)
-
-## VIII. 内存
+## VI. 内存
 
 > 根据设备可用内存的不同，每个设备给应用限定的Heap大小是有限的，当达到对应限定值还申请空间时，就会收到`OutOfMemoryError`的异常。
 
@@ -265,13 +275,14 @@ public void two() {
 - 如果还考虑2.x机器的话，设置`BitmapFactory#options`的`InNativeAlloc`参数为true，此时decode的内存不会上报到dvm中，便不会oom。
 - 建议采用[lingochamp/QiniuImageLoader](https://github.com/lingochamp/QiniuImageLoader)的方式，所有图片的操作都放到云端处理，本地默认使用Webp，并且获取的每个位置的图片，尽量通过精确的大小按需获取，避免内存没必要的消耗。
 
-
-## IX. 线程
+## VII. 线程
 
 - 采用全局线程池管理体系，有效避免野线程。可参照 [ThreadDebugger-demo/DemoThreadPoolCentral.java](https://github.com/Jacksgong/ThreadDebugger/blob/master/demo/src/main/java/cn/dreamtobe/threaddebugger/demo/DemoThreadPoolCentral.java)
 - 结合全局线程池管理体系，使用[ThreadDebugger](https://github.com/Jacksgong/ThreadDebugger)监控线程，避免线程泄漏的存在。
 
-## X. 编译与发布
+## VIII. 编译与发布
+
+> 关于开发流程优化，可以参考[这里](https://blog.dreamtobe.cn/large-project-develop/)
 
 - 考虑采用DexGuard，或ProGuard结合相关资源混淆来提高安全与包大小，参考: [DexGuard、Proguard、Multi-dex](http://blog.dreamtobe.cn/2015/11/04/guard_multi_dex/)
 - 结合Gradle、Gitlab-CI 与Slack(Incoming WebHooks)，快速实现，打相关git上打相关Tag，自动编相关包通知Slack。
@@ -280,15 +291,16 @@ public void two() {
 - 迭代过程中，包定期做多纬度扫描，如包大小、字节码大小变化、红线扫描、资源变化扫描、相同测试用例耗电量内存等等，更多的可以参考 [360手机卫士 Android开发 InfoQ视频 总结](http://blog.dreamtobe.cn/2015/03/17/360%E6%89%8B%E6%9C%BA%E5%8D%AB%E5%A3%AB-Android%E5%BC%80%E5%8F%91-InfoQ%E8%A7%86%E9%A2%91-%E6%80%BB%E7%BB%93/)
 - 迭代过程中，对关键`Activity`以及`Application`对打开的耗时进行统计，观察其变化，避免因为迭代导致某些页面非预期的打开变慢。
 
-## XI. 工具
+## IX. 工具
+
+> 这块的拓展阅读，可以直接参考[Android开发周边](https://blog.dreamtobe.cn/android-toolset/)
 
 - [TraceView](https://developer.android.com/studio/profile/traceview.html)可以有效的更重一段时间内哪个方法最耗时，但是需要注意的是目前TraceView在录制过中，会关闭JIT，因此也许有些JIT的优化在TraceView过程被忽略了。
 - [Systrace](https://developer.android.com/studio/profile/systrace.html)可以有效的分析掉帧的原因。
 - [HierarchyViewer](https://developer.android.com/studio/profile/optimize-ui.html)可以有效的分析View层级以及布局每个节点`measure`、`layout`、`draw`的耗时。
 
-## XII. 其他
+## X. 其他
 
-- `final`能用就用（高效: 编译器在调用`final`方法时，会转入内嵌机制）
 - 懒预加载，如简单的`ListView`、`RecyclerView`等滑动列表控件，停留在当前页面的时候，可以考虑直接预加载下个页面所需图片
 - 智能预加载，通过权重等方式结合业务层面，分析出哪些更有可能被用户浏览使用，然后再在某个可能的时刻进行预加载。如，进入朋友圈之前通过用户行为，智能预加载部分原图。
 - 做好有损体验的准备，在一些无法避免的问题面前做好有损体验（如，非UI进程crash，可以自己解决就不要让用户感知，或者UI进程crash了，做好场景恢复）
@@ -300,10 +312,51 @@ public void two() {
 - 当然运维也是一方面: [Optimize Your App](http://developer.android.com/intl/zh-cn/distribute/essentials/optimizing-your-app.html)
 - 在已知并且不需要栈数据的情况下，就没有必要需要使用异常，或创建`Throwable`生成栈快照是一项耗时的工作。
 - 需要十分明确发布环境以及测试环境，明确仅仅为了方便测试的代码以及工具在发布环境不会被带上。
+- 国内环境的长连接抉择: 根据各厂商设备在日活的排行，优先适配，而后再结合后台的工作量，评估是否自己做，客户端做主要就考虑电量以及可靠性权衡。如果要接第三方的，一定要了解清楚，国内现在第三方的，依然不太有节操（甚至有些会把你加入某套餐，就是会各种唤起其他应用)，如果要自己实现可以看看本文有提到的[这篇文章](https://blog.dreamtobe.cn/2016/08/15/android_scheduler_and_battery/)
+
+### 常见的依赖库推荐
+
+> 可以参考Falcon Pro作者的推荐: [Falcon Pro 3如何完成独立开发演讲分析](http://blog.dreamtobe.cn/2015/06/14/Falcon-Pro-3-如何完成独立开发演讲分析/)
+
+#### 1. 响应式编程
+
+> [RxJava](https://github.com/ReactiveX/RxJava) (响应式编程，代码更加简洁，异步处理更快快捷、异常处理更加彻底、数据管道理念)
+
+相关了解可以参看: [RxJava](http://blog.dreamtobe.cn/2015/04/29/RxJava学习整理/)
+
+#### 2. 图片加载:
+
+- 小型快捷: [Picasso](https://github.com/square/picasso) (接口干净、支持okhttp、功能强大、稳定、高效, 可以延读: [PhotoGallery、Volley、Picasso 比较](http://blog.dreamtobe.cn/2015/04/28/PhotoGallery%E3%80%81Volley%E3%80%81Picasso-%E6%AF%94%E8%BE%83/))
+- 大项目考虑: [Fresco](http://fresco-cn.org) (2.5M，pipeline解决资源竞争、Native Heep解决OOM，的同时减少GC)
+
+#### 3. 网络底层库:
+
+[Okhttp](https://github.com/square/okhttp): 默认gzip、缓存、安全等
+
+#### 4. 网络基层:
+
+[Retrofit](https://github.com/square/retrofit): 非常好用的REST Client，结合RxJava简单API实现、类型安全，简单快捷
+
+#### 5. 数据库层:
+
+[Realm](https://realm.io): 效率极高(Falcon Pro 3的作者Joaquim用了该库以后，所有数据库操作都放到了UI线程)（基于TightDB，底层C++闭源，Java层开源，简单使用，性能远高于SQLite等）
+
+#### 6. Crash上报:
+
+[Fabric](https://fabric.io): 全面的信息(新版本还支持JNI Crash获取和上报)、稳定的数据、及时的通知、强大的反混淆(其实在混淆后有上传mapping)
+
+#### 7. 内存泄漏自动化检测
+
+[LeakCanary](https://github.com/square/leakcanary): 自动化泄漏检测与分析 ( 可以看看这个[LeakCanary使用总结](http://blog.dreamtobe.cn/2015/05/18/LeakCanary%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/)与[Leakcanary Square的一款Android/Java内存泄漏检测工具](http://blog.dreamtobe.cn/2015/05/12/Leakcanary-Square%E7%9A%84%E4%B8%80%E6%AC%BEAndroid:Java%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E6%A3%80%E6%B5%8B%E5%B7%A5%E5%85%B7/))
+
+#### 8. 其他
+
+ - 代码质量: [phabricator 的arc diff](http://phabricator.org) (尽量小颗粒度的arc diff 与update review)，其实也可以看看Google是如何做的: [笔记-谷歌是如何做代码审查的](http://blog.dreamtobe.cn/2015/03/23/%5B笔记%5D谷歌是如何做代码审查的/)，还有一点的TODO要写好deadline与master
+ - 编包管理: [Gitlab CI](https://about.gitlab.com/gitlab-ci/) (结合Gitlab，功能够用，方便)
 
 ---
 
-- 最后一次更新时间: 2016-9-19，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/android_optimize.md)。
+- 文章创建时间: 2015-10-26，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/android_optimize.md)。
 
 ---
 
@@ -321,5 +374,6 @@ public void two() {
 - [Android优化实践](http://gold.xitu.io/entry/55272f6be4b0da2c5deb7f36)
 - [Performance Tips](https://developer.android.com/training/articles/perf-tips.html)
 - [Managing Your App's Memory](https://developer.android.com/training/articles/memory.html#YourApp)
+- [Reducing your networking footprint with OkHttp, Etags and If-Modified-Since](https://android.jlelse.eu/reducing-your-networking-footprint-with-okhttp-etags-and-if-modified-since-b598b8dd81a1#.7lr6enj2k)
 
 ---

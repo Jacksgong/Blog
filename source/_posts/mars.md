@@ -11,7 +11,7 @@ tags:
 
 ---
 
-> 前几年在微信工作时，参加一些内部会议当时也有做了相关简要整理: [Android网络](http://blog.dreamtobe.cn/2015/03/28/Android网络学习笔记整理/)，前端时间也有总结了[微信的心跳机制](https://blog.dreamtobe.cn/2016/08/16/android_weak_network/)，今天主要是对已开源的Mars进行窥探。
+> 前几年在微信工作时，参加一些内部会议当时也有做了相关简要整理: [Android网络](http://blog.dreamtobe.cn/2015/03/28/Android网络学习笔记整理/)，前端时间也有总结了[微信的心跳机制](https://blog.dreamtobe.cn/2016/08/16/android_weak_network/)，今天主要是对已开源的Mars进行窥探。如果对目前行业中互联网现状感兴趣也可以留意下[这里](https://blog.dreamtobe.cn/network_basic/)
 
 > Mars是微信[已经开源](https://github.com/Tencent/mars)的小数据传输的解决方案。
 
