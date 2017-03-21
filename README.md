@@ -32,6 +32,7 @@
 - 2017年2月 网站源支持了HTTP/2: https://nocdn.dreamtobe.cn/ (腾讯CDN要在2017年第二个季度才支持HTTP/2)
 - 2017年3月 博客服务器迁到日本，并改用KVM架构VPS，并将TCP拥塞控制算法改为BBR: https://nocdn.dreamtobe.cn/
 - 2017年3月 压缩站点，考虑到腾讯CDN优化缓慢(BBR、HTTP2等)，深受牵制，只将js/css图片等放到CDN，站点地址直接解析回自己的VPS
+- 2017年3月 考虑到出口有时候丢包与延时严重，另外租了一台腾讯VPS，域名解析国内的走腾讯在广州的VPS，海外的走日本的VPS
 
 
 ## LICENSE
