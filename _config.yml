@@ -75,9 +75,9 @@ baidusitemap:
 deploy:
   type:
 
-duoshuo_shortname: jacksgong
-duoshuo_share: true
-duoshuo_hotartical: true
+#duoshuo_shortname: jacksgong
+#duoshuo_share: true
+#duoshuo_hotartical: true
 
 # Next theme search configuration
 search:
