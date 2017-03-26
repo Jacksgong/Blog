@@ -39,7 +39,7 @@ tags:
 
 执行效果图:
 
-<img src="/img/conf-zsh.jpg" width="450px">
+<img src="/img/conf-zsh.png" width="450px">
 
 #### 2. 防火墙配置
 
