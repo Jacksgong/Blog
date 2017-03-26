@@ -140,6 +140,8 @@ tags:
 
 ### 2. gitlab
 
+> 这边我使用的是omnibus的版本，因为这个版本足够灵活也便于维护。
+
 #### 通过脚本安装gitlab-omnibus版本
 
 > [官方安装教程](https://about.gitlab.com/downloads/)
@@ -173,6 +175,31 @@ tags:
 #### 各类状态检测与修复
 
 <script src="https://gist.dreamtobe.cn/Jacksgong/c3976d9e7e53a4ef81b22efcba7388d4.js"></script>
+
+#### 查看当前状态
+
+执行`sudo gitlab-ctl status`
+
+#### 备份
+
+通过命令`sudo gitlab-rake gitlab:backup:create`进行备份，备份完成后备份文件会在`/var/opt/gitlab/backups`目录下面，文件名为`[TIMESTAMP]_gitlab_backup.tar`。
+
+#### 还原
+
+1. 确保目前的版本与备份文件的版本是在同一个版本
+2. 将备份文件拷贝到`/var/opt/gitlab/backups`目录下，并且通过`chown git:git [backup-file]`确保备份文件所有权是`git`用户所有
+3. 确保`/etc/gitlab/gitlab.rb`与`/etc/gitlab/gitlab-secrets.json`这两个配置文件与备份的一致，然后再生效下配置`sudo gitlab-ctl reconfigure`
+4. 分别执行`sudo gitlab-ctl stop unicorn`、`sudo gitlab-ctl stop sidekiq`，然后通过`sudo gitlab-ctl status`检查下状态
+5. 执行`sudo gitlab-rake gitlab:backup:restore BACKUP=[backup-file-name]`(这里的backup-file-name如: `1393513186_2014_02_27`)，进行还原
+6. 执行`sudo gitlab-ctl start`重新启动gitlab，并执行`sudo gitlab-rake gitlab:check SANITIZE=true`进行检查与自动修复
+
+#### 升级
+
+执行`sudo apt-get update`与`sudo apt-get install gitlab-ce`即可，自动会升级到最新的版本。
+
+#### 卸载
+
+执行`sudo gitlab-ctl uninstall`
 
 ## 站点维护
 
@@ -218,5 +245,7 @@ tags:
 - [一键安装最新内核并开启 BBR 脚本](https://teddysun.com/489.html)
 - [How To Secure Nginx with Let's Encrypt on Ubuntu 14.04](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-14-04)
 - [How To Add Swap Space on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-16-04)
+- [Gitlab Backup restore](https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/raketasks/backup_restore.md)
+- [Updating GitLab via omnibus-gitlab](https://docs.gitlab.com/omnibus/update/README.html#updating-from-gitlab-66-and-higher-to-the-latest-version)
 
 ---
