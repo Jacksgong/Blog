@@ -1,5 +1,5 @@
 title: 站点与服务器维护
-date: 2017-03-08 01:15:03
+date: 2017-04-01 15:59:03
 categories:
 - 服务器
 tags:
@@ -23,7 +23,12 @@ tags:
 
 ### 服务器环境配置
 
-#### 1. 配置Shell
+#### 1. 基本用户配置
+
+<script src="https://gist.dreamtobe.cn/Jacksgong/6b2c118c9a1b1c064c5d5f6402c240d3.js"></script>
+
+
+#### 2. 配置Shell
 
 > 由于MacBook上对zsh长期的使用习惯，因此使用统一风格的zsh，并使用oh-my-zsh管理
 
@@ -41,7 +46,38 @@ tags:
 
 <img src="/img/conf-zsh.png" width="450px">
 
-#### 2. 防火墙配置
+#### 3. 修改source
+
+> **如果是海外的VPS** 可以忽略这一步。
+
+这里之所以要修改，是因为国内的部分VPS，如阿里云、腾讯云等有篡改ubuntu与相关库的习惯。
+
+先备份`/etc/apt/sources.list`文件，然后将其内容全部删除，然后使用下面的源:
+
+<script src="https://gist.dreamtobe.cn/Jacksgong/2d960a5299ca67e728edc27ad4f284f9.js"></script>
+
+配置完后，最好升级下所有的包(`sudo -- sh -c "apt-get update && apt-get upgrade"`)，这时候你就会发现有哪些被修改过了，我的做法是全部替换为原版(`maintainer's version`)
+
+#### 4. 配置10分钟闲置后自动断开
+
+在`/etc/ssh/sshd_config`中配置
+
+```bash
+ClientAliveInterval 600
+ClientAliveCountMax 0
+```
+
+#### 5. 修改hostname
+
+> 可以通过命令`hostname`输出当前的hostname
+
+以下以将`hostname`修改为`new-host-name`为例子:
+
+- 第一步: 通过`sudo hostname new-host-name`，让注销重新登录以后立马生效新的`hostname`
+- 第二步: 通过修改`/etc/hostname`中的`hostname`来固化，让重启后依然使用新的`hostname`
+- 第三步: 通过修改(添加)`new-host-name`到本地`127.0.0.1`中，如`127.0.0.1 new-host-name`，让通过`hostname`访问本地时能够解析到本地
+
+#### 6. 防火墙配置
 
 > 内对外完全放开，外对内只开启22,80,443端口
 
@@ -57,7 +93,7 @@ tags:
 
 <img src="/img/conf-firewall.jpg" width="450px">
 
-#### 3. 配置TCP BBR拥塞算法
+#### 7. 配置TCP BBR拥塞算法
 
 快速执行配置，安装与检测安装算法(需要OpenVZ以外虚拟技术的VPS平台):
 
@@ -81,7 +117,7 @@ tags:
 
 <img src="/img/check-bbr.png" width="450px">
 
-#### 4. 配置Swap
+#### 8. 配置Swap
 
 > 考虑到gitlab等应用对内存使用比较多，因此可以通过`top`工具来查看内存的使用情况，考虑到有可能会有内存不足导致500，可以配置Swap来避免该问题的发生
 > 在以前考虑到SSD硬盘的写入次数太过频繁很容易缩短使用寿命，因此不建议使用SSD做Swap，但是现在的[SSD已经逐渐改善](http://askubuntu.com/questions/652337/why-no-swap-partitions-on-ssd-drives/652342#652342?newreg=237ae587907241919402075b80ab6fa3)了类似的情况
@@ -102,7 +138,7 @@ tags:
 
 <script src="https://gist.dreamtobe.cn/Jacksgong/d54e2b68e2b66faec7e671338ac4b85b.js"></script>
 
-#### 5. 安装与配置Nginx
+#### 9. 安装与配置Nginx
 
 快速执行配置:
 
@@ -116,7 +152,7 @@ tags:
 
 <img src="/img/install-nginx.jpg" width="450px">
 
-#### 6. 安装PHP7
+#### 10. 安装PHP7
 
 快速执行配置:
 
@@ -186,11 +222,11 @@ tags:
 
 #### 还原
 
-1. 确保目前的版本与备份文件的版本是在同一个版本
+1. 确保目前的版本与备份文件的版本是在同一个版本(检测当前版本: `sudo gitlab-rake gitlab:env:info`)
 2. 将备份文件拷贝到`/var/opt/gitlab/backups`目录下，并且通过`chown git:git [backup-file]`确保备份文件所有权是`git`用户所有
 3. 确保`/etc/gitlab/gitlab.rb`与`/etc/gitlab/gitlab-secrets.json`这两个配置文件与备份的一致，然后再生效下配置`sudo gitlab-ctl reconfigure`
 4. 分别执行`sudo gitlab-ctl stop unicorn`、`sudo gitlab-ctl stop sidekiq`，然后通过`sudo gitlab-ctl status`检查下状态
-5. 执行`sudo gitlab-rake gitlab:backup:restore BACKUP=[backup-file-name]`(这里的backup-file-name如: `1393513186_2014_02_27`)，进行还原
+5. 执行`sudo gitlab-rake gitlab:backup:restore BACKUP=[backup-file-name]`(这里的`[backup-file-name]`如: `1393513186_2014_02_27`)，进行还原
 6. 执行`sudo gitlab-ctl start`重新启动gitlab，并执行`sudo gitlab-rake gitlab:check SANITIZE=true`进行检查与自动修复
 
 #### 升级
@@ -245,6 +281,9 @@ tags:
 - [一键安装最新内核并开启 BBR 脚本](https://teddysun.com/489.html)
 - [How To Secure Nginx with Let's Encrypt on Ubuntu 14.04](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-14-04)
 - [How To Add Swap Space on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-16-04)
+- [How do I terminate all idle incoming ssh connections?](http://askubuntu.com/questions/137632/how-do-i-terminate-all-idle-incoming-ssh-connections)
+- [Add a User to a Group (or Second Group) on Linux](https://www.howtogeek.com/50787/add-a-user-to-a-group-or-second-group-on-linux/)
+- [Ubuntu Linux Change Hostname (computer name)](https://www.cyberciti.biz/faq/ubuntu-change-hostname-command/)
 - [Gitlab Backup restore](https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/raketasks/backup_restore.md)
 - [Updating GitLab via omnibus-gitlab](https://docs.gitlab.com/omnibus/update/README.html#updating-from-gitlab-66-and-higher-to-the-latest-version)
 
