@@ -1,5 +1,6 @@
 title: 屌丝心理学 视频笔记
 date: 2015-03-27 08:35:03
+updated: 2015-03-27 08:35:03
 permalink: 2015/03/27/cock_wire_psychology
 categories:
 - 生活笔记

@@ -1,5 +1,6 @@
 title: 常见网络协议优化与区分
-date: 2017-02-16 14:09:03
+date: 2017-02-12 14:09:03
+updated: 2017-02-16 14:09:03
 categories:
 - 网络
 tags:
@@ -201,7 +202,7 @@ SPDY兼容性: http://caniuse.com/#feat=spdy
 
 ---
 
-- 文章创建时间: 2017-02-12，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/network_basic.md)。
+- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/network_basic.md)。
 
 ---
 

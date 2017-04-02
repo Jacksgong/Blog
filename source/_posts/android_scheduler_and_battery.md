@@ -1,5 +1,6 @@
 title: Android后台调度任务与省电
 date: 2016-08-15 09:07:03
+updated: 2016-08-15 09:07:03
 permalink: 2016/08/15/android_scheduler_and_battery
 categories:
 - Android性能与优化

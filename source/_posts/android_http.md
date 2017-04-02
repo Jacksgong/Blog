@@ -1,5 +1,6 @@
 title: HttpURLConnection、HttpClient
 date: 2015-10-31 15:12:03
+updated: 2015-10-31 15:12:03
 permalink: 2015/10/31/android_http
 categories:
 - 网络

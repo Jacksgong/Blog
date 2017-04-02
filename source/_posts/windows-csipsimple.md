@@ -1,5 +1,6 @@
 title: windows 下csipsimple 编译全解 带最新源码[非中间]
 date: 2013-03-29 00:32:11
+updated: 2013-03-29 00:32:11
 permalink: 2013/03/29/windows-csipsimple
 categories:
 - voip

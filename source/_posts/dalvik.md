@@ -1,5 +1,6 @@
 title: Dalvik
 date: 2014-12-25 08:35:03
+updated: 2014-12-25 08:35:03
 permalink: 2014/12/25/dalvik
 categories:
 - Android机制

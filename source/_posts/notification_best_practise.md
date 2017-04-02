@@ -1,5 +1,6 @@
 title: Notification最佳实践
-date: 2016-10-25 15:06:03
+date: 2016-01-09 15:06:03
+updated: 2016-10-25 15:06:03
 permalink: 2016/01/09/notification_best_practise
 categories:
 - Android最佳实践
@@ -265,7 +266,7 @@ builder.setStyle(new NotificationCompat.MessagingStyle("You")
 
 ---
 
-- 文章创建时间: 2016-1-9，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/notification_best_practise.md)。
+- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/notification_best_practise.md)。
 
 ---
 

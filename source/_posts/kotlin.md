@@ -1,5 +1,6 @@
 title: Kotlin
-date: 2017-03-10 14:02:03
+date: 2016-11-30 14:02:03
+updated: 2017-03-10 14:02:03
 permalink: 2016/11/30/kotlin
 categories:
 - 编程语言
@@ -300,7 +301,7 @@ Java中可以通过[Lombok - @ExtensionMethod](https://github.com/mplushnikov/lo
 
 ---
 
-- 文章创建时间: 2016-11-17，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/kotlin.md)。
+- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/kotlin.md)。
 
 ---
 

@@ -1,5 +1,6 @@
 title: 架构设计基础知识整理
-date: 2016-10-25 22:41:03
+date: 2016-03-09 22:41:03
+updated: 2016-10-25 22:41:03
 permalink: 2016/03/09/oo_architecture
 categories:
 - 架构
@@ -228,7 +229,7 @@ TODO
 
 ---
 
-- 文章创建时间: 2016-3-9，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/oo_architecture.md)。
+- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/oo_architecture.md)。
 
 ---
 

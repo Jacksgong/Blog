@@ -1,5 +1,6 @@
 title: Switching between the panel and the keyboard in Wechat
 date: 2015-02-07 07:47:03
+updated: 2015-02-07 07:47:03
 permalink: 2015/02/07/Switching-between-the-panel-and-the-keyboard
 categories:
 - Android UI交互

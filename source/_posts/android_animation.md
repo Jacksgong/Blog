@@ -1,5 +1,6 @@
 title: Android动画
 date: 2015-11-02 20:58:03
+updated: 2015-11-02 20:58:03
 permalink: 2015/11/02/android_animation
 categories:
 - Android UI交互

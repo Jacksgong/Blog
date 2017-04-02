@@ -1,5 +1,6 @@
 title: Android键盘面板冲突 布局闪动处理方案
 date: 2015-09-01 13:35:03
+updated: 2015-09-01 13:35:03
 permalink: 2015/09/01/keyboard-panel-switch
 categories:
 - 开源项目

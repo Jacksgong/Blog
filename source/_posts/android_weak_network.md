@@ -1,5 +1,6 @@
 title: Android弱网通信探究
-date: 2017-02-10 11:34:03
+date: 2016-08-16 11:34:03
+updated: 2017-02-10 11:34:03
 permalink: 2016/08/16/android_weak_network
 categories:
 - 网络
@@ -28,6 +29,6 @@ tags:
 
 ---
 
-- 文章创建时间: 2016-08-16，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/android_weak_network.md)。
+- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/android_weak_network.md)。
 
 ---

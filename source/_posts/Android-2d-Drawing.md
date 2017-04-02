@@ -1,5 +1,6 @@
 title: Android 2d-Drawing
 date: 2015-04-18 08:35:03
+updated: 2015-04-18 08:35:03
 permalink: 2015/04/18/Android-2d-Drawing
 categories:
 - Android UI交互

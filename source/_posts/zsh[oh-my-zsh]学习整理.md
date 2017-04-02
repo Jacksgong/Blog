@@ -1,5 +1,6 @@
 title: zsh[oh my zsh]
-date: 2017-03-01 20:29:03
+date: 2015-03-29 20:29:03
+updated: 2017-03-01 20:29:0
 permalink: 2015/03/29/zsh[oh-my-zsh]学习整理
 categories:
 - 工程师技能
@@ -75,6 +76,6 @@ POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 
 ---
 
-- 文章创建时间: 2015-03-29，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/0a3e3bdc2378a5bd72652cd988c9ff3cbfc3d05f/source/_posts/zsh%5Boh-my-zsh%5D%E5%AD%A6%E4%B9%A0%E6%95%B4%E7%90%86.md)。
+- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/0a3e3bdc2378a5bd72652cd988c9ff3cbfc3d05f/source/_posts/zsh%5Boh-my-zsh%5D%E5%AD%A6%E4%B9%A0%E6%95%B4%E7%90%86.md)。
 
 ---

@@ -1,5 +1,6 @@
 title: SVG Android应用探究之路
-date: 2017-02-07 15:46:03
+date: 2014-11-08 15:46:03
+updated: 2014-11-08 15:46:03
 permalink: 2014/11/08/SVG-Android应用探究之路
 categories:
 - SVG
@@ -151,6 +152,6 @@ http://play.google.com/store/apps/details?id=com.whisperarts.kids.forms
 
 ---
 
-- 文章创建时间: 2014-11-08，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/SVG-Android%E5%BA%94%E7%94%A8%E6%8E%A2%E7%A9%B6%E4%B9%8B%E8%B7%AF.md)。
+- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/SVG-Android%E5%BA%94%E7%94%A8%E6%8E%A2%E7%A9%B6%E4%B9%8B%E8%B7%AF.md)。
 
 ---

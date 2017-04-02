@@ -1,5 +1,6 @@
 title: Android AIDL 通信与回调
 date: 2013-12-14 08:35:03
+updated: 2013-12-14 08:35:03
 permalink: 2013/12/14/Android-AIDL-通信与回调
 categories:
 - Android机制

@@ -1,5 +1,6 @@
 title: Android推送探究
 date: 2013-07-12 08:35:03
+updated: 2013-07-12 08:35:03
 permalink: 2013/07/12/Android推送探究
 categories:
 - Android机制

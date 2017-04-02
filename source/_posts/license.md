@@ -1,5 +1,6 @@
 title: 开源协议
-date: 2016-1-3 01:48:03
+date: 2016-01-03 01:48:03
+updated: 2016-01-03 01:48:03
 permalink: 2016/1/3/license
 categories:
 - 工程师技能

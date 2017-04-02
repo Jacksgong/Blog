@@ -1,5 +1,6 @@
 title: Android优化
-date: 2017-03-21 15:32:03
+date: 2015-10-26 15:32:03
+updated: 2017-03-21 15:32:03
 permalink: 2015/10/26/android_optimize
 categories:
 - Android性能与优化
@@ -356,7 +357,7 @@ public static Retrofit getAdapter(Context context, String baseUrl) {
 
 ---
 
-- 文章创建时间: 2015-10-26，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/android_optimize.md)。
+- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/android_optimize.md)。
 
 ---
 

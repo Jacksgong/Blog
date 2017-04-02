@@ -1,5 +1,6 @@
 title: Repair broken image url in wordpress posts
 date: 2015-01-22 14:13:03
+updated: 2015-01-22 14:13:03
 permalink: 2015/01/22/Repair-broken-image-url-in-wordpress-posts
 categories:
 - 开源项目

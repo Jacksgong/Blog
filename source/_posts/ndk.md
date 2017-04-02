@@ -1,6 +1,7 @@
 title: NDK | JNI
-date: 2016-12-24 23:16:03
-permalink: 2016/11/08/ndk
+date: 2015-11-08 23:16:03
+updated: 2016-12-24 23:16:03
+permalink: 2015/11/08/ndk
 categories:
 - Android Native Develop
 tags:
@@ -435,7 +436,7 @@ Cinar O. – Pro Android C++ with the NDK – 2012.
 
 ---
 
-- 文章创建时间: 2015-11-08，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/ndk.md)。
+- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/ndk.md)。
 
 ---
 - [Building Your Project](http://developer.android.com/intl/zh-cn/ndk/guides/build.html)

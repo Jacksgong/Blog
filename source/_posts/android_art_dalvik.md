@@ -1,5 +1,6 @@
 title: ART、Dalvik
 date: 2015-11-01 12:23:03
+updated: 2015-11-01 12:23:03
 permalink: 2015/11/01/android_art_dalvik
 categories:
 - Android机制

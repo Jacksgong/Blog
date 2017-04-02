@@ -1,5 +1,6 @@
 title: Ruby 入门
 date: 2015-07-26 20:39:03
+updated: 2015-07-26 20:39:03
 permalink: 2015/07/26/ruby_guide
 categories:
 - 编程语言

@@ -1,5 +1,6 @@
 title: Android单元测试与模拟测试
-date: 2016-11-30 00:40:03
+date: 2016-05-15 00:40:03
+updated: 2016-11-30 00:40:03
 permalink: 2016/05/15/android_test
 categories:
 - Android测试
@@ -574,7 +575,6 @@ class FooWraper{
 > (Integration Tests)模拟用户操作，事件流测试。
 
 ```java
-
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
 public class MyActivityTest{
@@ -639,7 +639,7 @@ public class MyActivityTest{
 
 ---
 
-- 文章创建时间: 2016-5-15，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/android_test.md)。
+- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/android_test.md)。
 
 ---
 

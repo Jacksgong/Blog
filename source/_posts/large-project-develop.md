@@ -1,5 +1,6 @@
 title: Android大项目开发
-date: 2017-03-04 12:48:03
+date: 2017-03-01 12:48:03
+updated: 2017-03-12 12:48:03
 categories:
 - 架构
 tags:
@@ -100,7 +101,7 @@ tags:
 
 ---
 
-- 文章创建时间: 2017-03-01，[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/large-project-develop.md)。
+- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/large-project-develop.md)。
 
 ---
 

@@ -1,5 +1,6 @@
 title: Android GC
 date: 2015-11-30 09:00:03
+updated: 2015-11-30 09:00:03
 permalink: 2015/11/30/gc
 categories:
 - Android内存
