@@ -156,7 +156,40 @@ ClientAliveCountMax 0
 
 快速执行配置:
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/bcc821847daa693dbb49452bdd0deb25.js"></script>
+```bash
+sudo apt install php7.0-common php7.0-fpm php7.0-cli php7.0-json php7.0-mysql php7.0-curl php7.0-intl php7.0-mcrypt php-pear php7.0-gd php7.0-zip php7.0-xml php7.0-mbstring
+```
+
+#### 11. 配置Java
+
+检测版本:
+
+```bash
+java -version
+```
+
+安装默认jdk(OpenJDK):
+
+```bash
+sudo apt-get install default-jdk
+```
+
+安装Oracle-JDk-8:
+
+```bash
+sudo apt-get install python-software-properties
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+
+sudo apt-get install oracle-java8-installer
+```
+
+检查可用`JAVA_HOME`环境变量的路径:
+
+```bash
+sudo update-alternatives --config java
+```
+
 
 ## 站点安装
 
@@ -286,5 +319,6 @@ ClientAliveCountMax 0
 - [Ubuntu Linux Change Hostname (computer name)](https://www.cyberciti.biz/faq/ubuntu-change-hostname-command/)
 - [Gitlab Backup restore](https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/raketasks/backup_restore.md)
 - [Updating GitLab via omnibus-gitlab](https://docs.gitlab.com/omnibus/update/README.html#updating-from-gitlab-66-and-higher-to-the-latest-version)
+- [How To Install Java on Ubuntu with Apt-Get](https://www.digitalocean.com/community/tutorials/how-to-install-java-on-ubuntu-with-apt-get)
 
 ---
