@@ -1,6 +1,5 @@
 title: gRPC
 date: 2017-02-16 22:38:03
-updated: 2017-02-16 22:38:03
 categories:
 - 网络
 tags:
@@ -11,7 +10,9 @@ tags:
 
 ---
 
-> 2015年2月由Google公司牵头，2016年8月对外正式发布的基于HTTP/2以及使用Proto3作为IDL与传输数据格式的通用的开源RPC架构。
+{% note warning %}2015年2月由Google公司牵头，2016年8月对外正式发布的基于HTTP/2以及使用Proto3作为IDL与传输数据格式的通用的开源RPC架构。
+
+我使用kotlin语言写了一个Android与Java后台通过GRPC通信的Demo: [Jacksgong/grpc-android-kotlin](https://github.com/Jacksgong/grpc-android-kotlin){% endnote %}
 
 <!-- more -->
 
