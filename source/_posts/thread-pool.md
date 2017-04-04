@@ -28,3 +28,7 @@ tags:
 - `scheduleWithFixedDelay`: 指定固定的间隔执行，如每次都是在上次执行后间隔delay以后执行
 
 ---
+
+> 当然，如果是简单的单线程复用，可以考虑直接使用Handler，这块可以参见[Android Handler Looper机制](/2016/03/11/android_handler_looper/)这篇文章。
+
+---
