@@ -1,6 +1,5 @@
 title: Kotlin
 date: 2016-11-30 14:02:03
-updated: 2017-03-10 14:02:03
 permalink: 2016/11/30/kotlin
 categories:
 - 编程语言
@@ -14,9 +13,10 @@ tags:
 
 Kotlin是一门为JVM、Android、前端开发的一门静态语言，相比Java8，它有太多的前瞻性的功能并且非常极客。
 
-> P.S 因为其标准库有700Kb左右，所以暂时没有考虑在生产环境用，前段时间, 刚好接了支付宝几个内部组件，因此都用Kotlin写了，整体感觉很不错。
-
 <!-- more -->
+
+
+> 因为其标准库有700Kb左右，所以暂时没有考虑在生产环境用，前段时间, 刚好接了支付宝几个内部组件，因此都用Kotlin写了，整体感觉很不错。顺便也写了一个[kotlin的开源库](https://github.com/Jacksgong/grpc-android-kotlin)，其中覆盖了rxkotlin的使用、kotlin单元测试编写，整个代码架构是以MVP为主，是一个很好的kotlin入门案例。
 
 ## I. 相比Java优势:
 
@@ -236,6 +236,8 @@ fun Date.isTuesday() = day == 2
 
 ## II. Kotlin Unit-test
 
+> 一般的单元测试是完全可以应付的，可以参考我写的[kotlin的开源库](https://github.com/Jacksgong/grpc-android-kotlin)，里面包含了一般的单元测试。
+
 #### 1. 遇到的问题
 
 对于编程设计来说，非常好的实践就是对拓展开放，对修改关闭的"开闭原则"，因为在Java中，我们对继承实在是太滥用了(可以参考[架构设计基础知识整理](https://blog.dreamtobe.cn/2016/10/25/oo_architecture/)中"使用组合而非继承")，也正是因为想要Kotlin中使这个情况得到好转，**因此Kotlin默认对所有Class与Method都是`final`的**， 除非使用`open`主动申明。
@@ -264,7 +266,7 @@ Mockito 2.1.0 及之后的版本原生支持了对`final`的method与class进行
 
 > 可以借助[nhaarman/mockito-kotlin](https://github.com/nhaarman/mockito-kotlin)使得更好的用Kotlin写单元测试。
 
-## III. Java中实现Kotlin的特性
+## III. 实现写Java代码也能享受Kotlin的特性
 
 > 无论是多出736KB的Kotlin基本库大小，还是公司不允许，**导致只能使用Java，但是又想使用一些Kotlin特性**。可以看看接下来提到的。
 
@@ -298,6 +300,21 @@ Java7中推荐使用[Lightweight-Stream-API](https://github.com/aNNiMON/Lightwei
 
 Java中可以通过[Lombok - @ExtensionMethod](https://github.com/mplushnikov/lombok-intellij-plugin)实现这些特性。
 
+#### 5. 可读性折叠
+
+> Kotlin中的各类更加可读的编写，使得代码看起来更加易懂简单，如(Kotlin: "My name is $name", Java: "My name is " + name)
+
+Java7中可以通过Intelij的[Advanced Java Folding](https://plugins.jetbrains.com/plugin/9320-advanced-java-folding)插件实现这些特性，这个主要是通过Intelij IDEA的折叠代码的特性，使得代码折叠成类似Kotlin的更加可读的代码。
+
+## IV. 为什么你可以开始使用Kotlin了
+
+> 我们看了上面Kotlin这么多优势，那么我们是时候开始使用Kotlin了吗？答案是肯定的，现在是时候开始使用Kotlin了。
+
+- Koltin非常容易入门: 相比于RxJava的学习曲线，Kotlin简单太多
+- Google官方也在使用Kotlin: 如Android的[databinding compiler](https://android.googlesource.com/platform/frameworks/data-binding/+/master/compiler/src/main/kotlin/android/databinding/tool)
+- Kotlin足够稳定可靠: Kotlin至今已经有7年的成长历史，最新版本是1.1，相比于你使用的其他开源库，Kotlin的稳定性更高
+- Kotlin周边齐全: 由于是Jetbrains团队所开发的语言，而Android Studio又是基于Jetbrains开发的Intelij的，因此各类周边，包括Inspection等都是第一时间应用上的，包括各类社区、插件完全不用担心
+- Kotlin兼容与Java协同开发: 正因为如此，我们可以使用所有的Java库的同时，也不必对已有的全局代码都进行修改，当然如果需要也可以通过Kotlin插件一键将Java代码转化为Kotlin代码
 
 ---
 
@@ -321,5 +338,7 @@ Java中可以通过[Lombok - @ExtensionMethod](https://github.com/mplushnikov/lo
 - [Living(Android) without Kotlin](https://hackernoon.com/living-android-without-kotlin-db7391a2b170#.dcvfz0j06)
 - [How “Effective Java” may have influenced the design of Kotlin — Part 1](https://medium.com/@lukleDev/how-effective-java-may-have-influenced-the-design-of-kotlin-part-1-45fd64c2f974#.r7qt7y819)
 - [Android Testing with Kotlin](http://fernandocejas.com/2017/02/03/android-testing-with-kotlin/)
+- [Kotlin in Production: Should you stay or should you go?](https://hackernoon.com/kotlin-in-production-should-you-stay-or-should-you-go-a3428b44b236)
+- [Making Java Code Easier to Read (Without Changing it)](https://medium.com/@andrey_cheptsov/making-java-code-easier-to-read-without-changing-it-adeebd5c36de)
 
 ---
