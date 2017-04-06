@@ -131,6 +131,10 @@ tags:
 
 ---
 
+本文已经发布到JackBlog公众号，可请直接访问: [GRPC - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483702&idx=1&sn=5ad22d675f5e4c5f0d2329a155a8493b)
+
+---
+
 - [gRPC reaches 1.0 - Square](https://medium.com/square-corner-blog/grpc-reaches-1-0-85728518393b#.xcevdgx5x)
 - [grpc/grpc - 开源库](https://github.com/grpc/grpc)
 - [gRPC - official website](http://www.grpc.io/)
