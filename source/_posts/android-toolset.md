@@ -1,6 +1,5 @@
 title: Android开发周边
 date: 2017-03-16 02:23:03
-updated: 2017-03-16 02:23:03
 categories:
 - 工程师技能
 tags:
@@ -171,8 +170,9 @@ App Start <-- 1182ms
 
 - [Icon/styles genrator](http://romannurik.github.io/AndroidAssetStudio/)
 - [Material design icons](https://materialdesignicons.com/)
+- [Color Tool](https://material.io/color): 根据选择的颜色，快速呈现效果以达到创建颜色组合、预览效果、检测不同背景下文字的可辨度。
 
-除了上面两个，也可以使用Android Studio自带的:
+除了上面几个，也可以使用Android Studio自带的:
 
 ![](/img/android-toolset-9.png)
 
@@ -206,6 +206,9 @@ Estimated download size for updates from the old APK,
 
 ![](/img/android-toolset-10.png)
 
+---
+
+- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/android-toolset.md)
 
 ---
 
@@ -213,5 +216,6 @@ Estimated download size for updates from the old APK,
 - [Tracking app update sizes](https://medium.com/google-developers/tracking-app-update-sizes-1a1f57634f7b#.w1txjnwhl)
 - [Resolving Conflicts in android gradle dependencies](https://blog.mindorks.com/avoiding-conflicts-in-android-gradle-dependencies-28e4200ca235#.oabd56w24)
 - [WHY YOU SHOLD CARE ABOUT COPYRIGHT](http://jeroenmols.com/blog/2016/08/03/copyright/)
+- [Color Tool - Material Design](https://material.io/guidelines/style/color.html#)
 
 ---
