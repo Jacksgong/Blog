@@ -24,19 +24,22 @@ tags:
 
 ## II. 安装AndroidThings
 
-{% cq %}第一步: 下载[最新版本镜像](https://developer.android.com/things/preview/download.html)，并解压缩下载的镜像压缩文件(通过unzip指令){% endcq %}
+#### 第一步: 下载镜像并解压缩
+
+下载[最新版本镜像](https://developer.android.com/things/preview/download.html)，并解压缩下载的镜像压缩文件(通过unzip指令)。
 
 ![](/img/install-androidthings-2.png)
 
-{% cq %} 第二步: 将microSD卡插入电脑，确保其是FAT32的文件格式(如果格式不对可以通过Disk Utility对其进行格式化) {% endcq %}
+#### 第二步: microSD卡准备
+
+将microSD卡插入电脑，确保其是FAT32的文件格式(如果格式不对可以通过Disk Utility对其进行格式化)。
 
 ![](/img/install-androidthings-3.png)
 
-{% cq %} 第三步: 下载并安装[Etcher](https://etcher.io/) {% endcq %}
+#### 第三步: 写入`.img`
 
-![](/img/install-androidthings-4.png)
+下载安装[Etcher](https://etcher.io/) 并通过Etcher将解压缩出来的`.img`文件写入microSD卡。
 
-{% cq %} 第四步: 通过Etcher将解压缩出来的`.img`文件写入microSD卡 {% endcq %}
 ![](/img/install-androidthings-5.png)
 <p style="text-align: center;"> 写入 </p>
 
@@ -46,26 +49,36 @@ tags:
 ![](/img/install-androidthings-7.png)
 <p style="text-align: center;"> 完成 </p>
 
-{% cq %} 第五步: 通过Finder的Eject取出microSD卡，插入树莓派 {% endcq %}
+#### 第四步: microSD插入树莓派
+
+通过Finder的Eject取出microSD卡，插入树莓派。
 
 <img src="/img/install-androidthings-8.jpeg" width="450px">
 
-{% cq %} 第六步: 使用视频线连接树莓派到显示器，接上网线，然后接上电源，至此AndroidThings已经运行起来了 {% endcq %}
+#### 第五步: 运行AndroidThings
+
+使用视频线连接树莓派到显示器，接上网线，然后接上电源，至此AndroidThings已经运行起来了。
 
 ![](/img/install-androidthings-9.jpeg)
 ![](/img/install-androidthings-10.jpeg)
 
 ## III. 基本配置
 
-#### 1. 连接AndroidThings: `adb connect <ip-address>`
+#### 1. 连接AndroidThings
+
+`adb connect <ip-address>`
 
 ![](/img/install-androidthings-11.png)
 
-#### 2. 断开AndroidThings: `adb disconnect <ip-address>`
+#### 2. 断开AndroidThings
+
+`adb disconnect <ip-address>`
 
 ![](/img/install-androidthings-12.png)
 
-#### 3. 关机: `adb shell reboot -p`
+#### 3. 关机
+
+`adb shell reboot -p`
 
 ![](/img/install-androidthings-13.png)
 
@@ -81,13 +94,19 @@ tags:
 
 ![](/img/install-androidthings-14.png)
 
-#### 5. 检测Wi-Fi是否连接上: `adb logcat -d | grep Wifi`
+#### 5. 检测Wi-Fi是否连接上
+
+`adb logcat -d | grep Wifi`
 
 ![](/img/install-androidthings-15.png)
 <p style="text-align: center;"> 通过logcat查看 </p>
 
 ![](/img/install-androidthings-16.png)
 <p style="text-align: center;"> 通过路由器查看连接 </p>
+
+---
+
+本文已经发布到JackBlog公众号: [AndroidThings安装与配置 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483704&idx=1&sn=beaa1ab0205888bfdcc9d4b165849ce4)
 
 ---
 
