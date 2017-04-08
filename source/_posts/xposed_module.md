@@ -1,6 +1,5 @@
 title: 5分钟发布一个Xposed Module
 date: 2017-03-26 18:36:03
-updated: 2017-03-26 18:36:03
 categories:
 - 工程师技能
 tags:
@@ -16,7 +15,7 @@ tags:
 
 ## I. Xposed原理浅谈
 
-> 在此之前建议通过这几篇文章简单的了解下Android简要的知识: [ART、Dalvik](https://blog.dreamtobe.cn/2015/11/01/android_art_dalvik/)、[Android GC](https://blog.dreamtobe.cn/2015/11/30/gc/)、[ActivityManagerService](https://blog.dreamtobe.cn/2015/11/26/activitymanagerservice/)
+> 在此之前建议通过这几篇文章简单的了解下Android简要的知识: [ART、Dalvik](https://blog.dreamtobe.cn/2015/11/01/android_art_dalvik/)、[Android GC](https://blog.dreamtobe.cn/2015/11/30/gc/)、[ActivityManagerService](https://blog.dreamtobe.cn/2015/11/26/activitymanagerservice/)。
 
 #### 常用方法
 
@@ -24,15 +23,15 @@ tags:
 
 #### Xposed做法
 
-而Xposed是通过hook方法的方式来实现，由于Xposed修改了系统在启动时加载的Zygote进程相关的逻辑以及加载的资源(并且所有应用的启动都是从Zygote进程中拷贝出来的)，因此几乎可以架空一切安全，做所有事情，包括修改系统行为。
+Xposed是通过hook方法的方式来实现，由于Xposed修改了系统在启动时加载的Zygote进程相关的逻辑以及加载的资源(并且所有应用的启动都是从Zygote进程中拷贝出来的)，因此几乎可以架空一切安全，做所有事情，包括修改系统行为。
 
 #### hook的大概原理
 
-而hook方法是`XposedBridge`中的一个私有native方法`hookMethodNative`改变被hook方法的类型为native并且link方法实现到它自己的native方法中，并且对调用者透明，该native方法调用XposedBridge中的`handleHookedMethod`方法，将参数，`this`引用等传进来，之后在回调回去，这样我们就可以在方法执行前后做任何的事情了。
+hook方法是`XposedBridge`中的一个私有native方法`hookMethodNative`改变被hook方法的类型为native并且link方法实现到它自己的native方法中，并且对调用者透明，该native方法调用XposedBridge中的`handleHookedMethod`方法，将参数，`this`引用等传进来，之后在回调回去，这样我们就可以在**任意方法执行前后**做任何的事情了(当然xposed框架还支持替换各类资源)。
 
 ## I. 编写code
 
-#### 创建空Android项目
+#### 1. 创建空Android项目
 
 首先创建一个空的Android项目
 
@@ -43,7 +42,7 @@ tags:
 - minSdkVersion: 9
 - targetSdkVersion: 25
 
-#### 申明为Xposed module项目
+#### 2. 申明为Xposed module项目
 
 在`AndroidManifest`中通过`meta-data`申明:
 
@@ -66,9 +65,7 @@ tags:
 </application>
 ```
 
-### 编写自己的Xposed加载器相关
-
-#### 1. 引入依赖
+#### 3. 引入依赖
 
 由于这些依赖库在安装了Xposed框架手机的Zygote进程上默认就已经有加载了，所以我们这边只需要保证当前写代码时候找得到依赖，并不需要打入apk包中，因此使用`provided`关键字即可，还有一个是为了我们在code中看得到Java-Doc，因此两个都引接口:
 
@@ -79,7 +76,7 @@ provided 'de.robv.android.xposed:api:[latest version]'
 provided 'de.robv.android.xposed:api:[latest version]:sources'
 ```
 
-#### 2. coding
+#### 4. CODING
 
 - 实现`IXposedHookLoadPackage`来在应用被加载的时候生效hook方法。
 - 实现好之后，创建assets目录，默认情况下是在`app/src/main/assets`
@@ -119,8 +116,6 @@ findAndHookMethod(pluginHelper, "FZ", String.class, new XC_MethodHook() {
 
 ## III. 发布到Xposed Module Repo
 
-> 十分简单，没有什么需要注意的地方
-
 1. 创建[xda developers](forum.xda-developers.com)帐号
 2. 在[Xposed Module repo](http://repo.xposed.info/)中使用xda帐号登录
 3. 惦记Upload new module进行上传即可
@@ -131,6 +126,14 @@ findAndHookMethod(pluginHelper, "FZ", String.class, new XC_MethodHook() {
 -keep class cn.dreamtobe.xposed.wechathunt.WechatHunt{*;}
 -keepnames class cn.dreamtobe.xposed.wechathunt.WechatHunt
 ```
+
+---
+
+- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/xposed_module.md)
+
+---
+
+本文已经发布到JackBlog公众号: [5分钟发布一个Xposed Module - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483706&idx=1&sn=6e1ff9df6478283bcc1a9e3edcb71fe4)
 
 ---
 
