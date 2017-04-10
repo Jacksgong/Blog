@@ -361,6 +361,10 @@ public static Retrofit getAdapter(Context context, String baseUrl) {
 
 ---
 
+本文已经发布到JackBlog公众号: [Android性能与优化 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483709&idx=1&sn=3d8ed0adb66d3544f109fbdbcf07e317)
+
+---
+
 - [应用的核心质量](http://developer.android.com/intl/zh-cn/distribute/essentials/quality/core.html)
 - [JNI调用性能测试及优化](http://wiki.jikexueyuan.com/project/jni-ndk-developer-guide/performance.html)
 - [Java学习笔记：(30)谨慎地使用本地方法](http://www.programgo.com/article/39033077030/)
