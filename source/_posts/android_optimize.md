@@ -1,6 +1,5 @@
 title: Android优化
 date: 2015-10-26 15:32:03
-updated: 2017-03-21 15:32:03
 permalink: 2015/10/26/android_optimize
 categories:
 - Android性能与优化
@@ -32,44 +31,44 @@ tags:
 
 ### 2. 编码习惯
 
->  尽量简化，不要做不需要的操作。
+> 尽量简化，不要做不需要的操作。
 
-#### 尽量避免分配内存(创建对象)
+**尽量避免分配内存(创建对象)**
 
-- 1) 如果一个方法返回一个`String`，并且这个方法的返回值始终都是被用来`append`到一个`StringBuffer`上，就改为传入`StringBuffer`直接`append`上去，避免创建一个短生命周期的临时对象；
-- 2) 如果使用的字符串是截取自某一个字符串，就直接从那个字符串上面`substring`，不要拷贝一份，因为通过`substring`虽然创建了新的`String`对象，但是共享了里面的`char`数组中的`char`对象，减少了这块对象的创建；
-- 3) 量使用多个一维数组，其性能高于多维数组；`int`数组性能远大于`Integer`数组性能；
+- 如果一个方法返回一个`String`，并且这个方法的返回值始终都是被用来`append`到一个`StringBuffer`上，就改为传入`StringBuffer`直接`append`上去，避免创建一个短生命周期的临时对象；
+- 如果使用的字符串是截取自某一个字符串，就直接从那个字符串上面`substring`，不要拷贝一份，因为通过`substring`虽然创建了新的`String`对象，但是共享了里面的`char`数组中的`char`对象，减少了这块对象的创建；
+- 尽量使用多个一维数组，其性能高于多维数组；`int`数组性能远大于`Integer`数组性能；
 
-#### 尽可能`static`方法
+**尽可能`static`方法**
 
 如果你确定不需要访问类成员，让方法`static`，这样调用时可以提升15%~20%的速度，因为不需要切换对象状态。
 
-#### 尽可能使用常量而非变量
+**尽可能使用常量而非变量***
 
 如果某个参数是常量，别忘了使用`static final`，这样可以让`Class`首次初始化时，不需要调用`<clinit>`来创建`static`方法，而是在编译时就直接将常量替换代码中使用的位置。
 
-#### 从性能层面出发，尽可能直接访问变量而非方法
+**从性能层面出发，尽可能直接访问变量而非方法***
 
 Android开发中，类内尽量避免通过`get/set`访问成员变量，虽然这在语言的开发中是一个好的习惯，但是Android虚拟机中，对方法的调用开销远大于对变量的直接访问。在没有JIT的情况下，直接的变量访问比调用方法快3倍，在JIT下，直接的变量访问更是比调用方法快7倍!
 
-#### 对被内部类调用的`方法/变量`改为包可见
+**对被内部类调用的`方法/变量`改为包可见**
 
 当内部类需要访问外部类的私有`方法/变量`时，考虑将这些外部类的私有`方法/变量`改用包可见的方式。首先在编写代码的时候，通过内部类访问外部类的私有`方法/变量`是合法的，但是在编译的时候为了满足这个会将需要被内部类访问的私有`方法/变量`封装一层包可见的方法，实现让内部类访问这些私有的`方法/变量`，根据前面我们有提到说方法的调用开销大于变量的调用，因此这样使得性能变差，所以我们在编码的时候可以考虑直接将需要被内部类调用的外部类私有`方法/变量`，改为包可见。
 
-#### 少用`float`
+**少用`float`***
 
 - 尽量少使用`float`。在很多现代设备中，`double`的性能与`float`的性能几乎没有差别，但是从大小上面`double`是`float`的两倍的大小。
 - 尽量考虑使用整型而非浮点数，在较好的Android设备中，浮点数比整型慢一倍。
 
-#### 使用乘法代替除法
+**使用乘法代替除法**
 
 尽量不要使用除法操作，有很多处理器有乘法器，但是没有除法器，也就是说在这些设备中需要将除法分解为其他的计算方式速度会比较慢。
 
-#### 使用内部实现，而非上层实现
+**使用内部实现，而非上层实现**
 
 尽量使用系统sdk中提供的方法，而非自己去实现。如`String.indexOf()`相关的API，Dalvik将会替换为内部方法；`System.arraycopy()`方法在Nexus One手机上，会比我们上层写的类似方法的执行速度快9倍。
 
-#### 谨慎编写Native
+**谨慎编写Native**
 
 > Android JVM相关知识，可参看: [ART、Dalvik](http://blog.dreamtobe.cn/2015/11/01/android_art_dalvik/)
 > Android JNI、NDK相关知识，可参看: [NDK](http://blog.dreamtobe.cn/2015/11/08/ndk/)
@@ -83,15 +82,15 @@ Android开发中，类内尽量避免通过`get/set`访问成员变量，虽然�
 
 > 一些重要的参数之类，也可以考虑放在Native层，保证安全性。参考: [Android应用程序通用自动脱壳方法研究](http://blog.dreamtobe.cn/2015/07/17/wh_android_tk/)
 
-#### 权衡面向接口编程
+**权衡面向接口编程**
 
 在没有JIT的设备中，面向接口编程的模式(如`Map map`)，相比直接访问对象类(如`HashMap map`)，会慢6%，但是在存在JIT的设备中，两者的速度差不多。但是内存占用方面面向接口变成会消耗更多内存，因此如果你的面向接口编程不是十分的必要的情况下可以考虑不用。
 
-#### 重复访问的变量，赋值为本地变量
+**重复访问的变量，赋值为本地变量**
 
 在没有JIT的设备中，访问本地化变量相对与成员变量会快20%，但是在存在JIT的设备中，两者速度差不多。
 
-#### 遍历优化
+**遍历优化**
 
 > 尽量使用`Iterable`而不是通过长度判断来进行遍历。
 
@@ -125,6 +124,7 @@ public void two() {
     }
 }
 ```
+
 ## II. 数据库相关
 
 > 建多索引的原则: 哪个字段可以最快的**减少查询**结果，就把该字段放在最前面
@@ -191,7 +191,7 @@ public static Retrofit getAdapter(Context context, String baseUrl) {
 
 ###  其他层面优化
 
-- 通过自实现DNS(如实现自己的HTTPDNS)，来降低没必要的DNS更新(由于DNS常见策略是与文件大小以及TTL相关，如果我们分文件以及分域名协商TTL有效期，可能case by case有效这块的刷新率)，甚至防止DNS劫持
+- 通过自实现DNS(如实现自己的HTTPDNS(用Okhttp3实现尤为简单，因为Okhttp3支持定制DNS))，来降低没必要的DNS更新(由于DNS常见策略是与文件大小以及TTL相关，如果我们分文件以及分域名协商TTL有效期，可能case by case有效这块的刷新率)，甚至防止DNS劫持
 - 图片、JS、CSS等静态资源，采用CDN（当然如果是使用7牛之类的服务就已经给你搭建布置好了）
 - 全局图片处理采用漏斗模型全局管控，所请求的图片大小最好依照业务大小提供/最大不超过屏幕分辨率需要，如果请求原图，也不要超过`GL10.GL_MAX_TEXTURE_SIZE`
 - 全局缩略图直接采用webp，在尽可能不损失图片质量的前提下，图片大小与png比缩小30% ~ 70%
@@ -242,17 +242,17 @@ public static Retrofit getAdapter(Context context, String baseUrl) {
 
 > 监听`onTrimMemory()`的回调，根据不同的内存等级，做相应的释放以此让系统资源更好的利用，以及自己的进程可以更好的保活。
 
-##### 当应用还在前台
+**当应用还在前台**
 
 - `TRIM_MEMORY_RUNNING_MODERATE`: 当前应用还在运行不会被杀，但是设备可运行的内存较低，系统正在从后台进程的LRU列表中杀死进程其他进程。
 - `TRIM_MEMORY_RUNNING_LOW`: 当前应用还在运行不会被杀，但是设备可运行内存很低了，会直接影响当前应用的性能，当前应用也需要考虑释放一些无用资源。
 - `TRIM_MEMORY_RUNNING_CRITICAL`: 当前应用还在运行中，但是系统已经杀死了后台进程LRU队列中绝大多数的进程了，当前应用需要考虑释放所有不重要的资源，否则很可能系统就会开始清理服务进程，可见进程等。也就说，如果内存依然不足以支撑，当前应用的服务也很有可能会被清理掉。
 
-##### `TRIM_MEMORY_UI_HIDDEN`
+**`TRIM_MEMORY_UI_HIDDEN`**
 
 当回调回来的时候，说明应用的UI对用户不可见的，此时释放UI使用的一些资源。这个不同于`onStop()`，`onStop()`的回调，有可能仅仅是当前应用中进入了另外一个`Activity`。
 
-##### 当应用处于后台
+**当应用处于后台**
 
 - `TRIM_MEMORY_BACKGROUND`: 系统已经处于低可用内存的情况，并且当前进程处于后台进程LRU队列队头附近，因此还是比较安全的，但是系统可能已经开始从LRU队列中清理进程了，此时当前应用需要释放部分资源，以保证尽量的保活。
 - `TRIM_MEMORY_MODERATE`: 系统处于低可用内存的情况，并且当前进程处于后台进程LRU队列中间的位置，如果内存进一步紧缺，当前进程就有可能被清理掉，需要进一步释放资源。
@@ -314,46 +314,9 @@ public static Retrofit getAdapter(Context context, String baseUrl) {
 - 在已知并且不需要栈数据的情况下，就没有必要需要使用异常，或创建`Throwable`生成栈快照是一项耗时的工作。
 - 需要十分明确发布环境以及测试环境，明确仅仅为了方便测试的代码以及工具在发布环境不会被带上。
 - 国内环境的长连接抉择: 根据各厂商设备在日活的排行，优先适配，而后再结合后台的工作量，评估是否自己做，客户端做主要就考虑电量以及可靠性权衡。如果要接第三方的，一定要了解清楚，国内现在第三方的，依然不太有节操（甚至有些会把你加入某套餐，就是会各种唤起其他应用)，如果要自己实现可以看看本文有提到的[这篇文章](https://blog.dreamtobe.cn/2016/08/15/android_scheduler_and_battery/)
-
-### 常见的依赖库推荐
-
-> 可以参考Falcon Pro作者的推荐: [Falcon Pro 3如何完成独立开发演讲分析](http://blog.dreamtobe.cn/2015/06/14/Falcon-Pro-3-如何完成独立开发演讲分析/)
-
-#### 1. 响应式编程
-
-> [RxJava](https://github.com/ReactiveX/RxJava) (响应式编程，代码更加简洁，异步处理更快快捷、异常处理更加彻底、数据管道理念)
-
-相关了解可以参看: [RxJava](http://blog.dreamtobe.cn/2015/04/29/RxJava学习整理/)
-
-#### 2. 图片加载:
-
-- 小型快捷: [Picasso](https://github.com/square/picasso) (接口干净、支持okhttp、功能强大、稳定、高效, 可以延读: [PhotoGallery、Volley、Picasso 比较](http://blog.dreamtobe.cn/2015/04/28/PhotoGallery%E3%80%81Volley%E3%80%81Picasso-%E6%AF%94%E8%BE%83/))
-- 大项目考虑: [Fresco](http://fresco-cn.org) (2.5M，pipeline解决资源竞争、Native Heep解决OOM，的同时减少GC)
-
-#### 3. 网络底层库:
-
-[Okhttp](https://github.com/square/okhttp): 默认gzip、缓存、安全等
-
-#### 4. 网络基层:
-
-[Retrofit](https://github.com/square/retrofit): 非常好用的REST Client，结合RxJava简单API实现、类型安全，简单快捷
-
-#### 5. 数据库层:
-
-[Realm](https://realm.io): 效率极高(Falcon Pro 3的作者Joaquim用了该库以后，所有数据库操作都放到了UI线程)（基于TightDB，底层C++闭源，Java层开源，简单使用，性能远高于SQLite等）
-
-#### 6. Crash上报:
-
-[Fabric](https://fabric.io): 全面的信息(新版本还支持JNI Crash获取和上报)、稳定的数据、及时的通知、强大的反混淆(其实在混淆后有上传mapping)
-
-#### 7. 内存泄漏自动化检测
-
-[LeakCanary](https://github.com/square/leakcanary): 自动化泄漏检测与分析 ( 可以看看这个[LeakCanary使用总结](http://blog.dreamtobe.cn/2015/05/18/LeakCanary%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/)与[Leakcanary Square的一款Android/Java内存泄漏检测工具](http://blog.dreamtobe.cn/2015/05/12/Leakcanary-Square%E7%9A%84%E4%B8%80%E6%AC%BEAndroid:Java%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E6%A3%80%E6%B5%8B%E5%B7%A5%E5%85%B7/))
-
-#### 8. 其他
-
- - 代码质量: [phabricator 的arc diff](http://phabricator.org) (尽量小颗粒度的arc diff 与update review)，其实也可以看看Google是如何做的: [笔记-谷歌是如何做代码审查的](http://blog.dreamtobe.cn/2015/03/23/%5B笔记%5D谷歌是如何做代码审查的/)，还有一点的TODO要写好deadline与master
- - 编包管理: [Gitlab CI](https://about.gitlab.com/gitlab-ci/) (结合Gitlab，功能够用，方便)
+- 控制合理加载资源的时间区间: 如由于图片的加载通常都与页面的生命周期有关系，在Android中可以考虑当从页面A进入页面B时，暂停所有页面A的图片加载，退出页面B时，终止所有页面B相关的图片加载，回到页面A时恢复页面A的所有图片加载(这些操作使用Picasso十分快速的实现，因此Picasso支持不同TAG的图片加载暂停、恢复、取消)
+- 代码质量: [phabricator 的arc diff](http://phabricator.org) (尽量小颗粒度的arc diff 与update review)，其实也可以看看Google是如何做的: [笔记-谷歌是如何做代码审查的](http://blog.dreamtobe.cn/2015/03/23/%5B笔记%5D谷歌是如何做代码审查的/)，还有一点的TODO要写好deadline与master
+- 编包管理: [Gitlab CI](https://about.gitlab.com/gitlab-ci/) (结合Gitlab，功能够用，方便)
 
 ---
 
