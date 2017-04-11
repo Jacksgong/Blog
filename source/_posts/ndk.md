@@ -1,6 +1,5 @@
-title: NDK | JNI
+title: NDK与JNI
 date: 2015-11-08 23:16:03
-updated: 2016-12-24 23:16:03
 permalink: 2015/11/08/ndk
 categories:
 - Android Native Develop
@@ -13,34 +12,37 @@ tags:
 
 ---
 
+{% note info %}本文比较全面的介绍了NDK与JNI的使用与基础知识。{% endnote %}
+
+<!-- more -->
+
 ## I. 初识
 
-### 1. NDK
+#### 1. NDK
 
 > Native Development Kit
 
-是一套让你的Android应用一部分代码可以使用像C/C++语言的工具包
+是一套让你的Android应用一部分代码可以使用像C/C++语言的工具包。
 
-<!-- more -->
-#### 一般什么时候可以使用NDK
+**一般什么时候可以使用NDK**
 
-> 谷歌建议真正要使用NDK的情况是在很少数情况
+> 谷歌建议真正要使用NDK的情况是在很少数情况。
 
 - 需要提高执行性能（e.g. 大数据排序）
 - 需要使用c/c++实现的第三方库（如 Ffmpeg，OpenCV）
 - 需要调用更加底层的代码(如，你想调用Dalvik以外的代码)
 
-### 2. JNI
+#### 2. JNI
 
 > Java Native Interface
 
 是一套在Java虚拟机控制下代码执行的标准机制。使得Java可以调用c/c++的方法，或者c/c++中可以调用Java。
 
-#### JNI标准机制的实现
+**JNI标准机制的实现**
 
 由汇编或c/c++的代码，组装(assembled)成动态库(允许非静态绑定），由此实现Java与c/c++双向调用。
 
-#### JNI的优势
+**JNI的优势**
 
 相比其他类似的(Netscape Java运行接口、Microsoft的原始本地接口、COM/Java接口)相比，它的优势在于兼容性:
 
@@ -49,21 +51,20 @@ tags:
 
 ## II. 基本知识
 
-> 为了更清晰，本地(虚拟机所在环境原生语言(通常是c/c++))这里都用native单词表示，而不直译
-
+为了更清晰，本地(虚拟机所在环境原生语言(通常是c/c++))这里都用native单词表示，而不直译。
 
 ### 参数与引用
 
 #### 1. 方法参数说明
 
-> 虚拟机需要追踪所有传递到native层的参数，使得GC不会在native层还在用这些参数引用的时候被清除了
+虚拟机需要追踪所有传递到native层的参数，使得GC不会在native层还在用这些参数引用的时候被清除了。
 
-##### 需要注意
+**需要注意**
 
 1. 原始类型直接通过相互拷贝传递
 2. 对象 通过引用传递
 
-##### JNI原始类型
+**JNI原始类型**
 
 Java类型 | Native类型 | 备注
 :-: |:-: |:-:
@@ -77,19 +78,19 @@ float | jfloat | 32 bits
 double | jdouble | 64 bits
 void(指针/对象引用) | void | N/A
 
-##### JNI对象引用关系
+**JNI对象引用关系**
 
 ![](/img/ndk-1.png)
 
-##### JNI接口指针
+**JNI接口指针**
 
 ![](/img/ndk-2.png)
 
-> ps: 上图的JNI函数表就好像C++的虚方法表一样。虚拟机可以运行多张JNI函数表(如一张用于调试，另外一张用于调用)。
+P.S. 上图的JNI函数表就好像C++的虚方法表一样。虚拟机可以运行多张JNI函数表(如一张用于调试，另外一张用于调用)。
 
-##### 例子
+**例子**
 
-```
+```java
 /**
  * @param *env JNI接口指针
  * @param obj 在native方法中定义的对象引用
@@ -106,20 +107,20 @@ jdouble Java_pkg_Cls_f__ILjava_lang_String_2 (JNIEnv *env, jobject obj, jint i, 
 
 #### 2. 其他引用类型说明
 
-> JNI定义了三种引用类型 局部引用、全局引用、全局弱引用
+> JNI定义了三种引用类型: 局部引用、全局引用、全局弱引用。
 
-##### 局部引用:
+**局部引用**
 
-> 所有通过JNI方法返回的Java对象都是局部引用
-> 局部引用只对创建该引用所在线程可见。
+- 所有通过JNI方法返回的Java对象都是局部引用
+- 局部引用只对创建该引用所在线程可见
 
-方法结束时释放。但是也可以调用JNI方法`DeleteLocalRef`对其马上进行释放。
+局部引用在方法结束时释放，但是也可以调用JNI方法`DeleteLocalRef`对其马上进行释放。
 
-##### 全局引用
+**全局引用**
 
-只有在主动调用释放方法时才释放，对其释放的JNI方法: `DeleteGlobalRef`; 创建全局引用的方法: `NewGlobalRef`
+只有在主动调用释放方法时才释放，对其释放的JNI方法: `DeleteGlobalRef`; 创建全局引用的方法: `NewGlobalRef`。
 
-##### 例子
+**例子**
 
 ```
 jclass localClazz;
@@ -133,21 +134,20 @@ globalClazz = (*env)->NewGlobalRef(env, localClazz);
 
 // 立即释放globalClazz全局引用
 (*env)->DeleteGlobalRef(env, globalClazz);
-
 ```
 
 ### 错误机制
 
-> JNI不会像Java一样检测像NullPointerException、IllegalArgumentException、ArrayIndexOutOfBoundsException、ArrayStoreException等这样的错误。
+JNI不会像Java一样检测像`NullPointerException`、`IllegalArgumentException`、`ArrayIndexOutOfBoundsException`、`ArrayStoreException`等这样的错误。
 
-##### 不报错原因
+**不报错原因**
 
 1. 错误检测会导致性能下降
 2. 在大多数C库函数中，很难对错误进行处理
 
-#### 处理方式
+**处理方式**
 
-> JNI允许使用Java的异常处理
+> JNI允许使用Java的异常处理。
 
 处理JNI函数中对应的出错的代码(因为即使出现异常, JNI层只会返回错误码，自己并不会报异常), 然后在JNI函数中错误对象抛异常到Java层(根据返回的错误代码)。
 
@@ -158,26 +158,25 @@ jthrowable ExceptionOccurred(JNIEnv *env);
 
 ### JNI的编码
 
-> 标准UTF-8主要用在C，而Java使用的是UTF-16
-> JNI 使用的是 修改过的UTF-8: [Modified UTF-8 Strings](https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/types.html#modified_utf_8_strings)
+- 标准UTF-8主要用在C，而Java使用的是UTF-16
+- JNI 使用的是 修改过的UTF-8: [Modified UTF-8 Strings](https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/types.html#modified_utf_8_strings)
 
+**结果**
 
-##### 结果:
+被编码过的"修改过的UTF-8"字符串只包含非空ASCII字符串，其中每个字符只需一个字符就可表示。但是所有的Unicode字符串都可以被表示。
 
-被编码过的'修改过的UTF-8'字符串只包含非空ASCII字符串，其中每个字符只需一个字符就可表示。但是所有的Unicode字符串都可以被表示
+**与标准UTF-8的差别**
 
-##### 与标准UTF-8的差别
-
-1. null字符(0)使用两个字节的格式而非一个字节进行编码，因为修改过的UTF-8不再有嵌入的null(`\0`)
+1. `null`字符(0)使用两个字节的格式而非一个字节进行编码，因为修改过的UTF-8不再有嵌入的null(`\0`)。
 2. 只使用标准UTF-8的一字节、两字节、三字节的格式，而四字节的将使用两个三字节来代替表示。
 
 
 ### JNI函数
 
-> JNI接口不仅仅包含数据集(dataset)，也包含了它的大量方法。
-> 官方文档: [JNI Functions](http://docs.oracle.com/javase/6/docs/technotes/guides/jni/spec/functions.html)
+- JNI接口不仅仅包含数据集(dataset)，也包含了它的大量方法。
+- 官方文档: http://docs.oracle.com/javase/6/docs/technotes/guides/jni/spec/functions.html
 
-##### 例子
+**例子**
 
 ```
 #include <jni.h>
@@ -218,28 +217,24 @@ jvm->DestroyJavaVM();
 
 ### JNI线程
 
-> 运行在Linux(Android)上的所有线程统一由内核管理的。
+运行在Linux(Android)上的所有线程统一由内核管理的。
 
-
-
-
-
-#### JNI中的线程附加到虚拟机中
+**JNI中的线程附加到虚拟机中**
 
 我们可以通过`AttachCurrentThread`和`AttachCurrentThreadAsDaemon`函数将线程附加到虚拟机中，以保证可以正常访问JNI接口指针(JNIEnv)(注意上文JNI接口指针那张图提到的JNI接口指针只在当前线程可见)。
 
-#### 需要注意
+**需要注意**
 
 Android将不会主动释放在JNI中创建的线程(GC不会对其进行主动释放)，所有一定要记得不用时，主动调用`DetachCurrentThread`方法，进行释放。
 
 ### Java中调用native方法
 
-#### 需要注意
+**需要注意**
 
 - 在方法前需要保留关键字`native`
 - Google建议方法名带`native`前缀，如`nativeGetStringFromFile`
 
-##### 例子
+**例子**
 
 ```
 native String nativeGetStringFromFile(String path) throws IOException;
@@ -252,14 +247,14 @@ native void nativeWriteByteArrayToFile(String path, byte[] b) throws IOException
 
 ![](/img/ndk-3.jpeg)
 
-##### 需要注意
+**需要注意**
 
 - 所有的native代码都存储在jni文件夹下
 - 每个子目录对应一种处理器架构
 - 如果只带有armeabi，将对armeabi-v7a默认支持（通常只带armeabi的话，armeabi-v7a架构的处理器也支持，只是多一步翻译的过程，也会因此速度会变差）
-- 假若你有多种库(so文件)，要么支持处理器架构的，同时都支持，要么同时都不支持。例子: 如果a.so一个带了mips的，b.so的没有带，则在mips处理器架构的手机上，执行到需要b.so的地方，发现在mips中找不到b.so，就会crash。
+- 假若你有多种库(so文件)，要么支持处理器架构的，同时都支持，要么同时都不支持。例子: 如果`a.so`一个带了mips的，`b.so`的没有带，则在mips处理器架构的手机上，执行到需要`b.so`的地方，发现在mips中找不到`b.so`，就会crash
 
-##### 针对简单的Android项目, 创建native项目:
+**针对简单的Android项目, 创建native项目**
 
 1. 创建jni文件夹，用于存储native源代码
 2. 创建`Andorid.mk`文件，用于构建项目
@@ -267,13 +262,10 @@ native void nativeWriteByteArrayToFile(String path, byte[] b) throws IOException
 
 #### 1. `Android.mk`
 
-> 构建native项目的MAKEFILE文件
-> 官方介绍: [Android.mk](https://developer.android.com/intl/zh-cn/ndk/guides/android_mk.html)
+- 构建native项目的`MAKEFILE`文件
+- 官方介绍: https://developer.android.com/intl/zh-cn/ndk/guides/android_mk.html
 
-用于打包代码到
-静态库(statistic libraries)拷贝到项目的libs目录下，生成 共享库与独立可执行文件
-
-##### 例子
+**例子**
 
 ```
 # 通过函数调用my-dir返回当前目录文件所在路径
@@ -294,7 +286,7 @@ LOCAL_SRC_FILES := ndkBegining.c \
 include$(BUILD_SHARED_LIBRARY)
 ```
 
-##### 自定义变量
+**自定义变量**
 
 可以在`Android.mk`中定义自定义变量，但是必须使用规范前缀: `LOCAL_`、`PRIVATE_`、`NDK_`、`APP_`、`MY_`(Google推荐)。
 
@@ -308,8 +300,8 @@ LOCAL_SRC_FILES += $(MY_SOURCE)
 
 #### 2. `Application.mk`
 
->  用于定义多种变量使得编译更加灵活的MAKEFILE文件
-> 官方文档: [Application.mk](https://developer.android.com/intl/zh-cn/ndk/guides/application_mk.html)
+- 用于定义多种变量使得编译更加灵活的MAKEFILE文件
+- 官方文档: https://developer.android.com/intl/zh-cn/ndk/guides/application_mk.html
 
 ```
 # (可选变量)
@@ -335,7 +327,7 @@ APP_STL := stlport_shared
 # NDK_TOOLCHAIN_VERSION := 4.9
 ```
 
-##### APP_ABI
+**APP_ABI**
 
 架构 | 参数名
 - | -
@@ -346,9 +338,9 @@ Intel64 | x86_64
 MIPS32 | mips
 MIPS64(r6) | mips64
 
-##### APP_STL
+**APP_STL**
 
-> 更多可以参考这里: [C++ Library Support](https://developer.android.com/intl/zh-cn/ndk/guides/cpp-support.html#runtimes)
+更多C++ Library Support可以参考这里: https://developer.android.com/intl/zh-cn/ndk/guides/cpp-support.html#runtimes
 
 ```
 # static STLport library
@@ -363,8 +355,8 @@ APP_STL := system
 
 #### 3. `NDK-BUILDS`
 
-> 基于GNU MAKE的封装
-> 官方文档: [ndk-build](http://developer.android.com/intl/zh-cn/ndk/guides/ndk-build.html)
+- 基于`GNU MAKE`的封装
+- 官方文档: http://developer.android.com/intl/zh-cn/ndk/guides/ndk-build.html
 
 ```
 # 清除之前生成的二进制文件
@@ -384,59 +376,50 @@ NDK_APPLICATION_MK=<file>
 
 ```
 
-##### NDK_HOST_32BIT
+**NDK_HOST_32BIT**
 
-> [64-Bit and 32-Bit Toolchains](http://developer.android.com/intl/zh-cn/ndk/guides/ndk-build.html#6432)
-
----
-
-#### 推荐书籍:
-
-Cinar O. – Pro Android C++ with the NDK – 2012.
+64-Bit and 32-Bit Toolchains: http://developer.android.com/intl/zh-cn/ndk/guides/ndk-build.html#6432
 
 ## IV. JNI实践
 
+- **Sample: hello-jni:** https://developer.android.com/ndk/samples/sample_hellojni.html#ap
+- **Create Hello-JNI with Android Studio:** https://codelabs.developers.google.com/codelabs/android-studio-jni/index.html#0
 
-> - [Sample: hello-jni](https://developer.android.com/ndk/samples/sample_hellojni.html#ap)
-> - [Create Hello-JNI with Android Studio](https://codelabs.developers.google.com/codelabs/android-studio-jni/index.html#0)
+#### 1. 简单的JNI
 
-### 1. 简单的JNI
+可直接参照: https://github.com/Jacksgong/android-ndk#i-sample-try-hello-jni
 
-> - [Sample: hello-jni](https://developer.android.com/ndk/samples/sample_hellojni.html#ap)
-> - [Create Hello-JNI with Android Studio](https://codelabs.developers.google.com/codelabs/android-studio-jni/index.html#0)
+- **Sample: hello-jni:** https://developer.android.com/ndk/samples/sample_hellojni.html#ap
+- **Create Hello-JNI with Android Studio:** https://codelabs.developers.google.com/codelabs/android-studio-jni/index.html#0
 
-#### 案例
+#### 2. 引用已有库拓展
 
-直接参照: https://github.com/Jacksgong/android-ndk#i-sample-try-hello-jni
+可直接参照: https://github.com/Jacksgong/android-ndk#ii-reference-prebuilt-libraries-hello-libs
 
-### 2. 引用已有库拓展
-
-> - [Using Prebuilt Libraries](https://developer.android.com/ndk/guides/prebuilts.html)
-> - [Android NDK with multiple pre-built libraries](http://labs.hyperandroid.com/android-ndk-with-multiple-pre-built-libraries)
+- **Using Prebuilt Libraries:** https://developer.android.com/ndk/guides/prebuilts.html
+- **Android NDK with multiple pre-built libraries:** http://labs.hyperandroid.com/android-ndk-with-multiple-pre-built-libraries
 
 这里提到的引用已有库，是指引用已有的Shared libraries(`.so`)，或是引用已有的Static libraries(`.a`)。
 
-#### 相关知识
+**Shared libraries(`.so`)**
 
-##### Shared libraries
+在Windows中是`.dll`, 在OSX中是`.dylib`。
 
-> are `.so`(or in Windows `.dll`, or in OS X `.dylib`).
+**运行时引用它:** 在Android中，我们只能通过`System.loadLibrary("..")`加载它。
 
-**存储运行时引用它**。在Android中，我们只能通过`System.loadLibrary("..")`加载它，因此别妄想将多个`.so`合成为一个`.so`了。
+**Static libraries(`.a`)**
 
-##### Static libraries
+在Windows中是`.lib`。
 
-> are `.a`(or in Windows .lib).
-
-**可以直接在编译期link它**。在Android中，我们可以直接在`Android.mk`中配置，在编译期直接拷贝其代码，与我们的代码合成一个`.so`。
-
-#### 案例
-
-直接参照: https://github.com/Jacksgong/android-ndk#ii-reference-prebuilt-libraries-hello-libs
+**直接在编译期Link它:** 在Android中，我们可以直接在`Android.mk`中配置，在编译时与我们的代码合成一个`.so`。
 
 ---
 
-- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/ndk.md)。
+- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/ndk.md)
+
+---
+
+本文已经发布到JackBlog公众号: [Android NDK与JNI - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483711&idx=1&sn=7b3f68b9131b57a6e58925840bacc863)
 
 ---
 - [Building Your Project](http://developer.android.com/intl/zh-cn/ndk/guides/build.html)
