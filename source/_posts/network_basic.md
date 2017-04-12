@@ -1,6 +1,5 @@
-title: 常见网络协议优化与区分
+title: 常见网络协议优化与演进
 date: 2017-02-12 14:09:03
-updated: 2017-02-16 14:09:03
 categories:
 - 网络
 tags:
@@ -14,70 +13,72 @@ tags:
 
 ---
 
-## I. 协议优化演进
-
-### 1. 带宽与拥塞
-
-#### 现状
-
-目前的网络基建越来越好，因此带宽的已经不再是瓶颈， 但是由于相关协议(如TCP)的拥塞窗口(CWND, congestion window)控制，很多时候并没有将带宽有效的利用，因此更有效的利用带宽是一个优化方向，特别针对视频、游戏等领域。
-
-#### 应对
-
-- **QUIC:** 基于UDP，QUIC可以支持无序的递交，因此通常单个丢包最多只会影响1个请求stream，并且QUIC中一定程度上拆分拥塞窗口来更好的适配多个多路复用的连接，来尽可能的利用带宽，目前已经在Youtube以及一些Google通用库(如字体库)上应用
-- **HTTP:** 通过同时建立多个连接通道，由于每个通道有单独的拥塞窗口保证一个丢包最多只拥塞一个连接通道
-- **BBR:** Google推出的全新的阻塞策略方案，从根本上解决该问题，通过交替测量带宽和激进的估算算法尽可能的占满带宽与降低延迟（此方式极大的提高了带宽利用率），目前已经在Youtube上应用
+{% note warning %}本文通过对比分析了截至目前为止各类常见网路协议与其特性。{% endnote %}
 
 <!-- more -->
 
-#### 存在该缺陷的协议
+## I. 协议优化演进
+
+#### 1. 带宽与拥塞
+
+**现状**
+
+目前的网络基建越来越好，因此带宽的已经不再是瓶颈， 但是由于相关协议(如TCP)的拥塞窗口(CWND, congestion window)控制算法，很多时候并没有将带宽有效的利用，因此更有效的利用带宽是一个优化方向，特别针对视频、游戏等领域。
+
+**应对**
+
+- **QUIC:** 基于UDP，QUIC可以支持无序的递交，因此通常单个丢包最多只会影响1个请求stream，并且QUIC中一定程度上拆分拥塞窗口来更好的适配多个多路复用的连接，来尽可能的利用带宽，目前已经在Youtube以及一些Google通用库(如字体库)上应用
+- **HTTP:** 通过同时建立多个连接通道，由于每个通道有单独的拥塞窗口保证一个丢包最多只拥塞一个连接通道
+- **BBR:** Google推出的全新的阻塞拥塞控制算法，从根本上解决该问题，通过交替测量带宽和激进的估算算法尽可能的占满带宽与降低延迟（此方式极大的提高了带宽利用率），目前已经在Youtube上应用
+
+**存在该缺陷的协议**
 
 - **TCP:** 由于采用"加性增，乘性减"的拥塞控制算法，错误的将网络中的错误丢包也认为是拥塞丢包，导致拥塞窗口被收敛的很小，带宽无法有效利用
 - **SPDY:** 由于SPDY基于TCP，因此存在TCP相同的缺陷问题，并且虽然SPDY采用了多路复用，也做个各类优化，但是由于一个TCP连接只有一个拥塞窗口，因此一个请求stream丢包，就会导致整个通道被阻塞
 
-### 2. 握手的N-RTT的开销
+#### 2. 握手的N-RTT的开销
 
-#### 现状
+**现状**
 
 目前TCP与SSL/TLS(1.0,1.1,1.2)，每次建连需要TCP三次握手+安全握手需要: `4~5-RRT`，导致建连效率低下，Google、Facebook、Tencent(Wechat)等公司推出了各类优化策略。
 
-#### 应对
+**应对**
 
 - **TLS1.3:** 安全握手提出了0-RTT草案
 - **QUIC:** 通过实现自己的安全模块，整个握手过程(TCP + TLS)采用全新的0-RTT方案，并计划当完成时适配到TLS1.3中
 - **Proxygen:** Facebook基于QUIC的0-RTT协议进行优化，保证安全握手最多只有1-RTT，并运用在TCP中 ，并将贡献各类优化成果给TLS1.3
 - **mmtls:** Wechat基于TLS1.3草案中的0-RTT，进行优化推出自己的mmtls，其对于长连接保障安全握手1-RTT，对于短连接安全握手尽可能使用0-RTT
 
-#### 存在该缺陷的协议
+**存在该缺陷的协议**
 
 - **SSL、TLS1.3之前版本:**  在TLS1.2中，需要2~1-RTT(全握手需要2-RTT)
 
-### 3. 冗余数据
+#### 3. 冗余数据
 
-#### 现状
+**现状**
 
-通常的一般的Http请求，每次请求header基本上没什么变化；在一些情况下多个页面使用相同静态资源(js、logo等)，却每次都重复下载。
+通常的一般的HTTP请求，每次请求header基本上没什么变化；在一些情况下多个页面使用相同静态资源(js、logo等)，却每次都重复下载。
 
-#### 应对
+**应对**
 
 - **SPDY:** 采用[DEFLATE](http://zh.wikipedia.org/wiki/DEFLATE)对请求头/响应头进行压缩
-- **HTTP/2:**采用[HPACK](http://http2.github.io/http2-spec/compression.html)算法对请求头/响应头进行压缩，并且通讯双方各自cache一份header fields表，避免了重复header的传输
+- **HTTP/2:** 采用[HPACK](http://http2.github.io/http2-spec/compression.html)算法对请求头/响应头进行压缩，并且通讯双方各自cache一份header fields表，避免了重复header的传输
 - **QUIC:** 目前版本采用[HPACK](http://http2.github.io/http2-spec/compression.html)算法对请求头/响应头进行压缩
 - **HTTP/1.1、HTTP/2:** 支持`Cache-Control`用于控制资源有效时间,支持`Last-Modified`来控制资源是否可复用
 - **Facebook geek方案:**  将`expiration time`全部设置为1年，所有的资源请求链接，都采用概念性的连接(在请求链接后加上资源名的md5，再做mapping)(只要资源不变化链接就不变化)，保证已下载资源能被有效利用的同时，避免重复检测资源有效性
 - **浏览器优化:** Facebook联系Chrome与Firefox，针对复用资源可复用检测频率进行调整(如firefox支持在`cache-control`中的`immutable`关键字表示资源不可变不用重复检测)
 
-#### 存在该缺陷的协议
+**存在该缺陷的协议**
 
 - **HTTP/1:** 请求头未做压缩，不支持`Cache-Control`与`Last-Modified`因此存在冗余资源重复下载问题
 - **HTTP/1.1:** 请求头未做压缩
 
-### 4. 预准备
+#### 4. 预准备
 
 - **Taobao:** DNS-Prefetch、Preconnect、Prefetch、Flush HTML early、PreRender
 - **SPDY、HTTP/2、QUIC:**: 允许服务端主动推服务端认为客户端需要的静态资源
 
-### 5. 负载均衡、超时策略优化与其他
+#### 5. 负载均衡、超时策略优化与其他
 
 - **负载均衡:** 收益较小的长连接，带来服务端没必要的性能开销
 - **超时策略:** 策略性的调整建连与维连时的超时重连的频率、时间、IP/端口，来应对弱网状况，何时快速放弃节约资源(无网状态)，何时找到可用资源快速恢复连接(被劫持、服务器某端口/IP故障、基站繁忙、连接信号弱、丢包率高)
@@ -86,11 +87,11 @@ tags:
 
 ## II. 常见协议区分
 
-### 1. TCP
+#### 1. TCP
 
 目前应用最广泛的可靠的、有序的、自带问题校验修复([error-checked](https://en.wikipedia.org/wiki/Error_detection_and_correction))、传输协议，通常情况下发送端与接收端通过TCP协议来保障数据的可靠到达，中间层通过IP协议来路由数据的传递。
 
-<center>![image_1b8j1od7f11rspea7gi1stssbq9.png-104.2kB][1]</center>
+<center>![][1]</center>
 
 - **建连:** 通过三次握手，保障连接已可靠连接
 - **超时重试:** 通过连接超时重试、读写超时重试机制，来保障连接的稳定性
@@ -100,19 +101,19 @@ tags:
 - **应答机制:** 每次接收端会发送Acks(Acknowledgements)给发送端告知数据以被接收
 - **断连:** 通过四次挥手，保障连接已可靠断开
 
-### 3. HTTP
+#### 2. HTTP
 
-#### `HTTP1.1` vs `HTTP1.0`
+**`HTTP1.1` vs `HTTP1.0`**
 
 - **更灵活缓存处理:** 引入Etag(Entity tag)等目前常用的缓存相关策略
 - **优化带宽使用:** 引入`range`头域，支持206(Partial Content)，用于数据断点续传。
 - **错误机制更完善:** 引入24个错误状态码，如409(Conflict)请求资源与当前状态冲突； 410(Gone)资源在服务器上被永久删除
-- **Host头处理:** 请求头中必须带上`host`，否则会报400 Bad Request，为了支持一台服务器上有多台虚拟主机，因此通常一个IP对应了多个域名。
+- **Host头处理:** 请求头中必须带上`host`，否则会报400 Bad Request，为了支持一台服务器上有多台虚拟主机，因此通常一个IP对应了多个域名
 - **长连接:** 默认`Connection: keep-alive`，以复用已建连通道，不像`http1.0`每个请求都需要重新创建
 
-### 4. HTTPS
+#### 3. HTTPS
 
-1994年由**网景**提出，并应用在网景导航者浏览器中。最新的HTTPS协议在2000年5月公布的`RFC 2818`正式确定。
+1994年由 **网景** 提出，并应用在网景导航者浏览器中。最新的HTTPS协议在2000年5月公布的`RFC 2818`正式确定。
 
 HTTPS协议是基于TLS(Transport Layer Security)/SSL(Secure Sockets Layer)对数据进行加密校验，保障了网络通信中的数据安全。
 
@@ -124,8 +125,7 @@ HTTPS协议是基于TLS(Transport Layer Security)/SSL(Secure Sockets Layer)对�
 - **TLS提高了SSL:** 虽然最早的TLS1.0与SSL3.0非常类似，但是TLS采用HMAC(keyed-Hashing for Message Authentication Code)算法对数据验证相比SSL的MAC(Message Authentication Code)算法会更难破解，并且在其他方面也有一些小的改进
 - **请求端口:** 443
 
-
-### 5. SPDY
+#### 4. SPDY
 
 > 读音speedy
 
@@ -142,29 +142,26 @@ SPDY兼容性: http://caniuse.com/#feat=spdy
 - **支持Server Push:** 允许服务端主动的推送资源(js、css)给客户端，当分析获知客户端将会需要时，以此利用起空闲带宽
 - **支持Server Hints:** 允许服务端可以在客户端还没有发现将需要哪些资源的时候，主动通知客户端，以便于客户端实现准备好相关资源的缓存
 
-### 6. HTTP/2
+#### 5. HTTP/2
 
 > HTTP/2基于SPDY设计
 
 <center>![image_1b90ik3e01di41tgr16hc12ks19uvp.png-129.5kB][4]</center>
 <center>![image_1b8jku3ol1rbveu4es1tp8rk61j.png-125kB][5]</center>
 
-#### HTTP/2 vs SPDY
+**HTTP/2 vs SPDY**
 
 - **SSL/TLS:** SPDY强制使用SSL/TLS，HTTP/2非强制(但是部分浏览器(如Chrome)不允许，所以目前如果使用HTTP/2最好都配置SSL/TLS)
 - **消息头压缩算法:** HTTP/2消息头压缩算法采用[HPACK](http://http2.github.io/http2-spec/compression.html)，SPDY采用[DEFLATE](http://zh.wikipedia.org/wiki/DEFLATE)，一般情况下HPACK的压缩率会高于DEFLATE
 - **传输格式:** HTTP/2传输采用二进制而非文本，因此HTTP/2中的基本单位是帧, 文本形式众多很难权衡健壮、性能与复杂度，二进制弥补了这个缺陷，并且是无序的帧，最终根据头帧重新组装
 - **继承与优化:** HTTP/2继承并优化了SPDY的多路复用与Server Push
 
-### 7. QUIC
+#### 6. QUIC
 
-> 发音`quick`
-
-> QUIC 参考了HTTP/2与SPDY，可靠的，多路复用的基于UDP的网络协议，内置安全加密模块，低延迟、运行在用户空间、开源的新一代网络协议。Google计划在完成后将其服务于所有的Google服务。
-
-> Google在2013年10月第一次在IETF展示QUIC, 2016年7月启动工作群,
-
-可靠的，多路复用的基于UDP的网络协议，内置安全加密模块，低延迟、运行在用户空间、开源的新一代网络协议。Google计划在完成后将其服务于所有的Google服务。
+- 发音`quick`
+- QUIC 参考了HTTP/2与SPDY
+- Google在2013年10月第一次在IETF展示QUIC, 2016年7月启动工作群
+- 可靠的，多路复用的基于UDP的网络协议，内置安全加密模块，低延迟、运行在用户空间、开源的新一代网络协议。Google计划在完成后将其服务于所有的Google服务。
 
 <center>![][6]</center>
 <center>![][7]</center>
@@ -202,7 +199,11 @@ SPDY兼容性: http://caniuse.com/#feat=spdy
 
 ---
 
-- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/network_basic.md)。
+[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/network_basic.md)
+
+---
+
+本文已经发布到JackBlog公众号: [常见网络协议与演进 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483713&idx=1&sn=a7a67d3a2258c738c725c37f7c37b210)
 
 ---
 
