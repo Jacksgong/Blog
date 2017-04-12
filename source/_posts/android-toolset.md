@@ -98,7 +98,7 @@ testCompile 'com.squareup.okhttp3:okhttp:3.6.0'
 
 #### hugo
 
-> [hugo](https://github.com/JakeWharton/hugo)
+> https://github.com/JakeWharton/hugo
 
 轻松给方法添加耗时日志:
 
@@ -116,7 +116,7 @@ V/Example: <-- getName [16ms] = "Jake Wharton"
 
 #### Pury
 
-> [Pury](https://medium.com/@nikita.kozlov/pury-new-way-to-profile-your-android-application-7e248b5f615e#.65ngahewt)
+> https://medium.com/@nikita.kozlov/pury-new-way-to-profile-your-android-application-7e248b5f615e#.65ngahewt
 
 统计事件之间的耗时:
 
@@ -138,12 +138,80 @@ App Start <-- 1182ms
 
 ### 2. 日志着色
 
-
-> [pidcat](https://github.com/JakeWharton/pidcat)
+> pidcat: https://github.com/JakeWharton/pidcat
 
 ![](/img/android-toolset-4.png)
 
-### 3. 项目License配置
+### 3. 数据库网络监控
+
+####  3.1 Stetho - Facebook
+
+基于Chrome DevTools十分实用便捷。
+
+[官网](http://facebook.github.io/stetho/)的教程已经非常简洁明了，如查看数据库:
+
+**首先引入基础库**
+
+```groovy
+// Gradle dependency on Stetho
+dependencies {
+  compile 'com.facebook.stetho:stetho:1.4.2'
+}
+```
+
+**在`Application`中初始化它**
+
+```java
+public class MyApplication extends Application {
+  public void onCreate() {
+    super.onCreate();
+    Stetho.initializeWithDefaults(this);
+  }
+}
+```
+
+**然后手机连接电脑，Chrome浏览器的地址栏输入`chrome://inspect`**
+
+
+![][chrome-inspect]
+<p style="text-align: center;"> 看到已经连接上的手机，并且看到初始化过Stetho应用的包名，点击`inspect`</p>
+
+![][stetho-db]
+<p style="text-align: center;"> 然后通过`Resources`就可以查看到数据库信息了</p>
+
+#### 3.2 通过Mitmproxy来抓HTTP/HTTPS的包
+
+需要注意的是HTTPS需要在手机端安装对应的证书，HTTP直接可以抓取。如果你和我一样是VI-MODE的死忠粉，那么用起来就会非常爽且高效。并且你可以通过[ustwo/mastermind](https://github.com/ustwo/mastermind)来模拟相关请求的返回，来解决联调时，前后端互等的效率问题。
+
+这块[官网](http://docs.mitmproxy.org/en/latest/mitmproxy.html)的教程也十分的详尽。比如监听并抓包8889端口过来的所有HTTP请求:
+
+> 这里的案例都是在OSX上的。
+
+**安装**
+
+建议直接通过Homebrew直接进行安装: `brew install mitmproxy`
+
+**配置**
+
+安装完成后，在用户目录下会有相关的配置目录`.mitmproxy`，打开`~/.mitmproxy/common.conf`添加监听端口为`8889`:
+
+```
+port = 8889
+```
+
+**抓包**
+
+- 将手机与MacBook连接同一Wiki使其在同一个局域网内，然后在手机设置代理到MacBook的IP，端口为`8889`
+- MacBook上，在Terminal中输入mitmproxy，此时就开始抓包所有`8889`端口代理进来的HTTP请求了
+
+![][mitmproxy]
+
+#### 3.3 其他
+
+- 常见的[Charles](https://www.charlesproxy.com/download/)(收费的)，通过窗口呈现，交互非常友好，很赞的抓包软件，并且你可以通过它的`Throttle Settings`来模拟不同的网络环境
+- 抓包TCP协议层的[TCPDUMP](http://www.tcpdump.org/tcpdump_man.html)，如果你需要调优网络（如检测建连、挥手、期间的各类ACK、超时重连等TCP层细节）可以考虑使用这个。如需要监听所有来往`10.15.71.165`IP的TCP: `sudo tcpdump host 10.15.71.165`
+
+### 4. 项目License配置
 
 基于Android Studio的Copyright功能
 
@@ -160,13 +228,13 @@ App Start <-- 1182ms
 
 当然如果需要特殊配置针对不同语言文件license格式等配置，可以在Formatting下面进一步配置。
 
-### 4. 查看依赖库方法数
+### 5. 查看依赖库方法数
 
 > [Methods Count](http://www.methodscount.com)
 
 ![](/img/android-toolset-8.png)
 
-### 5. UI生成器
+### 6. UI生成器
 
 - [Icon/styles genrator](http://romannurik.github.io/AndroidAssetStudio/)
 - [Material design icons](https://materialdesignicons.com/)
@@ -176,7 +244,7 @@ App Start <-- 1182ms
 
 ![](/img/android-toolset-9.png)
 
-### 6. 包大小跟踪与对比
+### 7. 包大小跟踪与对比
 
 #### 包大小跟踪
 
@@ -219,3 +287,7 @@ Estimated download size for updates from the old APK,
 - [Color Tool - Material Design](https://material.io/guidelines/style/color.html#)
 
 ---
+
+  [chrome-inspect]: /img/android-toolset-chrome-inspect.png
+  [stetho-db]: /img/android-toolset-stetho-db.png
+  [mitmproxy]: /img/android-toolset-mitmproxy.png
