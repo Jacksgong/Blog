@@ -1,6 +1,5 @@
 title: ART、Dalvik
 date: 2015-11-01 12:23:03
-updated: 2015-11-01 12:23:03
 permalink: 2015/11/01/android_art_dalvik
 categories:
 - Android机制
@@ -12,6 +11,7 @@ tags:
 - 运行
 
 ---
+
 > ART虚拟机的实现在libart.so中，而Dalvik再libdvm.so中
 > 实现了Java虚拟机的接口，内部却提供完全不一样的东西， -- 为了兼容。
 
@@ -19,13 +19,22 @@ tags:
 
 ## I. Dalvik
 
-#### dex字节码解释器
+- **简介:** 是Java虚拟机，Android L 之前Android的核心组成部分之一(Android L 后被ART取代)。
+- **作者:** Dan Bornstein
+- **名字来源:** 作者祖先曾经居住过的小渔村（位于冰岛）- Dalvík
+- **基本功能:** 支持`.dex`(Dalvik Executable)运行
+- **`.dex`:** 专为Dalvik设计的一种压缩格式（Java应用程序），适合内存和处理器速度有限的系统
+- **业界评价:** 一直被用户指责为拖慢安卓系统运行速度不如IOS的根源。2014年的Google I/O大会上，在Android L 中被Google 删除，取而代之的是ART。
 
-逐条逐行的执行字节码指令
+#### 诞生缘由
 
-#### JIT(Just-In-Time)编译器
+- **业界猜测:** 是对Sun尝试控制和保护来自Java ME收入来源的一次反应，以及对建立OpenJDK统辖理事会迟迟未果的回答
+- **官方解释:** Dalvik是对解决目前Java ME平台上分裂(与已有的JVM)的一次尝试，也是为了提供一个拥有较少限制许可证的平台
 
-当多次运行速度稍慢的代码时，JIT编译器则会自动将热点代码编译并缓存起来，由此执行速度会逐渐加快
+#### 基本组件
+
+- **dex字节码解释器:** 逐条逐行的执行字节码指令
+- **JIT(Just-In-Time)编译器:** 当多次运行速度稍慢的代码时，JIT编译器则会自动将热点代码编译并缓存起来，由此执行速度会逐渐加快
 
 ## II. ART
 
@@ -315,6 +324,15 @@ static void run_dex2oat(int zip_fd, int oat_fd, const char* input_file_name,
     ALOGE("execl(%s) failed: %s\n", DEX2OAT_BIN, strerror(errno));
 }
 ```
+
+---
+
+- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/android_art_dalvik.md)。
+
+---
+
+本文已经发布到JackBlog公众号: [Activity管理服务、虚拟机与GC - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483725&idx=1&sn=1b416b52c51ed0486bd34d66fc5abb2f)
+
 ---
 
 - [Android ART运行时无缝替换Dalvik虚拟机的过程分析](http://blog.csdn.net/luoshengyang/article/details/18006645)

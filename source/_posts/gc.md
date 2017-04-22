@@ -1,6 +1,5 @@
 title: Android GC
 date: 2015-11-30 09:00:03
-updated: 2015-11-30 09:00:03
 permalink: 2015/11/30/gc
 categories:
 - Android内存
@@ -62,6 +61,13 @@ Zygote Heap | 第一个应用程序fork前，已经使用的部分 | Zygote进�
 
 回收没有被标记的对象占用的内存
 
+---
+
+- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/gc.md)。
+
+---
+
+本文已经发布到JackBlog公众号: [Activity管理服务、虚拟机与GC - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483725&idx=1&sn=1b416b52c51ed0486bd34d66fc5abb2f)
 
 ---
 
