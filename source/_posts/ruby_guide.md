@@ -1,6 +1,5 @@
 title: Ruby 入门
 date: 2015-07-26 20:39:03
-updated: 2015-07-26 20:39:03
 permalink: 2015/07/26/ruby_guide
 categories:
 - 编程语言
@@ -312,6 +311,14 @@ end
 
 多了或少了`end`关键字，可以单独用`ruby -w`去执行发生错误的代码，例如`ruby -w app/controller/welcome_controller`这样会打开Ruby的警告模式
 
+
+---
+
+- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/ruby_guide.md)。
+
+---
+
+本文已经发布到JackBlog公众号: [Ruby入门 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483723&idx=1&sn=e558bddb5dd8e8d4861c72005898433d)
 
 ---
 
