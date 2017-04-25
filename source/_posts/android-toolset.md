@@ -239,9 +239,14 @@ Methods Count: http://www.methodscount.com
 
 #### 6. UI生成器
 
+> 如果是Material这类简单的图片，推荐使用`.svg`这样的矢量图来代替栅格化图片，以此不用考虑DPI的适配，因此只需要带一份图片，来减少包大小
+> 并且在Support Library的`23.2`版本或更高版本我们可以在`ImageView`中使用`app:srcCompat`而非`android:src`使用svg来对下兼容
+
 - [Icon/styles genrator](http://romannurik.github.io/AndroidAssetStudio/)
 - [Material design icons](https://materialdesignicons.com/)
 - [Color Tool](https://material.io/color): 根据选择的颜色，快速呈现效果以达到创建颜色组合、预览效果、检测不同背景下文字的可辨度。
+- [Material icons](https://material.io/icons/): 这里有大量的material的Icon，并且可以直接下载`VectorDrawable`支持的SVG格式
+- [Device Metrics](https://material.io/devices/): 各类设备的尺寸以及Density、DPI
 
 除了上面几个，也可以使用Android Studio自带的:
 
@@ -293,6 +298,7 @@ Android Studio Compare Apk files: https://developer.android.com/studio/build/apk
 - [Resolving Conflicts in android gradle dependencies](https://blog.mindorks.com/avoiding-conflicts-in-android-gradle-dependencies-28e4200ca235#.oabd56w24)
 - [WHY YOU SHOLD CARE ABOUT COPYRIGHT](http://jeroenmols.com/blog/2016/08/03/copyright/)
 - [Color Tool - Material Design](https://material.io/guidelines/style/color.html#)
+- [How we reduced our Android app size by 65%](https://medium.com/pregbuddy-engineering/how-we-reduced-our-android-app-size-by-65-54b17ae9a3c6)
 
 ---
 
