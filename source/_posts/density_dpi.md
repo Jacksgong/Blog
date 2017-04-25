@@ -1,6 +1,5 @@
 title: Android 切图与标注
 date: 2015-11-08 22:35:03
-updated: 2015-11-08 22:35:03
 permalink: 2015/11/08/density_dpi
 categories:
 - Android UI交互
@@ -35,6 +34,8 @@ tags:
 > 市面主要的Android手机屏幕尺寸: 5.5寸、5寸、4.7寸、3.7寸
 
 #### 适配原则
+
+> [Device Metrics](https://material.io/devices/): 官方给出的部分机型DPI与尺寸
 
 ![](/img/density_dpi-4.png)
 
@@ -101,5 +102,6 @@ mipmap用于存放应用图标(Launcher Icon)，不会受资源优化所影响�
 - [Android设计中的.9.png](http://isux.tencent.com/android-ui-9-png.html)
 - [Dashboards](https://developer.android.com/intl/zh-cn/about/dashboards/index.html)
 - [友盟指数](http://www.umindex.com/)
+- [How we reduced our Android app size by 65%](https://medium.com/pregbuddy-engineering/how-we-reduced-our-android-app-size-by-65-54b17ae9a3c6)
 
 ---
