@@ -1,6 +1,5 @@
 title: Android后台调度任务与省电
 date: 2016-08-15 09:07:03
-updated: 2016-08-15 09:07:03
 permalink: 2016/08/15/android_scheduler_and_battery
 categories:
 - Android性能与优化
@@ -258,6 +257,36 @@ Light: ACTIVE -> IDLE -> IDLE_MAINTENANCE -> OVERRIDE
 Deep: ACTIVE -> IDLE_PENDING -> SENSING -> LOCATING -> IDLE -> IDLE_MAINTENANCE
 ```
 
+## VII. Background Limit - Android O
+
+> 在Android O中引入了Background Limit，主要从以下三个方面让手机更加省电，更少的资源开销。
+
+Android O的Background Limit中定义的后台应用与内存管理时的进程级别不同，这里的应用在后台的定义是: `没有可见的Activity` && `没有前台服务` && `没有前台应用绑定当前应用的其中一个服务` && `没有前台应用通过ContentProvider绑定当前应用`
+
+#### 后台位置限制
+
+**无论目标SDK版本为何**，都会对后台应用检索用户当前位置的频率进行限制。应用在后台每小时只能接收几次位置更新。
+
+具体内容可参见: [后台位置限制](https://developer.android.com/preview/features/background-location-limits.html)
+
+#### 后台服务限制
+
+**当目标SDK版本大于`25`时**，当应用进入后台时，在一个持续数分钟的时间窗内，应用仍可以创建和使用服务。 在该时间窗结束后，应用将被视为处于_空闲_状态。 此时，系统将停止应用的后台服务，就像应用已经调用服务的 `Service.stopSelf()`方法一样。
+
+具体内容可参见: [后台服务限制](https://developer.android.com/preview/features/background.html#services)
+
+#### 广播限制
+
+> 隐式广播是一种不专门针对该应用的广播，一般是系统的一些通用事件(除了一些[例外的](https://developer.android.com/preview/features/background-broadcasts.html))与应用发送给其他应用的广播(非`LocalBroadcastmanager`的)
+
+ 由于有太多的应用注册那些基于系统事件的广播来保活，使得容易造成内存瓶颈以及电量消耗的很快的问题，因此 **当目标SDK版本大于`25`时**，无论有没有插电源，该功能都会被开启。
+
+隐式广播只有在运时使用`Context.registerReceiver()`注册接收器才能接收的到，如果你是通过AndroidManifest注册的，在Logcat中会受到一个`BroadcastQueue`警告级别的日志，而收不到对应的广播。
+
+建议: 一些需要隐式广播的地方，可以考虑使用JobScheduler来执行，或者替换为非隐式广播、如果是需要服务常驻，可以考虑使用前台服务而非后台服务。如果你有监听隐式广播，那么是时候思考下应该如何适配`targetSDKVersion`大于25的场景了。
+
+具体内容可参见: [广播限制](https://developer.android.com/preview/features/background.html#broadcasts)
+
 ---
 
 本文已经发布到JackBlog公众号，可请直接访问: [Android后台调度任务与省电 - JacksBlog](http://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483685&idx=1&sn=7f548740be9dd4e5b8849b861cb75ec7)
@@ -266,5 +295,8 @@ Deep: ACTIVE -> IDLE_PENDING -> SENSING -> LOCATING -> IDLE -> IDLE_MAINTENANCE
 
 - [Choosing the Right Background Scheduler in Android](https://www.bignerdranch.com/blog/choosing-the-right-background-scheduler-in-android/)
 - [Diving into Doze Mode for Developers](https://www.bignerdranch.com/blog/diving-into-doze-mode-for-developers/)
+- [Android O teases big changes to save your battery](https://www.engadget.com/2017/03/21/android-o-developer-preview-announced/)
+- [Android O promises to improve battery life with background limits on apps](http://www.androidauthority.com/android-o-battery-life-758422/)
+- [Android O and the Implicit Broadcast Ban](https://commonsware.com/blog/2017/04/11/android-o-implicit-broadcast-ban.html)
 
 ---
