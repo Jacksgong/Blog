@@ -1,6 +1,5 @@
 title: Android大项目开发
 date: 2017-03-01 12:48:03
-updated: 2017-03-12 12:48:03
 categories:
 - 架构
 tags:
@@ -41,7 +40,7 @@ tags:
 - Commit类型与目的辨识度高
 - 发布版本时，修改点一目了然，甚至可通过脚本自动生成
 
-因此作为大团队，优秀的统一的Commit Message Convention是十分必要的，推荐采用[AngularJS's commit message convention](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines)，官方地址: https://angularjs.org/，效果可以参考: [这里](https://github.com/Jacksgong/JKeyboardPanelSwitch/commits/master)
+因此作为大团队，优秀的统一的Commit Message Convention是十分必要的，推荐采用[AngularJS's commit message convention](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines)，官方地址: https://angularjs.org/ ，效果可以参考: [这里](https://github.com/Jacksgong/JKeyboardPanelSwitch/commits/master)
 
 #### Git Flow
 
