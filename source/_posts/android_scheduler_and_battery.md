@@ -24,6 +24,7 @@ tags:
 ## II. AlarmManager:
 
 > 利用系统层级的闹钟服务(持有`Wake Lock`)。
+> 在一些特定场景中，可以根据策略对进行省电优化，如[微信的Mars中心跳机制](https://blog.dreamtobe.cn/2016/08/16/android_weak_network/)
 
 <!-- more -->
 
