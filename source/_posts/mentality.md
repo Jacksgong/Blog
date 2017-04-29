@@ -32,4 +32,8 @@ tags:
 
 ---
 
+我的成长记录: [@Jacksgong的成长](https://life.jacksgong.com)
+
+---
+
 - 之前在知乎中的[答复](https://www.zhihu.com/question/40147605/answer/91501962)
