@@ -4,3 +4,4 @@ Thumbs.db
 public/
 .deploy*/
 db.json
+/.idea
