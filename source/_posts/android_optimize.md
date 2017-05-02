@@ -2,7 +2,7 @@ title: Android优化
 date: 2015-10-26 15:32:03
 updated: 2017-04-10 15:32:03
 permalink: 2015/10/26/android_optimize
-sticky: 3
+sticky: 4
 categories:
 - Android性能与优化
 tags:
