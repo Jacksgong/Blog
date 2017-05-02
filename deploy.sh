@@ -5,7 +5,9 @@
 #
 # For deplay public folder.
 
-echo "$(tput setaf 3)---------Public-Release v1.0--------- $(tput sgr 0)"
+echo "$(tput setaf 3)---------Public-Release v2.0--------- $(tput sgr 0)"
+
+bash push-double-end.sh
 cd public
 rm -rf .git
 git init
