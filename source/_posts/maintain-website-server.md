@@ -190,6 +190,63 @@ sudo apt-get install oracle-java8-installer
 sudo update-alternatives --config java
 ```
 
+#### 12. 配置Shadowsocks Client用于国内VPS翻墙
+
+先拉取shadowsocks-client-ubuntu项目:
+
+```bash
+git clone git@git.jacksgong.com:Jacksgong/shadowsocks-client-ubuntu.git
+cd shadowsocks-client-ubuntu
+```
+
+安装:
+
+> [install.sh](https://git.jacksgong.com/Jacksgong/shadowsocks-client-ubuntu/blob/master/install.sh)
+
+```bash
+./install.sh
+```
+
+创建配置文件:
+
+在项目根目录创建`config.json`，然后输入配置:
+
+```json
+{
+"server":"服务器ip地址",
+"server_port":8388,
+"local_port":10808,
+"password":"密码与服务端配置一样",
+"timeout":600,
+"method":"aes-256-cfb"
+}
+```
+
+后台运行并输出日志到log文件:
+
+> [start.sh](https://git.jacksgong.com/Jacksgong/shadowsocks-client-ubuntu/blob/master/start.sh)
+
+```bash
+./start.sh
+```
+
+检测运行:
+
+检测相关进程是否存在
+
+> [check.sh](https://git.jacksgong.com/Jacksgong/shadowsocks-client-ubuntu/blob/master/check.sh)
+
+```bash
+./check.sh
+```
+
+关闭后台运行:
+
+> [stop.sh](https://git.jacksgong.com/Jacksgong/shadowsocks-client-ubuntu/blob/master/stop.sh)
+
+```bash
+./stop.sh
+```
 
 ## 站点安装
 
@@ -320,5 +377,7 @@ sudo update-alternatives --config java
 - [Gitlab Backup restore](https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/raketasks/backup_restore.md)
 - [Updating GitLab via omnibus-gitlab](https://docs.gitlab.com/omnibus/update/README.html#updating-from-gitlab-66-and-higher-to-the-latest-version)
 - [How To Install Java on Ubuntu with Apt-Get](https://www.digitalocean.com/community/tutorials/how-to-install-java-on-ubuntu-with-apt-get)
+- [各种系统下Shadowsocks客户端的安装与配置](http://www.jeyzhang.com/how-to-install-and-setup-shadowsocks-client-in-different-os.html)
+- [Ubuntu下shadowsocks 安装与配置（server and client）](https://my.oschina.net/lieefu/blog/500774)
 
 ---
