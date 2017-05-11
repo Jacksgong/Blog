@@ -43,10 +43,6 @@ tags:
 
 ## 各类方案对比
 
-#### J2Obj
-
-当初Google inbox推行Android先行，近70%的逻辑都是Android先完成，然后转成IOS与Web，我看业界也有一些java to swift之类的，除了视觉与交互不同的平台有不同的规范，确实其他业务逻辑，通常都是多端冗余开发（只是为了适配不同的sdk，更高一点的性能?），而目前其实有很多解决方案: 大家怎么看这个问题呢? 
-
 #### 技术栈:
 
 - Xamarin: 只需要学习C#，一份代码，一个架构.Net framework + native libraries
