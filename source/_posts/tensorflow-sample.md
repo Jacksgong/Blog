@@ -1,5 +1,8 @@
 title: 敲开TensorFlow的大门
 date: 2017-03-17 23:58:03
+updated: 2017-04-14
+wechatmptitle: 敲开TensorFlow的大门
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483719&idx=1&sn=7f70a02d7d6ec49ab55354d9fa26768e
 categories:
 - 编程语言
 tags:
@@ -84,10 +87,6 @@ AI的模型训练其实就是: 对模型变量的值进行不断调整，直到�
 ---
 
 > 欢迎阅读另一篇文章[训练识别数字图片的模型](/tensorflow-mnist/)，进一步的了解TensorFlow的使用。
-
----
-
-本文已经发布到JackBlog公众号: [敲开TensorFlow的大门 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483719&idx=1&sn=7f70a02d7d6ec49ab55354d9fa26768e)
 
 ---
 

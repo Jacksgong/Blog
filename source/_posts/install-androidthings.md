@@ -1,5 +1,8 @@
 title: AndroidThings安装与配置
 date: 2017-04-07 02:07:03
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483704&idx=1&sn=beaa1ab0205888bfdcc9d4b165849ce4
+wechatmptitle: AndroidThings安装与配置
+updated: 2017-04-07
 categories:
 - IoT
 tags:
@@ -103,10 +106,6 @@ tags:
 
 ![](/img/install-androidthings-16.png)
 <p style="text-align: center;"> 通过路由器查看连接 </p>
-
----
-
-本文已经发布到JackBlog公众号: [AndroidThings安装与配置 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483704&idx=1&sn=beaa1ab0205888bfdcc9d4b165849ce4)
 
 ---
 

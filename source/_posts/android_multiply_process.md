@@ -2,6 +2,8 @@ title: Android Binder IPC机制
 date: 2015-11-25 23:54:03
 updated: 2015-11-25 23:54:03
 permalink: 2015/11/25/android_multiply_process
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483670&idx=1&sn=d9124d91d37fa1ecaf131238bda3fb94
+wechatmptitle: Android Binder IPC机制
 categories:
 - Android机制
 tags:
@@ -162,10 +164,6 @@ Client - `transact()`(block client thread by default) -> Service - `onTransact()
 Service - `onTransact()` -> Client - transaction (transaction, 在binder thread)。
 
 > The client will receive the transaction in the thread waiting for the first transaction to be finished rather than a binder thread.
-
----
-
-本文已经发布到JackBlog公众号，可请直接访问: [Android Binder IPC机制 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483670&idx=1&sn=d9124d91d37fa1ecaf131238bda3fb94)
 
 ---
 

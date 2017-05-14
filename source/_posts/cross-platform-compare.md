@@ -1,5 +1,7 @@
 title: 各类跨平台开发对比
 date: 2017-05-11 10:44:03
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483729&idx=1&sn=caffc39ece5afa40e36d00f6f0f2c73c
+wechatmptitle: 各类跨平台开发对比
 categories:
 - 工程师技能
 tags:
@@ -91,4 +93,3 @@ tags:
 
 - [The Good and The Bad of Xamarin Mobile Development](https://www.altexsoft.com/blog/mobile/the-good-and-the-bad-of-xamarin-mobile-development/)
 - [google/j2objc](https://github.com/google/j2objc)
-

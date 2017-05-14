@@ -1,5 +1,8 @@
 title: 微信Mars策略分析
 date: 2017-02-08 19:42:03
+updated: 2017-05-13
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483717&idx=1&sn=6cb46f4bab32a525a02152ce629a2071
+wechatmptitle: 微信Mars策略分析
 sticky: 2
 categories:
 - 网络
@@ -245,10 +248,6 @@ XLog的代码主要分为三层
 - 压缩与策略
 - 加密与策略
 - 落盘与策略
-
----
-
-本文已经发布到JackBlog公众号: [微信Mars策略分析 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483717&idx=1&sn=6cb46f4bab32a525a02152ce629a2071)
 
 ---
 

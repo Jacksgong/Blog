@@ -1,6 +1,9 @@
 title: NDK与JNI
 date: 2015-11-08 23:16:03
+updated: 2017-04-11
 permalink: 2015/11/08/ndk
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483711&idx=1&sn=7b3f68b9131b57a6e58925840bacc863
+wechatmptitle: Android NDK与JNI
 categories:
 - Android Native Develop
 tags:
@@ -412,10 +415,6 @@ NDK_APPLICATION_MK=<file>
 在Windows中是`.lib`。
 
 **直接在编译期Link它:** 在Android中，我们可以直接在`Android.mk`中配置，在编译时与我们的代码合成一个`.so`。
-
----
-
-本文已经发布到JackBlog公众号: [Android NDK与JNI - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483711&idx=1&sn=7b3f68b9131b57a6e58925840bacc863)
 
 ---
 - [Building Your Project](http://developer.android.com/intl/zh-cn/ndk/guides/build.html)

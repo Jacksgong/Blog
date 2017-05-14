@@ -1,6 +1,8 @@
 title: Android大项目开发
 date: 2017-03-01 12:48:03
 updated: 2017-04-27 12:48:03
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483691&idx=1&sn=a1fef6b8842b63b99457afe552a70654
+wechatmptitle: Android大项目开发
 sticky: 5
 categories:
 - 架构
@@ -99,10 +101,6 @@ tags:
 ![](/img/large-project-develop-3.png)
 
 其中的api与impl的打包可以参照[gradle-sample](https://github.com/Jacksgong/gralde-sample)。
-
----
-
-本文已经发布到JackBlog公众号: [Android大项目开发 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483691&idx=1&sn=a1fef6b8842b63b99457afe552a70654)
 
 ---
 

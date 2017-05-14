@@ -1,6 +1,8 @@
 title: OpenWrt通过迅雷快鸟提速
 date: 2016-05-29 14:30:03
 updated: 2016-05-29 14:30:03
+wechatmptitle: OpenWrt通过迅雷快鸟提速
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483654&idx=1&sn=151940b17d4f1bd03076988027a35831
 permalink: 2016/05/29/openwrt_xunlei_fastdick
 categories:
 - OpenWrt
@@ -82,10 +84,6 @@ killall -9 swjsq
 ## IV. 升级
 
 这块记得Watching [fffonion/Xunlei-Fastdick](https://github.com/fffonion/Xunlei-Fastdick) 项目，有更新的时候当然是要重新生成ipk，重新卸载安装即可。
-
----
-
-本文已经发布到JackBlog公众号，可请直接访问: [OpenWrt通过迅雷快鸟提速 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483654&idx=1&sn=151940b17d4f1bd03076988027a35831)
 
 ---
 

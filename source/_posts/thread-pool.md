@@ -1,5 +1,8 @@
 title: ThreadPoolExecutor与ScheduledThreadPoolExecutor
 date: 2017-04-04 01:22:03
+updated: 2017-04-07
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483697&idx=1&sn=4d0943137fbeab6072e9fc2e3251abe5
+wechatmptitle: 常见线程池
 categories:
 - 编程语言
 tags:
@@ -30,9 +33,5 @@ tags:
 ---
 
 > 当然，如果是简单的单线程复用，可以考虑直接使用Handler，这块可以参见[Android Handler Looper机制](/2016/03/11/android_handler_looper/)这篇文章。
-
----
-
-本文已经发布到JackBlog公众号，可请直接访问: [常见线程池 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483697&idx=1&sn=4d0943137fbeab6072e9fc2e3251abe5)
 
 ---

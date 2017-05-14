@@ -1,5 +1,8 @@
 title: 5分钟发布一个Xposed Module
 date: 2017-03-26 18:36:03
+updated: 2017-04-08
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483706&idx=1&sn=6e1ff9df6478283bcc1a9e3edcb71fe4
+wechatmptitle: 5分钟发布一个Xposed Module
 categories:
 - 工程师技能
 tags:
@@ -126,10 +129,6 @@ findAndHookMethod(pluginHelper, "FZ", String.class, new XC_MethodHook() {
 -keep class cn.dreamtobe.xposed.wechathunt.WechatHunt{*;}
 -keepnames class cn.dreamtobe.xposed.wechathunt.WechatHunt
 ```
-
----
-
-本文已经发布到JackBlog公众号: [5分钟发布一个Xposed Module - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483706&idx=1&sn=6e1ff9df6478283bcc1a9e3edcb71fe4)
 
 ---
 

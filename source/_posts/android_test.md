@@ -1,6 +1,8 @@
 title: Android单元测试与模拟测试
 date: 2016-05-15 00:40:03
 updated: 2016-11-30 00:40:03
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483680&idx=1&sn=a81f0b86696f243bf32c032fc7b09574
+wechatmptitle: Android单元测试与模拟测试
 permalink: 2016/05/15/android_test
 categories:
 - Android测试
@@ -636,10 +638,6 @@ public class MyActivityTest{
 最终的思想原理
 
 ![](/img/android-test_5.png)
-
----
-
-本文已经发布到JackBlog公众号，可请直接访问: [Android单元测试与模拟测试 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483680&idx=1&sn=a81f0b86696f243bf32c032fc7b09574)
 
 ---
 

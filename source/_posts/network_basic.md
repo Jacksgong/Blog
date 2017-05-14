@@ -1,6 +1,8 @@
 title: 常见网络协议优化与演进
 date: 2017-02-12 14:09:03
 updated: 2017-04-12 14:09:03
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483713&idx=1&sn=a7a67d3a2258c738c725c37f7c37b210
+wechatmptitle: 常见网络协议与演进
 sticky: 1
 categories:
 - 网络
@@ -198,10 +200,6 @@ SPDY兼容性: http://caniuse.com/#feat=spdy
 - [QUIC - Google-peering](http://peering.google.com/#/learn-more/quic)
 - [QUIC教材](https://www.chromium.org/quic)
 - [QUIC视频介绍](https://www.youtube.com/watch?v=hQZ-0mXFmk8)
-
----
-
-本文已经发布到JackBlog公众号: [常见网络协议与演进 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483713&idx=1&sn=a7a67d3a2258c738c725c37f7c37b210)
 
 ---
 

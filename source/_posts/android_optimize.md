@@ -2,6 +2,8 @@ title: Android优化
 date: 2015-10-26 15:32:03
 updated: 2017-04-10 15:32:03
 permalink: 2015/10/26/android_optimize
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483709&idx=1&sn=3d8ed0adb66d3544f109fbdbcf07e317
+wechatmptitle: Android性能与优化
 sticky: 4
 categories:
 - Android性能与优化
@@ -319,10 +321,6 @@ public static Retrofit getAdapter(Context context, String baseUrl) {
 - 控制合理加载资源的时间区间: 如由于图片的加载通常都与页面的生命周期有关系，在Android中可以考虑当从页面A进入页面B时，暂停所有页面A的图片加载，退出页面B时，终止所有页面B相关的图片加载，回到页面A时恢复页面A的所有图片加载(这些操作使用Picasso十分快速的实现，因此Picasso支持不同TAG的图片加载暂停、恢复、取消)
 - 代码质量: [phabricator 的arc diff](http://phabricator.org) (尽量小颗粒度的arc diff 与update review)，其实也可以看看Google是如何做的: [笔记-谷歌是如何做代码审查的](http://blog.dreamtobe.cn/2015/03/23/%5B笔记%5D谷歌是如何做代码审查的/)，还有一点的TODO要写好deadline与master
 - 编包管理: [Gitlab CI](https://about.gitlab.com/gitlab-ci/) (结合Gitlab，功能够用，方便)
-
----
-
-本文已经发布到JackBlog公众号: [Android性能与优化 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483709&idx=1&sn=3d8ed0adb66d3544f109fbdbcf07e317)
 
 ---
 

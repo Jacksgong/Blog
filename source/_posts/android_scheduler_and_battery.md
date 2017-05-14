@@ -1,6 +1,8 @@
 title: Android后台调度任务与省电
 date: 2016-08-15 09:07:03
 updated: 2017-04-27 09:07:03
+wechatmpurl: http://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483685&idx=1&sn=7f548740be9dd4e5b8849b861cb75ec7
+wechatmptitle: Android后台调度任务与省电
 permalink: 2016/08/15/android_scheduler_and_battery
 categories:
 - Android性能与优化
@@ -288,10 +290,6 @@ Android O的Background Limit中定义的后台应用与内存管理时的进程�
 建议: 一些需要隐式广播的地方，可以考虑使用JobScheduler来执行，或者替换为非隐式广播、如果是需要服务常驻，可以考虑使用前台服务而非后台服务。如果你有监听隐式广播，那么是时候思考下应该如何适配`targetSDKVersion`大于25的场景了。
 
 具体内容可参见: [广播限制](https://developer.android.com/preview/features/background.html#broadcasts)
-
----
-
-本文已经发布到JackBlog公众号，可请直接访问: [Android后台调度任务与省电 - JacksBlog](http://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483685&idx=1&sn=7f548740be9dd4e5b8849b861cb75ec7)
 
 ---
 

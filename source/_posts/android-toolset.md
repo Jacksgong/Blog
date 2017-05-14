@@ -1,5 +1,8 @@
 title: Android开发周边
 date: 2017-03-16 02:23:03
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483721&idx=1&sn=070ac8ab054274818831a5756170b642
+wechatmptitle: Android开发周边
+updated: 2017-04-26
 categories:
 - 工程师技能
 tags:
@@ -281,11 +284,6 @@ Android Studio Compare Apk files: https://developer.android.com/studio/build/apk
 通过Android Studio Compare Apk files工具进行对比
 
 ![](/img/android-toolset-10.png)
-
----
-
-本文已经发布到JackBlog公众号: [Android开发周边 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483721&idx=1&sn=070ac8ab054274818831a5756170b642)
-
 
 ---
 

@@ -1,6 +1,8 @@
 title: Java多线程抢占
 date: 2015-03-25 08:35:03
 updated: 2015-03-25 08:35:03
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483673&idx=1&sn=cc20b1149e9ffed649dd00d8737e6a08
+wechatmptitle: Java Synchronized机制与常见的多线程抢占
 permalink: 2015/03/25/Java多线程抢占
 categories:
 - 编程语言
@@ -73,11 +75,6 @@ tags:
 # Android 中抢占机制需要注意的地方
 
 > 需要注意的是: Android中如果某进程中只有某线程且被长期阻塞在等待池，并且进程所在组件优先级较低，可能会被系统回收。此时更应该考虑使用`AlarmManager`，它持有一个CPU唤醒锁，并且即便是组件或进程已经被回收也会被重新唤起，是不存在这个问题的。(因此如果要做轮询、Socket心跳之类的，推荐使用`AlarmManager`，这样才能保证时间间隔的稳定、可靠)。
-
-
----
-
-本文已经发布到JackBlog公众号，可请直接访问: [Java Synchronized机制与常见的多线程抢占 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483673&idx=1&sn=cc20b1149e9ffed649dd00d8737e6a08)
 
 ---
 

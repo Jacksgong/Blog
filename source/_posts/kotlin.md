@@ -1,6 +1,9 @@
 title: Kotlin
 date: 2016-11-30 14:02:03
+updated: 2017-04-06
 permalink: 2016/11/30/kotlin
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483689&idx=1&sn=a6261038ae037d6fb54a1b66f51a1623
+wechatmptitle: Kotlin
 categories:
 - 编程语言
 tags:
@@ -315,10 +318,6 @@ Java7中可以通过Intelij的[Advanced Java Folding](https://plugins.jetbrains.
 - Kotlin足够稳定可靠: Kotlin至今已经有7年的成长历史，最新版本是1.1，相比于你使用的其他开源库，Kotlin的稳定性更高
 - Kotlin周边齐全: 由于是Jetbrains团队所开发的语言，而Android Studio又是基于Jetbrains开发的Intelij的，因此各类周边，包括Inspection等都是第一时间应用上的，包括各类社区、插件完全不用担心
 - Kotlin兼容与Java协同开发: 正因为如此，我们可以使用所有的Java库的同时，也不必对已有的全局代码都进行修改，当然如果需要也可以通过Kotlin插件一键将Java代码转化为Kotlin代码
-
----
-
-本文已经发布到JackBlog公众号: [Kotlin - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483689&idx=1&sn=a6261038ae037d6fb54a1b66f51a1623)
 
 ---
 

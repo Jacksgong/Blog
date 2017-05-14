@@ -1,6 +1,8 @@
 title: Android 动态加载dex
 date: 2015-12-07 00:48:03
 updated: 2015-12-07 00:48:03
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483667&idx=1&sn=5e4cc3bd07e81efa41fbfce25f4a6bd3
+wechatmptitle: Android动态加载dex
 permalink: 2015/12/07/android_dynamic_dex
 categories:
 - Android机制
@@ -129,10 +131,6 @@ Android中的这几种类加载器实际是依赖`DexFile`的，对于`DexFile`�
 1. 尽量将dex放到当前应用的私有目录下，保证只有当前应用uid可以读甚至写(一般就只有`Context.getFileDir()`/ `Context.getDir(String, MODE_PRIVATE)` / `Context.getCacheDir()`)，这方面目录相关知识可以参看: [Android中尽量不用Storage Permission](http://blog.dreamtobe.cn/2015/11/30/android_storage_permission/)
 2. 对从服务端下载或者外部加载的dex，做校验（对文件进行哈希值校验等）。
 3. 将dex文件加密，通过JNI将解密代码写在Native层，解密之后通过`defineClass`指定路径加载完成后，删除解密后文件。
-
----
-
-本文已经发布到JackBlog公众号，可请直接访问: [Android动态加载dex - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483667&idx=1&sn=5e4cc3bd07e81efa41fbfce25f4a6bd3)
 
 ---
 

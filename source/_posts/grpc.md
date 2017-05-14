@@ -1,6 +1,8 @@
 title: gRPC
 date: 2017-02-16 22:38:03
 updated: 2017-04-06 22:38:03
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483702&idx=1&sn=5ad22d675f5e4c5f0d2329a155a8493b
+wechatmptitle: GRPC
 categories:
 - 网络
 tags:
@@ -129,10 +131,6 @@ tags:
 - [Go语言编写的gRPC的反向代理](https://github.com/mwitkow/grpc-proxy)
 - [Envoy](https://github.com/lyft/envoy/tree/master/examples/grpc-bridge)
 - 可以使用nghttpx来做gRPC的负载均衡，而非nginx: [gRPC with nghttp2](https://movinggauteng.co.za/blog/2016/08/03/grpc-with-nghttp2/)、[Load balancing gRPC servers](https://groups.google.com/forum/#!topic/grpc-io/Ye9bcx62mJk)、[nghttpx - HTTP/2 proxy - HOW-TO](https://nghttp2.org/documentation/nghttpx-howto.html)
-
----
-
-本文已经发布到JackBlog公众号，可请直接访问: [GRPC - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483702&idx=1&sn=5ad22d675f5e4c5f0d2329a155a8493b)
 
 ---
 

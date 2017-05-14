@@ -1,6 +1,9 @@
 title: ART、Dalvik
 date: 2015-11-01 12:23:03
 permalink: 2015/11/01/android_art_dalvik
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483725&idx=1&sn=1b416b52c51ed0486bd34d66fc5abb2f
+wechatmptitle: Activity管理服务、虚拟机与GC
+updated: 2017-04-24
 categories:
 - Android机制
 tags:
@@ -324,10 +327,6 @@ static void run_dex2oat(int zip_fd, int oat_fd, const char* input_file_name,
     ALOGE("execl(%s) failed: %s\n", DEX2OAT_BIN, strerror(errno));
 }
 ```
-
----
-
-本文已经发布到JackBlog公众号: [Activity管理服务、虚拟机与GC - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483725&idx=1&sn=1b416b52c51ed0486bd34d66fc5abb2f)
 
 ---
 

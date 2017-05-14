@@ -2,6 +2,8 @@ title: Java Synchronised机制
 date: 2015-11-13 21:14:03
 updated: 2015-11-13 21:14:03
 permalink: 2015/11/13/java_synchronized
+wechatmptitle: Java Synchronized机制与常见的多线程抢占
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483673&idx=1&sn=cc20b1149e9ffed649dd00d8737e6a08
 categories:
 - Android机制
 tags:
@@ -130,10 +132,6 @@ JVM会为每个对象分配一个`monitor`，而同时只能有一个线程可�
 - **基本策略**: 写操作时，会有`Lock`前缀指定，处理器会立马将修改直接写回系统内存，并且其他处理器会将该值在其上的高速缓存标为无效。
 - **可能带来的性能消耗**: 写操作实时写回内存，锁总线/锁内存。
 - **优势**: 一些场景上相比`synchronized`，执行成本更低(不会引起线程上下文切换以及调度)，使用更方便。
-
----
-
-本文已经发布到JackBlog公众号，可请直接访问: [Java Synchronized机制与常见的多线程抢占 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483673&idx=1&sn=cc20b1149e9ffed649dd00d8737e6a08)
 
 ---
 

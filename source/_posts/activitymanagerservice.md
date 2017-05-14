@@ -1,6 +1,9 @@
 title: ActivityManagerService
 date: 2015-11-26 20:49:03
 permalink: 2015/11/26/activitymanagerservice
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483725&idx=1&sn=1b416b52c51ed0486bd34d66fc5abb2f
+wechatmptitle: Activity管理服务、虚拟机与GC
+updated: 2017-04-24
 categories:
 - Android机制
 tags:
@@ -20,10 +23,6 @@ ServiceManager初始化，有一个循环等待Client组件发送的请求(参�
 2. ActivityManagerService在启动应用(ActivityThread.main)之前就已经建立好了这个循环
 
 ![](/img/ActivityManagerService.png)
-
----
-
-本文已经发布到JackBlog公众号: [Activity管理服务、虚拟机与GC - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483725&idx=1&sn=1b416b52c51ed0486bd34d66fc5abb2f)
 
 ---
 

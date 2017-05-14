@@ -1,6 +1,9 @@
 title: Notification最佳实践
 date: 2016-01-09 15:06:03
+updated: 2017-04-24
 permalink: 2016/01/09/notification_best_practise
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483727&idx=1&sn=5a43afb4c00c41bce62fbc9f3e13e805
+wechatmptitle: Notification最佳实践
 categories:
 - Android最佳实践
 tags:
@@ -262,10 +265,6 @@ builder.setStyle(new NotificationCompat.MessagingStyle("You")
 
 - 当Target Api指向25的时候，默认情况下Notification上面的Notification更新时间会被隐藏，如果需要显示，需要显式的调用`setShowWhen(true)`。
 - 在Android N的设备上，如果同一个应用Notification的个数大于等于4个并且没有Group，就会自动将其Bundled。
-
----
-
-本文已经发布到JackBlog公众号: [Notification最佳实践 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483727&idx=1&sn=5a43afb4c00c41bce62fbc9f3e13e805)
 
 ---
 
