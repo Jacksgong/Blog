@@ -1,3 +1,11 @@
+### `0.5.13` _2017-04-04_
+* Bumped version to address Bower cache issues with last release.  [#474](https://github.com/moment/moment-timezone/issues/474)
+* (No actual changes otherwise)
+
+### `0.5.12` _2017-04-02_
+* Updated data to IANA TZDB `2017b`. [#422](https://github.com/moment/moment-timezone/pull/460)
+* Build the truncated data file as 2012-2022 (+/- 5 years).
+
 ### `0.5.11` _2016-12-23_
 * Remove log statement when data is loaded twice. [#352](https://github.com/moment/moment-timezone/pull/352)
 

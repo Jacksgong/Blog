@@ -37,5 +37,5 @@ stylus:
   - **sourceRoot** - `sourceRoot` property of the generated sourcemap
   - **basePath** - Base path from which sourcemap and all sources are relative (default: `.`)
 
-[Stylus]: http://learnboost.github.io/stylus/
+[Stylus]: http://stylus-lang.com/
 [nib]: http://tj.github.io/nib/

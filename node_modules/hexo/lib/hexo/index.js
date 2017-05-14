@@ -23,6 +23,7 @@ var Theme = require('../theme');
 var Locals = require('./locals');
 var defaultConfig = require('./default_config');
 var loadDatabase = require('./load_database');
+var MultiConfigPath = require('./multi_config_path');
 
 var libDir = pathFn.dirname(__dirname);
 var sep = pathFn.sep;
@@ -31,6 +32,8 @@ var dbVersion = 1;
 function Hexo(base, args) {
   base = base || process.cwd();
   args = args || {};
+
+  var mcp = new MultiConfigPath(this);
 
   EventEmitter.call(this);
 
@@ -52,9 +55,6 @@ function Hexo(base, args) {
     version: pkg.version,
     init: false
   };
-
-  this.config_path = args.config ? pathFn.resolve(base, args.config)
-                                 : pathFn.join(base, '_config.yml');
 
   this.extend = {
     console: new extend.Console(),
@@ -88,6 +88,9 @@ function Hexo(base, args) {
     version: dbVersion,
     path: pathFn.join(base, 'db.json')
   });
+
+  this.config_path = args.config ? mcp(base, args.config)
+                                 : pathFn.join(base, '_config.yml');
 
   registerModels(this);
 
@@ -324,7 +327,7 @@ Hexo.prototype._generate = function(options) {
   Locals.prototype.view_dir = pathFn.join(this.theme_dir, 'layout') + sep;
 
   // Run before_generate filters
-  return this.execFilter('before_generate', null, {context: this})
+  return this.execFilter('before_generate', self.locals.get('data'), {context: this})
   .then(function() {
     self.locals.invalidate();
     siteLocals = self.locals.toObject();
