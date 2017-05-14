@@ -265,10 +265,6 @@ builder.setStyle(new NotificationCompat.MessagingStyle("You")
 
 ---
 
-- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/notification_best_practise.md)。
-
----
-
 本文已经发布到JackBlog公众号: [Notification最佳实践 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483727&idx=1&sn=5a43afb4c00c41bce62fbc9f3e13e805)
 
 ---

@@ -415,10 +415,6 @@ NDK_APPLICATION_MK=<file>
 
 ---
 
-- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/ndk.md)
-
----
-
 本文已经发布到JackBlog公众号: [Android NDK与JNI - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483711&idx=1&sn=7b3f68b9131b57a6e58925840bacc863)
 
 ---

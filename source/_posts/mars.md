@@ -214,10 +214,10 @@ mmap带来的益处显而易见，`操作内存` = `操作文件`, 从而避免�
 
 #### 加密策略
 
-考虑采用DH(Diffie-Hellman)。 
+考虑采用DH(Diffie-Hellman)。
 
 - DH中有Ax, Ay, Bx, By。
-- 其中通过DH算法:`DH(Ax, By) = DH(Ay, Bx)` 
+- 其中通过DH算法:`DH(Ax, By) = DH(Ay, Bx)`
 - 后端存固定的Bx与By，客户端存储固定的Bx
 - 客户端生成Ax, Ay
 - 客户端将DH(Ay, Bx)作为key，将Ax作为keybuffer
@@ -245,10 +245,6 @@ XLog的代码主要分为三层
 - 压缩与策略
 - 加密与策略
 - 落盘与策略
-
----
-
-[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/mars.md)
 
 ---
 

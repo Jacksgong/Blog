@@ -318,10 +318,6 @@ Java7中可以通过Intelij的[Advanced Java Folding](https://plugins.jetbrains.
 
 ---
 
-- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/kotlin.md)。
-
----
-
 本文已经发布到JackBlog公众号: [Kotlin - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483689&idx=1&sn=a6261038ae037d6fb54a1b66f51a1623)
 
 ---

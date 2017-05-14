@@ -322,10 +322,6 @@ public static Retrofit getAdapter(Context context, String baseUrl) {
 
 ---
 
-- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/android_optimize.md)。
-
----
-
 本文已经发布到JackBlog公众号: [Android性能与优化 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483709&idx=1&sn=3d8ed0adb66d3544f109fbdbcf07e317)
 
 ---

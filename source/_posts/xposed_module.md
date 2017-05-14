@@ -129,10 +129,6 @@ findAndHookMethod(pluginHelper, "FZ", String.class, new XC_MethodHook() {
 
 ---
 
-- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/xposed_module.md)
-
----
-
 本文已经发布到JackBlog公众号: [5分钟发布一个Xposed Module - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483706&idx=1&sn=6e1ff9df6478283bcc1a9e3edcb71fe4)
 
 ---

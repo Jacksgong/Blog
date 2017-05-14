@@ -639,10 +639,6 @@ public class MyActivityTest{
 
 ---
 
-- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/android_test.md)。
-
----
-
 本文已经发布到JackBlog公众号，可请直接访问: [Android单元测试与模拟测试 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483680&idx=1&sn=a81f0b86696f243bf32c032fc7b09574)
 
 ---

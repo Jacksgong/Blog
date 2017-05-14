@@ -229,10 +229,6 @@ TODO
 
 ---
 
-- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/oo_architecture.md)。
-
----
-
 - [Java之美[从菜鸟到高手演变]之设计模式](http://blog.csdn.net/zhangerqing/article/details/8194653)
 - [软件设计原则----合成/聚合复用原则（CARP）](http://blog.csdn.net/beyondhaven/article/details/6906050)
 - [【设计模式】之六大原则（二）](http://m.blog.csdn.net/article/details?id=48834109)

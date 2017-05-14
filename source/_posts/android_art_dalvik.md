@@ -327,10 +327,6 @@ static void run_dex2oat(int zip_fd, int oat_fd, const char* input_file_name,
 
 ---
 
-- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/android_art_dalvik.md)。
-
----
-
 本文已经发布到JackBlog公众号: [Activity管理服务、虚拟机与GC - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483725&idx=1&sn=1b416b52c51ed0486bd34d66fc5abb2f)
 
 ---

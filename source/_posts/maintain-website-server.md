@@ -362,10 +362,6 @@ cd shadowsocks-client-ubuntu
 
 ---
 
-- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/maintain-website-server.md)
-
----
-
 - [How To Set Up a Firewall with UFW on Ubuntu 14.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-14-04)
 - [本博客 Nginx 配置之完整篇](https://imququ.com/post/my-nginx-conf.html)
 - [一键安装最新内核并开启 BBR 脚本](https://teddysun.com/489.html)

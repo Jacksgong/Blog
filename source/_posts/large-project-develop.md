@@ -102,10 +102,6 @@ tags:
 
 ---
 
-- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/large-project-develop.md)。
-
----
-
 本文已经发布到JackBlog公众号: [Android大项目开发 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483691&idx=1&sn=a1fef6b8842b63b99457afe552a70654)
 
 ---

@@ -201,10 +201,6 @@ SPDY兼容性: http://caniuse.com/#feat=spdy
 
 ---
 
-[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/network_basic.md)
-
----
-
 本文已经发布到JackBlog公众号: [常见网络协议与演进 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483713&idx=1&sn=a7a67d3a2258c738c725c37f7c37b210)
 
 ---

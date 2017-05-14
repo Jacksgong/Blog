@@ -20,15 +20,9 @@ tags:
 
 ![](/img/android-weak-network-1.png)
 
-
-
 ---
 
 - [Android微信智能心跳方案](http://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&mid=207243549&idx=1&sn=4ebe4beb8123f1b5ab58810ac8bc5994)
 - [微信终端跨平台组件 mars 系列 - 我们如约而至](https://mp.weixin.qq.com/s?__biz=MzAwNDY1ODY2OQ==&mid=2649286451&idx=1&sn=9711761792fe800094efde219fda3cde)
-
----
-
-- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/android_weak_network.md)。
 
 ---

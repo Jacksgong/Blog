@@ -284,10 +284,6 @@ Android Studio Compare Apk files: https://developer.android.com/studio/build/apk
 
 ---
 
-[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/android-toolset.md)
-
----
-
 本文已经发布到JackBlog公众号: [Android开发周边 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483721&idx=1&sn=070ac8ab054274818831a5756170b642)
 
 

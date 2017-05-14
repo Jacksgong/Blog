@@ -87,10 +87,6 @@ AI的模型训练其实就是: 对模型变量的值进行不断调整，直到�
 
 ---
 
-[本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/tensorflow-sample.md)。
-
----
-
 本文已经发布到JackBlog公众号: [敲开TensorFlow的大门 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483719&idx=1&sn=7f70a02d7d6ec49ab55354d9fa26768e)
 
 ---

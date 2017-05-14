@@ -314,10 +314,6 @@ end
 
 ---
 
-- [本文迭代日志](https://github.com/Jacksgong/Blog/commits/master/source/_posts/ruby_guide.md)。
-
----
-
 本文已经发布到JackBlog公众号: [Ruby入门 - JacksBlog](https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483723&idx=1&sn=e558bddb5dd8e8d4861c72005898433d)
 
 ---
