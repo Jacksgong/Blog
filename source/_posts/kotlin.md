@@ -1,9 +1,10 @@
 title: Kotlin
 date: 2016-11-30 14:02:03
-updated: 2017-04-06
+updated: 2017-05-18
 permalink: 2016/11/30/kotlin
 wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483689&idx=1&sn=a6261038ae037d6fb54a1b66f51a1623
 wechatmptitle: Kotlin
+sticky: 1
 categories:
 - 编程语言
 tags:
@@ -14,7 +15,7 @@ tags:
 
 ---
 
-Kotlin是一门为JVM、Android、前端开发的一门静态语言，相比Java8，它有太多的前瞻性的功能并且非常极客。
+{% note info %} Kotlin被Google官方扶正了，现在是Android开发的正式开发语言之一。Kotlin是一门为JVM、Android、前端开发的一门静态语言，相比Java8，它有太多的前瞻性的功能并且非常极客。{% endnote %}
 
 <!-- more -->
 
