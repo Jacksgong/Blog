@@ -1,6 +1,6 @@
 title: 架构设计基础知识整理
 date: 2016-03-09 22:41:03
-updated: 2016-10-25 22:41:03
+updated: 2017-05-24
 permalink: 2016/03/09/oo_architecture
 categories:
 - 架构
@@ -126,6 +126,52 @@ From http://msdn.microsoft.com/en-us/library/ff647859.aspx
 - `ViewModel`: 显示数据(监听`Model`中的数据变化进行显示)
 - `Model`: 存储内容
 
+#### 4. 指令分离
+
+> 这样的好处很明显，当你调用一个`getUser`的时候，符合预期的就是获取当前的User，而数据不会被修改;
+> 而当你执行`login`的时候，也就是登陆，而非为了返回数据;
+
+- 执行命令型的方法返回`void`
+- 查询的方法才有返回值
+- 抛`Exception`而非返回错误的值
+
+如:
+
+```java
+// 登陆就用于登陆
+UserService.login(username, password);
+// 获取登陆的用户用另外的方法
+User u = UserService.getUser();
+```
+
+#### 5. 得墨忒耳定律
+
+> 最少知识原则，尽可能少的获知有限的知识，这是一种松耦合的具体案例
+
+- 每个单元对于其他的单元只能拥有有限的知识：只是与当前单元紧密联系的单元；
+- 每个单元只能和它的朋友交谈：不能和陌生单元交谈；
+- 只和自己直接的朋友交谈。
+
+如:
+
+```java
+// 错误的方式，这种方式调用者就必须要知道ObjectB，ObjectC
+objectA.getObjectB().getObjectC().doSomething();
+// 正确的方式，这样调用者只需要知道ObjectA，以及其有doSomething()这个接口即可
+ObjectA.doSomething()
+```
+
+#### 6. "死亡参数"
+
+> 当方法的参数过多或者没有严格规范时，久而久之可读性就会非常差，并且容易出现问题
+
+- 当方法的参数达到或超过3个时，就要停下来思考，如果这些参数真这么紧密，[为什么他们不是一个对象](https://www.refactoring.com/catalog/introduceParameterObject.html)
+- 当参数很多时，特别在Java中是十分影响可读性，考虑使用Builder Pattern
+- 参入参数能采用不可变就使用不可变
+- 当传入参数有`Boolean`时，考虑拆成两个方法，因为这种时候通常都是处理两种情况，更易于维护
+- 避免传入参数有`null`的可能，如果允许这种情况，拆成另外一个无需传入该参数的方法，如果不允许，使用`@NotNull`来注解。
+
+
 ## III. 设计模式
 
 ### 1. 工厂方法模式
@@ -239,5 +285,8 @@ TODO
 - [Java之美[从菜鸟到高手演变]之设计模式三](http://blog.csdn.net/zhangerqing/article/details/8243942)
 - [Difference between asp.net MVC and MVP? are they both same?](http://stackoverflow.com/questions/19996963/difference-between-asp-net-mvc-and-mvp-are-they-both-same)
 - [Shades of MVVM](https://www.bignerdranch.com/blog/shades-of-mvvm/)
+- [Object Oriented Tricks: #1 The Art of Command Query Separation](https://hackernoon.com/oo-tricks-the-art-of-command-query-separation-9343e50a3de0)
+- [Design principal: Understand Law of Demeter](https://android.jlelse.eu/design-principal-understand-law-of-demeter-4a44ac18e923)
+- [Object Oriented Tricks: #3 Death By Arguments](https://hackernoon.com/object-oriented-tricks-3-death-by-arguments-d070ac86d996)
 
 ---
