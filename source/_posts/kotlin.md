@@ -1,10 +1,10 @@
 title: Kotlin
 date: 2016-11-30 14:02:03
-updated: 2017-05-18
+updated: 2017-05-25
 permalink: 2016/11/30/kotlin
 wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483689&idx=1&sn=a6261038ae037d6fb54a1b66f51a1623
 wechatmptitle: Kotlin
-sticky: 1
+sticky: 3
 categories:
 - 编程语言
 tags:
@@ -20,7 +20,63 @@ tags:
 <!-- more -->
 
 
-> 因为其标准库有700Kb左右，所以暂时没有考虑在生产环境用，前段时间, 刚好接了支付宝几个内部组件，因此都用Kotlin写了，整体感觉很不错。顺便也写了一个[kotlin的开源库](https://github.com/Jacksgong/grpc-android-kotlin)，其中覆盖了rxkotlin的使用、kotlin单元测试编写，整个代码架构是以MVP为主，是一个很好的kotlin入门案例。
+> 因为其标准库有100Kb左右，所以暂时没有考虑在生产环境用，前段时间, 刚好接了支付宝几个内部组件，因此都用Kotlin写了，整体感觉很不错。顺便也写了一个[kotlin的开源库](https://github.com/Jacksgong/grpc-android-kotlin)，其中覆盖了rxkotlin的使用、kotlin单元测试编写，整个代码架构是以MVP为主，是一个很好的kotlin入门案例。
+
+## 前言
+
+让我来描述下写Kotlin的感觉的话，是真的很爽，简洁，可读性强，而且很多优秀的设计规范被语言层面支持使得应用起来非常简单。比如单例就一个`object`就搞定了，data就一个`data class`搞定，默认的调用变量就是调用其`get`、`set`还支持`delegate`；创建变量的时候不用指明类型赋值什么就是什么；如builder pattern本身由于argument就支持指明是赋值给哪个默认就支持；编写的时候还可以更加健壮的思考清楚哪个参数可以为`null`，哪个参数不能为`null`，哪个参数在调用时才创建，哪个参数在访问之前肯定会在某处被创建；默认就是`final`提高稳定性与可维护性；`let`简化if；`when`支持区间"switch"；还有各类geek的`null`条件判断方式；类似groovy之类的字符串内用`$`带上变量组字符串；Lambda；Stream等等的特性支持，代码可以很简洁，可读性也很强。
+
+这门语言已经被打磨了6、7年了，而且是Jetbrains团队打造的，Android这边很早就有很多大神在推。社区也在这半年火起来，官方也非常努力，包括自己的bbs，stackoverflow之类的，我之前在Stackoverflow提了一个issue，马上就有官方来回答，并且kotlin可以与java协同开发，而且java工程师转过去的曲线也很平滑，至少比学习rxjava的难度低很多。
+
+唯两个点:
+
+1. Kotlin调用Java确实100%协同，但是Java调用Kotlin就比较绕，因为Kotlin本身的封装实现
+2. 目前版本1.1全量proguard后kotlin标准库大小大概是100kb左右，意味着包大小会增大小于100kb(如果有些kotlin标准库中方法没有调用到，在proguard时会被移除)
+
+针对第二个问题，其实我有做过探究，Kotlin本身设计时是为了Jetbrain工程师更高效的开发稳定的桌面IDE用的，刚开始的时候肯定在大小这块考虑的比较少，不过目前已经发展了6、7年了，看官方的描述现在已经一直在做这块的优化了，其实吧，标准库带来的kotlin的大小是kotlin不得不面对的一个问题，并且由于编译后有很多的判空，类封装，可能编译为class的逻辑代码虽然编写起来简单了，但是应该不会小多少估计还有可能变得更大。
+
+---
+
+我自己也用自己之前写的小应用做了一个简单的对比:
+
+本文样本是一个简单的Apk，拥有远程截图、远程获知手机live、远程定位情况等。对比部分基本包含方法260左右方法数，可能由于部分kotlin特性没有用上在proguard的时候对应的方法就被移除了，因此在标准库这块可能与大幅度使用时会有略微偏差，这里的偏差不超过100KB(官方数据这块标准库Proguard后小于100KB)。
+
+#### 非Proguard包对比
+
+![](/img/kotlin-no-proguard.png)
+
+- Kotlin的包大了300+KB
+- Kotlin的包使用Kotlin的代码逻辑部分多了41个方法数
+
+#### Proguard包对比
+
+![](/img/kotlin-proguard.png)
+
+- Kotlin的包大了50+KB
+- Kotlin的包使用Kotlin的代码逻辑部分多了31个方法数
+- 由于很多Kotlin框架方法没有被调用到，因此这块标准库被Proguard移除了83%的方法数
+
+#### 方法采样对比
+
+![](/img/kotlin-class-compare.png)
+
+可以很明显的看到，虽然我们编写代码的时候很简洁，但是编译为class以后，多出了很多判空。
+
+---
+
+至于未来是否Android Framework SDK带上，我本人是不看好的，估计应该长期需要带这个标准库，类似Appcompat，如果是官方的Android Framework SDK，会带来两个问题（类似OkHttp的场景):
+
+1. 只有某个版本后的Android支持，旧版本Android如何适配将成问题
+2. 新版本的Kotlin特性无法全平台享用，也无法及时使用
+
+而对于大多数同学关注的问题，其实[官方](http://kotlinlang.org/docs/reference/android-overview.html)已经说的很明白了:
+
+- 兼容性: 兼容旧Android设备完全没问题
+- 性能: 与Java一样快，并且由于支持inline、coroutine，甚至比java更快
+- 协同: 与Kotlin 100%协同
+- 大小: 如果全量带标准库，proguard后会大100kb左右
+- 编译时间: 冷编译会慢些，但是由于增量编译，[非冷编译速度甚至比编译java还快](https://medium.com/keepsafe-engineering/kotlin-vs-java-compilation-speed-e6c174b39b5d)
+- 学习曲线: java转过来很轻松(very easy)
 
 ## I. 相比Java优势:
 
