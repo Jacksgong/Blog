@@ -2,8 +2,8 @@ title: Kotlin
 date: 2016-11-30 14:02:03
 updated: 2017-05-25
 permalink: 2016/11/30/kotlin
-wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483689&idx=1&sn=a6261038ae037d6fb54a1b66f51a1623
-wechatmptitle: Kotlin
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483734&idx=1&sn=a9761881ebd6632fc7e1417988002339
+wechatmptitle: 重谈Kotlin
 sticky: 3
 categories:
 - 编程语言
