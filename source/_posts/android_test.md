@@ -1,6 +1,6 @@
 title: Android单元测试与模拟测试
 date: 2016-05-15 00:40:03
-updated: 2016-11-30 00:40:03
+updated: 2017-06-05 22:30:03
 wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483680&idx=1&sn=a81f0b86696f243bf32c032fc7b09574
 wechatmptitle: Android单元测试与模拟测试
 permalink: 2016/05/15/android_test
@@ -18,6 +18,12 @@ tags:
 > 测试驱动式编程(Test-Driven-Development)在RoR中已经是非常普遍的开发模式，是一种十分可靠、优秀的编程思想，可是在Android领域中这块还没有普及，今天主要聊聊Android中的单元测试与模拟测试及其常用的一些库。
 
 <!-- more -->
+
+---
+
+关于Kotlin中的单元测试，请移步这篇文章: [Kotlin](https://blog.dreamtobe.cn/2016/11/30/kotlin/)
+
+---
 
 ## I. 测试与基本规范
 
