@@ -1,6 +1,6 @@
 title: 站点与服务器维护
 date: 2017-03-06 15:59:03
-updated: 2017-05-05
+updated: 2017-06-15
 categories:
 - 服务器
 tags:
@@ -327,6 +327,10 @@ cd shadowsocks-client-ubuntu
 #### 卸载
 
 执行`sudo gitlab-ctl uninstall`
+
+### 3. Phabricator
+
+可以参照我的另外一篇文章: [Ubuntu 16.04.2 安装与配置 Phabricator](https://blog.dreamtobe.cn/install-config-phabricator/)
 
 ## 站点维护
 
