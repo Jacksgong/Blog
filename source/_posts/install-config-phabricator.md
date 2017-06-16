@@ -1,4 +1,4 @@
-title: Ubuntu 16.04.2 安装与配置 Phabricator
+title: Ubuntu 16.04 安装与配置 Phabricator
 date: 2017-06-15 23:52:03
 updated: 2017-06-15
 categories:
