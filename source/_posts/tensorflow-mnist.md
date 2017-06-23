@@ -2,7 +2,7 @@ title: 训练识别数字图片的模型
 date: 2017-03-24 01:57:03
 updated: 2017-03-24 01:57:03
 categories:
-- 编程语言
+- AI 
 tags:
 - TensorFlow
 - AI

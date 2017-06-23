@@ -4,7 +4,7 @@ updated: 2017-04-14
 wechatmptitle: 敲开TensorFlow的大门
 wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483719&idx=1&sn=7f70a02d7d6ec49ab55354d9fa26768e
 categories:
-- 编程语言
+- AI
 tags:
 - TensorFlow
 - AI
