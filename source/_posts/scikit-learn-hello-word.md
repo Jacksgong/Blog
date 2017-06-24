@@ -4,15 +4,18 @@ updated: 2017-06-23
 categories:
 - AI
 tags:
-- ScikitLearn
+- Scikit-learn
 - TensorFlow
 - AI
 
 ---
 
-> 参考视频: https://youtu.be/cKxRvEZd3Mw
+{% note warning %} [上一篇文章](https://blog.dreamtobe.cn/tensorflow-mnist/)中我们介绍了如何通过TensorFlow去训练一个识别数字图片模型，其中涉及了算法推演到最后的输出结果，其实可以借助Scikit-learn来简化。{% endnote %}
 
 <!-- more -->
+
+> 参考视频: https://youtu.be/cKxRvEZd3Mw
+
 
 ## I. 前言
 
