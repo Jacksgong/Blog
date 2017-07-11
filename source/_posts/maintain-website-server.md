@@ -1,6 +1,6 @@
 title: 站点与服务器维护
 date: 2017-03-06 15:59:03
-updated: 2017-06-15
+updated: 2017-07-11
 categories:
 - 服务器
 tags:
@@ -249,6 +249,50 @@ cd shadowsocks-client-ubuntu
 ./stop.sh
 ```
 
+#### 13. 安装sendmail用于发邮件
+
+安装:
+
+```shell
+apt-get install sendmail
+```
+
+检测是否正在运行:
+
+```shell
+ps -aux | grep sendmail
+```
+
+配置php中的sendmail，编辑`/etc/php/7.1/fpm/php.ini`:
+
+将其中的:
+
+```
+;sendmail_path=
+```
+
+替换为:
+
+```
+sendmail_path = /usr/sbin/sendmail
+```
+
+如果使用外部邮件提供商，需要进一步配置:
+
+编辑`/etc/mail/sendmail.mc`文件，新增下面两行(将`jacksgong.com`替换为你的域名):
+
+```m
+define(`MAIL_HUB', `jacksgong.com.')dnl
+define(`LOCAL_RELAY', `jacksgong.com.')dnl
+```
+
+然后生效配置:
+
+```shell
+sudo sendmailconfig
+sudo service sendmail restart
+```
+
 ## 站点安装
 
 ### 1. ownCloud
@@ -380,5 +424,6 @@ cd shadowsocks-client-ubuntu
 - [How To Install Java on Ubuntu with Apt-Get](https://www.digitalocean.com/community/tutorials/how-to-install-java-on-ubuntu-with-apt-get)
 - [各种系统下Shadowsocks客户端的安装与配置](http://www.jeyzhang.com/how-to-install-and-setup-shadowsocks-client-in-different-os.html)
 - [Ubuntu下shadowsocks 安装与配置（server and client）](https://my.oschina.net/lieefu/blog/500774)
+- [INSTALL SENDMAIL ON UBUNTU](https://www.leonardaustin.com/blog/technical/sendmail-on-ubuntu/)
 
 ---
