@@ -1,6 +1,6 @@
 title: Ubuntu 16.04 安装与配置 Phabricator
 date: 2017-06-15 23:52:03
-updated: 2017-06-15
+updated: 2017-07-11
 categories:
 - 工程师技能
 tags:
@@ -337,6 +337,12 @@ sql_mode=STRICT_ALL_TABLES
 ./bin/config set pygments.enabled true
 ```
 
+#### 7. 配置Outbound发邮件
+
+首先根据[站点配置](https://blog.dreamtobe.cn/maintain-website-server/)中的`安装sendmail`教程，安装好sendmail，然后只需要进入Phabricator，打开`Config > Core > Mail`中配置:
+
+![](/img/install-config-phabricator-3.png)
+
 ---
 
 - [Installing Phabricator (Debian, nginx, MySql)](http://povilasb.com/phabricator/install.html)
@@ -345,5 +351,6 @@ sql_mode=STRICT_ALL_TABLES
 - [Configuration Guide](https://secure.phabricator.com/book/phabricator/article/configuration_guide/)
 - [Restarting Phabricator](https://secure.phabricator.com/book/phabricator/article/restarting/)
 - [Phabricator Ubuntu Installation Guide](https://gist.github.com/sparrc/b4eff48a3e7af8411fc1)
+- [Configuring Outbound Email](https://secure.phabricator.com/book/phabricator/article/configuring_outbound_email/)
 
 ---
