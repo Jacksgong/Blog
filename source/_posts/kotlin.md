@@ -24,7 +24,7 @@ tags:
 
 ## 前言
 
-让我来描述下写Kotlin的感觉的话，是真的很爽，简洁，可读性强，而且很多优秀的设计规范被语言层面支持使得应用起来非常简单。比如单例就一个`object`就搞定了，data就一个`data class`搞定，默认的调用变量就是调用其`get`、`set`还支持`delegate`；创建变量的时候不用指明类型赋值什么就是什么；如builder pattern本身由于argument就支持指明是赋值给哪个默认就支持；编写的时候还可以更加健壮的思考清楚哪个参数可以为`null`，哪个参数不能为`null`，哪个参数在调用时才创建，哪个参数在访问之前肯定会在某处被创建；默认就是`final`提高稳定性与可维护性；`let`简化if；`when`支持区间"switch"；还有各类geek的`null`条件判断方式；类似groovy之类的字符串内用`$`带上变量组字符串；Lambda；Stream等等的特性支持，代码可以很简洁，可读性也很强。
+让我来描述下写Kotlin的感觉的话，是真的很爽，简洁，可读性强，性能也很好(关于Kotlin运行时性能可以参看[这篇文章](https://blog.dreamtobe.cn/kotlin-performance/))而且很多优秀的设计规范被语言层面支持使得应用起来非常简单。比如单例就一个`object`就搞定了，data就一个`data class`搞定，默认的调用变量就是调用其`get`、`set`还支持`delegate`；创建变量的时候不用指明类型赋值什么就是什么；如builder pattern本身由于argument就支持指明是赋值给哪个默认就支持；编写的时候还可以更加健壮的思考清楚哪个参数可以为`null`，哪个参数不能为`null`，哪个参数在调用时才创建，哪个参数在访问之前肯定会在某处被创建；默认就是`final`提高稳定性与可维护性；`let`简化if；`when`支持区间"switch"；还有各类geek的`null`条件判断方式；类似groovy之类的字符串内用`$`带上变量组字符串；Lambda；Stream等等的特性支持，代码可以很简洁，可读性也很强。
 
 这门语言已经被打磨了6、7年了，而且是Jetbrains团队打造的，Android这边很早就有很多大神在推。社区也在这半年火起来，官方也非常努力，包括自己的bbs，stackoverflow之类的，我之前在Stackoverflow提了一个issue，马上就有官方来回答，并且kotlin可以与java协同开发，而且java工程师转过去的曲线也很平滑，至少比学习rxjava的难度低很多。
 
