@@ -1,6 +1,8 @@
 title: Kotlin运行时性能
 date: 2017-07-12 00:47:03
 updated: 2017-07-12
+wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483756&idx=1&sn=4342775021bb9fa1b60ebc454293bd1e
+wechatmptitle: Kotlin运行时性能
 categories:
 - 编程语言
 tags:
