@@ -1,6 +1,6 @@
 title: Kotlin
 date: 2016-11-30 14:02:03
-updated: 2017-05-25
+updated: 2017-08-02
 permalink: 2016/11/30/kotlin
 wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483734&idx=1&sn=a9761881ebd6632fc7e1417988002339
 wechatmptitle: 重谈Kotlin
@@ -326,6 +326,28 @@ Mockito 2.1.0 及之后的版本原生支持了对`final`的method与class进行
 
 > 可以借助[nhaarman/mockito-kotlin](https://github.com/nhaarman/mockito-kotlin)使得更好的用Kotlin写单元测试。
 
+## III. Anko
+
+[Anko](https://github.com/Kotlin/anko)是JetBrains维护的用Kotlin编写的针对Android的辅助库，正如其名字: `(An)droid (Ko)tlin`，其主要组成部分是:
+
+- Commons 常用组件
+- Layouts 布局组件
+- SQLite 数据库组件
+- Coroutines Android中的Coroutine
+
+#### 引用
+
+![](/img/kotlin-anko-1.png)
+
+#### 使用案例
+
+> 具体参看其[wiki](https://github.com/Kotlin/anko/wiki)
+
+![](/img/kotlin-anko-2.png)
+![](/img/kotlin-anko-3.png)
+![](/img/kotlin-anko-4.png)
+![](/img/kotlin-anko-5.png)
+
 ## III. 实现写Java代码也能享受Kotlin的特性
 
 > 无论是多出736KB的Kotlin基本库大小，还是公司不允许，**导致只能使用Java，但是又想使用一些Kotlin特性**。可以看看接下来提到的。
@@ -392,5 +414,6 @@ Java7中可以通过Intelij的[Advanced Java Folding](https://plugins.jetbrains.
 - [Android Testing with Kotlin](http://fernandocejas.com/2017/02/03/android-testing-with-kotlin/)
 - [Kotlin in Production: Should you stay or should you go?](https://hackernoon.com/kotlin-in-production-should-you-stay-or-should-you-go-a3428b44b236)
 - [Making Java Code Easier to Read (Without Changing it)](https://medium.com/@andrey_cheptsov/making-java-code-easier-to-read-without-changing-it-adeebd5c36de)
+- [Why every Android developer should use Anko](https://www.kotlindevelopment.com/why-should-use-anko/)
 
 ---
