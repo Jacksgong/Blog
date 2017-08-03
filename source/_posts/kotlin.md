@@ -19,7 +19,6 @@ tags:
 
 <!-- more -->
 
-
 > 因为其标准库有100Kb左右，所以暂时没有考虑在生产环境用，前段时间, 刚好接了支付宝几个内部组件，因此都用Kotlin写了，整体感觉很不错。顺便也写了一个[kotlin的开源库](https://github.com/Jacksgong/grpc-android-kotlin)，其中覆盖了rxkotlin的使用、kotlin单元测试编写，整个代码架构是以MVP为主，是一个很好的kotlin入门案例。
 
 ## 前言
@@ -348,7 +347,7 @@ Mockito 2.1.0 及之后的版本原生支持了对`final`的method与class进行
 ![](/img/kotlin-anko-4.png)
 ![](/img/kotlin-anko-5.png)
 
-## III. 实现写Java代码也能享受Kotlin的特性
+## IV. 实现写Java代码也能享受Kotlin的特性
 
 > 无论是多出736KB的Kotlin基本库大小，还是公司不允许，**导致只能使用Java，但是又想使用一些Kotlin特性**。可以看看接下来提到的。
 
@@ -388,7 +387,7 @@ Java中可以通过[Lombok - @ExtensionMethod](https://github.com/mplushnikov/lo
 
 Java7中可以通过Intelij的[Advanced Java Folding](https://plugins.jetbrains.com/plugin/9320-advanced-java-folding)插件实现这些特性，这个主要是通过Intelij IDEA的折叠代码的特性，使得代码折叠成类似Kotlin的更加可读的代码。
 
-## IV. 为什么你可以开始使用Kotlin了
+## V. 为什么你可以开始使用Kotlin了
 
 > 我们看了上面Kotlin这么多优势，那么我们是时候开始使用Kotlin了吗？答案是肯定的，现在是时候开始使用Kotlin了。
 
