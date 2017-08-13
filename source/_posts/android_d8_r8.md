@@ -23,6 +23,8 @@ D8目前还在preview阶段，不过Google Android团队测试了多款应用结
 
 ### 1. D8优化部分
 
+> 其实单就优化dex的文件大小与运行时性能，最出名的开源解决方案应该是Facebook的[redex](http://fbredex.com/)。
+
 - Dex编译时间更短
 - `.dex`文件大小更小
 - D8编译的`.dex`文件将拥有相同或者是更好的运行时性能
