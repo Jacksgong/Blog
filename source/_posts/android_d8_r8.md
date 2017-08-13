@@ -19,13 +19,25 @@ tags:
 
 ## I. D8
 
-D8目前还在preview阶段，不过Google Android团队测试了多款应用结果都是很不错的，因此他们很有信心将D8编译器引入到AOSP中，预计会在接下来的几个月中对其进行Release，如果你使用中有遇到任何问题可以到[这里](https://issuetracker.google.com/issues/new?component=317603&template=1018721)给他们提。
+D8目前还在preview阶段，不过Google Android团队测试了多款应用结果都是很不错的，预计会在接下来的几个月中对其进行Release，如果你使用中有遇到任何问题可以到[这里](https://issuetracker.google.com/issues/new?component=317603&template=1018721)给他们提。
 
 ### 1. D8优化部分
 
 - Dex编译时间更短
 - `.dex`文件大小更小
-- 相同或者是更好的运行时性能
+- D8编译的`.dex`文件将拥有相同或者是更好的运行时性能
+
+#### Java 8支持相关
+
+目前Java 8语言支持的处理是在javac之后，与字节码处理工具处理之前。在接下来的几个月，这个步骤将会被移动到pipeline的后一个阶段，作为D8的一部分。
+
+其带来的影响:
+
+1. 减少这块的编译时间
+2. 可以优化更多代码
+3. 这么一来，所有字节码处理工具就必须要支持Java8的字节码格式了。
+
+#### 测试数据
 
 根据Google Android团队对[这个项目](https://github.com/jmslau/perf-android-large/tree/android-30)进行分别使用Dex与D8的测试数据:
 
