@@ -23,7 +23,7 @@ tags:
 
 ## 前言
 
-让我来描述下写Kotlin的感觉的话，是真的很爽，简洁，可读性强，性能也很好(关于Kotlin运行时性能可以参看[这篇文章](https://blog.dreamtobe.cn/kotlin-performance/))而且很多优秀的设计规范被语言层面支持使得应用起来非常简单。比如单例就一个`object`就搞定了，data就一个`data class`搞定，默认的调用变量就是调用其`get`、`set`还支持`delegate`；创建变量的时候不用指明类型赋值什么就是什么；如builder pattern本身由于argument就支持指明是赋值给哪个默认就支持；编写的时候还可以更加健壮的思考清楚哪个参数可以为`null`，哪个参数不能为`null`，哪个参数在调用时才创建，哪个参数在访问之前肯定会在某处被创建；默认就是`final`提高稳定性与可维护性；`let`简化if；`when`支持区间"switch"；还有各类geek的`null`条件判断方式；类似groovy之类的字符串内用`$`带上变量组字符串；Lambda；Stream等等的特性支持，代码可以很简洁，可读性也很强。
+让我来描述下写Kotlin的感觉的话，是真的很爽，简洁，可读性强，性能也很好(关于Kotlin运行时性能可以参看[这篇文章](https://blog.dreamtobe.cn/kotlin-performance/))，支持Coroutines(关于Kotlin Courtines可以参考[这篇文章](https://blog.dreamtobe.cn/kotlin-coroutines/) 的解读)，而且很多优秀的设计规范被语言层面支持使得应用起来非常简单。比如单例就一个`object`就搞定了，data就一个`data class`搞定，默认的调用变量就是调用其`get`、`set`还支持`delegate`；创建变量的时候不用指明类型赋值什么就是什么；如builder pattern本身由于argument就支持指明是赋值给哪个默认就支持；编写的时候还可以更加健壮的思考清楚哪个参数可以为`null`，哪个参数不能为`null`，哪个参数在调用时才创建，哪个参数在访问之前肯定会在某处被创建；默认就是`final`提高稳定性与可维护性；`let`简化if；`when`支持区间"switch"；还有各类geek的`null`条件判断方式；类似groovy之类的字符串内用`$`带上变量组字符串；Lambda；Stream等等的特性支持，代码可以很简洁，可读性也很强。
 
 这门语言已经被打磨了6、7年了，而且是Jetbrains团队打造的，Android这边很早就有很多大神在推。社区也在这半年火起来，官方也非常努力，包括自己的bbs，stackoverflow之类的，我之前在Stackoverflow提了一个issue，马上就有官方来回答，并且kotlin可以与java协同开发，而且java工程师转过去的曲线也很平滑，至少比学习rxjava的难度低很多。
 
@@ -77,7 +77,7 @@ tags:
 - 编译时间: 冷编译会慢些，但是由于增量编译，[非冷编译速度甚至比编译java还快](https://medium.com/keepsafe-engineering/kotlin-vs-java-compilation-speed-e6c174b39b5d)
 - 学习曲线: java转过来很轻松(very easy)
 
-## I. 相比Java优势:
+## I. 相比Java优势
 
 - 增量编译，Kotlin更快些
 - 代码更精准有效，更可读
@@ -88,7 +88,7 @@ Kotlin语言是2010年Jetbrains团队为自己的团队打造的。宗旨是希�
 
 ### 根据《Effective Java》Kotlin的优化
 
-#### 1. 不再需要builder:
+#### 1. 不再需要builder
 
 在构造函数如果需要传入大量参数时，考虑到可读性，"Effective Java"在第二章中的谈到了[Builder Pattern](https://en.wikipedia.org/wiki/Builder_pattern)，以此构造与对象分离，达到更灵活、更可读。
 
@@ -136,7 +136,6 @@ data class Person(val name: String, val age: Integer)
 
 > P.S [AutoValue](https://github.com/google/auto/tree/master/value)为Java实现了类似的功能。
 
-
 #### 4. 自动化`getter`与`setter`
 
 在"Effective Java"的第十四章中建议到对于成员变量尽量使用方法可见(通常通过提供`getter`与`setter`实现)而非直接`public`。
@@ -170,7 +169,6 @@ person.age = 27
 在Java 1.5中引入了`Overried`关键字，但这个关键字是`option`的，在"Effective Java"的第三十六章中说明了一定要加上这个注解一旦是覆写方法，否则在后期维护时很可能将覆写方法当做非覆写方法从而引来各种问题。
 
 在Kotlin中，`override`变为了强制性的注解以避免类似的问题。
-
 
 ### 常用语法与特性
 
