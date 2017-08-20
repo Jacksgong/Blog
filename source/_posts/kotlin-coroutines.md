@@ -1,4 +1,4 @@
-title: Kotlin Coroutines
+title: Kotlin Coroutines(协程)
 date: 2017-08-20 15:21:03
 updated: 2017-08-20
 categories:
@@ -24,21 +24,31 @@ tags:
 
 本文所有案例均在kotlin 1.1.4与kotlinx-coroutines-core 0.18版本进行实验(由于我引入anko时，anko引用的coroutines时0.15版本因此这里引入0.18版本进行替换(至于为什么高版本会自动替换低版本可以参考[这篇文章](https://blog.dreamtobe.cn/android-toolset/)))。
 
-## II. 什么是Coroutines
+## II. 什么是Kotlin Coroutines
 
-简单来说就是使用`suspend`来代替线程阻塞，可以理解为无阻塞的异步编写方式，基本原理是复用被`suspension`线程的资源。
+Coroutines中文名"协程"，简单来说就是使用`suspend`来代替线程阻塞，可以理解为无阻塞的异步编写方式，基本原理是复用被`suspension`线程的资源。
 
-综合Unity 3D、Lua等中的Coroutine对于`suspend`的翻译，文中为了便于理解，将`suspend`的操作(如`delay`)称为"挂起"。
+综合C#、Lua等中的Coroutine对于`suspend`的翻译，文中为了便于理解，将`suspend`的操作(如`delay`)称为"挂起"。kotlin协程的挂起是十分廉价的，相反的线程的阻塞时十分昂贵的。
 
-Coroutines中每个coroutine都是运行在对应的`CoroutineContext`中的，为了便于理解，文中将`CoroutineContext`称为"coroutine上下文"。而coroutine上下文可以是为coroutine提供运行线程的`CoroutineDispatcher`(如`newSingleThreadContext`创建的单线程coroutine上下文、`CommonPool`公共的拥有与CPU核实相当线程数的线程池等)，可以是用于管理coroutine的`Job`、甚至可以是继承自`Job`的可以为异步任务带回数返回值的的`Deferred`等。
+协程中每个coroutine都是运行在对应的`CoroutineContext`中的，为了便于理解，文中将`CoroutineContext`称为"coroutine上下文"。而coroutine上下文可以是为coroutine提供运行线程的`CoroutineDispatcher`(如`newSingleThreadContext`创建的单线程coroutine上下文、`CommonPool`公共的拥有与CPU核实相当线程数的线程池等)，可以是用于管理coroutine的`Job`、甚至可以是继承自`Job`的可以为异步任务带回数返回值的的`Deferred`等。
+
+### Kotlin协程的特征
+
+我们知道协程的概念并不是kotlin第一个提出的，在此之前已经有很多语言有协程的概念，但是kotlin协程有自己的特征:
+
+1. koltin的协程完全是通过编译实现的(不愧是IDE公司出的^ ^)，没有修改JVM或者是底层逻辑
+2. 相比其他语言的协程，kotlin的协程可谓非常的全面，其不仅支持C#和`ECMAScript`的`async/await`、Go的`channels`与`select`，还支持C#和Python的`build sequence`/`yield`等
+
+### 需要注意
+
+我们可以通过目前kotlinx.coroutines所在包名(`kotlin.coroutines.experimental`)获知目前kotlin协程还是实验性的，并且根据官方文档，等到完全设计完成后最终API会移到`kotlin.coroutines`中，正因为这个原因，官方建议给基于协程API的包添加`experimental`后缀(如:`cn.dreamtobe.experimental`)，等到最终发布后，再迁移到无`experimental`后缀的包中，并且官方表明会做兼容以最小化迁移成本。
 
 ## III. 挂起是很轻的操作
 
 我测试了如下两个代码:
 
 ```kotlin
-
-// 使用coroutines
+// 使用协程
 println("Coroutines: start")
 val jobs = List(100_000) {
     // 创建新的coroutine
@@ -65,21 +75,20 @@ noCoroutinesJobs.forEach { it.join() }
 println("No Coroutines: end")
 ```
 
-在Nexus6P上：使用Coroutines的大约在8s左右完成所有输出；而不使用Coroutines的大约2min才完成所有输出
-
+在Nexus6P上：使用协程的大约在8s左右完成所有输出；而不使用协程的大约2min才完成所有输出
 
 ![](/img/kotlin-coroutines-2.png)
 
 这里你可能会提出，这里很大程度是复用了线程?
 
-是的，这就是Coroutines的特性，使用挂起当前上下文替代阻塞，使得可以复用被`delay`的线程，大量减少了这块的资源浪费。
+是的，这就是协程的特性，使用挂起当前上下文替代阻塞，使得可以复用被`delay`的线程，大量减少了这块的资源浪费。
 
-而没有使用Coroutines的情况是，不断创建新的线程然后阻塞，因此哪怕是我们使用线程池，也无法复用其中的任何被线程，由于被创建的线程都被阻塞了，如果这块不明白，可以直接使用以下的代码，让不使用Coroutines的测试用例也跑在一个尽可能提供线程复用的常规线程池中，结果相同大约2min才完成所有输出:
+而使用阻塞的情况是，不断创建新的线程然后阻塞，因此哪怕是我们使用线程池，也无法复用其中的任何被线程，由于被创建的线程都被阻塞了，如果这块不明白，可以直接使用以下的代码，让阻塞的测试用例也跑在一个尽可能提供线程复用的常规线程池中，结果相同大约2min才完成所有输出:
 
 ```kotlin
 val noCoroutinesPool: ExecutorService = Executors.newCachedThreadPool()
 println("No Coroutines: start")
-// 不使用coroutines
+// 使用阻塞
 val noCoroutinesJobs = List(100_000) {
     Executors.callable {
         Thread.sleep(1000L)
@@ -91,7 +100,7 @@ noCoroutinesPool.invokeAll(noCoroutinesJobs)
 println("No Coroutines: end")
 ```
 
-## IV. 如何使用Coroutines
+## IV. 如何使用协程
 
 - `run(CoroutineContext) { ... }`: 创建一个运行在`CoroutineContext`制定线程中的区块，效果是运行在`CoroutineContext`线程中并且挂起父coroutine上下文直到区块执行完毕
 - `runBlocking(CoroutineContext) { ... }`: 创建一个coroutine并且阻塞当前线程直到区块执行完毕，这个一般是用于桥接一般的阻塞试编程方式到coroutine编程方式的，不应该在已经是coroutine的地方使用
@@ -101,7 +110,7 @@ println("No Coroutines: end")
 
 ### 1. `fun methodName(...) = runBlocking<Unit> { ... }`
 
-申明`methodName`方法是顶层主Coroutines方法。一般是用于桥接一般的阻塞试编程方式到coroutine编程方式的，不应该在已经是coroutine的地方使用。
+申明`methodName`方法是顶层主协程方法。一般是用于桥接一般的阻塞试编程方式到coroutine编程方式的，不应该在已经是coroutine的地方使用。
 
 ```kotlin
 fun main(args: Array<String>) = runBlocking<Unit> {
@@ -170,7 +179,7 @@ fun main(args: Array<String>) { // 普通方法
 
 ### 3. 为Coroutine指定不同的线程(`Dispaters`)
 
-在Coroutines中包含了很多[CoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.experimental/-coroutine-dispatcher/index.html)，这些`Dispaters`决定了Coroutine运行所在线程。比如:
+在协程中包含了很多[CoroutineDispatcher](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.experimental/-coroutine-dispatcher/index.html)，这些`Dispaters`决定了Coroutine运行所在线程。比如:
 
 - `Unconfined`: 执行coroutine是在调用者的线程，但是当在coroutine中第一个挂起之后，后面所在的线程将完全取决于调用挂起方法的线程(如`delay`一般是由`kotlinx.coroutines.DefaultExecutor`中的线程调用)
 - `CoroutineScope#coroutineContext`(旧版本这个变量名为`context`): 执行coroutine始终都是在`coroutineContext`所在线程(`coroutineContext`就是`CoroutineScope`的成员变量，因此就是`CoroutineScope`实例所在coroutine的线程)，
@@ -258,7 +267,7 @@ fun main(args: Array<String>) = runBlocking<Unit> {
 }
 ```
 
-对父coroutines进行取消，除了取消了coroutines本身，还会影响使用其`CoroutineScope#context`的子job，但是不会影响使用其他`CoroutineContext`的job，如:
+对父coroutine进行取消，除了取消了coroutine本身，还会影响使用其`CoroutineScope#context`的子job，但是不会影响使用其他`CoroutineContext`的job，如:
 
 ```kotlin
 // 创建一个运行在CommonPool线程池中的Coroutine
@@ -366,7 +375,7 @@ job.cancel() // 会cancel所有与其相加的coroutine
 
 ### 6. 对Coroutine进行超时设计
 
-可以在主Coroutines方法内，通过`withTimeout`或者`withTimeoutOrNull`创建一个一段时间还没有完成便会自动被取消的Coroutine。
+可以在协程方法内，通过`withTimeout`或者`withTimeoutOrNull`创建一个一段时间还没有完成便会自动被取消的Coroutine。
 
 其中`withTimeout`在超时的时候，会抛出继承自`CancellationException`的`TimeoutException`，如果超时是被允许的，你可以通过实现`try { ... } catch ( e: CancellationException ) { ... }`在其中做超时之后的操作（比如释放之类的)，或者是直接使用`withTimeoutOrNull`。
 
@@ -389,7 +398,7 @@ fun main(args: Array<String>) = runBlocking<Unit> {
 
 suspend fun massiveRun(context: CoroutineContext, action: suspend () -> Unit) {
     val n = 1000 // launch的个数
-    val k = 1000 // 每个conroutine中执行action的次数
+    val k = 1000 // 每个coroutine中执行action的次数
     val time = measureTimeMillis {
         val jobs = List(n) {
             launch(context) {
@@ -564,7 +573,7 @@ fun main(args: Array<String>) = runBlocking<Unit> {
 }
 ```
 
-Actor是一个coroutine的结合，所有的参数可以定义与封装在这个coroutine中，并且通过channel与其他coroutine进行通信，由于Actor本身就是一个coroutine的结合，因此无论Actor运行在哪个`CoroutineContext`下面，Actor本身都是运行在自己的courtine中并且这是一个顺序执行的coroutine，因此我们可以用它来做线程安全的一些操作，因此在这个案例中这个是可行的，并且由于它始终都运行在同一个conroutine中不需要进行context切换，因此性能比前面提到的`Mutex`更好。
+Actor是一个coroutine的结合，所有的参数可以定义与封装在这个coroutine中，并且通过channel与其他coroutine进行通信，由于Actor本身就是一个coroutine的结合，因此无论Actor运行在哪个`CoroutineContext`下面，Actor本身都是运行在自己的courtine中并且这是一个顺序执行的coroutine，因此我们可以用它来做线程安全的一些操作，因此在这个案例中这个是可行的，并且由于它始终都运行在同一个coroutine中不需要进行context切换，因此性能比前面提到的`Mutex`更好。
 
 ```
 completed 1000000 actions in 14192 ms
@@ -575,9 +584,9 @@ Counter = 1000000
 
 ### 8. 通信
 
-#### 8.1 Channel
+#### 8.1 Channels
 
-Coroutines中可以通过Channel进行通道模式的在不同coroutine中传递数据，可以发送、接收、关闭等操作，并且对于接收者来说Channel是公平的，也就是先`receive`的会优先收到`send`的推送，其余的挂主住等待，而Channel又分有缓冲区的与无缓冲区的。
+协程中可以通过Channel进行通道模式的在不同coroutine中传递数据，可以发送、接收、关闭等操作，并且对于接收者来说Channel是公平的，也就是先`receive`的会优先收到`send`的推送，其余的挂主住等待，而Channel又分有缓冲区的与无缓冲区的。
 
 ##### 8.1.1 公平的Channel
 
@@ -719,7 +728,7 @@ fun main(args: Array<String>) = runBlocking<Unit> {
     val squares = square(numbers) // 加工
     for (i in 1..5) println(squares.receive()) // 消费前5个结果
 
-    squares.cancel() // cancel加工的coroutine（一般来说是不用主动cancel的，因为coroutines就好像一个常驻线程，挂起也会被其他任务使用闲置资源，不过大型应用推荐cancel不使用的coroutine)
+    squares.cancel() // cancel加工的coroutine（一般来说是不用主动cancel的，因为协程就好像一个常驻线程，挂起也会被其他任务使用闲置资源，不过大型应用推荐cancel不使用的coroutine)
     numbers.cancel() // cancel生产者的coroutine
 }
 ```
@@ -912,7 +921,7 @@ fun asyncString(str: String, time: Long) = async(CommonPool) {
 
 fun main(args: Array<String>) = runBlocking<Unit> {
     val chan = Channel<Deferred<String>>() // 创建一个传递Deferred<String>的channel
-    launch(coroutineContext) { // 启动一个conroutine用于输出每次的选择结果
+    launch(coroutineContext) { // 启动一个coroutine用于输出每次的选择结果
         for (s in switchMapDeferreds(chan))
             println(s)
     }
@@ -984,8 +993,9 @@ Consuming 10
 Done consuming
 ```
 
-总的来说，Kotlin的Coroutines可以应用的场景非常的宽泛，也非常的实用，从对线程阻塞这块资源利用的出发点，衍生出各种各样的实用场景，如果能够灵活使用，将能编写出更优质，更高效的代码，本文只是通过Kotlinx.coroutines的教程进行了解读，更多的细节需要通过实践来挖掘，欢迎大家多实践，多拍砖。
+总的来说，Kotlin的协程可以应用的场景非常的宽泛，也非常的实用，从对线程阻塞这块资源利用的出发点，衍生出各种各样的实用场景，如果能够灵活使用，将能编写出更优质，更高效的代码，本文只是通过Kotlinx.coroutines的教程进行了解读，更多的细节需要通过实践来挖掘，欢迎大家多实践，多拍砖。
 
 ---
 
 - [Guide to kotlinx.coroutines by example](https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md)
+- [协程](https://www.kotlincn.net/docs/reference/coroutines.html)
