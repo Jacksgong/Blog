@@ -18,11 +18,11 @@ tags:
 
 ## I. 引入Coroutines
 
-首先，Coroutines是一个单独的包，如果你是普通Java开发者，建议使用[官方的教程](https://kotlinlang.org/docs/tutorials/coroutines-basic-jvm.html)进行引入，如果你和我一样是Android开发者，建议直接使用[Anko-Coroutines](https://github.com/Kotlin/anko/wiki/Anko-Coroutines):
+首先，Coroutines是一个单独的包，如果你是普通Java开发者，建议使用[官方的教程](https://kotlinlang.org/docs/tutorials/coroutines-basic-jvm.html)进行引入，如果你和我一样是Android开发者，建议直接使用[Anko-Coroutines](https://github.com/Kotlin/anko/wiki/Anko-Coroutines)):
 
 ![](/img/kotlin-coroutines-1.png)
 
-本文所有案例均在kotlin 1.1.4与kotlinx-coroutines-core 0.18版本进行实验(由于我引入anko时，anko引用的coroutines时0.15版本因此这里引入0.18版本进行替换(至于为什么高版本会自动替换低版本可以参考[这篇文章](https://blog.dreamtobe.cn/android-toolset/))。
+本文所有案例均在kotlin 1.1.4与kotlinx-coroutines-core 0.18版本进行实验(由于我引入anko时，anko引用的coroutines时0.15版本因此这里引入0.18版本进行替换(至于为什么高版本会自动替换低版本可以参考[这篇文章](https://blog.dreamtobe.cn/android-toolset/)))。
 
 ## II. 什么是Coroutines
 
@@ -93,7 +93,7 @@ println("No Coroutines: end")
 
 ## IV. 如何使用Coroutines
 
-- `run(CoroutineContext) { ... }`: 创建一个运行在`CoroutineContext`制定线程中的区块，但是确是运行在父coroutine中，因此效果是运行在`CoroutineContext`线程中并且挂起父coroutine上下文直到区块执行完毕
+- `run(CoroutineContext) { ... }`: 创建一个运行在`CoroutineContext`制定线程中的区块，效果是运行在`CoroutineContext`线程中并且挂起父coroutine上下文直到区块执行完毕
 - `runBlocking(CoroutineContext) { ... }`: 创建一个coroutine并且阻塞当前线程直到区块执行完毕，这个一般是用于桥接一般的阻塞试编程方式到coroutine编程方式的，不应该在已经是coroutine的地方使用
 - `launch(CoroutineContext) { ... }`: 创建运行在`CoroutineContext`中的coroutine，返回的Job支持取消、启动等操作，不会挂起父coroutine上下文；可以在非coroutine中调用
 - `suspend fun methodName() { ... }`: 申明一个`suspend`方法，`suspend`方法中能够调用如`delay`这些coroutine特有的非阻塞方法；需要注意的是`suspend`方法只能在coroutine中执行
