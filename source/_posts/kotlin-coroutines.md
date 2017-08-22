@@ -28,7 +28,7 @@ tags:
 
 Coroutines中文名"协程"，简单来说就是使用`suspend`来代替线程阻塞，可以理解为无阻塞的异步编写方式，基本原理是复用被`suspension`线程的资源。
 
-综合C#、Lua等中的Coroutine对于`suspend`的翻译，文中为了便于理解，将`suspend`的操作(如`delay`)称为"挂起"。kotlin协程的挂起是十分廉价的，相反的线程的阻塞时十分昂贵的。
+综合C#、Lua等中的Coroutine对于`suspend`的翻译，文中为了便于理解，将`suspend`的操作(如`delay`)称为"挂起"。kotlin协程的挂起是十分廉价的，相反的线程的阻塞是十分昂贵的。
 
 协程中每个coroutine都是运行在对应的`CoroutineContext`中的，为了便于理解，文中将`CoroutineContext`称为"coroutine上下文"。而coroutine上下文可以是为coroutine提供运行线程的`CoroutineDispatcher`(如`newSingleThreadContext`创建的单线程coroutine上下文、`CommonPool`公共的拥有与CPU核实相当线程数的线程池等)，可以是用于管理coroutine的`Job`、甚至可以是继承自`Job`的可以为异步任务带回数返回值的的`Deferred`等。
 
@@ -83,7 +83,7 @@ println("No Coroutines: end")
 
 是的，这就是协程的特性，使用挂起当前上下文替代阻塞，使得可以复用被`delay`的线程，大量减少了这块的资源浪费。
 
-而使用阻塞的情况是，不断创建新的线程然后阻塞，因此哪怕是我们使用线程池，也无法复用其中的任何被线程，由于被创建的线程都被阻塞了，如果这块不明白，可以直接使用以下的代码，让阻塞的测试用例也跑在一个尽可能提供线程复用的常规线程池中，结果相同大约2min才完成所有输出:
+而使用阻塞的情况是，不断创建新的线程然后阻塞，因此哪怕是我们使用线程池，也无法复用其中的任何线程，由于这里所有的线程都被阻塞了。如果这块不明白，可以直接使用以下的代码，让阻塞的测试用例也跑在一个尽可能提供线程复用的常规线程池中，结果相同大约2min才完成所有输出:
 
 ```kotlin
 val noCoroutinesPool: ExecutorService = Executors.newCachedThreadPool()
