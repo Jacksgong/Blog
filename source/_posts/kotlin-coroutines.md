@@ -26,7 +26,7 @@ tags:
 
 ## II. 什么是Kotlin Coroutines
 
-Coroutines中文名"协程"，简单来说就是使用`suspend`来代替线程阻塞，可以理解为无阻塞的异步编写方式，基本原理是复用被`suspension`线程的资源。
+Coroutines中文名"协程"，简单来说就是使用`suspend`来代替线程阻塞，可以理解为无阻塞的异步编写方式，基本原理是使用更轻的协程来代替繁重的阻塞操作(为什么阻塞是繁重的，可以参考[这篇文章](https://blog.dreamtobe.cn/2015/11/13/java_synchronized/))，并且复用原本阻塞的线程资源。
 
 综合C#、Lua等中的Coroutine对于`suspend`的翻译，文中为了便于理解，将`suspend`的操作(如`delay`)称为"挂起"。kotlin协程的挂起是十分廉价的，相反的线程的阻塞是十分昂贵的。
 
