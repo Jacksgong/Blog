@@ -440,7 +440,7 @@ Counter = 676243
 private val lock = Any()
 fun main(args: Array<String>) = runBlocking {
     massiveRun(CommonPool) {
-        synchronized(actionLock) {
+        synchronized(lock) {
             counter++
         }
     }
