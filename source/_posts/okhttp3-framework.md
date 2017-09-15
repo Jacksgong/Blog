@@ -1,4 +1,4 @@
-title: OkHttp3 整体架构分析
+title: OkHttp3 架构分析
 date: 2017-09-15 20:31:03
 updated: 2017-09-15
 categories:
