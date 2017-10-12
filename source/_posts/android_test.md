@@ -1,6 +1,6 @@
 title: Android单元测试与模拟测试
 date: 2016-05-15 00:40:03
-updated: 2017-06-05 22:30:03
+updated: 2017-10-13 12:39:03
 wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483680&idx=1&sn=a81f0b86696f243bf32c032fc7b09574
 wechatmptitle: Android单元测试与模拟测试
 permalink: 2016/05/15/android_test
@@ -116,6 +116,47 @@ dependencies {
 | `@Ignore`或者`@Ignore("Why disabled")` | 忽略当前测试方法，一般用于测试方法还没有准备好，或者太耗时之类的
 | `@FixMethodOrder(MethodSorters.NAME_ASCENDING) public class TestClass{}`  | 使得该测试方法中的所有测试都按照方法中的字母顺序测试
 | `Assume.assumeFalse(boolean condition)` | 如果满足`condition`，就不执行对应方法
+
+##### Exception 处理
+
+比如我们希望执行某方法之后，该方法需要抛出`IOException`，最简单的方法如下:
+
+```java
+@Test
+public void thrownExceptionTestMethod(){
+  try {
+    doSomethingThatShouldThrow();
+    Assert.fail("Should have thrown IO exception");
+  } catch (IOException e) {
+    // success
+  }
+}
+```
+
+如果仅仅只需要检验是否有抛出，我们可以通过`expected`来简化:
+
+```java
+@Test(expected = IOException.class)
+public void thrownExceptionTestMethod(){
+  doSomethingThatShouldThrow();
+}
+```
+
+如果需要校验`Exception`的内容，也可以通过`ExpectedException`来简化:
+
+```java
+@Rule
+public ExpectedException thrown = ExpectedException.none();
+
+@Test
+public void shouldTestExceptionMessage() throws IndexOutOfBoundsException {
+    List<Object> list = new ArrayList<Object>();
+
+    thrown.expect(IndexOutOfBoundsException.class);
+    thrown.expectMessage("Index: 0, Size: 0");
+    list.get(0); // 这里抛出的异常会被上面的thrown进行检验
+}
+```
 
 ### 2. 模拟测试
 
@@ -663,5 +704,6 @@ public class MyActivityTest{
 - [rest-assured/rest-assured](https://github.com/rest-assured/rest-assured)
 - [skyscreamer/JSONassert](https://github.com/skyscreamer/JSONassert)
 - [Mastering the Terminal side of Android development](https://medium.com/@cesarmcferreira/mastering-the-terminal-side-of-android-development-e7520466c521#.e5vt3p3vl)
+- [Android JUnit Testing … How to Expect an Exception](https://stackoverflow.com/questions/5912240/android-junit-testing-how-to-expect-an-exception)
 
 ---
