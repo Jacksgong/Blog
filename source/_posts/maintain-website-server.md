@@ -47,6 +47,14 @@ tags:
 
 <img src="/img/conf-zsh.png" width="450px">
 
+P.S 如果`autojump`存在问题，请主动执行:
+
+```shell
+git clone https://github.com/joelthelion/autojump.git
+cd autojump
+python install.py
+```
+
 #### 3. 修改source
 
 > **如果是海外的VPS** 可以忽略这一步。
@@ -76,7 +84,7 @@ ClientAliveCountMax 0
 
 - 第一步: 通过`sudo hostname new-host-name`，让注销重新登录以后立马生效新的`hostname`
 - 第二步: 通过修改`/etc/hostname`中的`hostname`来固化，让重启后依然使用新的`hostname`
-- 第三步: 通过修改(添加)`new-host-name`到本地`127.0.0.1`中，如`127.0.0.1 new-host-name`，让通过`hostname`访问本地时能够解析到本地
+- 第三步: 通过在`/etc/hosts`中修改(添加)`new-host-name`到本地`127.0.0.1`中，如`127.0.0.1 new-host-name`，让通过`hostname`访问本地时能够解析到本地
 
 #### 6. 防火墙配置
 
