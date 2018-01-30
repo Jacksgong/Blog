@@ -117,6 +117,6 @@ TCP的做法是引入`拥塞窗口(cwnd)`并策略性的调整其大小，让`�
 - [TCP窗口控制、流控制、拥塞控制](http://blog.csdn.net/cloud323/article/details/77481711)
 
 
-  [1]: http://static.zybuluo.com/jacksgong/b5qv9lgzf5o6mmq9d6ypz8yy/image_1c5324un1stt126u18pqqo1ramm.png
-  [2]: http://static.zybuluo.com/jacksgong/pgziyzetsd7pbe5d2azz669a/image_1c532dt06b9pfuvu2242sk4u13.png
-  [3]: http://static.zybuluo.com/jacksgong/cquo7d8573ydq3o1zrpli975/image_1c52u2f101rp8apc1llk119n1i909.pngggi
+  [1]: /img/tcp-window-1.png
+  [2]: /img/tcp-window-2.png
+  [3]: /img/tcp-window-3.png
