@@ -192,7 +192,11 @@ TCP的做法是引入`拥塞窗口(cwnd)`并策略性的调整其大小，如上
 
 等待本地有足够的缓存空间容纳一个报文段，或者等到本地的缓存空间有一半空闲的时候，再通知发送端发送数据。
 
+### X. FileDownloader上该问题的解决
 
+![][8]
+
+正如issue上[jiangyanlily](https://github.com/jiangyanlily)，提到的，采用`Range: 0-0`通过响应的`Content-Range`来获取总大小与是否支持断点续传的判定，如上图。
 
 ---
 
@@ -211,4 +215,5 @@ TCP的做法是引入`拥塞窗口(cwnd)`并策略性的调整其大小，如上
   [4]: /img/tcp-window-4.png
   [5]: /img/tcp-window-5.jpg
   [6]: /img/tcp-window-6.jpg
-  [6]: /img/tcp-window-7.jpg
+  [7]: /img/tcp-window-7.jpg
+  [8]: /img/tcp-window-8.png
