@@ -212,6 +212,10 @@ TCP的做法是引入`拥塞窗口(cwnd)`并策略性的调整其大小，如上
 
 #### 综合考虑
 
+实际测试下来在使用`0-0`的`Range`前提下，确实使用`HEAD`比使用`GET`少去了`1bytes`的body，实际上这个意义并不是特别大，不过就协议而言，确实`HEAD`方法请求更加合理:
+
+![][10] ![][11]
+
 其实如果真的要一个依据，肯定是以RFC作为依据的，如果按照RFC的定义，目前看来策略一是最靠谱的，但是考虑到现实中策略一中返回状态码并无法完全说明是否支持`Range`的情况，我们这边会再配合响应头的`Accept-Ranges`进行判断；而在处理`HEAD`的请求出现问题的情况下，我们会结合策略二来处理，最终方案如下:
 
 - 默认发起一个带有`If-Match`并且`Range`为`0-0`的`HEAD`请求
@@ -239,3 +243,5 @@ TCP的做法是引入`拥塞窗口(cwnd)`并策略性的调整其大小，如上
   [7]: https://blog.dreamtobe.cn/img/tcp-window-7.jpg
   [8]: https://blog.dreamtobe.cn/img/tcp-window-8.png
   [9]: https://blog.dreamtobe.cn/img/tcp-window-9.png
+  [10]: https://blog.dreamtobe.cn/img/tcp-window-10.png
+  [11]: https://blog.dreamtobe.cn/img/tcp-window-11.png
