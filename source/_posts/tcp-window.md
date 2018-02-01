@@ -192,9 +192,32 @@ TCP的做法是引入`拥塞窗口(cwnd)`并策略性的调整其大小，如上
 
 ### X. FileDownloader上该问题的解决
 
+#### 策略一
+
+如公众平台上李冬冬回复提到，改用`HEAD`方法的请求。
+
+![][9]
+
+根据[RFC2616](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html)中定义，HEAD请求服务端只会返回相同的`GET`请求的响应头，而不带回消息体，由于其特性，响应速度会比一般的`GET`请求更快，这显然是我们试探连接想要做的。
+但是我们发现，实际过程中，有很多的请求的返回的状态码与`GET`请求并不一致，比如`GET`时返回的是`206`，但是`HEAD`时，返回的却是`200`，因此我们查找[RFC2616](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html)文档，在Session 14中，看到了`Accept-Ranges`这个响应头字段: 如果是`Accept-Ranges: none`代表不支持，而`Accept-Ranges: bytes`代表支持，但是如果没有这个响应头字段却也不能说明不支持。
+
+#### 策略二
+
+正如issue上[jiangyanlily](https://github.com/jiangyanlily)，提到的，采用`0-0`的`Range`发起`GET`方法的请求。
+
 ![][8]
 
-正如issue上[jiangyanlily](https://github.com/jiangyanlily)，提到的，采用`0-0`的`Range`，这样根据[RFC7233](https://tools.ietf.org/html/rfc7233#page-6)的协议，此时返回的只有第一个字节与最后一个字节，并且我们可以通过响应头的`Content-Range`来获取总大小，以及返回的状态码来获知是否支持断点续传的判定，如上图。
+
+根据[RFC7233](https://tools.ietf.org/html/rfc7233#page-6)的协议，此时返回的只有第一个字节与最后一个字节，并且我们可以通过响应头的`Content-Range`来获取总大小，以及返回的状态码来获知是否支持断点续传的判定。
+
+#### 综合考虑
+
+其实如果真的要一个依据，肯定是以RFC作为依据的，如果按照RFC的定义，目前看来策略一是最靠谱的，但是考虑到现实中策略一中返回状态码并无法完全说明是否支持`Range`的情况，我们这边会再配合响应头的`Accept-Ranges`进行判断；而在处理`HEAD`的请求出现问题的情况下，我们会结合策略二来处理，最终方案如下:
+
+- 默认发起一个带有`If-Match`并且`Range`为`0-0`的`HEAD`请求
+- 支持`Range`判定: 返回状态码是`206`或者响应头包含`Accept-Ranges: bytes`
+- `Etag`过期判定: 对比响应头中的`Etag`与请求头中的`If-Math`
+- 总大小获取: 先通过`Content-Range`获取，如若获取不到，再通过`Content-Length`进行获取
 
 ---
 
@@ -215,3 +238,4 @@ TCP的做法是引入`拥塞窗口(cwnd)`并策略性的调整其大小，如上
   [6]: https://blog.dreamtobe.cn/img/tcp-window-6.jpg
   [7]: https://blog.dreamtobe.cn/img/tcp-window-7.jpg
   [8]: https://blog.dreamtobe.cn/img/tcp-window-8.png
+  [9]: https://blog.dreamtobe.cn/img/tcp-window-9.png
