@@ -20,9 +20,9 @@ tags:
 
 <!-- more -->
 
-## I. 基础相关
+### I. 基础相关
 
-### 1. 老生常谈的数据结构
+#### 1. 老生常谈的数据结构
 
 > 如果已知大概需要多大，就直接给初始大小，减少扩容时额外开销。
 
@@ -33,7 +33,7 @@ tags:
 - `Collections.synchronizedMap`: 线程安全，采用当前对象作为锁，颗粒较大，并发性能较差。
 - `SparseArray`、`SparseBooleanArray`、`SparseIntArray`:  针对Key为`Int`、`Boolean`进行了优化，采用二分法查找，简单数组存储。相比`HashMap`而言，`HashMap`每添加一个数据，大约会需要申请额外的32字节的数据，因此`Sparsexxx`在内存方面的开销会小很多。
 
-### 2. 编码习惯
+#### 2. 编码习惯
 
 > 尽量简化，不要做不需要的操作。
 
@@ -129,17 +129,17 @@ public void two() {
 }
 ```
 
-## II. 数据库相关
+### II. 数据库相关
 
 > 建多索引的原则: 哪个字段可以最快的**减少查询**结果，就把该字段放在最前面
 
-#### 无法使用索引的情况
+#### 1. 无法使用索引的情况
 
 - 操作符`BETWEEN`、`LIKE`、`OR`
 - 表达式
 - `CASE WHEN`
 
-#### 不推荐
+#### 2. 不推荐
 
 - 不要设计出索引是其他索引的前缀（没有意义）
 - 更新时拒绝直接全量更新，要更新哪列就put哪列的数据
@@ -147,28 +147,28 @@ public void two() {
 - 拒绝用大字符串创建索引
 - 避免建太多索引，查询时可能就不会选择最好的来执行
 
-#### 推荐
+#### 3. 推荐
 
 - 多使用整型索引，效率远高于字符串索引
 - 搜索时使用SQL参数(`"?", parameter`)代替字符串拼接（底层有特殊优化与缓存）
 - 查询需要多少就limit多少（如判断是否含有啥，就limit 1就行了嘛）
 - 如果出现很宽的列(如blob类型)，考虑放在单独表中(在查询或者更新其他列数据时防止不必要的大数据i/o影响性能)
 
-## III. 网络调优
+### III. 网络调优
 
 > 更多网络优化，可移步[微信Mars与其策略](https://blog.dreamtobe.cn/mars/)
 
 > 当然无论是网速评估、心跳间隔、超时间隔，我认为这些在往常是基于特定环境下指定算法，然后结合自己的经验值给出的结果（如微信中的网速评估、超时间隔等），都能够借助AI整合原本的经验数据，给出一个更优数据的可能性(如某环境下超时间隔为5s为最优值的可能性为80%)，来替代人的经验值。但是目前可预见的难点是在于如何去区分以及定义训练的数据，如:网速评估，其实是根据不同的环境(2G、3G、LTE、4G、千兆4G、5G、Wifi、之类的)，之前微信其实有自己的一个评估策略，但是如果要接入AI，是因为网速这个评估的结果一直不是一个准确值，之前只是根据我们自己的经验给一个粗略的算法；可能这块要结合各类网络因素，参考RTT(这块的计算算法)，输入的因素越多，对应我们能够确定的结果越少，应该训练出来的模型能够越有效，这样可以结合AI给出的”经验”，让网速评估更准确些。这也是目前我在探究的，所以才有了前几天写的[敲开TensorFlow的大门](https://blog.dreamtobe.cn/tensorflow-sample/)。
 
-### 策略层面优化
+#### 策略层面优化
 
-#### 1. 通过`If-Modified-Since`与`Last-Modified`
+**1. 通过`If-Modified-Since`与`Last-Modified`**
 
 - 第一次请求时，服务端在头部通过`Last-Modified`带下来最后一次修改的时间。
 - 之后的请求，在请求头中通过`If-Modified-Since`带上之前服务端返回的`Last-Modified`的值
 - 如果服务端判断最后一次修改的时间距离目前数据没有修改过，就直接返回`304 NOT MODIFIED`的状态码，此时客户端直接呈现之前的数据，由于不需要带下来重复的数据，减少用户流量的同时也提高了响应速度。
 
-#### 2. 通过`Etag`与`If-None-Match`
+**2. 通过`Etag`与`If-None-Match`**
 
 - 第一次请求时，服务端在头部通过`Etag`带下来请求数据的hash值
 - 之后的请求，在请求头中通过`If-None-Match`带上之前服务端返回的`Etag`的值
@@ -188,12 +188,12 @@ public static Retrofit getAdapter(Context context, String baseUrl) {
 }
 ```
 
-### 数据结构层面
+#### 数据结构层面
 
 - 如果是需要全量数据的，考虑使用[Protobuffers](https://developers.google.com/protocol-buffers/?hl=zh-cn) (序列化反序列化性能高于json)，并且考虑使用[nano protocol buffer](https://android.googlesource.com/platform/external/protobuf/+/master/java/README.txt)。
 - 如果传输回来的数据不需要全量读取，考虑使用[Flatbuffers](https://github.com/google/flatbuffers) (序列化反序列化几乎不耗时，耗时是在读取对象时(就这一部分如果需要优化，可以参看[Flatbuffer Use Optimize](http://blog.dreamtobe.cn/2015/01/05/Flatbuffer-Use-Optimize/)
 
-###  其他层面优化
+####  其他层面优化
 
 - 通过自实现DNS(如实现自己的HTTPDNS(用Okhttp3实现尤为简单，因为Okhttp3支持定制DNS))，来降低没必要的DNS更新(由于DNS常见策略是与文件大小以及TTL相关，如果我们分文件以及分域名协商TTL有效期，可能case by case有效这块的刷新率)，甚至防止DNS劫持
 - 图片、JS、CSS等静态资源，采用CDN（当然如果是使用7牛之类的服务就已经给你搭建布置好了）
@@ -203,7 +203,7 @@ public static Retrofit getAdapter(Context context, String baseUrl) {
 - 轮询或者socket心跳采用系统`AlarmManager`提供的闹钟服务来做，保证在系统休眠的时候cpu可以得到休眠，在需要唤醒时可以唤醒（持有cpu唤醒锁），这块考虑到省点等问题可以参考[这篇文章](https://blog.dreamtobe.cn/2016/08/15/android_scheduler_and_battery/)
 - 在一些异步的任务时，可以考虑合并请求
 
-## IV. 多进程抉择
+### IV. 多进程抉择
 
 > 360 17个进程: [360手机卫士 Android开发 InfoQ视频 总结
 ](http://blog.dreamtobe.cn/2015/03/17/360手机卫士-Android开发-InfoQ视频-总结/)，但是考虑到多进程的消耗，我们更需要关注多个组件复用同一进程。
@@ -216,7 +216,7 @@ public static Retrofit getAdapter(Context context, String baseUrl) {
 
 > 最后，多进程存在的两个问题: 1. 由于进程间通讯或者首次调起进程的消耗等，带来的cpu、i/o等的资源竞争。2. 也许对于部分同事来说，会还有可读性问题吧，毕竟多了层IPC绕了点。
 
-## V. UI层面
+### V. UI层面
 
 > 相关深入优化，可参看[Android绘制布局相关](http://blog.dreamtobe.cn/2015/10/20/android-view/)
 > 对于卡顿相关排查推荐参看: [Android性能优化案例研究(上)](http://www.importnew.com/3784.html)与[Android性能优化案例研究（下）](http://www.importnew.com/4065.html)
@@ -227,11 +227,11 @@ public static Retrofit getAdapter(Context context, String baseUrl) {
 - 在UI线程中频繁的调度中，尽量少的对象创建，减少gc等。
 - 分步加载（减少任务颗粒）、预加载、异步加载(区别出耗时任务，采用异步加载)
 
-## VI. 内存
+### VI. 内存
 
 > 根据设备可用内存的不同，每个设备给应用限定的Heap大小是有限的，当达到对应限定值还申请空间时，就会收到`OutOfMemoryError`的异常。
 
-### 1. 内存管理
+#### 1. 内存管理
 
 > Android根据不同的进程优先级，对不同进程进行回收来满足内存的供求，可以参照这篇文章: [Android中线程、进程与组件的关系](http://blog.dreamtobe.cn/2015/04/08/android_thread_process_components/)。
 > 在后台进程的LRU队列中，除了LRU为主要的规则以外，系统也会根据杀死一个后台进程所获得的内存是否更多作为一定的参考依据，因此后台进程为了保活，尽量少的内存，尽可能的释放内存也是十分必要的。
@@ -242,27 +242,27 @@ public static Retrofit getAdapter(Context context, String baseUrl) {
 - Java中的每个`class`(或者匿名类)大约占用500字节。
 - 每个对象实例大约开销12~16字节的内存。
 
-#### `onTrimMemory()`回调处理
+**`onTrimMemory()`回调处理**
 
 > 监听`onTrimMemory()`的回调，根据不同的内存等级，做相应的释放以此让系统资源更好的利用，以及自己的进程可以更好的保活。
 
-**当应用还在前台**
+当应用还在前台:
 
 - `TRIM_MEMORY_RUNNING_MODERATE`: 当前应用还在运行不会被杀，但是设备可运行的内存较低，系统正在从后台进程的LRU列表中杀死进程其他进程。
 - `TRIM_MEMORY_RUNNING_LOW`: 当前应用还在运行不会被杀，但是设备可运行内存很低了，会直接影响当前应用的性能，当前应用也需要考虑释放一些无用资源。
 - `TRIM_MEMORY_RUNNING_CRITICAL`: 当前应用还在运行中，但是系统已经杀死了后台进程LRU队列中绝大多数的进程了，当前应用需要考虑释放所有不重要的资源，否则很可能系统就会开始清理服务进程，可见进程等。也就说，如果内存依然不足以支撑，当前应用的服务也很有可能会被清理掉。
 
-**`TRIM_MEMORY_UI_HIDDEN`**
+`TRIM_MEMORY_UI_HIDDEN`:
 
 当回调回来的时候，说明应用的UI对用户不可见的，此时释放UI使用的一些资源。这个不同于`onStop()`，`onStop()`的回调，有可能仅仅是当前应用中进入了另外一个`Activity`。
 
-**当应用处于后台**
+当应用处于后台:
 
 - `TRIM_MEMORY_BACKGROUND`: 系统已经处于低可用内存的情况，并且当前进程处于后台进程LRU队列队头附近，因此还是比较安全的，但是系统可能已经开始从LRU队列中清理进程了，此时当前应用需要释放部分资源，以保证尽量的保活。
 - `TRIM_MEMORY_MODERATE`: 系统处于低可用内存的情况，并且当前进程处于后台进程LRU队列中间的位置，如果内存进一步紧缺，当前进程就有可能被清理掉，需要进一步释放资源。
 - `TRIM_MEMORY_COMPLETE`: 系统处于低可用内存的情况，并且当前进程处于后天进程LRU队列队首的位置，如果内存进一步紧缺，下一个清理的就是当前进程，需要释放尽可能的资源来保活当前进程。在API14之前，`onLowMemory()`就相当于这个级别的回调。
 
-### 2. 避免内存泄漏相关
+#### 2. 避免内存泄漏相关
 
 - 无法解决的泄漏（如系统底层引起的)移至独立进程(如2.x机器存在webview的内存泄漏)
 - 大图片资源/全屏图片资源，要不放在`assets`下，要不放在`nodpi`下，要不都带，否则缩放会带来额外耗时与内存问题
@@ -271,7 +271,7 @@ public static Retrofit getAdapter(Context context, String baseUrl) {
 - 万金油: 静态化内部类，使用`WeakReference`引用外部类，防止内部类长期存在，泄漏了外部类的问题。
 
 
-### 3. 图片
+#### 3. 图片
 
 > Android 2.3.x或更低版本的设备，是将所有的Bitmap对象存储在native heap，因此我们很难通过工具去检测其内存大小，在Android 3.0或更高版本的设备，已经调整为存储到了每个应用自身的Dalvik heap中了。
 
@@ -280,12 +280,12 @@ public static Retrofit getAdapter(Context context, String baseUrl) {
 - 如果还考虑2.x机器的话，设置`BitmapFactory#options`的`InNativeAlloc`参数为true，此时decode的内存不会上报到dvm中，便不会oom。
 - 建议采用[lingochamp/QiniuImageLoader](https://github.com/lingochamp/QiniuImageLoader)的方式，所有图片的操作都放到云端处理，本地默认使用Webp，并且获取的每个位置的图片，尽量通过精确的大小按需获取，避免内存没必要的消耗。
 
-## VII. 线程
+### VII. 线程
 
 - 采用全局线程池管理体系，有效避免野线程。可参照 [ThreadDebugger-demo/DemoThreadPoolCentral.java](https://github.com/Jacksgong/ThreadDebugger/blob/master/demo/src/main/java/cn/dreamtobe/threaddebugger/demo/DemoThreadPoolCentral.java)
 - 结合全局线程池管理体系，使用[ThreadDebugger](https://github.com/Jacksgong/ThreadDebugger)监控线程，避免线程泄漏的存在。
 
-## VIII. 编译与发布
+### VIII. 编译与发布
 
 > 关于开发流程优化，可以参考[这里](https://blog.dreamtobe.cn/large-project-develop/)
 
@@ -296,7 +296,7 @@ public static Retrofit getAdapter(Context context, String baseUrl) {
 - 迭代过程中，包定期做多纬度扫描，如包大小、字节码大小变化、红线扫描、资源变化扫描、相同测试用例耗电量内存等等，更多的可以参考 [360手机卫士 Android开发 InfoQ视频 总结](http://blog.dreamtobe.cn/2015/03/17/360%E6%89%8B%E6%9C%BA%E5%8D%AB%E5%A3%AB-Android%E5%BC%80%E5%8F%91-InfoQ%E8%A7%86%E9%A2%91-%E6%80%BB%E7%BB%93/)
 - 迭代过程中，对关键`Activity`以及`Application`对打开的耗时进行统计，观察其变化，避免因为迭代导致某些页面非预期的打开变慢。
 
-## IX. 工具
+### IX. 工具
 
 > 这块的拓展阅读，可以直接参考[Android开发周边](https://blog.dreamtobe.cn/android-toolset/)
 
@@ -304,7 +304,7 @@ public static Retrofit getAdapter(Context context, String baseUrl) {
 - [Systrace](https://developer.android.com/studio/profile/systrace.html)可以有效的分析掉帧的原因。
 - [HierarchyViewer](https://developer.android.com/studio/profile/optimize-ui.html)可以有效的分析View层级以及布局每个节点`measure`、`layout`、`draw`的耗时。
 
-## X. 其他
+### X. 其他
 
 - 懒预加载，如简单的`ListView`、`RecyclerView`等滑动列表控件，停留在当前页面的时候，可以考虑直接预加载下个页面所需图片
 - 智能预加载，通过权重等方式结合业务层面，分析出哪些更有可能被用户浏览使用，然后再在某个可能的时刻进行预加载。如，进入朋友圈之前通过用户行为，智能预加载部分原图。
