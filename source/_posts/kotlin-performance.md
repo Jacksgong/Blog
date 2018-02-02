@@ -22,26 +22,26 @@ tags:
 
 - Macbook Pro (2,5 GHz Intel Core i7, 16GB of RAM)
 - Java HotSpot(TM) 64-Bit Server VM (build 25.131-b11, mixed mode)
-- Kotlin version (1.1.3) 
+- Kotlin version (1.1.3)
 - JMH (0.5.6)
 
 ---
 
 ## 性能测试结果
 
-#### 1. 性能相比Java更差相关
+### 1. 性能相比Java更差相关
 
 - 对`varargs`参数展开，**Kotlin比Java慢1倍**，主要原因是在Kotlin在展开`varargs`前需要全量拷贝整个数组，这个是非常高的性能开销。
-- 对`Delegated Properties`的应用，**Kotlin相比Java慢10%**。 
+- 对`Delegated Properties`的应用，**Kotlin相比Java慢10%**。
 
-#### 2. 性能相比Java更优相关
+### 2. 性能相比Java更优相关
 
 - 对`Lambda`的使用，**Kotlin相比Java快30%**，而对用例中的`transaction`添加`inline`关键字配置内联后，发现其反而慢了一点点(约1.14%)。
 - Kotlin对`companion object`的访问相比Java中的静态变量的访问，**Kotlin与Java差不多快或更快一点**。
 - Kotlin对局部函数(`Local Functions`)的访问相比Java中的局部函数的访问，**Kotlin与Java差不多快或更快一点**。
 - Kotlin的非空参数的使用相比没有使用空检查的Java，**Kotlin与Java差不多快或更快一点**。
 
-#### 3. Kotlin自身比较
+### 3. Kotlin自身比较
 
 - 对于基本类型范围的使用，无论是否使用`常量引用`还是`直接的范围`**速度都差不多**。
 - 对于非基本类型范围的使用，`常量引用`相比`直接的范围`**会快3%左右**。
@@ -95,7 +95,7 @@ public static void printDouble( BlackHole blackHole, int... values ) {
 
 ![](/img/kotlin-performance-1.png)
 
-##### 2. `Delegated Properties`
+#### 2. `Delegated Properties`
 
 测试发现：对`Delegated Properties`的应用，**Kotlin相比Java慢10%**。
 
@@ -362,7 +362,7 @@ public static void sayHello( String who, BlackHole blackHole ) {
 
 ```kotlin
 private val myRange get() = 1..10
- 
+
 fun isInOneToTenWithIndirectRange(i: Int) = i in myRange
 ```
 
@@ -451,9 +451,9 @@ fun rangeForEachMethod(blackHole: BlackHole) {
 
 | Benchmark | 平均值 | 平均误差  
 | --- | --- |  ---  
-| `kotlinRangeForEachFunction` | 108382.188 | 561.632 
-| `kotlinRangeForEachLoop` | 331558.172 | 494.281 
-| `kotlinRangeForEachLoopWithStep1` | 331250.339 | 545.200 
+| `kotlinRangeForEachFunction` | 108382.188 | 561.632
+| `kotlinRangeForEachLoop` | 331558.172 | 494.281
+| `kotlinRangeForEachLoopWithStep1` | 331250.339 | 545.200
 
 ![](/img/kotlin-performance-9.png)
 
