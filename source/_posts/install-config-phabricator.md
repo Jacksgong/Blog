@@ -14,12 +14,12 @@ tags:
 
 <!-- more -->
 
-## 先上图吧
+### 先上图吧
 
 ![](/img/install-config-phabricator-1.png)
 ![](/img/install-config-phabricator-2.png)
 
-## I. 准备环境
+### I. 准备环境
 
 根据[之前的服务器维护文章](https://blog.dreamtobe.cn/maintain-website-server/)，安装好git与nginx环境，而后进行以下操作
 
@@ -57,7 +57,7 @@ sudo apt install php7.1-common php7.1-fpm php7.1-cli php7.1-json php7.1-mysql ph
 sudo apt-get install mariadb-server-10.0 mariadb-client-10.0
 ```
 
-## II. 配置
+### II. 配置
 
 #### 1. 拉取Phabricator
 
@@ -169,7 +169,7 @@ cd /var/www/phab/phabricator
 
 至此Phabricator可以正常访问。
 
-## III. 配置HTTPS(option)
+### III. 配置HTTPS(option)
 
 首先根据[之前的服务器维护文章](https://blog.dreamtobe.cn/maintain-website-server/)为域名申请好证书
 
@@ -254,7 +254,7 @@ $_SERVER['HTTPS'] = true;
 
 P.S. 可以使用`php -l support/preamble.php` 来检查`preamble.php`中是否存在php语法错误。
 
-## IV. 更多配置
+### IV. 更多配置
 
 #### 1. 时区
 
