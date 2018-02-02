@@ -18,14 +18,14 @@ tags:
 
 ![](/img/install-androidthings-1.jpeg)
 
-## I. 你需要准备以下
+### I. 你需要准备以下
 
 1. 树莓派3代B型(Raspberry Pi Model B)主板
 2. 树莓派电源
 3. 至少8G的microSD卡
 4. 连接显示器的视频线(注意: 树莓派上的口是HDMI口)
 
-## II. 安装AndroidThings
+### II. 安装AndroidThings
 
 #### 第一步: 下载镜像并解压缩
 
@@ -65,7 +65,7 @@ tags:
 ![](/img/install-androidthings-9.jpeg)
 ![](/img/install-androidthings-10.jpeg)
 
-## III. 基本配置
+### III. 基本配置
 
 #### 1. 连接AndroidThings
 
