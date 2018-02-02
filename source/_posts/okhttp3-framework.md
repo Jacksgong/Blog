@@ -12,7 +12,7 @@ tags:
 
 <!-- more -->
 
-## I. 主框架分析
+### I. 主框架分析
 
 
 我们都知道在OkHttp3中，其灵活性，很大程度上体现在，我们可以`intercept`其任意一个环节，而这个优势便是okhttp3整个请求响应架构体系的精髓所在:
@@ -48,7 +48,7 @@ tags:
 ![](/img/okhttp3-connecitonpool-maintain.png)
 <p style="text-align: center;">连接池</p>
 
-## II. 各类线程池分析
+### II. 各类线程池分析
 
 OkHttp中的对所有的任务采用`NamedRunnable`，与我开源的[ThreadDebugger](https://github.com/Jacksgong/ThreadDebugger)中通过架构层面约束，让每个执行单元给出对应的业务名称，以便于线程维护不谋而合。关于Android中`ThreadPoolExecutor`的机制，可以看我之前写的[这篇文章](https://blog.dreamtobe.cn/thread-pool/)。
 
