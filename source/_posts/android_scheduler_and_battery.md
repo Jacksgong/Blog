@@ -16,7 +16,7 @@ tags:
 
 ---
 
-## I. Handler:
+### I. Handler:
 
 > 在进程存活的期间有效使用, Google官方推荐使用。
 > 相关机制可以参见: [Android Handler Looper机制](http://blog.dreamtobe.cn/2016/03/11/android_handler_looper/)
@@ -24,7 +24,7 @@ tags:
 - 简单易用。
 - 稳定高效。
 
-## II. AlarmManager:
+### II. AlarmManager:
 
 > 利用系统层级的闹钟服务(持有`Wake Lock`)。
 > 在一些特定场景中，可以根据策略对进行省电优化，如[微信的Mars中心跳机制](https://blog.dreamtobe.cn/2016/08/16/android_weak_network/)
@@ -47,7 +47,7 @@ tags:
 - `AlarmManager`处理的是一个`PendingIntent`。
 - 考虑到电量损耗，建议非特殊情况使用大概时间间隔的规则，这样Android会尽量让几个任务打包在一起执行，防止频繁的唤起手机。
 
-## III. Job Scheduler:
+### III. Job Scheduler:
 
 > [JobScheduler官方文档](https://developer.android.com/reference/android/app/job/JobScheduler.html)
 
@@ -80,7 +80,7 @@ void onStopJob(){
 }
 ```
 
-## IV. GCM(FCM)
+### IV. GCM(FCM)
 
 > GCM Network Manager实际上在 Api 21 或以上也是使用了 Job Scheduler，在此之前的版本使用的是Google Play Service中实现Job Scheduler的功能。
 > 在[GCMNetworkManager](https://developers.google.com/android/reference/com/google/android/gms/gcm/GcmNetworkManager)中有很多利于省电的规则。
@@ -100,7 +100,7 @@ void onStopJob(){
 - 通过 `OneoffTask.Builder()`与`PeriodicTask.Builder()`创建任务。
 - `GcmTaskService#onRunTask(TaskParams params)`是在后台线程执行的。
 
-## V. Sync Adapter
+### V. Sync Adapter
 
 > [Transferring Data Using Sync Adapters](https://developer.android.com/training/sync-adapters/index.html)
 
@@ -132,13 +132,13 @@ void onStopJob(){
 - 一天。
 - 如果同步失败，会放到同步失败的队列中，在尽可能的时候进行同步。
 
-## VI. Doze Mode
+### VI. Doze Mode
 
-### Deep Doze Mode
+#### Deep Doze Mode
 
 > `API23`中直接称其为`Doze Mode`。
 
-#### 1. 特征
+##### 1. 特征
 
 > **旨在**: 在用户离开设备以后，尽可能的减少手机电量的消耗。
 
@@ -149,7 +149,7 @@ void onStopJob(){
 
 ![](/img/android-scheduler_deep-doze.png)
 
-#### 2. 进入条件
+##### 2. 进入条件
 
 会同时满足以下情况一段时间(大约30分钟)以后生效:
 
@@ -159,7 +159,7 @@ void onStopJob(){
 
 > 退出条件是，进入条件中任意条件状态发生变化。
 
-#### 3. 在两个处理窗口之间的手机状态
+##### 3. 在两个处理窗口之间的手机状态
 
 1. 对所有应用拒绝网络访问。
 2. 所有`JobScheduler`、`Sync-Adapter`、`AlarmManager`的任务都会被延后到窗口中执行。
@@ -167,17 +167,17 @@ void onStopJob(){
 4. 停止所有Wifi以及GPS扫描
 5. 减少位置事件从设备检测WiFi热点。
 
-### Light Doze Mode
+#### Light Doze Mode
 
 > `Android 7`或以上会启用该模式。
 
-#### 1. 特征
+##### 1. 特征
 
 - 相比`Deep Doze Mode`，打包执行任务的频率会更高些。
 
 ![](/img/android-scheduler_light-doze.png)
 
-#### 2. 进入条件
+##### 2. 进入条件
 
 会同时满足以下情况一段时间(大约几分钟)以后生效:
 
@@ -191,34 +191,34 @@ void onStopJob(){
 - 手机没有在充电
 - 手机不再处于稳定状态
 
-#### 3. 退出条件
+##### 3. 退出条件
 
 - 屏幕打开
 - 手机开始充电
 - 进入`Deep Doze Mode`
 
-#### 4. 在两个处理窗口之间的手机状态
+##### 4. 在两个处理窗口之间的手机状态
 
 - 对所有应用拒绝网络访问。
 - 所有`JobScheduler`与`Sync Adapter`的任务都会被延后到窗口中执行。
 - 不会对`AlarmManager`中的任务进行影响，但是将无网络访问（如果你的任务需要网络访问，是时候改用`JobScheduler`或`Sync Adapter`了，这样才会保证在任务窗口执行会有网络）
 
-### 中断/避开Doze
+#### 中断/避开Doze
 
 > 以下所有情况，Google官方都建议不在特殊情景，不要去使用，由于中断了Doze Mode的省电规则。
 
-#### 1. AlarmManager
+##### 1. AlarmManager
 
 - 在精确的时间间隔中运行的任务: `setAndAllowWhileIdle()`、`setExactAndAllowWhileIdle()`。但是在非窗口期间并不解除无网络访问的限制，并且只有10s的时间给予处理。
 - 指定闹钟事件`AlarmManager.setAlarmClock()`的事件会在闹钟结束前，令系统短暂的完全退出Doze模式，并且正常处理事件，系统为了突显该闹钟事件，将会在系统的`Status Bar`上显示物理闹钟的ICON。
 
-#### 2. FCM/GCM
+##### 2. FCM/GCM
 
 > (Firebase Cloud Messaging，旧版中称为Google Cloud Messaging(GCM))。
 
 FCM/GCM中高优先级的任务配置中(`"priority" : "high"`) 的消息，在Doze模式下可以正常及时到达。
 
-#### 3. 白名单
+##### 3. 白名单
 
 > [白名单官方文档](https://developer.android.com/training/monitoring-device-state/doze-standby.html#support_for_other_use_cases)
 > [官方建议可考虑加入白名单的情况](https://developer.android.com/training/monitoring-device-state/doze-standby.html#whitelisting-cases)
@@ -233,15 +233,15 @@ FCM/GCM中高优先级的任务配置中(`"priority" : "high"`) 的消息，在D
 - 通过[ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS](https://developer.android.com/reference/android/provider/Settings.html#ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)打开电量优化页面，用户可以通过搜索来关闭应用的电量优化，以此加入白名单。
 - 先持有[REQUEST_IGNORE_BATTERY_OPTIMIZATIONS](https://developer.android.com/reference/android/Manifest.permission.html#REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)权限，然后通过启动Intent[ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS](https://developer.android.com/reference/android/provider/Settings.html#ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)直接弹出Dialog让用户关闭应用的电量优化，以此加入白名单。
 
-#### 4. 特殊情况
+##### 4. 特殊情况
 
 前台服务(`Foreground Service`)将不会受到`Doze`模式影响。
 
-### Doze模式测试
+#### Doze模式测试
 
 > Google官方提供了一些adb命令用于测试`Doze`模式，而非需要通过等待来进入`Doze`模式的。
 
-#### 1. 进入Doze模式
+##### 1. 进入Doze模式
 
 - 准备一台系统是在`Android Nougat Developer Preview4`或以上版本的设备。
 - 将其连接连接到电脑。
@@ -250,7 +250,7 @@ FCM/GCM中高优先级的任务配置中(`"priority" : "high"`) 的消息，在D
 
 > 退出`Doze`模式，让手机恢复正常需要复位充电模式:`adb shell dumpsys battery reset`。
 
-#### 2. 其他指令
+##### 2. 其他指令
 
 - 获取设备状态:`adb shell dumpsys deviceidle get [light|deep|force|screen|charging|network]`。
 
@@ -261,7 +261,7 @@ Light: ACTIVE -> IDLE -> IDLE_MAINTENANCE -> OVERRIDE
 Deep: ACTIVE -> IDLE_PENDING -> SENSING -> LOCATING -> IDLE -> IDLE_MAINTENANCE
 ```
 
-## VII. Background Limit - Android O
+### VII. Background Limit - Android O
 
 > 在Android O中引入了Background Limit，主要从以下三个方面让手机更加省电，更少的资源开销。
 
