@@ -2,7 +2,7 @@ title: 训练识别数字图片的模型
 date: 2017-03-24 01:57:03
 updated: 2017-03-24 01:57:03
 categories:
-- AI 
+- AI
 tags:
 - TensorFlow
 - AI
@@ -22,6 +22,8 @@ MNIST包含一个手写的数字，就好像:
 
 ![](/img/tensorflow-mnist-2.png)
 
+### 前言
+
 #### 这个案例是为了解答:
 
 1. TensorFlow是怎么工作的?
@@ -35,7 +37,7 @@ MNIST包含一个手写的数字，就好像:
 3. 通过模型浏览上千个案例来训练模型识别数字
 4. 通过测试数据，来验证模型的准确度
 
-## I. MNIST数据
+### I. MNIST数据
 
 > 数据是在[Yann LeCun's website](http://yann.lecun.com/exdb/mnist/)这上面。
 
@@ -61,7 +63,7 @@ MNIST包含一个手写的数字，就好像:
 - `minst.[train/test].labels`也是一个tensor，由55_000个由10个值的一维数组组成，数组中有且仅有一个为1，其余为0，数组的index表示标签所代表的数字，如3表示为[0,0,0,1,0,0,0,0,0,0]]，我们表示为[55000,10]
 ![](/img/tensorflow-mnist-5.png)
 
-## II. Softmax Regression算法
+### II. Softmax Regression算法
 
 > 我们算法要尽量准确的通过图片(784个像素点)所呈现的，让结果中正确的数字所占的比例尽量的高，如给出的图片对应的数字是9，模型运算结果可能是: 80%的概率是9，5%概率是8，15%的概率是其他。
 
@@ -91,7 +93,7 @@ MNIST包含一个手写的数字，就好像:
 ![](/img/tensorflow-mnist-8.png)
 ![](/img/tensorflow-mnist-9.png)
 
-## III. 通过Tensorflow实现
+### III. 通过Tensorflow实现
 
 <script src="https://gist.dreamtobe.cn/Jacksgong/c90d3e0f6a877330c55daeeb7a021685.js"></script>
 
