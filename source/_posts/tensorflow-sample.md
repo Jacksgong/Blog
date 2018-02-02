@@ -17,7 +17,7 @@ AI的模型训练其实就是: 对模型变量的值进行不断调整，直到�
 
 <!-- more -->
 
-## I. macOS Sierra中配置运行环境
+### I. macOS Sierra中配置运行环境
 
 > 官方教程地址: https://www.tensorflow.org/install/install_mac#installing_with_virtualenv
 
@@ -51,7 +51,7 @@ AI的模型训练其实就是: 对模型变量的值进行不断调整，直到�
 
 ![](/img/tensorflow-sample-5.png)
 
-## II. 训练模型案例
+### II. 训练模型案例
 
 > 该案例来自[官方的入门案例](https://www.tensorflow.org/get_started/get_started)
 
@@ -69,7 +69,7 @@ AI的模型训练其实就是: 对模型变量的值进行不断调整，直到�
 
 <script src="https://gist.dreamtobe.cn/Jacksgong/355d0129457eec50ffe2dcbd15763352.js"></script>
 
-## III. 常见的API
+### III. 常见的API
 
 > 具体API可以参看[官网文档](https://www.tensorflow.org/api_docs/)
 
