@@ -17,7 +17,7 @@ tags:
 
 <!-- more -->
 
-## I. 开发工具
+### I. 开发工具
 
 #### 1. 快速运行github项目
 
@@ -46,7 +46,7 @@ tags:
 - 支持绝大多数图片类型多功能压缩神器ImageOptim: https://imageoptim.com/
 
 
-## II. gradle小技巧
+### II. gradle小技巧
 
 - 通过`--offline`，离线编译，免去检测的网络耗时
 - 通过`gradle --stop`，停止所有的gradle编译，包括IDE中的
@@ -96,7 +96,7 @@ testCompile 'com.liulishuo.filedownloader:library:1.4.1'
 testCompile 'com.squareup.okhttp3:okhttp:3.6.0'
 ```
 
-## III. 编程工具
+### III. 编程工具
 
 #### 1. 耗时日志
 
