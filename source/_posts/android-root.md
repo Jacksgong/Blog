@@ -15,7 +15,7 @@ tags:
 
 <!-- more -->
 
-## BootLoader
+### BootLoader
 
 Google亲儿子的Android手机(如Nexus的)，是可以直接通过进入fastboot模式后，执行`fastboot oem unlock`来解锁的。那么这个锁是干啥用呢?
 
@@ -24,7 +24,7 @@ Google亲儿子的Android手机(如Nexus的)，是可以直接通过进入fastbo
 - 即便是用户自己去unlock，默认也是会先将用户数据全部清除，然后再unlock，目的是为了防止用户数据被盗。
 - 早期的中国厂商的出厂手机默认就是解锁的，现在大多数都已经规范，默认BootLoader是锁住的，并且有配套的解锁工具，如小米就需要绑定账户到官网申请以后才能获得对应的解锁权利。
 
-## Recovery
+### Recovery
 
 Android手机有一个独立的Recovery分区，用于存储Recovery，Recovery是一个Linux的最小集镜像，主要是用于一些简单的操作，如清除用户数据，检验与刷入Over-the-Air(OTA)升级包。
 
@@ -40,7 +40,7 @@ Android手机有一个独立的Recovery分区，用于存储Recovery，Recovery�
 - 通过fastboot刷入recovery.img镜像: `fastboot flash recovery recovery.img`
 - 刷入完成后进入recovery.img镜像的Recovery: `fastboot boot recovery.img`
 
-## Root
+### Root
 
 所谓Root，就是让应用拥有管理者权限来执行相关的指令。
 
