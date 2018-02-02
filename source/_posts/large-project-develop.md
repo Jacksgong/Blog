@@ -18,12 +18,12 @@ tags:
 
 ### 1. 代码风格与质量
 
-##### 统一风格自动审查
+#### 统一风格自动审查
 
 在提交Review之前，可以借助IDEA的审查功能(`Inspect Code`)，制定一致自动审计风格，保证远端代码质量的一致性。并且之后在代码提交远端以后，CI系统再跑一次统一风格的审计，避免落网之鱼。
 
 <!-- more -->
-##### Unit Test
+#### Unit Test
 
 在大项目中的单元测试尤为重要，避免代码裸奔，还可以结合Android Studio顺便做代码覆盖，目前Android的单元测试社区已经十分成熟活跃，可以参考[Android单元测试与模拟测试](https://blog.dreamtobe.cn/2016/05/15/android_test/)，在提交Review之前，先本地强制跑过相关代码的单元测试(推荐使用[Facebook phabricator的Arc Diff](https://www.phacility.com)便于这块流程配置)
 
