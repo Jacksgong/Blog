@@ -16,7 +16,7 @@ tags:
 
 <!-- more -->
 
-## I. Xposed原理浅谈
+### I. Xposed原理浅谈
 
 > 在此之前建议通过这几篇文章简单的了解下Android简要的知识: [ART、Dalvik](https://blog.dreamtobe.cn/2015/11/01/android_art_dalvik/)、[Android GC](https://blog.dreamtobe.cn/2015/11/30/gc/)、[ActivityManagerService](https://blog.dreamtobe.cn/2015/11/26/activitymanagerservice/)。
 
@@ -32,7 +32,7 @@ Xposed是通过hook方法的方式来实现，由于Xposed修改了系统在启�
 
 hook方法是`XposedBridge`中的一个私有native方法`hookMethodNative`改变被hook方法的类型为native并且link方法实现到它自己的native方法中，并且对调用者透明，该native方法调用XposedBridge中的`handleHookedMethod`方法，将参数，`this`引用等传进来，之后在回调回去，这样我们就可以在**任意方法执行前后**做任何的事情了(当然xposed框架还支持替换各类资源)。
 
-## I. 编写code
+### I. 编写code
 
 #### 1. 创建空Android项目
 
@@ -86,7 +86,7 @@ provided 'de.robv.android.xposed:api:[latest version]:sources'
 - 在assets目录中创建`xposed_init`文件
 - 在`xposed_init`中申明加载器(完整的加载器路径)，如`cn.dreamtobe.xposed.wechathunt.WechatHunt`
 
-## II. 实现隐藏游戏中心入口
+### II. 实现隐藏游戏中心入口
 
 下载微信，解压缩，反编译，搜索关键字:
 
@@ -117,7 +117,7 @@ findAndHookMethod(pluginHelper, "FZ", String.class, new XC_MethodHook() {
 });
 ```
 
-## III. 发布到Xposed Module Repo
+### III. 发布到Xposed Module Repo
 
 1. 创建[xda developers](forum.xda-developers.com)帐号
 2. 在[Xposed Module repo](http://repo.xposed.info/)中使用xda帐号登录
