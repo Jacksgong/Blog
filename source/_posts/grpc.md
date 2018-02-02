@@ -21,7 +21,7 @@ tags:
 
 > And Square, which has been working with Google on gRPC since the very early days, is connecting polyglot microservices within its infrastructure. - [gRPC: a true internet-scale RPC framework is now 1.0 and ready for production deployments](https://cloudplatform.googleblog.com/2016/08/gRPC-a-true-Internet-scale-RPC-framework-is-now-1-and-ready-for-production-deployments.html)
 
-## I. 特点
+### I. 特点
 
 - 低延迟、高拓展、高性能
 - 目前Google、Square等贡献代码
@@ -36,20 +36,20 @@ tags:
 > gRPC can help make connecting, operating and debugging distributed systems as easy as making local function calls; the framework handles all the complexities normally associated with enforcing strict service contracts, data serialization, efficient network communication, authentications and access control, distributed tracing and so on - [gRPC: a true internet-scale RPC framework is now 1.0 and ready for production deployments](https://cloudplatform.googleblog.com/2016/08/gRPC-a-true-Internet-scale-RPC-framework-is-now-1-and-ready-for-production-deployments.html)
 
 
-## II. 安全校验
+### II. 安全校验
 
 - 支持SSL/TLS
 - 支持通过实现gRPC提供的接口来实现自己的校验机制
 
 
-## III. 支持的服务方法
+### III. 支持的服务方法
 
 1. 类似本地调用方法: 客户端发送一个请求然后收到一个响应
 2. 客户端发送一个请求给服务器，并且不断从服务端返回的数据流中读取数据，直到没有数据
 3. 客户端使用stream不断写入一系列的数据并发送给服务端，当客户端完成写入以后等待服务端读取以及服务端的响应
 4. 客户端与服务端通过可读写的stream发送一系列的消息实现双向通信: 两个stream是相互独立的，因此两端可以同时或错开无序的发送与接收数据
 
-## IV. 流程
+### IV. 流程
 
 #### 开发流程
 
@@ -94,20 +94,20 @@ tags:
 - `Payload Messages`将映射为字节流，在发送端组装为HTTP/2帧，在接收端重新组装为数据
 - `Status`与`Trailing-Metadata`是通过HTTP/2的trailing headers进行传输
 
-## V. PING帧
+### V. PING帧
 
 - 在deadline之内如果发送PING没有收到响应，服务端就会于`CANCELLED`状态直接结束所有操作，如果是客户端就会以UNAVAILABLE状态结束
 - 发送PING的频率取决于网络环境，也可以自由的进行调整
 
-## VI. 案例
+### VI. 案例
 
 - [官方案例](https://github.com/grpc/grpc/tree/master/examples)
 - [自动服务端负载均衡docker(使用nghttp2、registrator、consul)](https://github.com/amitripshtos/grpc-docker-lb)
 
 
-## VII. 其他
+### VII. 其他
 
-### gRPC比较Thrift
+#### gRPC比较Thrift
 
 - gRPC基于最新的HTTP2公有协议,(Thrift采用私有协议)，gRPC更好做维护、性能优化、缓存、集群
 - gRPC采用proto3.x作为IDL，更易于配置
@@ -116,9 +116,9 @@ tags:
 - gRPC是非常与Google内部类似已经使用许多年的版本，但Thrift虽然在2007年就release了，但是内部很多重要的迭代Facebook拒绝贡献到开源社区中
 - Facebook到后面就都没有维护Thrift了，都丢给社区维护了，不过14年的时候自己建了一个使用C++写的fbThrift
 
-### gRPC使用反向代理
+#### gRPC使用反向代理
 
-#### Nginx
+##### Nginx
 
 > [gRPC-PHP](https://github.com/grpc/grpc/tree/master/src/php#use-the-grpc-php-extension-with-nginxphp-fpm)是可以的，但是其余的(如[gRPC-Java目前暂时不行](https://github.com/grpc/grpc-java/issues/2559)，但是[正在实现](https://github.com/grpc/grpc.github.io/issues/230#issuecomment-244508727))
 
@@ -126,7 +126,7 @@ tags:
 - [How can I use nginx 1.9.5 as reverse proxy with gRPC](https://groups.google.com/forum/#!searchin/grpc-io/nginx|sort:relevance/grpc-io/gpNnAprcCxc/5Mr0xwAaCgAJ): 解释为什么grpc-php已经适配，但是grpc-java没有
 - [nginx reverse proxy -Unknown frame type 50](https://github.com/grpc/grpc/issues/4911) 最终原因是nginx没有支持http2导致
 
-#### 其他方案
+##### 其他方案
 
 - [Go语言编写的gRPC的反向代理](https://github.com/mwitkow/grpc-proxy)
 - [Envoy](https://github.com/lyft/envoy/tree/master/examples/grpc-bridge)
