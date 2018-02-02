@@ -14,7 +14,7 @@ tags:
 
 <!-- more -->
 
-## 1. SENT BY GitHub Staff
+### 1. SENT BY GitHub Staff
 
 Hi there,
 
@@ -98,13 +98,13 @@ I swear, under penalty of perjury, that the information in this notification is 
 
 ---
 
-## 2. SENT BY ME
+### 2. SENT BY ME
 
 This is the DMCA Counter request, content is lost, what is roughly about I disagree with Tencent said, and there is no DMCA problem on [my post](https://blog.jacksgong.com/2014/12/08/Workflows-Proxy/) which is written on 2014, and I even don't known which content is illegaled with `[private]` point.
 
 ---
 
-## 3. SENT BY Elizabeth (GitHub Support)
+### 3. SENT BY Elizabeth (GitHub Support)
 
 Hi Jacks,
 
@@ -122,15 +122,15 @@ Elizabeth
 
 ---
 
-## 4. SENT BY ME
+### 4. SENT BY ME
 
 Hi GitHub:
 
-Please stop do mistake things with Tencent! 
+Please stop do mistake things with Tencent!
 
 I always like to share knowledge with tech communities, and I always respect for any people originality as I want people to do. I never believe I can receive DMCA takedown notices but I get, I never believe anybody can disable access on my GitHub repo but I get, I never believe the free and open place like GitHub can do such mistake things with Tencent, but you do! YOU LET ME DOWN!
 
-First of all, Yesterday when I receive the DMCA takedown notices, I think there must be some misunderstanding, and I send a DMCA Counter Notice on 'Get help with GitHub` to you, but the reply letter is so official, and I think you just ignore my your loyalty user and freedom person request:
+First of all, Yesterday when I receive the DMCA takedown notices, I think there must be some misunderstanding, and I send a DMCA Counter Notice on 'Get help with GitHub to you, but the reply letter is so official, and I think you just ignore my your loyalty user and freedom person request:
 
 ![](https://phab.jacksgong.com/file/data/7k3rifznty7xf6oundp2/PHID-FILE-7yakwuzgz6pxsyk7a32u/image.png)
 
@@ -142,13 +142,13 @@ For convenience, I public my back up about this "ILLEGAL REPO" on my own Gitlab:
 
 From the [DMCA notice](https://github.com/github/dmca/blob/master/2017/2017-08-17-Tencent.md) I even don't know anything about `[private]`  which is Tencent mentioned about unique authentication, could you please list it for me?
 
-If you don't provide it, I have to guess, I search all refer to Tencent on [the post you said leak your unique authentication](https://git.jacksgong.com/Jacksgong/blog/blob/fd6bcba4c3dae29128e79233fec4d1b898964bc0/source/_posts/Workflows-Proxy.md), I found: 
+If you don't provide it, I have to guess, I search all refer to Tencent on [the post you said leak your unique authentication](https://git.jacksgong.com/Jacksgong/blog/blob/fd6bcba4c3dae29128e79233fec4d1b898964bc0/source/_posts/Workflows-Proxy.md), I found:
 
 ```
 http://txp-01.tencent.com/proxy.pac
 ```
 
-##### Is it on the `[private]` content? If real this one, could you please tell why it's illegal?
+#### Is it on the `[private]` content? If real this one, could you please tell why it's illegal?
 
 1. does there any license on this link and I violate?
 2. is there any article of law on any country about people can't using some public link( which anybody can access on anywhere )?
@@ -171,7 +171,7 @@ Thank you.
 ---
 
 
-## 5. SENT BY Embry (GitHub Support)
+### 5. SENT BY Embry (GitHub Support)
 
 
 Hi Jacks,
@@ -195,11 +195,11 @@ Embry
 
 ---
 
-## 6. SENT BY ME
+### 6. SENT BY ME
 
 Hi Github,
 
-Could you please tell me which Copyright I violate with which content? 
+Could you please tell me which Copyright I violate with which content?
 
 If you don’t provide it, just disable public access to my repo because of one Tencent unreasonable request.
 
@@ -214,7 +214,7 @@ Jacks
 
 ---
 
-## 7. SENT BY Matt Hartley(GitHub Support)
+### 7. SENT BY Matt Hartley(GitHub Support)
 
 Hi Jacks,
 
@@ -237,7 +237,7 @@ Matt
 
 ---
 
-## 8. SENT BY ME
+### 8. SENT BY ME
 
 Hi GitHub,
 
