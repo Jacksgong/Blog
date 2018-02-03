@@ -39,7 +39,7 @@ To ensure that gone(or providing zero height) panel during keyboard squeeze layo
 To ensure that switching panel to display(visible&valid height) from hidden(gone|no height) state is in the keybord hiding trigger layout real remeasuring more high and redrawing period.
 
 
-## In a word
+### In a word
 
 - No trigger layout remeasure & redraw by panel.
 - Readjusting panel height during keybord trigger layout remeasuring new height.

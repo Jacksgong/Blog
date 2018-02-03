@@ -12,15 +12,17 @@ tags:
 
 ---
 
-#### 发布时间
+## 前言
+
+### 发布时间
 Java SE 8在2013年6月13的版本中已经完全了全部的功能
 
 ## I. Lambda表达式
+
 > 函数式接口(functional interface): 只包含一个抽象方法的接口(如`Runnable`只有run()这么一个方法)
 
-
-
 <!--more-->
+
 ### 举例
 `Runnable`:
 
