@@ -10,7 +10,10 @@ tags:
 - phoneGap
 
 ---
-#### Native app
+
+## 前言
+
+### Native app
 
 > 主要问题: 平台局限性，迭代不够灵活，开发代价高
 
@@ -19,7 +22,7 @@ tags:
 
 <!-- more -->
 
-#### Hybrid app
+### Hybrid app
 
 > 主要问题: 用户体验
 
