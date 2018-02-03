@@ -29,7 +29,7 @@ scale | 渐变尺寸
 translate | 画面位置移动
 rotate | 画面旋转
 
-#### 实现方式
+### 实现方式
 
 `Animation`配合`AnimationUtils`，结合xml中`set`
 
@@ -37,7 +37,7 @@ rotate | 画面旋转
 
 > 顺序播放关键帧
 
-#### 实现方式
+### 实现方式
 
 `AnimationDrawable`结合xml中定义`animation-list`标签
 

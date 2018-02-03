@@ -14,16 +14,18 @@ tags:
 
 <!-- more -->
 
+## 前言
+
 ### 先上图吧
 
 ![](/img/install-config-phabricator-1.png)
 ![](/img/install-config-phabricator-2.png)
 
-### I. 准备环境
+## I. 准备环境
 
 根据[之前的服务器维护文章](https://blog.dreamtobe.cn/maintain-website-server/)，安装好git与nginx环境，而后进行以下操作
 
-#### 1. 创建Phabricator用户
+### 1. 创建Phabricator用户
 
 > 并加入sudo群组
 
@@ -39,7 +41,7 @@ mkdir /var/www/phab
 chown -R phab:phab /var/www/phab
 ```
 
-#### 2. 安装php7.1
+### 2. 安装php7.1
 
 > Phabricator不支持php7.0，而目前php7.1只有再ppa上有
 
@@ -49,7 +51,7 @@ sudo apt-get update
 sudo apt install php7.1-common php7.1-fpm php7.1-cli php7.1-json php7.1-mysql php7.1-curl php7.1-intl php7.1-mcrypt php-pear php7.1-gd php7.1-zip php7.1-xml php7.1-mbstring
 ```
 
-#### 3. 安装Mariadb
+### 3. 安装Mariadb
 
 > 这边选用Mariadb而非MySQL的原因是，Mariadb对MySQL兼容并且拓展了很多功能，已经修复了MySQL中的一些BUG以及各类优化
 
@@ -57,9 +59,9 @@ sudo apt install php7.1-common php7.1-fpm php7.1-cli php7.1-json php7.1-mysql ph
 sudo apt-get install mariadb-server-10.0 mariadb-client-10.0
 ```
 
-### II. 配置
+## II. 配置
 
-#### 1. 拉取Phabricator
+### 1. 拉取Phabricator
 
 这边我将Phabricator存放在`/var/www/phab`下:
 
@@ -70,7 +72,7 @@ git clone https://github.com/phacility/arcanist
 git clone https://github.com/phacility/phabricator.git
 ```
 
-#### 2. 配置nginx
+### 2. 配置nginx
 
 如果你的nginx环境就是在[服务器维护](https://blog.dreamtobe.cn/maintain-website-server/)这篇文章配的，那么到`/etc/nginx/sites-available`目录，创建`phabricator.conf`，添加以下内容。
 
@@ -137,7 +139,7 @@ sudo service nginx reload
 
 至此站点应该可以访问了，但是打开站点以后你会看到提示要配置数据库。
 
-#### 3. 配置数据库
+### 3. 配置数据库
 
 
 > 默认Mariadb的root账户在root用户下是不用密码的，因此通过`sudo`进入
@@ -169,7 +171,7 @@ cd /var/www/phab/phabricator
 
 至此Phabricator可以正常访问。
 
-### III. 配置HTTPS(option)
+## III. 配置HTTPS(option)
 
 首先根据[之前的服务器维护文章](https://blog.dreamtobe.cn/maintain-website-server/)为域名申请好证书
 
@@ -254,9 +256,9 @@ $_SERVER['HTTPS'] = true;
 
 P.S. 可以使用`php -l support/preamble.php` 来检查`preamble.php`中是否存在php语法错误。
 
-### IV. 更多配置
+## IV. 更多配置
 
-#### 1. 时区
+### 1. 时区
 
 > 亚洲时间表: http://php.net/manual/en/timezones.asia.php
 
@@ -267,7 +269,7 @@ P.S. 可以使用`php -l support/preamble.php` 来检查`preamble.php`中是否�
 date.timezone = Asia/Shanghai
 ```
 
-#### 2. 大文件存储
+### 2. 大文件存储
 
 nginx配置，在service中增加:
 
@@ -286,7 +288,7 @@ max_input_vars = 1000
 upload_max_filesize = 32M
 ```
 
-#### 3. MySQL相关配置
+### 3. MySQL相关配置
 
 最大大小
 
@@ -317,7 +319,7 @@ innodb_buffer_pool_size = 2147483648
 sql_mode=STRICT_ALL_TABLES
 ```
 
-#### 4. 配置Phabricator账户
+### 4. 配置Phabricator账户
 
 > 我们前面步骤创建的
 
@@ -325,19 +327,19 @@ sql_mode=STRICT_ALL_TABLES
 ./bin/config set phd.user phab
 ```
 
-#### 5. 配置`environment.append-paths`
+### 5. 配置`environment.append-paths`
 
 ```
 ./bin/config set environment.append-paths '["/usr/bin", "/usr/lib/git-core"]'
 ```
 
-#### 6. 配置开启`pygments`
+### 6. 配置开启`pygments`
 
 ```
 ./bin/config set pygments.enabled true
 ```
 
-#### 7. 配置Outbound发邮件
+### 7. 配置Outbound发邮件
 
 首先根据[站点配置](https://blog.dreamtobe.cn/maintain-website-server/)中的`安装sendmail`教程，安装好sendmail，然后只需要进入Phabricator，打开`Config > Core > Mail`中配置:
 

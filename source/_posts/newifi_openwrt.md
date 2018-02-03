@@ -32,7 +32,7 @@ tags:
 
 ## II. 基本配置
 
-#### 1. 安装5G网络
+### 1. 安装5G网络
 
 安装一个包就可以了，登录终端以后执行以下命令:
 
@@ -40,7 +40,7 @@ tags:
 opkg update && opkg -y install kmod-mt76
 ```
 
-#### 2. 镜像源配置
+### 2. 镜像源配置
 
 > 留意是: `chaos_calmer`，并且是 `ramips` 架构。
 
@@ -63,14 +63,14 @@ opkg install libpolarssl
 opkg install resolveip
 ```
 
-#### 1. 安装ChinaDNS以及其luci
+### 1. 安装ChinaDNS以及其luci
 
 > https://github.com/aa65535/openwrt-chinadns
 
 - ChinaDNS(我当时选用`1.3.2-d3e75dd`(当时最新版本)): https://sourceforge.net/projects/openwrt-dist/files/chinadns/
 - ChinaDNS-luci(我当时选用`1.4.0-1_all`(当时最新版本): https://sourceforge.net/projects/openwrt-dist/files/luci-app/chinadns/
 
-#### 2. 安装Shadowsocks以及其luci
+### 2. 安装Shadowsocks以及其luci
 
 > https://github.com/shadowsocks/openwrt-shadowsocks
 
@@ -83,13 +83,13 @@ opkg install resolveip
 
 基本的配置与 [TP-LINK WR720N v3刷OpenWrt完美翻墙](http://blog.dreamtobe.cn/2015/09/06/wr720n-v3-openwrt-shadowsocks/)中的(`VI. 配置shadowsocks和chinadns`)一致，配置完以后，**再进行以下最后的配置即可**。
 
-#### 1.手动在Global Setting中选中Server
+### 1.手动在Global Setting中选中Server
 
 > 在 Shadowsocks 配置中 需要手动在Global Setting 中选中其中一个Server，方可运行。
 
 ![](/img/newifi-2.png)
 
-#### 2. 手动指定过滤的IP列表
+### 2. 手动指定过滤的IP列表
 
 > 在 Shadowsocks 配置中 需要手动在 Access Control->Interfaces-WAN 中手动选择 Bypassed IP List。
 

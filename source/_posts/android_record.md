@@ -13,7 +13,7 @@ tags:
 
 ## I. 通过系统自带的录音进行录音
 
-#### 存在问题
+### 存在问题
 
 - [可能无效](http://www.grokkingandroid.com/checking-intent-availability/)
 - 默认放到sdcard根目录
@@ -57,7 +57,7 @@ protected void onActivityResult(int requestCode,
 
 ## II. 通过MediaRecorder进行自己应用内录音
 
-#### 需要注意:
+### 需要注意:
 
 1. `java.lang.IllegalStateException`: `prepare()`失败或者其他一些关机步骤失败了还继续执行导致。
 2. `mediarecorder went away with unhandled events`，不用担心，这个只是告知你调用`release()`的时候还在录音或者还在队列中。

@@ -211,7 +211,7 @@ recyclerView.scrollToPosition(0);
 
 ## IV. 动画
 
-#### Android L:
+### Android L:
 1. Activity Transitions
 2. Shared elements
 
@@ -221,11 +221,11 @@ recyclerView.scrollToPosition(0);
 
 ps: support包有一个简单的判断是Android L的静态方法:`versionUtils.isAtLeastL`
 
-#### LayoutTransitions ( API 1开始就有):
+### LayoutTransitions ( API 1开始就有):
 
 非常强大，布局变化或者Visible/Gone这类的切换动画。考虑用这个，简单强大。
 
-#### AnimationUtils
+### AnimationUtils
 
 一般的动画，可以参考下github上其他人的一些好的封装，做一些简单的fade啊、slide啊、缩放啊非常方便。
 
@@ -281,28 +281,28 @@ Android Studio上的一个功能。
 
 > Falcon 可是 Joaquim自己设计的!
 
-#### 1. 草图
+### 1. 草图
 可以使用软件sketch
 
-#### 2. 颜色选择方面
+### 2. 颜色选择方面
 
 可以使用[coolors.co](http://coolors.co/)，可以很快的定位好整个app的颜色。Joaquim大概就用了10分钟
 
 这边我也推荐一个[Paletton.com](http://paletton.com/#uid=72P0+0kllllaFw0g0qFqFg0w0aF),也很不错。
 
-#### 3. Icon
+### 3. Icon
 
 说实话作为开发，确实不愿意花太多时间去设计icon，但是Google对外开放了200多个icon素材。
 
 **更好的方法**: 一款intellij(或者Android Studio（同一平台idea）)的插件: [https://github.com/konifar/android-material-design-icon-generator-plugin](https://github.com/konifar/android-material-design-icon-generator-plugin) 自动生成Material icon确实好屌。
 
-#### 4. 字体方面
+### 4. 字体方面
 
 Joaquim只用了Android SDK的: `android:font_family`，完全够用：
 
 ![](/img/SQLite___Core_Data.png)
 
-#### 5. 视觉宗旨定义
+### 5. 视觉宗旨定义
 
 Joaquim定位Falcon是内容至上。
 

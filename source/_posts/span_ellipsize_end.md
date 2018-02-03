@@ -24,7 +24,7 @@ tags:
 
 最终的解决是猛然回头发现`android.text.TextUtils#ellipsize(...):CharSequence`已经很好的分装了类似方法。
 
-#### 看图理解
+### 看图理解
 
 > 还是没有明白解决啥问题？不多废话，上图!
 

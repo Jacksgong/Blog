@@ -94,7 +94,7 @@ Loads the class with the specified name, optionally linking it after loading. Th
 
 ![](/img/android_dynamic_dex.png)
 
-#### DexFile
+### DexFile
 
 Android中的这几种类加载器实际是依赖`DexFile`的，对于`DexFile`有以下两点:
 
@@ -108,11 +108,11 @@ Android中的这几种类加载器实际是依赖`DexFile`的，对于`DexFile`�
 
 ## III. 编译层面实现打指定独立dex
 
-#### Ant
+### Ant
 
 可以参考[这里](http://android-developers.blogspot.hk/2011/07/custom-class-loading-in-dalvik.html)后面的`Build Process`。
 
-#### Gradle
+### Gradle
 
 在编译层面将指定的module拆分出来打包成dex放入assets中，完全可以参考这个方案: [secondary-dex-gradle/app/build.gradle](https://github.com/creativepsyco/secondary-dex-gradle/blob/master/app/build.gradle)
 
@@ -120,13 +120,13 @@ Android中的这几种类加载器实际是依赖`DexFile`的，对于`DexFile`�
 
 ## IV. 安全性讨论
 
-#### 动态加载Dex的安全性主要存在两方面:
+### 动态加载Dex的安全性主要存在两方面:
 
 1. 存储dex的文件暴露在其他应用可读写的目录下。
 2. 加载外部dex的时候没有做好完整的安全性校验。
 
 
-#### 解决方案
+### 解决方案
 
 1. 尽量将dex放到当前应用的私有目录下，保证只有当前应用uid可以读甚至写(一般就只有`Context.getFileDir()`/ `Context.getDir(String, MODE_PRIVATE)` / `Context.getCacheDir()`)，这方面目录相关知识可以参看: [Android中尽量不用Storage Permission](http://blog.dreamtobe.cn/2015/11/30/android_storage_permission/)
 2. 对从服务端下载或者外部加载的dex，做校验（对文件进行哈希值校验等）。

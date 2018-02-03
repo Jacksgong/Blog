@@ -20,7 +20,7 @@ tags:
 
 > 一个很简单的图片加载库
 
-#### 特点:
+### 特点:
 - 优点:
 
 `简单`、`小`、`易于理解`
@@ -32,7 +32,7 @@ tags:
 > ps: 图片下载，单线程串行。
 
 
-#### 代码:
+### 代码:
 
 - 创建使用
 
@@ -106,7 +106,7 @@ tags:
 > - 地址: [https://github.com/square/picasso](https://github.com/square/picasso)
 > - 官方描述: Picasso通常使用一行代码就能够解决复杂的图片加载问题
 
-#### 代码:
+### 代码:
 
 - 使用
 
@@ -137,7 +137,7 @@ private class GalleryItemAdapter extends ArrayAdapter<GalleryItem> {
     }
 ```
 
-#### 特点
+### 特点
 
 - 优点:
 
@@ -171,7 +171,7 @@ private class GalleryItemAdapter extends ArrayAdapter<GalleryItem> {
 > - 视频介绍: [https://developers.google.com/events/io/sessions/325304728](https://developers.google.com/events/io/sessions/325304728)
 > - 官方定位: 网络异步框架（一般我们只用到其中的网络与缓存部分）
 
-#### 代码:
+### 代码:
 
 - 初始化
 
@@ -225,7 +225,7 @@ private class GalleryItemAdapter extends ArrayAdapter<GalleryItem> {
 ```
 
 
-#### 特点
+### 特点
 
 - 优点:
 
@@ -256,7 +256,7 @@ private class GalleryItemAdapter extends ArrayAdapter<GalleryItem> {
 > Picasso 专注图片处理，Volley 解决更通用的问题
 
 
-#### 作者建议：
+### 作者建议：
 
 - 如果已经有一个稳定的，大型的项目，那么Picasso是更好的选择。
 

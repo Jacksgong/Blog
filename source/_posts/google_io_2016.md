@@ -103,13 +103,13 @@ Android Wear 2.0
 - Test recording
 - New Layout Design.
 
-#### Smarts.
+### Smarts.
 
 - Apk analyzer
 - Layout inspector
 - Expanded Android code analysis.
 
-#### platform Support
+### platform Support
 
 - Ndk build, C++.
 

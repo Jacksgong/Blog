@@ -16,7 +16,7 @@ tags:
 
 > 具体实现: `DefaultHttpClient`、`AndroidHtppClient`
 
-#### 特点:
+### 特点:
 
 API数量繁多，官方升级维护较少
 
@@ -24,23 +24,23 @@ API数量繁多，官方升级维护较少
 
 ## II. HttpURLConnection
 
-#### 特点:
+### 特点:
 
 多用途、轻量。API简单，易于使用、拓展。
 
-#### 坑点:
+### 坑点:
 
 Android 2.2以前: 可读的InputStream调用close时，可能导致连接池失效（通常解决方法禁用连接池功能）。
 
-#### 迭代亮点:
+### 迭代亮点:
 
-##### Andorid 2.3
+#### Andorid 2.3
 
 - 默认请求接受gzip。
 - 后会使用SNI([Server Name Indication](https://en.wikipedia.org/wiki/Server_Name_Indication))
 - 断线重连
 
-##### Android 4.0
+#### Android 4.0
 
 - 响应缓存机制(`HttpResponseCache#install`):
 

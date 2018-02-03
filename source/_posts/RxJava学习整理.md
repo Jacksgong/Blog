@@ -91,7 +91,7 @@ getTitle(String) : Observable<String> // 获取标题
 saveTitle(String) : boolean // 保存标题
 ```
 
-#### 1. map操作符
+### 1. map操作符
 
 > 把一个事件转换为另一个事件 ( 不必返回Observable对象返回的类型，如下面就返回了int，而Observable返回的是String )
 
@@ -109,7 +109,7 @@ Observable.just("Hello, world!")
 
 
 
-#### 2. from操作符
+### 2. from操作符
 
 > 接收一个集合作为输入，然后每次输出一个元素给subscriber
 
@@ -122,7 +122,7 @@ Observable.from("url1", "url2", "url3")
     .subscribe(url -> System.out.println(url));
 ```
 
-#### 3. flatMap操作符
+### 3. flatMap操作符
 
 > 接收一个Observable的输出作为输入，同时输出另外一个Observable （可以用来很好的解决多重嵌套回调的问题）
 
@@ -139,7 +139,7 @@ query("Hello, world!")
     .subscribe(title -> System.out.println(title));
 ```
 
-#### 4. filter操作符
+### 4. filter操作符
 
 > 输入与输出为相同元素，过滤掉不满足检查条件的
 
@@ -155,7 +155,7 @@ query("Hello, world!")
     .subscribe(title -> System.out.println(title));  
 ```
 
-#### 5. take操作符
+### 5. take操作符
 
 > 输出最多指定数量的结果
 
@@ -172,7 +172,7 @@ query("Hello, world!")
     .subscribe(title -> System.out.println(title));  
 ```
 
-#### 6. doOnNext操作符
+### 6. doOnNext操作符
 
 > 在每次输出一个元素之前做一些额外的事情
 
@@ -186,7 +186,7 @@ query("Hello, world!")
     .subscribe(title -> System.out.println(title));  
 ```
 
-#### 7. subscribeOn/observerOn操作符
+### 7. subscribeOn/observerOn操作符
 
 > 通过`subscribeOn()`指定观察者运行的线程，`observerOn()`指定订阅者运行的线程
 
@@ -220,7 +220,7 @@ System.out.println("Unsubscribed=" + subscription.isUnsubscribed());
 > 是RxJava的一个针对Android平台的扩展。它包含了一些能够简化Android开发的工具
 > **地址:** [https://github.com/ReactiveX/RxAndroid](https://github.com/ReactiveX/RxAndroid)
 
-#### 1. AndroidSchedulers
+### 1. AndroidSchedulers
 
 > 提供了针对Android的线程系统的调度
 
@@ -231,7 +231,7 @@ retrofitService.getImage(url)
     .subscribe(bitmap -> myImageView.setImageBitmap(bitmap));
 ```
 
-#### 2. AndroidObservable
+### 2. AndroidObservable
 
 > 它提供了跟踪Android生命周期的功能。`bindActivity()`和`bindFragment()`方法默认在UI线程调用，并且这两个方法会在生命周期结束的时候通知Observable停止发出新的消息。
 
@@ -241,7 +241,7 @@ AndroidObservable.bindActivity(this, retrofitService.getImage(url))
     .subscribe(bitmap -> myImageView.setImageBitmap(bitmap);
 ```
 
-#### 3. AndroidObservable.fromBroadcast
+### 3. AndroidObservable.fromBroadcast
 
 > 功能类似`BroadcastReceiver`
 
@@ -252,7 +252,7 @@ AndroidObservable.fromBroadcast(context, filter)
     .subscribe(intent -> handleConnectivityChange(intent));
 ```
 
-#### 4. ViewObservable
+### 4. ViewObservable
 
 > 可以很轻易的在View触发某些Action时，被通知
 
@@ -266,7 +266,7 @@ ViewObservable.clicks(mCardNameEditText, false)
 
 ## VII. 常见问题解决
 
-#### 1. 在configuration改变（比如转屏）之后继续之前的Subscription/使用Retrofit发出了一个REST请求，接着想在listview中展示结果。如果在网络请求的时候用户旋转了屏幕怎么办？你当然想继续刚才的请求，但是怎么搞？
+### 1. 在configuration改变（比如转屏）之后继续之前的Subscription/使用Retrofit发出了一个REST请求，接着想在listview中展示结果。如果在网络请求的时候用户旋转了屏幕怎么办？你当然想继续刚才的请求，但是怎么搞？
 
 > 通过RxJava内置缓存机制解决
 > **原理:** `cache()`(或者`replay()`)不会使`unsubscribe`打断，网络请求，因此在`unsubscribe`以后直接从`cache()`的返回值中创建一个新的`Observable`对象。
@@ -281,7 +281,7 @@ sub.unsubscribe();
 //一旦Activity重建
 request.subscribe(photo -> handleUserPhoto(photo));
 ```
-#### 2. Observable持有Context导致的内存泄露
+### 2. Observable持有Context导致的内存泄露
 
 > 参考解决方案: 在生命周期的某个时刻取消订阅
 > **原理:** 利用`CompositeSubscription`持有所有的`Subscriptions`，然后在`onDestory()`或者`onDestroyView()`里取消所有的订阅。
@@ -308,7 +308,7 @@ protected void onDestroy() {
 
 ## VIII. 拓展
 
-#### 1. Retrofit
+### 1. Retrofit
 
 > **功能:**  REST的网络架构，目前有[测试结果](http://themakeinfo.com/2015/04/retrofit-android-tutorial/)比Volley、AsyncTask快
 > 目前Retrofit库内置了对RxJava的支持
@@ -329,7 +329,7 @@ Observable.zip(
     .subscribe(photoWithData -> showPhoto(photoWithData));
 ```
 
-#### 2. 旧代码整合RxJava
+### 2. 旧代码整合RxJava
 
 > 比较简单的办法
 
@@ -357,7 +357,7 @@ public Observable<Object> newMethod() {
 
 ## 简单案例
 
-#### 案例1
+### 案例1
 
 ```java
 Observable.just("Alpha","Beta","Gamma","Delta","Epsilon")
@@ -374,7 +374,7 @@ Observable.just("Alpha","Beta","Gamma","Delta","Epsilon")
 7
 ```
 
-#### 案例2
+### 案例2
 
 ```java
 Observable.just("1/5/8", "1/9/11/58/16/", "9/15/56/49/21");
@@ -401,7 +401,7 @@ Observable.just("1/5/8", "1/9/11/58/16/", "9/15/56/49/21");
 21
 ```
 
-#### 案例3
+### 案例3
 
 > 提供多个Observable根据不同的数据进行网络请求，当其中有一个成功，就停止请求，如果所有请求都失败就失败。
 
@@ -432,7 +432,7 @@ modelProvider.getItems() // 多个不同数据的Observable
 
 [更多了解请移步>>](https://github.com/ReactiveX/RxJava/wiki)
 
-#### 参考以下文档整理:
+### 参考以下文档整理:
 
 - [Grokking RxJava, Part 1: The Basics](http://blog.danlew.net/2014/09/15/grokking-rxjava-part-1/)
 - [Grokking RxJava, Part 2: Operator, Operator](http://blog.danlew.net/2014/09/22/grokking-rxjava-part-2/)
@@ -440,11 +440,11 @@ modelProvider.getItems() // 多个不同数据的Observable
 - [Grokking RxJava, Part 4: Reactive Android](http://blog.danlew.net/2014/10/08/grokking-rxjava-part-4/)
 
 
-#### 参考以下博客的翻译校对:
+### 参考以下博客的翻译校对:
 
 [大头鬼Bruce](http://blog.csdn.net/lzyzsd)
 
-#### 拓展阅读:
+### 拓展阅读:
 
 - [不要打破链式：使用Rxjava的compose()操作符](http://www.pythonnote.com/archives/bu-yao-da-po-lian-shi-shi-yong-rxjavade-composecao-zuo-fu.html)
 - [RxAndroid(RxJava) 与 AsyncTask](http://blog.dreamtobe.cn/2312.html)

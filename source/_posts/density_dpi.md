@@ -33,7 +33,7 @@ tags:
 
 > 市面主要的Android手机屏幕尺寸: 5.5寸、5寸、4.7寸、3.7寸
 
-#### 适配原则
+### 适配原则
 
 > [Device Metrics](https://material.io/devices/): 官方给出的部分机型DPI与尺寸
 
@@ -55,15 +55,15 @@ tags:
 - | - | - | - | - | 4 | 640 | xxxhdpi | -
 
 
-#### Android 取资源原则
+### Android 取资源原则
 
 如果存在匹配的就取对应文件夹资源，否则会选择default的作为160dpi进行缩放(但是也不一定，因为如ldpi与hdpi是0.5倍关系内部此时为了便于计算，就会取hdpi的进行缩放)，否则一般取最高清的资源根据density进行缩放。
 
-#### 常用工具
+### 常用工具
 
 Android Virtual Device Manager
 
-#### 需要注意
+### 需要注意
 
 > [Managing Launcher Icons as mipmap Resources](https://developer.android.com/intl/zh-cn/tools/projects/index.html#mipmap)
 
@@ -79,14 +79,14 @@ mipmap用于存放应用图标(Launcher Icon)，不会受资源优化所影响�
 - 1、2 拉伸区域
 - 3、4 内容区域
 
-#### 内容区域作用如下图
+### 内容区域作用如下图
 
 > 其中的内容布局是: 垂直居中，水平靠左
 > 注意其中3、4的内容区域
 
 ![](/img/density_dpi-2.png)
 
-#### 不想被拉伸
+### 不想被拉伸
 
 > 点在透明区域即可
 

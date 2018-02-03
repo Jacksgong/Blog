@@ -21,7 +21,7 @@ Java SE 8在2013年6月13的版本中已经完全了全部的功能
 
 
 <!--more-->
-#### 举例
+### 举例
 `Runnable`:
 
 ```
@@ -65,7 +65,7 @@ public class CollectionUtils {
 
 > 可以在不调用某个方法的情况下引用一个方法
 
-#### 举例
+### 举例
 
 ```
 List input = Arrays.asList(new String[] {"apple", "orange", "pear"});
@@ -81,7 +81,7 @@ input.forEach(System.out::println);
 
 > 可以在不创建对象的情况下引用一个构造方法
 
-#### 举例
+### 举例
 
 ```
 List dateValues = Arrays.asList(new Long[] { 0L, 1000L});
@@ -93,13 +93,13 @@ List dates = CollectionUtils.map(dateValues, Date::new);
 
 > 通过新的`default`关键词来修饰，为接口提供默认方法
 
-#### 解决问题
+### 解决问题
 
 1. **接口演化问题：** 通过新增默认接口方法来搞定新增的功能，而无需新增方法，在所有的实现类中改，当然，默认方法支持复写
 
 2. **实现多继承的行为：** 一个类实现多个接口，就包含了默认方法的方法体
 
-#### 举例
+### 举例
 
 ```
 //一个简单的货币转换接口，假设需要调用的是第三方服务

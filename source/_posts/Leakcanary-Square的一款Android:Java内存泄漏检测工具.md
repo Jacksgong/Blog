@@ -149,7 +149,7 @@ In com.example.leakcanary:1.0:1 com.example.leakcanary.MainActivity has leaked:
 
 ## IX. 定制
 
-#### 图标与标注(Icon and Label)
+### 图标与标注(Icon and Label)
 
 `DisplayLeakActivity`默认是使用默认的图标与标注，当然你可以通过在你的app中提供`R.drawable.__leak_canary_icon`与`R.string.__leak_canary_display_activity_label`来定制这个:
 
@@ -174,7 +174,7 @@ res/
 </resources>
 ```
 
-#### 存储leak traces
+### 存储leak traces
 
 `DisplayLeakActivity`最多在app目录中存储7个heap dumps与leak traces 文件。你可以通过在你的app中提供`R.integer.__leak_canary_max_stored_leaks`来定制这个:
 
@@ -185,7 +185,7 @@ res/
 </resources>
 ```
 
-#### 上传到服务器
+### 上传到服务器
 
 可以通过修改默认的行为来上传leak trace与heap dump到指定的服务器。
 

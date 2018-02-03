@@ -16,7 +16,7 @@ tags:
 > 会议主持人: Michael Yeung
 
 ## I. 新制度
-#### New Review Process
+### New Review Process
 1. 发布前先人工审核(加速上架时间)
 2. 新分级制度(IARC)(5月前没做，就会列入未分级，甚至会被下架或找不到)
     符合不同年龄层的app
@@ -27,7 +27,7 @@ tags:
 <!--more-->
 ## II. 应用质量
 
-#### 该做
+### 该做
 - **返回键:**
     应该回到上个界面 ，上部分返回键(up)可以相同与不同。
     Webview: back button: 返回上一页; up button(通常会更重一些): 返回上一个Activity
@@ -42,7 +42,7 @@ tags:
     强烈建议
 
 
-#### 不该做的
+### 不该做的
 
 - 风格上不该模范平台上的用户体验（应该用Android的标准）
 - 不该使用其他平台的图标（应该用: `github`上Google有发布一些通用的图标）

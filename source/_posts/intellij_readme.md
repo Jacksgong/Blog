@@ -12,13 +12,13 @@ tags:
 
 ## I. 快捷键Mark
 
-#### pop内容选择
+### pop内容选择
 向下: C-N ; 向上: C-P
 
 <!--more-->
 ## II. 技巧
 
-#### 善用Postfix Completion
+### 善用Postfix Completion
 
 ## III. 优化
 
@@ -26,7 +26,7 @@ tags:
 
 ## IV. 插件
 
-#### 1) emacsIDEAs
+### 1) emacsIDEAs
 
 开启: C + L
 
@@ -39,7 +39,7 @@ tags:
 
 ## V. 快捷键
 
-#### 【常规】
+### 【常规】
 
 Name | Desc
 -|-|
@@ -124,7 +124,7 @@ Ctrl+Backspace| 按单词删除
 Ctrl+"+/-"| 当前方法展开、折叠
 Ctrl+Shift+"+/-"| 全部展开、折叠
 
-#### 【调试部分、编译】
+### 【调试部分、编译】
 Name | Desc
 - | -|
 Ctrl+F2| 停止
@@ -160,7 +160,7 @@ Ctrl+Shift+F4| 关闭活动选项卡
 Ctrl+Tab| 转到下一个拆分器
 Ctrl+Shift+Tab| 转到上一个拆分器
 
-#### 【重构】
+### 【重构】
 
 Name | Desc
 -| -|
@@ -171,7 +171,7 @@ F5| 复制
 Alt+Delete| 安全删除
 Ctrl+Alt+N| 内联
 
-#### 【查找】
+### 【查找】
 
 Name | Desc
 -|-|
@@ -188,7 +188,7 @@ Ctrl+Alt+F7| 显示用法
 Ctrl+F7| 在文件中查找用法
 Ctrl+Shift+F7| 在文件中高亮显示用法
 
-#### 【VCS】
+### 【VCS】
 
 Name | Desc
 -|-|

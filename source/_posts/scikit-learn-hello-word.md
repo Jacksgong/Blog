@@ -33,13 +33,13 @@ tags:
 
 安装完Anaconda之后，可以简单的编写python通过`import sklearn`然后执行下，验证下是否已经可以正常import。
 
-#### 1. 训练数据(表)
+### 1. 训练数据(表)
 
 ![](/img/scikit-learn-hello-world.png)
 
 我们可以看到训练数据Orange比较粗糙也比较重，这里训练的维度就参考`重量`与`纹理情况`。
 
-#### 2. 代码
+### 2. 代码
 
 在编写时，将输入的训练数据`1`定义为`smooth`，将`0`定义为`bumpy`；将输出数据`1`定义为`Orange`，将`1`定义为`Apple`。
 
@@ -47,18 +47,17 @@ tags:
 
 ```python
 from sklearn import tree
-
-#### 1. collect tranining data
+# 1. collect tranining data
 # input: [weight, 1-> smooth | 0 -> bumpy]
 features = [[140, 1], [130, 1], [150, 0], [170, 0]]
 # output: apple -> 0 | orange -> 1
 labels = [0, 0, 1, 1]
 
-###### 2. train claasifier
+# 2. train claasifier
 clf = tree.DecisionTreeClassifier()
 clf = clf.fit(features, labels)
 
-###### 3. make predict
+# 3. make predict
 # 150kg, bumpy
 print clf.predict([[150, 0]])
 ```

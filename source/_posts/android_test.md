@@ -27,20 +27,20 @@ tags:
 
 ## I. 测试与基本规范
 
-#### 1. 为什么需要测试?
+### 1. 为什么需要测试?
 
 - 为了稳定性，能够明确的了解是否正确的完成开发。
 - 更加易于维护，能够在修改代码后保证功能不被破坏。
 - 集成一些工具，规范开发规范，使得代码更加稳定( 如通过 phabricator differential 发diff时提交需要执行的单元测试，在开发流程上就可以保证远端代码的稳定性)。
 
-#### 2. 测什么?
+### 2. 测什么?
 
 - 一般单元测试:
   - 列出想要测试覆盖的异常情况，进行验证。
   - 性能测试。
 - 模拟测试: 根据需求，测试用户真正在使用过程中，界面的反馈与显示以及一些依赖系统架构的组件的应用测试。
 
-#### 3. 需要注意
+### 3. 需要注意
 
 - 考虑可读性，对于方法名使用表达能力强的方法名，对于测试范式可以考虑使用一种规范, 如 RSpec-style。方法名可以采用一种格式，如: `[测试的方法]_[测试的条件]_[符合预期的结果]`。
 - 不要使用逻辑流关键字(If/else、for、do/while、switch/case)，在一个测试方法中，如果需要有这些，拆分到单独的每个测试方法里。
@@ -49,7 +49,7 @@ tags:
 - 不需要考虑测试`private`的方法，将`private`方法当做黑盒内部组件，测试对其引用的`public`方法即可；不考虑测试琐碎的代码，如`getter`或者`setter`。
 - 每个单元测试方法，应没有先后顺序；尽可能的解耦对于不同的测试方法，不应该存在Test A与Test B存在时序性的情况。
 
-#### 4. 创建测试
+### 4. 创建测试
 
 - 选择对应的类
 - 将光标停留在类名上
@@ -360,7 +360,7 @@ onView(withItemHint("test")).check(matches(isDisplayed()));
 
 ## III. 拓展工具
 
-#### 1. AssertJ Android
+### 1. AssertJ Android
 
 > [square/assertj-android](https://github.com/square/assertj-android)
 > 极大的提高可读性。
@@ -400,7 +400,7 @@ assertThat(testList).extracting("name")
                     .doesNotContain("Jacks");
 ```
 
-#### 2. Hamcrest
+### 2. Hamcrest
 
 > [JavaHamcrest](https://github.com/hamcrest/JavaHamcrest)
 > 通过已有的通配方法，快速的对代码条件进行测试
@@ -438,7 +438,7 @@ assertThat(ints, arrayContaining(7, 5, 12, 16));
 
 ```
 
-##### 几个主要的匹配器:
+#### 几个主要的匹配器
 
 | Mather | 描述
 | --- | ---
@@ -460,7 +460,7 @@ assertThat(ints, arrayContaining(7, 5, 12, 16));
 | `equalToIgnoringWhiteSpace` | 忽略空格字符串对比
 | `containsString`,`endsWith`,`startsWith`,`isEmptyString`,`isEmptyOrNullString` | 字符串匹配
 
-##### 自定义匹配器
+#### 自定义匹配器
 
 ```java
 // 自定义
@@ -488,7 +488,8 @@ public class RegexMatcher extends TypeSafeMatcher<String> {
 String s = "aaabbbaaa";
 assertThat(s, RegexMatcher.matchesRegex("a*b*a"));
 ```
-#### 3. Mockito
+
+### 3. Mockito
 
 > [Mockito](https://code.google.com/archive/p/mockito/)
 > Mock对象，控制其返回值，监控其方法的调用。
@@ -535,7 +536,7 @@ doReturn("foo").when(spy).get(0);
 assertEquals("foo", spy.get(0));
 ```
 
-##### 对访问方法时，传入参数进行快照
+#### 对访问方法时，传入参数进行快照
 
 ```java
 import org.mockito.ArgumentCaptor;
@@ -566,7 +567,7 @@ public void testCapture(){
 }
 ```
 
-##### 对于静态的方法的Mock:
+#### 对于静态的方法的Mock
 
 可以使用 [PowerMock](https://github.com/jayway/powermock/wiki/MockitoUsage):
 
@@ -611,14 +612,14 @@ class FooWraper{
 }
 ```
 
-#### 4. Robolectric
+### 4. Robolectric
 
 > [Robolectric](http://robolectric.org/)
 > 让模拟测试直接在开发机上完成，而不需要在Android系统上。所有需要使用到系统架构库的，如(`Handler`、`HandlerThread`)都需要使用Robolectric，或者进行模拟测试。
 
 主要是解决模拟测试中耗时的缺陷，模拟测试需要安装以及跑在Android系统上，也就是需要在Android虚拟机或者设备上面，所以十分的耗时。基本上每次来来回回都需要几分钟时间。针对这类问题，业界其实已经有了一个现成的解决方案: Pivotal实验室推出的[Robolectric](http://robolectric.org/)。通过使用Robolectrict模拟Android系统核心库的`Shadow Classes`的方式，我们可以像写本地测试一样写这类测试，并且直接运行在工作环境的JVM上，十分方便。
 
-#### 5. Robotium
+### 5. Robotium
 
 > [RobotiumTech/robotium](https://github.com/robotiumtech/robotium)
 > (Integration Tests)模拟用户操作，事件流测试。
@@ -647,7 +648,7 @@ public class MyActivityTest{
 
 通过模拟用户的操作的行为事件流进行测试，这类测试无法避免需要在虚拟机或者设备上面运行的。是一些用户操作流程与视觉显示强相关的很好的选择。
 
-#### 6. Test Butler
+### 6. Test Butler
 
 > [linkedin/test-butler](https://github.com/linkedin/test-butler)
 > 避免设备/模拟器系统或者环境的错误，导致测试的失败。
@@ -658,19 +659,19 @@ public class MyActivityTest{
 
 ## IV. 拓展思路
 
-#### 1. Android Robots
+### 1. Android Robots
 
 > [Instrumentation Testing Robots - Jake Wharton](https://realm.io/news/kau-jake-wharton-testing-robots/)
 
 假如我们需要测试: 发送 $42 到 "foo@bar.com"，然后验证是否成功。
 
-##### 通常的做法
+#### 通常的做法
 
 ![](/img/android-test_1.png)
 
 ![](/img/android-test_2.png)
 
-##### Robot思想
+### 2. Robot思想
 
 在写真正的UI测试的时候，只需要关注要测试什么，而不需要关注需要怎么测试，换句话说就是让测试逻辑与View或Presenter解耦，而与数据产生关系。
 

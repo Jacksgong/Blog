@@ -10,22 +10,22 @@ tags:
 
 ---
 
-# Git特点:
+## Git特点:
 1. 在2002由Linus花了两周写的，用在Linux版本维护，后来由Linux社区高手维护
 2. git是维护修改
 3. git是分布式版本控制
 
 
 <!--more-->
-# Git使用
+## Git使用
 ### I. 创建:
-##### 本地:
+#### 本地:
 `git init`
 
 - 效果:
 创建版本库(.git)
 
-##### 远程:
+#### 远程:
 `git remote add [<远程库分支名>] [<远程库地址>]`
 
 - 效果: 关联本地库与远程库
@@ -39,7 +39,7 @@ tags:
 - 效果: 克隆远程分支到本地（本地分支名和远程分支名相同）.
 
 
-##### 分支:
+#### 分支:
 
 `git branch [<分支名>]`
 
@@ -68,7 +68,7 @@ tags:
 
 - 效果: 把分支内容推到远程库相对应的分支上
 
-##### 合并:
+#### 合并:
 
 > 推荐merge工具: [p4Merge](https://gist.github.com/tony4d/3454372)
 
@@ -94,12 +94,12 @@ git fetch origin master
 git merge origin/master
 ```
 
-##### 删除:
+#### 删除:
 `git branch -d [<分支名>]`
 
 - 效果: 删除目标分支（`-D`大写D是强行删除（未进行merge就直接删除时使用））
 
-##### 撤销:
+#### 撤销:
 `git reset [<版本参数>] [<文件名>]`
 
 - 效果: 从暂存区撤销某文件的提交
@@ -108,7 +108,7 @@ git merge origin/master
 
 - 效果: 撤销未提交的文件
 
-### III. 状态:
+## III. 状态:
 `git status`
 
 - 效果: 显示状态
@@ -125,7 +125,7 @@ git merge origin/master
 
 - 效果: 存储当前工作现场（通常用在:用于工作一半，想要切换分支的时候）
 
-##### 存储现场:
+### 存储现场:
 `git stash list`
 
 - 效果: 所有储存的工作现场列表
@@ -142,15 +142,15 @@ git merge origin/master
 
 - 效果: 应用最早的现场，并删除它
 
-### IV. 对比:
+## IV. 对比:
 `git diff [<文件名>]`
 
-###### 拓展:
+### 拓展
 `git diff HEAD -- [<file>]`
 
 - 效果: 工作区和版本库分支里的最新版本对比
 
-### V. 日志:
+## V. 日志:
 `git log`
 
 - 效果: 查看git日志
@@ -163,21 +163,21 @@ git merge origin/master
 
 - 效果: 修改上次提交的commit message
 
-###### 查看历史git命令（可以用来找`commit id`）
+### 查看历史git命令（可以用来找`commit id`）
 `git reflog`
 
-###### 简化:
+### 简化:
 `git log --pretty=online`
 
-###### 查看分支合并图:
+### 查看分支合并图:
 `git log --graph`
 
-### VI. 回退代码:
+## VI. 回退代码:
 `git reset --hard [commit id/版本参数]`
-###### 版本参数定义:
+### 版本参数定义:
 `HEAD`表示当前版本，上一个版本:`HEAD^`,上n个版本就是加n个`^`或者`HEAD~[n]`
 
-###### 拓展:
+### 拓展:
 `git checkout -- [<文件名>]`
 
 - 效果:
@@ -194,7 +194,7 @@ git merge origin/master
 
 - 效果:  撤销`stage`暂存区中[file]文件的修改
 
-### VII. 冲突
+## VII. 冲突
 修改好冲突文件后，直接重新提交即可.
 
 冲突文件一般的表示：
@@ -209,14 +209,14 @@ Head 的内容
 
 > 强烈推荐mergetool: [p4merge](https://gist.github.com/tony4d/3454372)
 
-### VIII. 同步远程
+## VIII. 同步远程
 `git pull`
 
 - 效果: 同步远程库（如果提示`no tracking information`，说明本地分支与远程分支的链接关系没有创建，用命令`git branch --set-upstream [<本地分支名>] [<远程分支名>]/[<本地分支名>]`进行创建链接）
 
-### IX. 标签
+## IX. 标签
 
-##### 创建:
+### 创建
 
 `git tag [<标签名>] [<commit id>]`
 
@@ -229,7 +229,7 @@ Head 的内容
 
 - 效果: 给对应commit id打上标签，并给标签加上了描述，并且加上PGP签名，如果不提供comit id，默认给最新一次提交打上标签
 
-##### 显示:
+### 显示
 
 `git tag`
 
@@ -239,13 +239,13 @@ Head 的内容
 
 - 效果: 显示标签那次提交的信息
 
-##### 删除:
+### 删除
 
 `git tag -d [<标签名>]`
 
 - 效果: 删除标签
 
-##### 远程:
+### 远程
 
 > [Push a tag to a remote repository using Git?](http://stackoverflow.com/questions/5195859/push-a-tag-to-a-remote-repository-using-git)
 
@@ -267,7 +267,7 @@ Head 的内容
 
 > [使用Git Submodule管理子模块](https://segmentfault.com/a/1190000003076028)
 
-#### 1. 添加子模块:
+### 1. 添加子模块
 
 ```
 // 添加外部项目为当前项目的子模块, 添加完后，会配置到`.gitmodules`内
@@ -280,7 +280,7 @@ git commit -m "[<描述>]"
 git submodule init
 ```
 
-#### 2. 修改子模块
+### 2. 修改子模块
 
 ```
 cd [<子模块目录>]/
@@ -291,23 +291,23 @@ cd ..
 // 提交子模块中的修改->推到远端
 ```
 
-#### 3. 更新子模块
+### 3. 更新子模块
 
-##### 方式一:
+#### 方式一
 
 在父项目目录下运行: `git submodule foreach git pull`
 
-##### 方式二:
+#### 方式二
 
 进入对应的子项目目录: `git pull`
 
-#### 4. 拉取存在子模块的项目
+### 4. 拉取存在子模块的项目
 
-##### 方式一:
+#### 方式一
 
 在父项目目录下运行: `git clone [<远程库地址>] --recursive`
 
-##### 方式二:
+#### 方式二
 
 ```
 // 先clone父项目
@@ -318,7 +318,7 @@ git submodule init
 git submodule update
 ```
 
-#### 5. 删除项目中的子模块
+### 5. 删除项目中的子模块
 
 ```
 git rm --cached [<子模块目录>]
@@ -329,15 +329,15 @@ rm -rf [<子模块目录]
 
 ## XI. 其他需要注意的
 
-#### 1. 由于Mac下文件名大小不敏感，造成git下如果改了名字，git不识别有变化，因此改名字需要使用下面命令:
+### 1. 由于Mac下文件名大小不敏感，造成git下如果改了名字，git不识别有变化，因此改名字需要使用下面命令
 
 `git mv --force myfile MyFile`
 
-#### 2. 如果需要修改提交过的历史用户资料
+### 2. 如果需要修改提交过的历史用户资料
 
 [Changing author info](https://help.github.com/articles/changing-author-info/)
 
-#### 3. 修改Commit Message
+### 3. 修改Commit Message
 
 > 当然若修改的那个Commit已经在远端，需要`git push --force`覆盖远端。
 
@@ -345,27 +345,27 @@ rm -rf [<子模块目录]
 - 如果需要修改更早之前的一些Commit Message: `git rebase -i [<Commit Id>]`
 
 
-# Git 配置
+## XII. Git 配置
 
-##### 配置文件:
+### 配置文件
 
 局部: 项目工作区`.git/config`
 
 全局: `~/.gitconfig`
 
-##### 命令配置:
+### 命令配置
 
 `git config --global color.ui true`
 
 - 效果: Git会适应当地显示不同颜色
 
-##### 忽略特殊文件:
+### 忽略特殊文件
 
 在项目工作区根目录下直接创建`.gitignore`文件然后望里面添加文件名即可
 
 可以参考: [https://github.com/github/gitignore](https://github.com/github/gitignore)
 
-##### 别名配置:
+### 别名配置
 
 `git config --global alias.[<别名>] [对应命令]`
 
@@ -381,7 +381,7 @@ git config --global alias.last 'log -1'
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 ```
 
-## XII. GitHub
+## XIII. GitHub
 
 ### fork同步问题
 
@@ -411,7 +411,7 @@ git pull upstream master
 git push origin master
 ```
 
-## XIII. 其他疑难问题
+## XIV. 其他疑难问题
 
 调用`git fetch`的时候，出现:
 

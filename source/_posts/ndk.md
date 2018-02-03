@@ -21,7 +21,7 @@ tags:
 
 ## I. 初识
 
-#### 1. NDK
+### 1. NDK
 
 > Native Development Kit
 
@@ -35,7 +35,7 @@ tags:
 - 需要使用c/c++实现的第三方库（如 Ffmpeg，OpenCV）
 - 需要调用更加底层的代码(如，你想调用Dalvik以外的代码)
 
-#### 2. JNI
+### 2. JNI
 
 > Java Native Interface
 
@@ -263,7 +263,7 @@ native void nativeWriteByteArrayToFile(String path, byte[] b) throws IOException
 2. 创建`Andorid.mk`文件，用于构建项目
 3. 创建`Application.mk`文件（非必须），用于存储编译配置相关，能够灵活的配置编译。
 
-#### 1. `Android.mk`
+### 1. `Android.mk`
 
 - 构建native项目的`MAKEFILE`文件
 - 官方介绍: https://developer.android.com/intl/zh-cn/ndk/guides/android_mk.html
@@ -301,7 +301,7 @@ MY_SOURCE := MYNDKfile.c
 LOCAL_SRC_FILES += $(MY_SOURCE)
 ```
 
-#### 2. `Application.mk`
+### 2. `Application.mk`
 
 - 用于定义多种变量使得编译更加灵活的MAKEFILE文件
 - 官方文档: https://developer.android.com/intl/zh-cn/ndk/guides/application_mk.html
@@ -356,7 +356,7 @@ APP_STL := stlport_shared
 APP_STL := system
 ```
 
-#### 3. `NDK-BUILDS`
+### 3. `NDK-BUILDS`
 
 - 基于`GNU MAKE`的封装
 - 官方文档: http://developer.android.com/intl/zh-cn/ndk/guides/ndk-build.html
@@ -388,14 +388,14 @@ NDK_APPLICATION_MK=<file>
 - **Sample: hello-jni:** https://developer.android.com/ndk/samples/sample_hellojni.html#ap
 - **Create Hello-JNI with Android Studio:** https://codelabs.developers.google.com/codelabs/android-studio-jni/index.html#0
 
-#### 1. 简单的JNI
+### 1. 简单的JNI
 
 可直接参照: https://github.com/Jacksgong/android-ndk#i-sample-try-hello-jni
 
 - **Sample: hello-jni:** https://developer.android.com/ndk/samples/sample_hellojni.html#ap
 - **Create Hello-JNI with Android Studio:** https://codelabs.developers.google.com/codelabs/android-studio-jni/index.html#0
 
-#### 2. 引用已有库拓展
+### 2. 引用已有库拓展
 
 可直接参照: https://github.com/Jacksgong/android-ndk#ii-reference-prebuilt-libraries-hello-libs
 

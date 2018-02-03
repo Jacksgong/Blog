@@ -32,26 +32,26 @@ tags:
 
 ## I. 准备
 
-#### 1. 准备一个快鸟帐号
+### 1. 准备一个快鸟帐号
 
 可以到淘宝买快鸟帐号或者直接到[迅雷会员官网](http://vip.xunlei.com/vip_service/introduce/)购买。
 
-#### 2. 执行文件准备
+### 2. 执行文件准备
 
 直接clone [fffonion/Xunlei-Fastdick](https://github.com/fffonion/Xunlei-Fastdick) 项目。
 
-#### 3. 准备环境
+### 3. 准备环境
 
 准备一个已经有python运行环境的地方(当然也可以直接在openwrt上面操作(`opkg install python`))。
 
 
 ## II. 生成运行ipk
 
-#### 1. 配置帐号
+### 1. 配置帐号
 
 在clone下来的fffonion/Xunlei-Fastdick项目目录(或与`swjsq.py`文件同目录就行)下创建文件`swjsq.account.txt`，输入帐号与密码格式如: `ahaha,123456`（英文逗号），并保存。
 
-#### 2. 执行脚本
+### 2. 执行脚本
 
 执行 `python ./swjsq.py &`，出现如下图 `Upgrade done: Down xxx, Up xxx`，表明提速成功，此时本地会生成`swjsq_0.0.1_all.ipk`文件。
 
@@ -59,11 +59,11 @@ tags:
 
 ## III. 安装
 
-#### 1. 安装ipk
+### 1. 安装ipk
 
 在OpenWrt的`swjsq_0.0.1_all.ipk`所在目录执行 `opkg install swjsq_0.0.1_all.ipk`，进行安装。
 
-#### 2. 配置开机启动
+### 2. 配置开机启动
 
 在OpenWrt的`/etc/hotplug.d/iface/`目录下，创建文件`99-xunlei`，并添加以下脚本:
 
@@ -75,7 +75,7 @@ killall -9 swjsq
 (/bin/swjsq &)
 ```
 
-#### 3. 重启完成
+### 3. 重启完成
 
 重启路由器，此时到OpenWrt的LUCI界面，在Status->Processes会看到有一个`swjsq`的进程在运行，说明已经成功运行。
 

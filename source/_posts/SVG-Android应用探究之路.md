@@ -14,7 +14,7 @@ tags:
 
 ## I. 结论
 
-#### 优点:
+### 优点:
 
 1. vector
 2. 在所有大小分辨率屏幕上完美显示
@@ -24,18 +24,18 @@ tags:
 
 <!--more-->
 
-#### 缺点:
+### 缺点:
 
 1. 图片只能按照比例缩放
 2. 不支持透明度？
 3. svg文件还可以近一步优化，里面有一些不可取（The schedule needs to be simplified — the more vector elements, the the file more weighs. It is undesirable to use shades and luminescences as it in times increases the size of SVG-files）
 
-#### SVG 的探索来源于：
+### SVG 的探索来源于
 
 > No sooner said than done. So, under katom history of introduction of vector images in one of our applications. In article we will impart experience also features of use of vector images in format SVG in applications Android.
 
 
-##### projects on guglokode
+#### projects on guglokode
 
 - code.google.com/p/svg-android/
 - code.google.com/p/svg-android-2/
@@ -43,7 +43,7 @@ tags:
 - horribileru.blogspot.ru/2011/10/android-imageview-svg.html
 - And some links to dead projects at different forums.
 
-#### SVG可用编辑器
+### SVG可用编辑器
 
 Adobe Illustrator 、Inkscape work.
 
@@ -65,7 +65,7 @@ imageView.setImageDrawable(drawable);
 
 > URL: [svg-android-2](https://code.google.com/p/svg-android-2/wiki/Introduction)
 
-#### 第一个发现：SVG在包含 阴影的情况下大小会飙升：
+### 第一个发现：SVG在包含 阴影的情况下大小会飙升：
 
 ![icon 1](/img/svg-k-1.png)
 
@@ -73,7 +73,7 @@ izorbrazhenija with a shade and without: 118 KB vs 1 KB
 
 - **解决方法：** 删除对应的阴影
 
-#### 第二个发现：显示梯度颜色，不支持！
+### 第二个发现：显示梯度颜色，不支持！
 
 The problem with gradients has dared removal of superfluous tags from svg (it is described further in article). But basically, and with it it would be possible to live and in our simple images to replace a gradient with homogeneous pouring, if not other nuance — considerable load time of images.
 
@@ -84,7 +84,7 @@ The problem with gradients has dared removal of superfluous tags from svg (it is
 
  at the left — the black sky in the form of a gradient, on the right — a correct picture.
 
-#### 第三个发现：加载时间
+### 第三个发现：加载时间
 
 - **根源：** 为什么SVG-Android-2这么耗时，
 - **原因：** SVGParser 解析Image XML file ，解析了两次，第一次 为第二次解析收集多余的属性。多余信息是：
@@ -93,7 +93,7 @@ The problem with gradients has dared removal of superfluous tags from svg (it is
 
 - **成果：** 耗时，加载35个SVG的图片(PNG 500px*500px)：从原8s 减少到 1.8-2s。
 
-#### 第四个发现：透明与颜色适配器
+### 第四个发现：透明与颜色适配器
 
 - **原因：** 库不是加载 典型的bitmapDrawable与pictureDrawable,并且源码中的setColorFilter、setAlpha方法都是空的：
 
@@ -124,7 +124,7 @@ SVG svg = SVGParser.getSVGFromResource(getResources(), rawSvgId, filterColor);
 
 > Also it is possible to establish and Alpha for fillPaint, but in games this property is required in the dynamic form (have pressed an element — has become translucent), and podgruzhat each time the new image is inconvenient. Therefore this effect have replaced with scaling (have pressed — the element has decreased).
 
-#### 第五个发现：异常处理：
+### 第五个发现：异常处理：
 
 ```java
 java.lang.UnsupportedOperationException
@@ -144,7 +144,7 @@ public static void setSoftwareLayerType(View view) {
 }
 ```
 
-#### 其使用SVG的项目：
+### 其使用SVG的项目：
 
 http://play.google.com/store/apps/details?id=com.whisperarts.kids.forms
 

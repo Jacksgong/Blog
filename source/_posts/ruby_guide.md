@@ -21,7 +21,7 @@ tags:
 
 <!--more-->
 
-### Ruby语言推荐入门
+## Ruby语言推荐入门
 
 1. [Ruby 学习](https://ihower.tw/rails4/ruby.html)
 2. [关于Ruby](https://www.ruby-lang.org/zh_cn/about/)

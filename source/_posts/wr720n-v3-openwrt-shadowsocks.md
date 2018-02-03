@@ -34,11 +34,11 @@ tags:
 
 ## II. 刷入目标OpenWrt
 
-#### 没有刷过OpenWrt的路由器
+### 没有刷过OpenWrt的路由器
 
 连接以后，登录路由器，在系统升级页面选择刷机包，选择不配置，确定升级，在升级过程不可断电。升级结束后，就刷好了。
 
-#### 刷过OpenWrt的路由器
+### 刷过OpenWrt的路由器
 
 1. 通过`scp openwrt-ar71xx-generic-tl-wr720n-v3-squashfs-sysupgrade.bin root@192.168.2.1:/tmp`拷贝到路由器的`/tmp`目录
 2. 进入openwrt以后`mtd write /tmp/openwrt-ar71xx-generic-tl-wr720n-v3-squashfs-sysupgrade.bin firmware`刷入。
@@ -49,8 +49,8 @@ tags:
 > 替换为: http://mirrors.ustc.edu.cn/openwrt 这个源，速度飕飕的。
 > 最后几行是根据[ShadowSocks安装](http://openwrt-dist.sourceforge.net/)该官方文档添加的源，方便后面shadowsocks安装。
 
-#### 1). ssh连上openWrt
-#### 2). 修改`/etc/opkg.conf`文件内容为:
+### 1). ssh连上openWrt
+### 2). 修改`/etc/opkg.conf`文件内容为:
 
 ```
 dest root /
@@ -72,7 +72,7 @@ src/gz openwrt_dist_luci http://openwrt-dist.sourceforge.net/releases/luci/packa
 
 ## IV. 挂载u盘(参考[加菲猫的博客](http://coffeecat.info/?p=175)进行调整，优化)
 
-#### 1). 安装包
+### 1). 安装包
 
 ```
 opkg update
@@ -81,17 +81,17 @@ opkg install kmod-usb-ohci kmod-usb2 kmod-fs-ext4 kmod-usb-storage block-mount 	
 
 ps: 安装过程中会提示: `kmod: failed to insert /lib/modules/…`的错误，不要管，回头重启就好了。
 
-#### 2). 现在关闭路由器
+### 2). 现在关闭路由器
 
 运行 `df`，会发现rootfs只剩下40k左右。
 
-#### 3). 准备
+### 3). 准备
 
 1. 格式化准备好的u盘为`ext4`，并插入路由器的usb口。
 2. 将路由器模式开关调为3g，开启路由器。
 3. 等到路由器灯不闪了，ssh登录路由器。
 
-#### 4). 挂载操作
+### 4). 挂载操作
 
 1. 运行`ls /dev/sda*`，如果显示`/dev/sda /dev/sda1 ...`，说明u盘已经认出来了。否则拔出来格式化下。
 2. 接着运行
@@ -142,7 +142,7 @@ echo option force_space >> /etc/opkg.conf
 
 重启路由器
 
-#### 5). 挂载最后的配置
+### 5). 挂载最后的配置
 
 1. 通过网页输入路由器ip进入luci
 2. 选择system->mount point，可以看到rootfs已经变为U盘的大小
@@ -152,7 +152,7 @@ echo option force_space >> /etc/opkg.conf
 6. 选择/dev/sda1，文件系统选择ext4，这时候会出来一个选项，设置为rootfs，选中它，再选中启用
 7. 保存并应用
 
-#### 6). 挂载最终效果
+### 6). 挂载最终效果
 
 ![](/img/wr720n-4.png)
 
@@ -160,7 +160,7 @@ echo option force_space >> /etc/opkg.conf
 
 > 参考 [ShadowSocks安装](http://openwrt-dist.sourceforge.net/)
 
-#### 1). 安装ipset
+### 1). 安装ipset
 
 ```
 opkg update
@@ -171,7 +171,7 @@ ps: 安装过程中如果提示`kmod:failed to insert /lib/modules/...`的错误
 
 好了以后，重启路由器。
 
-#### 2). ssh登录路由器，安装软件
+### 2). ssh登录路由器，安装软件
 
 ```
 opkg update
@@ -184,16 +184,16 @@ opkg install shadowsocks-libev-spec
 opkg install luci-app-shadowsocks-spec
 ```
 
-#### 3). 通过路由器ip登录 luci，可以将luci修改为中文
+### 3). 通过路由器ip登录 luci，可以将luci修改为中文
 
 选用system -> system -> language 选择中文
 重启路由器
 
 ## VI. 配置shadowsocks和chinadns
 
-#### 1). 通过路由器ip访问luci
+### 1). 通过路由器ip访问luci
 
-#### 2). 配置ChinaDNS
+### 2). 配置ChinaDNS
 
 ![](/img/wr720n-2.png)
 
@@ -203,14 +203,14 @@ opkg install luci-app-shadowsocks-spec
 223.6.6.6,123.125.81.6,114.114.115.115,114.114.114.114,8.8.4.4,127.0.0.1:5151
 ```
 
-#### 3). 配置Shadowsocks
+### 3). 配置Shadowsocks
 
 ![](/img/wr720n-5.png)
 
 1. 进入 服务->ShadowSocks 配置好全局配置，UDP转发 选择勾选。
 2. UDP本地端口保证与ChinaDNS中 上游服务器 中设置的本地的端口一样: 5151。
 
-#### 4). DHCP/DNS设置
+### 4). DHCP/DNS设置
 
 > 4个是为了保证稳定性，否则经常会出现解析失败导致网页无法打开，
 
@@ -235,7 +235,7 @@ opkg install luci-app-shadowsocks-spec
 1. 忽略解析文件 打勾
 2. 忽略HOSTS文件 打勾
 
-#### 5). 更新ChinaDNS过滤ip
+### 5). 更新ChinaDNS过滤ip
 
 > `/etc/chinadns_chnroute.txt` 替换为 服务->ChinaDNS中的 国内路由表 地址
 

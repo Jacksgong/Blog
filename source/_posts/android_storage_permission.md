@@ -20,11 +20,13 @@ tags:
 
 ----
 
-#### 演讲中提到的权限是什么权限?
+## 前言
+
+### 演讲中提到的权限是什么权限?
 
 文件读写权限
 
-#### 为什么在此时提出?
+### 为什么在此时提出?
 
 1. 在Android M中更重视权限，Android M是一个运行时权限管理的模型，并且存储权限会被视为危险权限(当应用想要获取该权限时，会弹窗类似提示: 是否允许该应用访问你的所有图片与视频，并且在存储卡做任何的写操作)；
 2. 有效管理文件与文件权限谨慎使用，更有益于健康生态以及用户的数据安全规范；
@@ -81,7 +83,7 @@ tags:
 - `Environment.getExternalStorageDirectory()`
 - `Environment.getExternalStoragePublicDirectory(String)`
 
-##### 是否需要申请读写权限申请
+#### 是否需要申请读写权限申请
 
 < API 19 | API 19-22 | API 23+
 :-: | :-: | :-: |
@@ -95,7 +97,7 @@ tags:
 > 基于URI基本权限(URI-Based Permissions)
 > Intent底层架构也是依附于URI基本权限来完成的应用间调用
 
-#### 添加URI基本权限
+### 添加URI基本权限
 
 1. startActivity/startService的时候在Intent中添加Flag(接收者对于该URI的权限(如URI是一个图片，那么接收者就有了该图片的对应权限)): `Intent.FLAG_GRANT_READ_URI_PERMISSION`、`Intent.FLAG_GRANT_WRITE_URI_PERMISSION`
 2. 手动调用: `Context.grantUriPermission()`(会使当前包名下所有URI都有了对应权限)、`Context.revokeUriPermission()`(URI撤销权限对应权限)

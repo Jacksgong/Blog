@@ -44,7 +44,7 @@ private class CallWebServiceTask extends AsyncTask<String, Result, Void> {
 
 ## II. 利用`RxAndroid(RxJava)`解决这些问题
 
-#### 1. 关于书写复杂的问题:
+### 1. 关于书写复杂的问题:
 
 > RxJava结合lambda是一个很好的解决方案
 
@@ -57,7 +57,7 @@ webService.doSomething(someData)
     );
 ```
 
-#### 2. 关于异常处理困难的问题:
+### 2. 关于异常处理困难的问题:
 
 > RxJava 中所有的错误都会回调到onError
 
@@ -76,7 +76,7 @@ Subscriber<String> mySubscriber = new Subscriber<String>() {
 };
 ```
 
-#### 3. 关于`Activity/Fragment`生命周期导致`AsyncTask`难以维护的问题:
+### 3. 关于`Activity/Fragment`生命周期导致`AsyncTask`难以维护的问题:
 
 > RxAndroid给出了很好的解决方案
 
@@ -88,7 +88,7 @@ Subscriber<String> mySubscriber = new Subscriber<String>() {
     );
 ```
 
-#### 4. 关于`AsyncTask`无法足够简单做复杂的异步的问题:
+### 4. 关于`AsyncTask`无法足够简单做复杂的异步的问题:
 
 > RxJava中的各类"操作"可以解决这个问题，这里如果有较多的线程切换，可以考虑[使用`compose`](http://www.pythonnote.com/archives/bu-yao-da-po-lian-shi-shi-yong-rxjavade-composecao-zuo-fu.html)
 
@@ -103,7 +103,7 @@ public Observable<List<CityWeather>> getWeatherForLargeUsCapitals() {
     }
 ```
 
-#### 5. 关于`AsyncTask`难以测试:
+### 5. 关于`AsyncTask`难以测试:
 
 > RxJava通过`toblocking()`将一个异步方法变为同步方法来完成测试
 
@@ -112,7 +112,7 @@ List results = getWeatherForLargeUsCapitals().toBlocking().first();
 assertEquals(12, results.size());
 ```
 
-#### 6. 关于`AsyncTask`异步数据无法得到良好的缓存
+### 6. 关于`AsyncTask`异步数据无法得到良好的缓存
 
 > 通过RxAndroid提供的方法，保存一个对Observable 的缓存的引用
 

@@ -27,18 +27,18 @@ sudo shutdown -r 0
 ```
 
 <!--more-->
-#### 配置文件
+### 配置文件
 
 - 全局配置文件: `~/.zshrc`
 - oh-my-zsh目录: `~/.oh-my-zsh/`
 
 ## II. 插件
 
-#### 添加插件:
+### 添加插件:
 
 编辑`~/.zshrc`中的plugins字段。默认是:`plugins=(git)`默认已经添加了git插件。如果需要添加插件，只要在括号里添加即可，如:`plugins=(git autojump)`
 
-#### 插件目录:
+### 插件目录:
 
 ```
 ~/.oh-my-zsh/plugins
@@ -46,7 +46,7 @@ sudo shutdown -r 0
 
 如想要修改`git`插件的带的`git`相关别名或其他配置，只需要编辑:`~/.oh-my-zsh/plugins/git/git.plugin.zsh`文件即可
 
-#### 推荐插件
+### 推荐插件
 
 - **git**: git着色、git别名
 - **autojump**: 根据目录名称中的几个关键字符串，快速跳转到以前访问过的对应的目录

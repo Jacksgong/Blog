@@ -25,7 +25,7 @@ tags:
 
 ![](/img/scheduled-thread-pool-executor.png)
 
-#### 需要注意
+### 需要注意
 
 - `scheduleAtFixedRate`: 无论运行任务用的多久，还是指定固定的时间执行，如任务在initDelay, initDelay + period, initDelay + period * 2会被执行
 - `scheduleWithFixedDelay`: 指定固定的间隔执行，如每次都是在上次执行后间隔delay以后执行

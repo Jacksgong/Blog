@@ -27,18 +27,18 @@ Proguard | DexGuard | 备注
 不需要multi-dex | 自带multi-dex扫描 | -
 
 
-#### 资源混淆?
+### 资源混淆?
 首先， 所有static final的都会直接预编译，代码中都是资源ID，资源混淆只和 **resources.arsc** (资源ID、string、路径映射等)、**资源路径**、**资源文件名** 有关。
 
-#### 资源混淆可能的坑?:
+### 资源混淆可能的坑?:
 
 Resources#getIdentifier估计废了，记得白名单。
 
-#### Proguard也想要资源混淆?:
+### Proguard也想要资源混淆?:
 
 试试这个: [AndResGuard](https://github.com/shwenzhang/AndResGuard)
 
-#### 为啥国内很少用DexGuard?有坑?
+### 为啥国内很少用DexGuard?有坑?
 
 - 付费
 - 国内文档少，而且配置起来会比Proguard复杂一些，细节多些。
@@ -47,7 +47,7 @@ Resources#getIdentifier估计废了，记得白名单。
 
 ## II. Multi-dex
 
-#### 为啥有这梗
+### 为啥有这梗
 
 > 可以先参看: [ART、Dalvik](http://blog.dreamtobe.cn/2015/11/01/android_art_dalvik/)
 
@@ -55,7 +55,7 @@ Resources#getIdentifier估计废了，记得白名单。
 
 > 以下针对Gradle multi-dex说明
 
-#### 配置
+### 配置
 
 Gradle:
 
@@ -90,12 +90,12 @@ AndroidManifest.xml:
 </manifest>
 ```
 
-#### 优化
+### 优化
 
-##### 问题1:
+#### 问题1:
 由于multidex配置需要编译系统复杂的处理引用关系来判断哪些需要在主dex，哪些需要在次dex，因此势必会增加日常编译的耗时
 
-##### 解决方法:
+#### 解决方法:
 可以创建两个variations用于gradle编译，定义在`productFlavors`，一个定义最低sdk到21(由于ART不再需要运行时加载，并且其在安装时翻译的时候，会处理classes(..N).dex，因此build直接每个module一个dex不用merge不用分主次dex，每次只需要重新计算修改过的modules的dex，省去很多很多时间)，一个为发布需要的最低sdk。自己调试的时候，结合选用Debug的Type，在Build Variants中选用`devDebug`即可。
 
 ```
@@ -117,11 +117,11 @@ android {
 }
 ```
 
-##### 问题2:
+#### 问题2:
 
 由于Dalvik运行时加载dex，如果dex多而且大，在启动应用的时候加载其余dex的时可能会出现ANR，甚至在Android 4.0(API 14)以前的机器无法运行。
 
-##### 解决方法:
+#### 解决方法:
 
 Gradle配置
 
