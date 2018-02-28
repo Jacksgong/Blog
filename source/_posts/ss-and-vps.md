@@ -20,6 +20,9 @@ tags:
 #### 1. 前言
 
 在十九大之前，我是采用[portal.shadowsocks.la](https://portal.shadowsocks.la)中够买的VPS，其VPS的香港与日本的线路是采用阿里云，延时极低全部直连在平时速度是极快的，但是十九大之后便变得十分不可靠，而后我自己在通过[Vultr][vultr_url]够买VPS开始自行搭建自己的SS，刚开始也并非一帆风顺。
+
+![](/img/ss-and-vps-6.png)
+
 最早在[Vultr][vultr_url]够买的是其在日本的VPS，刚开始是很快的，后来发现GW对其逐渐加大力度以至于后来经常出现不稳定的情况，由于[Vultr][vultr_url]是按照小时计费的，并且每小时的费用极低，于是我再创建了新加坡的VPS，通过其提供的Snapshot快速恢复了日本VPS的环境，最终新加坡线路也同日本线路一样的情况，而后我切换到美国的VPS发现情况类似。
 
 #### 2. 最终的选择
