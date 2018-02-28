@@ -61,8 +61,9 @@ Shadowsocks这块，推荐直接使用Teddysun的这个[一键安装脚本](http
 
 这块也是推荐采用该[一键安装脚本](https://teddysun.com/489.html)，实测BBR对SS影响还是挺明显的。
 
----
+### V. 其他
 
-最后有任何问题欢迎评论讨论。
+
+最后如果有Ubuntu服务端维护相关的问题，欢迎转到[这篇文章](https://blog.dreamtobe.cn/maintain-website-server/)。如果有任何问题欢迎评论讨论。
 
 [vultr_url]: https://www.vultr.com/?ref=7210853
