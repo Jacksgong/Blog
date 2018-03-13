@@ -218,10 +218,10 @@ TCP的做法是引入`拥塞窗口(cwnd)`并策略性的调整其大小，如上
 
 其实如果真的要一个依据，肯定是以RFC作为依据的，如果按照RFC的定义，目前看来策略一是最靠谱的，但是考虑到现实中策略一中返回状态码并无法完全说明是否支持`Range`的情况，我们这边会再配合响应头的`Accept-Ranges`进行判断；而在处理`HEAD`的请求出现问题的情况下，我们会结合策略二来处理，最终方案如下:
 
-- 默认发起一个带有`If-Match`并且`Range`为`0-0`的`HEAD`请求
+- 默认发起一个带有`If-Match`并且`Range`为`0-0`的`GET`请求
 - 支持`Range`判定: 返回状态码是`206`或者响应头包含`Accept-Ranges: bytes`
 - `Etag`过期判定: 对比响应头中的`Etag`与请求头中的`If-Math`
-- 总大小获取: 先通过`Content-Range`获取，如若获取不到，再通过`Content-Length`进行获取
+- 总大小获取: 通过`Content-Range`获取，如若不存在`Content-Range`但是存在`Content-Length`，此时的`Content-Length`是`1`，此时再发起一个`HEAD`请求，通过其返回的`Content-Length`获取总大小；否则判定为`Chunked`传输编码进行下载
 
 ---
 
