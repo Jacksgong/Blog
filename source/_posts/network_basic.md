@@ -201,6 +201,8 @@ SPDY兼容性: http://caniuse.com/#feat=spdy
 - [QUIC - Google-peering](http://peering.google.com/#/learn-more/quic)
 - [QUIC教材](https://www.chromium.org/quic)
 - [QUIC视频介绍](https://www.youtube.com/watch?v=hQZ-0mXFmk8)
+- [Http2-test](https://tools.keycdn.com/http2-test)
+- [Http2-debug](https://community.akamai.com/community/web-performance/blog/2015/06/05/useful-tools-for-http2-debugging)
 
 ---
 
