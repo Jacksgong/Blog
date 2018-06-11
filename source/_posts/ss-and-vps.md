@@ -1,6 +1,6 @@
 title: 翻墙的VPS选择与SS快速搭建与优化
 date: 2018-02-28 11:06:03
-updated: 2018-02-28
+updated: 2018-06-11
 categories:
 - 网络
 tags:
@@ -32,6 +32,10 @@ tags:
 ![](/img/ss-and-vps-1.png)
 ![](/img/ss-and-vps-2.png)
 ![](/img/ss-and-vps-3.png)
+
+其速度测试，可自行到[这里](https://www.vultr.com/faq/#downloadspeedtests)进行验证，我直接用它的阿姆斯特丹的服务器ping我上海腾讯云的服务器大约在200多毫秒:
+
+![](/img/ss-and-vps-7.png)
 
 ### II. SS的搭建
 
