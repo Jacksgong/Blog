@@ -46,7 +46,7 @@ tags:
 
 这个Alfred workflow我是根据我的个人需求定制的，如果需要调整的，可以在对应根目录下的proxy.py进行修改:
 
-```
+```python
 __author__ = 'jacksgong'
 
 import sys
@@ -57,7 +57,8 @@ def main(wf):
 
     params = wf.args[0]
 
-    echo_qq = 'http://txp-01.tencent.com/proxy.pac'
+    # please replace the following value to your own proxy.pac url
+    echo_qq = 'http://xxx.xxx/proxy.pac'
     echo_off = 'off'
     echo_pre = 'networksetup -setautoproxyurl Wi-Fi '
     echo_diy_pre = 'http://192.168.'
