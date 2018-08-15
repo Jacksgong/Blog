@@ -1,4 +1,4 @@
-title: 流利说客户持交工程实践
+title: 流利说客户端持续交付工程实践
 date: 2018-08-15 22:07:03
 updated: 2018-08-15
 wechatmpurl: https://mp.weixin.qq.com/s/sjm891upJi3HEyhCsuHqHA
