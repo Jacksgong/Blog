@@ -1,6 +1,6 @@
 title: Newifi Y1 刷Openwrt 自配Shadowsocks高稳定翻墙
 date: 2016-04-24 00:22:03
-updated: 2016-04-24 00:22:03
+updated: 2018-08-31 10:18:03
 permalink: 2016/04/24/newifi_openwrt
 categories:
 - OpenWrt
@@ -26,7 +26,7 @@ tags:
 
 1. 下载Newifi Y1 系统镜像 ： http://downloads.openwrt.org/chaos_calmer/15.05/ramips/mt7620/openwrt-15.05-ramips-mt7620-Lenovo-y1-squashfs-sysupgrade.bin
 2. 拔掉路由去电源。
-3. 将路由器连接电脑，并且电脑端新建一个连接，设置IP `192.168.1.1` 以及掩码 `255.255.255.0`，网关 `192.168.1.1`。
+3. 将路由器连接电脑，并且电脑端新建一个连接，设置IP `192.168.1.11` 以及掩码 `255.255.255.0`，网关 `192.168.1.1`。
 4. 长按复位键的同时连接电源，看到路由器上面有两个LED等在闪说明进入了刷机模式。
 5. 选择下载的镜像刷入。
 
