@@ -11,7 +11,7 @@ tags:
 
 ---
 
-{% note info %} 原理比较简单是基于ADB的`screenrecord`指令以及VLC的持续对输入流的解码展示，最终的效果是能够在Window或者Mac上进行投屏小米VR一体机，并且支持缩放操作。该教程同样适用与Oculus Go{% endnote %}
+{% note info %} 原理比较简单是基于ADB的`screenrecord`指令以及VLC的持续对输入流的解码展示，最终的效果是能够在Window或者Mac上进行投屏小米VR一体机，并且支持缩放操作（该教程同样适用与Oculus Go)。{% endnote %}
 
 <!-- more -->
 
