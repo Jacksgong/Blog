@@ -1,6 +1,6 @@
 title: 翻墙的VPS选择与SS快速搭建与优化
 date: 2018-02-28 11:06:03
-updated: 2018-06-11
+updated: 2018-10-09
 categories:
 - 网络
 tags:
@@ -19,7 +19,7 @@ tags:
 
 #### 1. 前言
 
-在十九大之前，我是采用[portal.shadowsocks.la](https://portal.shadowsocks.la)中够买的VPS，其VPS的香港与日本的线路是采用阿里云，延时极低全部直连在平时速度是极快的，但是十九大之后便变得十分不可靠，而后我自己在通过[Vultr][vultr_url]够买VPS开始自行搭建自己的SS，刚开始也并非一帆风顺。
+在十九大之前，我是采用[portal.shadowsocks.la](https://portal.shadowsocks.la)中够买的VPN，其VPS的香港与日本的线路是采用阿里云，延时极低全部直连在平时速度是极快的，但是十九大之后便变得十分不可靠，而后我自己在通过[Vultr][vultr_url]够买VPS开始自行搭建自己的SS，刚开始也并非一帆风顺。
 
 ![](/img/ss-and-vps-6.png)
 
@@ -53,9 +53,9 @@ Shadowsocks这块，推荐直接使用Teddysun的这个[一键安装脚本](http
 
 ### III. Kcptun
 
-**Kcptun是可选的，可用可不用**。其用于加速翻墙的速度，但是需要服务端与客户端双端的支持，大概原理是由于目前网络基建已经十分可靠通过Kcptun会将所有流量都跑到UDP协议上。
+**Kcptun是可选的，可用可不用**。其用于加速翻墙的速度，但是需要服务端与客户端双端的支持，大概原理是使用KCP + UDP通过牺牲部分带宽来提高带宽利用率，一般来说优化效果会比较明显，特别在弱网环境。
 
-对于服务端而言推荐使用该[一键安装脚本](https://blog.kuoruan.com/110.html)，十分可靠，客户端的话[手机版的SS](https://github.com/shadowsocks/shadowsocks-android/releases)通过kcptun插件有支持，mac版没有支持，而路由器的openwrt一般都会有集成。
+对于服务端而言推荐使用该[一键安装脚本](https://blog.kuoruan.com/110.html)，十分可靠，客户端的话[手机版的SS](https://github.com/shadowsocks/shadowsocks-android/releases)通过kcptun插件有支持，[mac版](https://github.com/shadowsocks/ShadowsocksX-NG/releases)有支持，路由器的openwrt一般也会有集成。
 
 相关加速的其他选择还有`锐速`与[finalspeed](https://github.com/d1sm/finalspeed)。
 
