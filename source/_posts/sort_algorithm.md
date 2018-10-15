@@ -16,7 +16,7 @@ tags:
 
 在此之前大家可以看下这个浅谈算法的BBC先回顾下:
 
-<iframe width=100% height="415" src="https://www.youtube.com/embed/gOKVwRIyWdg" frameborder="0" allowfullscreen></iframe>
+<iframe width=100% height="450" src="https://www.youtube.com/embed/gOKVwRIyWdg" frameborder="0" allowfullscreen></iframe>
 
 ([bilibili地址](https://www.bilibili.com/video/av11035025?from=search&seid=1803828490295110622)，这里不引用bilibili因为bilibili比较模糊)
 
@@ -46,7 +46,7 @@ BBC讨论概况:
 
 不过我们今天就对于混乱情况借助下面这个很有意思的视频，对其效率进行排序下:
 
-<iframe width=100% height="415" src="//player.bilibili.com/player.html?aid=6979707&cid=11376507&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+<iframe width=100% height="450" src="//player.bilibili.com/player.html?aid=6979707&cid=11376507&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 | 效率排名 | 完全逆序 | 乱序 | 部分相同 | 几乎有序
 | --- | --- | --- | --- | ---
@@ -59,6 +59,11 @@ BBC讨论概况:
 | 7 | 插入排序(Insertion) | 选择排序(Selection) | 选择排序(Selection) | 堆排序(Heap)
 | 8 | 冒泡排序(Bubble) | 鸡尾酒排序(Cocktail) | 鸡尾酒排序(Cocktail) | 冒泡排序(Bubble)
 | 9 | 鸡尾酒排序(Cocktail) | 冒泡排序(Bubble) | 冒泡排序(Bubble) | 选择排序(Selection)
+
+| | 无序时间复杂度 | 有序空间复杂度 | 逆序空间复杂度
+| --- | --- | --- | ---
+| 选择排序 | $O(n^2)$ | $O(n^2)$ | $O(n^2)$
+| 插入排序 | $O(n^2)$ | $O(n)$ | $O(n)$
 
 ## II. 各类排序详细分析
 
@@ -118,7 +123,7 @@ BBC讨论概况:
 
 插入排序的原理很想扑克牌抓牌，每次抓牌都是从桌面上的牌抓起插入已经排好序的手中的牌中: 往已经有序的数据序列中插入一个数，使得插入完成后依然有序。
 
-每次交换情况:
+每次交换情况(最坏也只需要$O(n)$次交换):
 
 ```
 [5]  6  1  8  2  4
@@ -146,7 +151,7 @@ BBC讨论概况:
 - 比较操作最坏情况: 源数据逆序，需要$\frac{1}{2}n(n-1)$次
 - 赋值次数: $(比较操作次数) - (n-1)$ 因为$n-1$次循环中，每一次循环的比较都比赋值多一个，多在最后那次比较并不带来赋值
 - 时间复杂度: $O(n^2)$ (最坏: $O(n^2)$; 最优: $O(n)$)
-- 空间复杂度: 辅助空间$O(1)$用于
+- 空间复杂度: 辅助空间$O(1)$
 
 #### 已有应用场景
 
@@ -155,11 +160,14 @@ BBC讨论概况:
 
 ### 3. 冒泡排序 -- Bubble sort
 
+> [冒泡排序-维基](https://zh.wikipedia.org/wiki/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F)
+
 #### 原理
 
-从后往前分别两两对比，
+从后往前分别两两对比，遇到前一个比后一个小，就进行交换，这样每一轮下来就会有一个最小数被交换到前面，以此类推。
+冒泡排序只要数据一多，排序效率将会大打折扣，
 
-每次交换情况:
+每次交换情况(最坏需要$O(n^2)$次交换):
 
 ```
 5  6  1  8  2  4
@@ -195,6 +203,41 @@ BBC讨论概况:
 [1, 2, 4, 5, 6, 8]
 ```
 
+#### 效率分析
+
+- 稳定性: 稳定排序(排序过程中，两两交换，相同元素前后顺序没有改变)
+- 比较操作最好情况: 源数据有序，只需要$n-1$次(移动0次)
+- 比较操作最坏情况: 源数据逆序，需要$\frac{1}{2}n(n-1)$次(移动$\frac{3}{2}n(n-1)$次)
+- 时间复杂度: $O(n^2)$ (最坏(源为逆序): $O(n^2)$; 最优(源为正序): $O(n)$)
+- 空间复杂度: 辅助空间$O(1)$
+
+
+```
+public static void bubbleSort(int[] arr){
+  boolean changed;
+  int len= arr.length;
+  do{
+    changed = false;
+    len-=1;
+    for (i = 0; i < len; i++) {
+      // move larger one to next each time.
+      if (arr[i] > arr[i+1]) {
+        int temp = arr[i];
+        arr[i] = arr[i+1];
+        arr[i+1] = temp;
+        changed=true;
+      }
+    }
+  } while(changed);
+}
+```
+
+#### 已有应用场景
+
+## 鸡尾酒排序 -- Cocktail Sort
+
+将冒泡排序中，把走访数据的顺序反过来以提高效率。
+
 ## [TODO]
 
 ---
@@ -204,5 +247,6 @@ BBC讨论概况:
 - [直接选择排序](https://baike.baidu.com/item/%E7%9B%B4%E6%8E%A5%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F)
 - [sound-of-sorting](http://panthema.net/2013/sound-of-sorting/)
 - [蜜蜂或可快速找到最短飞行路线](http://news.sciencenet.cn/htmlpaper/2010102616262073312976.shtm)
-- [插入排序-维基](https://zh.wikipedia.org/wiki/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F)
 - [常见排序算法 - 插入排序 (Insertion Sort)](http://bubkoo.com/2014/01/14/sort-algorithm/insertion-sort/)
+- [经典排序算法（1）——冒泡排序算法详解](https://blog.csdn.net/guoweimelon/article/details/50902597)
+- [各类排序算法比较和应用场景](https://blog.csdn.net/MBuger/article/details/67643185)
