@@ -159,6 +159,22 @@ BBC讨论概况:
 - 由于其时间复杂度的缘故，不适合用于数据量较大的数据(如量级大于千)
 - 在STL的sort算法和stdlib的qsort算法中被作为快速排序的补充，用于少量元素的排序(8个或以下)
 
+```
+public static void insertSort(int[] arr) {
+  int length = arr.length();
+  for (int i = 0; i < length - 1; i++) {
+    int j = i;
+    int tmp = arr[j + 1];
+    for(; tmp < arr[j] && j >= 0; j--) {
+      arr[j + 1] = arr[j]
+    }
+
+    // j = -1 or tmp >= arr[j]
+    if (i != j) {
+      arr[j + 1] = tmp;
+    }
+}
+```
 ### 3. 冒泡排序 -- Bubble sort
 
 > [冒泡排序-维基](https://zh.wikipedia.org/wiki/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F)
@@ -251,3 +267,4 @@ public static void bubbleSort(int[] arr){
 - [常见排序算法 - 插入排序 (Insertion Sort)](http://bubkoo.com/2014/01/14/sort-algorithm/insertion-sort/)
 - [经典排序算法（1）——冒泡排序算法详解](https://blog.csdn.net/guoweimelon/article/details/50902597)
 - [各类排序算法比较和应用场景](https://blog.csdn.net/MBuger/article/details/67643185)
+- [冒泡排序和插入排序](https://harttle.land/2015/09/28/insertion-bubble-sort.html)
