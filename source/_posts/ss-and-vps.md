@@ -70,4 +70,5 @@ Shadowsocks这块，推荐直接使用Teddysun的这个[一键安装脚本](http
 
 最后如果有Ubuntu服务端维护相关的问题，欢迎转到[这篇文章](https://blog.dreamtobe.cn/maintain-website-server/)。如果有任何问题欢迎评论讨论。
 
-[vultr_url]: https://www.vultr.com/?ref=7210853
+[vultr_url_usually]: https://www.vultr.com/?ref=7210853
+[vultr_url]: http://www.vultr.com/?ref=7604654
