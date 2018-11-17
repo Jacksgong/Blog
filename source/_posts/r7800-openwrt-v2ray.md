@@ -1,4 +1,4 @@
-title: 网件R7800 openwrt使用v2ray+mkcp+透明代理完美翻墙
+title: 网件R7800 OpenWrt使用V2Ray+mKcp+透明代理完美翻墙
 date: 2018-11-17 11:51:03
 updated: 2018-11-17
 categories:
@@ -20,7 +20,7 @@ tags:
 
 顺便提一下，这货还真的大，简直可以盖住我整个MBP的键盘。
 
-![](/img/r7800-openwrt-3.jpeg)
+![](https://blog.dreamtobe.cn/img/r7800-openwrt-3.jpeg)
 
 
 这边R7800至少目前为止没有梅林等解决方案，但是其还有各类[其他选择](https://www.dropbox.com/sh/ew0gap0crn30wyk/AADQLCBF5All8wc8RXmxisqAa?dl=0)，今天我们就刷入[OpenWrt](https://openwrt.org/toh/netgear/r7800)，我们可以在[论坛上](https://forum.openwrt.org/t/netgear-r7800-exploration-ipq8065-qca9984/285)看到hnyman为其确实下了很多心血。
@@ -38,13 +38,13 @@ tags:
 
 通过`tftp`进行刷入，如果你是Mac OS，可以通过`brew install tftp`安装`tftp`，如果是windows可以自行在网络上下载`tftp`工具。然后如图进行刷入:
 
-![](/img/r7800-openwrt-1.png)
+![](https://blog.dreamtobe.cn/img/r7800-openwrt-1.png)
 
 通常几秒钟便完成刷机，此时路由器会自动重启并且进入openwrt。
 
 此时记得将网络改回DHCP，便可以通过浏览器访问`192.168.1.1`进入Openwrt的luci页面了。
 
-![](/img/r7800-openwrt-4.png)
+![](https://blog.dreamtobe.cn/img/r7800-openwrt-4.png)
 
 此时通过`System->Administration`进入管理员密码设置，设置好密码以及SSH后便完成了第一步。
 
@@ -420,7 +420,7 @@ service v2ray start
 
 启动后你就可以通过`ps | grep v2ray`看到该服务在运行了:
 
-![](/img/r7800-openwrt-2.png)
+![](https://blog.dreamtobe.cn/img/r7800-openwrt-2.png)
 
 到这里你依然不能翻墙，除非你的电脑代理到路由器的对应`1060`的端口上，我们不废话，其实我们刚刚在路由器的`config.json`上已经配置了透明代理，只不过路由器的防火墙还没有做转发，现在我们开始配置这个转发，来完成透明代理:
 
@@ -480,7 +480,7 @@ service dnsmasq restart
 
 这边Youtube能够跑到1440P基本流畅不卡顿，跑下来平均速度在14.5Mbps(快的时候可以到20Mbps，慢的时候在8Mbps，80%的情况通常在12.5Mbps左右)，R7800的CPU基本上被吃到10%左右，算是符合预期吧，如果你的VPS选择也是参考[这篇文章](https://blog.dreamtobe.cn/ss-and-vps/)应该整体下来和我差不多:
 
-![](/img/r7800-openwrt-5.png)
+![](https://blog.dreamtobe.cn/img/r7800-openwrt-5.png)
 
 
 ---
