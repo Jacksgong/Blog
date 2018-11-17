@@ -76,7 +76,20 @@ SSH进入路由器，然后修改`/etc/hosts`文件，添加:
 service network restart
 ```
 
-## IV. 上V2Ray
+## IV. LUCI中文界面配置
+
+直接通过SSH安装opkg包(也可以在luci界面中通过System->Software中搜索`uci-i18n-base-zh-cn`安装):
+
+```
+opkg update
+opkg install uci-i18n-base-zh-cn
+```
+
+搞定后默认会切换到中文:
+
+![](/img/r7800-openwrt-6.png)
+
+## V. 上V2Ray
 
 ### 1. V2Ray在VPS端搭建与配置
 
@@ -449,7 +462,7 @@ service firewall restart
 
 重启完成后你已经可以通过V2Ray翻墙了。
 
-## V. DNS污染问题处理
+## VI. DNS污染问题处理
 
 最后我们可以稍微优化下DNS解析，防止DNS污染的问题:
 
@@ -476,7 +489,7 @@ service dnsmasq restart
 
 自此已经完全全部配置，Have Fun!
 
-## VI. 最后
+## VII. 最后
 
 这边Youtube能够跑到1440P基本流畅不卡顿，跑下来平均速度在14.5Mbps(快的时候可以到20Mbps，慢的时候在8Mbps，80%的情况通常在12.5Mbps左右)，R7800的CPU基本上被吃到10%左右，算是符合预期吧，如果你的VPS选择也是参考[这篇文章](https://blog.dreamtobe.cn/ss-and-vps/)应该整体下来和我差不多:
 
