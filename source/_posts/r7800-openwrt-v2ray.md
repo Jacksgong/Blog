@@ -105,7 +105,7 @@ bash <(curl -L -s https://install.direct/go.sh)
 
 ```
 {
-  "log": {
+  "log" : {
     "access": "/var/log/v2ray/access.log",
     "error": "/var/log/v2ray/error.log",
     "loglevel": "warning"
@@ -121,15 +121,15 @@ bash <(curl -L -s https://install.direct/go.sh)
           "alterId": 64
         }
       ],
-      "detour": {
-        "to": "dynamicPort"
+      "detour":{
+        "to":"dynamicPort"
       }
     },
-    "streamSettings": {
-      "network": "kcp"
+    "streamSettings":{
+      "network":"kcp"
     }
   },
-  "inboundDetour": [
+  "inboundDetour":[
     {
       "protocol": "vmess",
       "port": "10000-20000",
@@ -161,23 +161,20 @@ bash <(curl -L -s https://install.direct/go.sh)
       "tag": "blocked"
     }
   ],
-  "transport": {
-    "tcpSettings": {
-      "connectionReuse": true
-    },
-    "kcpSettings": {
-      "mtu": 1350,
-      "tti": 20,
-      "uplinkCapacity": 100,
-      "downlinkCapacity": 100,
-      "congestion": false,
-      "readBufferSize": 5,
-      "writeBufferSize": 5,
-      "header": {
-        "type": "utp"
+ "transport":{
+      "kcpSettings":{
+         "mtu":1350,
+         "tti":50,
+         "uplinkCapacity":100,
+         "downlinkCapacity":200,
+         "congestion":true,
+         "readBufferSize":2,
+         "writeBufferSize":2,
+         "header":{
+            "type":"wechat-video"
+         }
       }
-    }
-  }
+   }
 }
 ```
 
@@ -296,7 +293,9 @@ mv v2ray v2ctl geoip.dat geosite.dat /usr/bin/v2ray/
   "dns": {
     "servers": [
       "119.29.29.29",
-      "localhost"
+      "localhost",
+      "8.8.8.8",
+      "8.8.4.4"
     ]
   },
   "routing": {
@@ -304,6 +303,43 @@ mv v2ray v2ctl geoip.dat geosite.dat /usr/bin/v2ray/
     "settings": {
       "domainStrategy": "IPIfNonMatch",
       "rules": [
+        {
+          "type": "field",
+          "domain": [
+            "geosite:cn"
+          ],
+          "outboundTag": "direct"
+        },
+        {
+          "type": "field",
+          "domain": [
+            "google",
+            "facebook",
+            "youtube",
+            "twitter",
+            "instagram",
+            "gmail",
+            "domain:twimg.com",
+            "domain:t.co"
+          ],
+          "outboundTag": "proxy"
+        },
+        {
+          "type": "field",
+          "ip": [
+            "8.8.8.8/32",
+            "8.8.4.4/32",
+            "91.108.56.0/22",
+            "91.108.4.0/22",
+            "109.239.140.0/24",
+            "149.154.164.0/22",
+            "91.108.56.0/23",
+            "67.198.55.0/24",
+            "149.154.168.0/22",
+            "149.154.172.0/22"
+          ],
+          "outboundTag": "proxy"
+        },
         {
           "type": "field",
           "port": "1-52",
@@ -374,14 +410,14 @@ mv v2ray v2ctl geoip.dat geosite.dat /usr/bin/v2ray/
     },
     "kcpSettings": {
       "mtu": 1350,
-      "tti": 20,
+      "tti": 50,
       "uplinkCapacity": 100,
-      "downlinkCapacity": 100,
-      "congestion": false,
-      "readBufferSize": 5,
-      "writeBufferSize": 5,
+      "downlinkCapacity": 200,
+      "congestion": true,
+      "readBufferSize": 2,
+      "writeBufferSize": 2,
       "header": {
-        "type": "utp"
+        "type": "wechat-video"
       }
     }
   }
@@ -497,7 +533,7 @@ service dnsmasq restart
 
 ## VII. 最后
 
-这边Youtube能够跑到1440P基本流畅不卡顿，跑下来平均速度在14.5Mbps(快的时候可以到20Mbps，慢的时候在8Mbps，80%的情况通常在12.5Mbps左右)，R7800的CPU基本上被吃到10%左右，算是符合预期吧，如果你的VPS选择也是参考[这篇文章](https://blog.dreamtobe.cn/ss-and-vps/)应该整体下来和我差不多:
+这边Youtube能够跑到1440P基本流畅不卡顿，跑下来平均速度在24.5Mbps(快的时候可以到30Mbps，慢的时候在18Mbps，80%的情况通常在22.5Mbps左右)，R7800的CPU基本上被吃到10%左右，算是符合预期吧，如果你的VPS选择也是参考[这篇文章](https://blog.dreamtobe.cn/ss-and-vps/)应该整体下来和我差不多:
 
 ![](https://blog.dreamtobe.cn/img/r7800-openwrt-5.png)
 
@@ -512,21 +548,21 @@ service dnsmasq restart
 ```
 "kcpSettings": {
   "mtu": 1350,
-  "tti": 10,
+  "tti": 50,
   "uplinkCapacity": 100,
   "downlinkCapacity": 200,
   "congestion": true,
   "readBufferSize": 2,
   "writeBufferSize": 2,
   "header": {
-    "type": "utp"
+    "type": "wechat-video"
   }
 }
 ```
 
-> P.S. 如果`header`使用`dtls`伪装，王者荣耀等通过udp协议匹配后会直接连接失败，因此这边我们采用`utp`伪装为BT下载数据，`dtls`相关存在问题的具体原因还没有深究。
+> P.S. 如果`header`使用`wechat-video`伪装，王者荣耀等通过udp协议匹配后会直接连接失败，因此这边我们采用`utp`伪装为BT下载数据，`dtls`相关存在问题的具体原因还没有深究。
 
-使用[这篇文章](https://blog.dreamtobe.cn/ss-and-vps/)的VPS换为东京后，并且如上做mKcp调整后，最终测速下来稳定在30Mbps左右:
+使用[这篇文章](https://blog.dreamtobe.cn/ss-and-vps/)的VPS换为东京后，并且如上做mKcp调整后，最终测速下来稳定在40Mbps左右:
 
 
 ![](/img/r7800-openwrt-v2ray-8.png)
@@ -545,3 +581,4 @@ service dnsmasq restart
 - [OpenWrt的DNS相关设置](https://www.right.com.cn/forum/thread-194080-1-1.html)
 - [openwrt 之 DNS配置文件修改](https://blog.csdn.net/zjqlovell/article/details/78598959)
 - [测速](https://fast.com)
+- [V2Ray各类模板配置](https://github.com/KiriKira/vTemplate)
