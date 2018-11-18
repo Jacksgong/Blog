@@ -1,6 +1,6 @@
 title: 翻墙的VPS选择与SS快速搭建与优化
 date: 2018-02-28 11:06:03
-updated: 2018-10-09
+updated: 2018-11-18
 categories:
 - 网络
 tags:
@@ -65,7 +65,11 @@ Shadowsocks这块，推荐直接使用Teddysun的这个[一键安装脚本](http
 
 这块也是推荐采用该[一键安装脚本](https://teddysun.com/489.html)，实测BBR对SS影响还是挺明显的。
 
-### V. 其他
+### V. V2Ray
+
+如果你不想使用SS + Kcptun，有另外一款更加稳定的选择方案，那就是V2Ray，针对V2Ray的搭建可以参看[这篇文章](https://blog.dreamtobe.cn/r7800-openwrt-v2ray/)的《上V2ray》的部分。
+
+### VI. 其他
 
 
 最后如果有Ubuntu服务端维护相关的问题，欢迎转到[这篇文章](https://blog.dreamtobe.cn/maintain-website-server/)。如果有任何问题欢迎评论讨论。
