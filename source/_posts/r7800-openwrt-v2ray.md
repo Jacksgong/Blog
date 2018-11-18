@@ -513,10 +513,12 @@ service dnsmasq restart
   "readBufferSize": 2,
   "writeBufferSize": 2,
   "header": {
-    "type": "dtls"
+    "type": "utp"
   }
 }
 ```
+
+> P.S. 如果`header`使用`dtls`伪装，王者荣耀等通过udp协议匹配后会直接连接失败，因此这边我们采用`utp`伪装为BT下载数据，`dtls`相关存在问题的具体原因还没有深究。
 
 使用[这篇文章](https://blog.dreamtobe.cn/ss-and-vps/)的VPS换为东京后，并且如上做mKcp调整后，最终测速下来稳定在30Mbps左右:
 
