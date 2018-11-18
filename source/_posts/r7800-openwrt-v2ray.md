@@ -1,6 +1,6 @@
 title: 网件R7800 OpenWrt使用V2Ray+mKcp+透明代理完美翻墙
 date: 2018-11-17 11:51:03
-updated: 2018-11-17
+updated: 2018-11-18
 categories:
 - 网络
 tags:
@@ -495,6 +495,33 @@ service dnsmasq restart
 
 ![](https://blog.dreamtobe.cn/img/r7800-openwrt-5.png)
 
+进一步优化:
+
+由于V2Ray有各类方式可以进行伪装，这边不再需要像[这篇文章](https://blog.dreamtobe.cn/ss-and-vps/)中选用阿姆斯特丹，这边虽然阿姆斯特丹掉包率极低，但是由于[参考这边](https://blog.dreamtobe.cn/ss-and-vps/)中选用的VPS的日本东京VPS从中国电信过去是直连的，因此这边改用V2Ray后我这边便直接通过将旧的VPS打Snapshots然后恢复到新开的东京的VPS(每小时$0.007，具体如何购买可以直接参考[这篇文章](https://blog.dreamtobe.cn/ss-and-vps/)，改选东京即可):
+
+![](/img/r7800-openwrt-v2ray-7.png)
+
+并且这边针对性的对mKCP进行了优化(注意服务端与客户端两边咱们的配置文件`config.json`中都需要调整):
+
+```
+"kcpSettings": {
+  "mtu": 1350,
+  "tti": 10,
+  "uplinkCapacity": 100,
+  "downlinkCapacity": 200,
+  "congestion": true,
+  "readBufferSize": 2,
+  "writeBufferSize": 2,
+  "header": {
+    "type": "dtls"
+  }
+}
+```
+
+使用[这篇文章](https://blog.dreamtobe.cn/ss-and-vps/)的VPS换为东京后，并且如上做mKcp调整后，最终测速下来稳定在30Mbps左右:
+
+
+![](/img/r7800-openwrt-v2ray-8.png)
 
 ---
 
