@@ -293,6 +293,12 @@ mv v2ray v2ctl geoip.dat geosite.dat /usr/bin/v2ray/
       }
     }
   ],
+  "dns": {
+    "servers": [
+      "119.29.29.29",
+      "localhost"
+    ]
+  },
   "routing": {
     "strategy": "rules",
     "settings": {
