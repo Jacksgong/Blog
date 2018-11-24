@@ -82,7 +82,7 @@ service network restart
 
 ```
 opkg update
-opkg install uci-i18n-base-zh-cn
+opkg install luci-i18n-base-zh-cn
 ```
 
 搞定后默认会切换到中文:
