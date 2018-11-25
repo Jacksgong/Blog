@@ -25,6 +25,20 @@ tags:
 
 这块请直接参看这篇文章: [翻墙的VPS选择与SS快速搭建与优化](https://blog.dreamtobe.cn/ss-and-vps/)
 
+这边可以特别留意的是，我这边由于一个月有1000G流量($5/月)，因此我测试下来是丝毫无需顾忌流量的问题，为了确保尽可能的流畅体验，我的kcptun配置如下:
+
+```
+crypt:  salsa20
+mode:  fast3
+mtu:  1350
+sndwnd:  768
+rcvwnd:  768
+datashard:  10
+parityshard:  3
+dscp:  0
+nocomp:  true
+```
+
 ## II. 路由器配置Shadowsocks + ChinaDNS
 
 首先建议可以先通过[这篇文章](https://blog.dreamtobe.cn/r7800-openwrt-v2ray/)中除V2ray部分的准备工作，然后我们再接下来操作。
