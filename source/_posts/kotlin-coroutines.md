@@ -1,6 +1,6 @@
 title: Kotlin Coroutines(协程)
 date: 2017-08-20 15:21:03
-updated: 2017-09-10
+updated: 2018-11-27
 categories:
 - 编程语言
 tags:
@@ -23,6 +23,32 @@ tags:
 ![](/img/kotlin-coroutines-1.png)
 
 本文所有案例均在kotlin 1.1.4与kotlinx-coroutines-core 0.18版本进行实验(由于我引入anko时，anko引用的coroutines时0.15版本因此这里引入0.18版本进行替换(至于为什么高版本会自动替换低版本可以参考[这篇文章](https://blog.dreamtobe.cn/android-toolset/)))。
+
+从kotlin 1.3起，coroutine已经进入了1.0并且不再是`experimental`了，相关引入如下,  我们直接参照[kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines)中，进行引入:
+
+```
+implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"
+implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1'
+```
+
+### 简单案例
+
+我们使用kotlin 1.0.1版本做一个简单的案例，案例中我们在主线程中异步的执行一个耗时操作，然后再在最后弹一个Toast:
+
+首先引入上面提到的`kotlinx-coroutines-core`与`kotlinx-coroutines-android` 两个依赖，然后在`MainActivity`中:
+
+```
+class MainActivity : AppCompatActivity() {
+  override fun onCreate(savedInstanceState: Bundle?){
+    super.onCreate(savedInstanceState)
+    ...
+    GlobalScope.launch(Dispatchers.Main) {
+      async(Dispatchers.IO) { delay(5000) }.await()
+      Toast.makeText(this@MainActivity, "finish async job but not block main thread", Toast.LENGTH_LONG).show()
+    }
+  }
+}
+```
 
 ## II. 什么是Kotlin Coroutines
 
@@ -1021,3 +1047,4 @@ Done consuming
 
 - [Guide to kotlinx.coroutines by example](https://github.com/Kotlin/kotlinx.coroutines/blob/master/coroutines-guide.md)
 - [协程](https://www.kotlincn.net/docs/reference/coroutines.html)
+- [How coroutines switch back to the main thread.](https://proandroiddev.com/how-coroutines-switch-back-to-the-main-thread-413fa6dc507a)
