@@ -37,7 +37,7 @@ implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1'
 
 首先引入上面提到的`kotlinx-coroutines-core`与`kotlinx-coroutines-android` 两个依赖，然后在`MainActivity`中:
 
-```
+```kotlin
 class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?){
     super.onCreate(savedInstanceState)
