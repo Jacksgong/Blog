@@ -1,4 +1,4 @@
-title: 网件R7800 Shadowsocks + ChinaDNS + KcpTun实现YouTuBe 4K流畅体验
+title: 网件R7800 SS + ChinaDNS + KcpTun实现YouTuBe 4K流畅体验
 date: 2018-11-25 16:44:03
 updated: 2018-11-25
 categories:
