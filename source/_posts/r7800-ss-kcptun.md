@@ -245,6 +245,8 @@ uci commit
 
 由于Shadowsocks依赖Kcptun，这边我们需要将Shadowsocks启动顺序延后，编辑`/etc/init.d/shadowsocks`将原本的`START=90`修改为`START=99`。
 
+如果有遇到域名解析是局域网域名断就解析失败的，通过到在LUCI页面上`网络`->`DHCP/DNS`->`基本设置`中将`重绑定保护`勾勾去掉即可。
+
 ---
 
 - [ChinaDNS + Shadowsocks](https://lvii.gitbooks.io/outman/content/ss.openwrt.html)
