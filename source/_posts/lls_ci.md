@@ -1,6 +1,6 @@
 title: 流利说客户端持续交付工程实践
 date: 2018-08-15 22:07:03
-updated: 2018-08-15
+updated: 2018-12-15
 wechatmpurl: https://mp.weixin.qq.com/s/sjm891upJi3HEyhCsuHqHA
 wechatmptitle: 流利说客户端持续交付工程实践
 sticky: 3
@@ -21,6 +21,10 @@ tags:
 ---
 
 本文已经发布到英语流利说技术团队公众号，可请直接访问: [流利说客户端持续交付工程实践 - 流利说技术团队](https://mp.weixin.qq.com/s/6ae3i5Zuo8svX0wMGQoggw)
+
+---
+
+本文所谈到的内容在GMTC上的相关演讲视频，可直接墙外访问: [流利说大前端持续交付工程实践 - YouTuBe](https://youtu.be/4whiXJP8DxE)
 
 ---
 
