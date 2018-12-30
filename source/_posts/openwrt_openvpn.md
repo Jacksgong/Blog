@@ -14,7 +14,7 @@ tags:
 
 <!-- more -->
 
-具体OpenVPN的各类配置特征可以直接参看[OpenWrt的这个帖子](https://oldwiki.archive.openwrt.org/doc/howto/vpn.openvpn#tab__server-bridge_tap_server2)，我们今天的整个流程也是主要参考该教程进行实践的，关于[openWRT路由搭建](https://blog.dreamtobe.cn/r7800-openwrt-v2ray/)相关的博客中有很多文章了，感兴趣的可以搜索查看。
+具体OpenVPN的各类配置特征可以直接参看[OpenWrt的这个帖子](https://oldwiki.archive.openwrt.org/doc/howto/vpn.openvpn#tab__server-bridge_tap_server2)，我们今天的整个流程也是主要参考该教程进行实践的，关于[OpenWRT路由搭建](https://blog.dreamtobe.cn/r7800-openwrt-v2ray/)相关的博客中有很多文章了，感兴趣的可以搜索查看。
 
 ## I. 准备工作
 
