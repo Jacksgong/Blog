@@ -116,7 +116,7 @@ chmod 0600 "my-client.key"
 openssl dhparam -out dh2048.pem 2048
 ```
 
-### III. OpenVPN相关网络配置
+## III. OpenVPN相关网络配置
 
 ### 1. 创建VPN接口(命名为vpn0)
 
