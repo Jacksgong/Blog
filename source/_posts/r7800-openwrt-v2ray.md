@@ -1,6 +1,6 @@
 title: 网件R7800 OpenWrt使用V2Ray+mKcp+透明代理完美翻墙
 date: 2018-11-17 11:51:03
-updated: 2018-11-18
+updated: 2018-12-30
 categories:
 - 网络
 tags:
@@ -89,7 +89,19 @@ opkg install luci-i18n-base-zh-cn
 
 ![](/img/r7800-openwrt-6.png)
 
-## V. 上V2Ray
+## V. 配置系统运行日志
+
+安装`rsyslog`:
+
+```
+opkg install rsyslog
+/etc/init.d/rsyslog enable
+/etc/init.d/rsyslog start
+```
+
+安装后，所有的运行日志都可以直接在`/var/log/messages`中查看了。
+
+## VI. 上V2Ray
 
 ### 1. V2Ray在VPS端搭建与配置
 
@@ -504,7 +516,7 @@ service firewall restart
 
 重启完成后你已经可以通过V2Ray翻墙了。
 
-## VI. DNS污染问题处理
+## VII. DNS污染问题处理
 
 最后我们可以稍微优化下DNS解析，防止DNS污染的问题:
 
@@ -531,7 +543,7 @@ service dnsmasq restart
 
 自此已经完全全部配置，Have Fun!
 
-## VII. 最后
+## VIII. 最后
 
 这边Youtube能够跑到1440P基本流畅不卡顿，跑下来平均速度在24.5Mbps(快的时候可以到30Mbps，慢的时候在18Mbps，80%的情况通常在22.5Mbps左右)，R7800的CPU基本上被吃到10%左右，算是符合预期吧，如果你的VPS选择也是参考[这篇文章](https://blog.dreamtobe.cn/ss-and-vps/)应该整体下来和我差不多:
 
