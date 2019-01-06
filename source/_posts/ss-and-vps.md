@@ -1,6 +1,6 @@
 title: 翻墙的VPS选择与SS快速搭建与优化
 date: 2018-02-28 11:06:03
-updated: 2018-11-18
+updated: 2019-01-06
 categories:
 - 网络
 tags:
@@ -27,7 +27,7 @@ tags:
 
 #### 2. 最终的选择
 
-最后我选择了[Vultr][vultr_url]在阿姆斯特丹的线路(费用: 每月`$5`，每小时`$0.007`)，从十九大期间一直使用到现在非常可靠稳定，速度方面youtube的访问常常都是1080P，因此VPS的选择推荐[Vultr][vultr_url]中的荷兰阿姆斯特丹的VPS。
+最后我选择了[Vultr][vultr_url]在阿姆斯特丹的线路(费用: 每月`$3.5`，每小时`$0.005`)，从十九大期间一直使用到现在非常可靠稳定，速度方面youtube的访问常常都是1080P，因此VPS的选择推荐[Vultr][vultr_url]中的荷兰阿姆斯特丹的VPS。
 
 ![](/img/ss-and-vps-1.png)
 ![](/img/ss-and-vps-2.png)
