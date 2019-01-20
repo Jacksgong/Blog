@@ -1,6 +1,6 @@
 title: 网件R7800 SS + ChinaDNS + KcpTun实现YouTuBe 4K流畅体验
 date: 2018-11-25 16:44:03
-updated: 2018-11-25
+updated: 2019-01-21
 categories:
 - 网络
 tags:
@@ -246,6 +246,32 @@ uci commit
 由于Shadowsocks依赖Kcptun，这边我们需要将Shadowsocks启动顺序延后，编辑`/etc/init.d/shadowsocks`将原本的`START=90`修改为`START=99`。
 
 如果有遇到域名解析是局域网域名断就解析失败的，通过到在LUCI页面上`网络`->`DHCP/DNS`->`基本设置`中将`重绑定保护`勾勾去掉即可。
+
+## IV. 自动更新ChinaDNS IP段
+
+我这边使用的是[17mon/china_ip_list](https://github.com/17mon/china_ip_list)这个仓库长期是有在更新的。
+
+创建文件`/bin/update_chinadns.sh`并输入以下内容:
+
+```
+rm -rf /etc/chinadns_chnroute.txt
+wget https://raw.githubusercontent.com/17mon/china_ip_list/master/china_ip_list.txt -O /etc/chinadns_chnroute.txt
+service chinadns stop
+service chinadns start
+service shadowsocks stop
+service shadowsocks start
+```
+
+然后给到其可执行权限:
+
+```
+chmod +x /bin/update_chinadns.sh
+```
+
+然后通过打开路由器管理页面，通过`系统`->`计划任务`，添加`0 4 * * 6 update_chinadns.sh`以配置每周6凌晨4点自动刷新DNS。
+
+![](/img/r7800-ss-kcptun-4.png)
+
 
 ---
 
