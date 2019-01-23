@@ -1,6 +1,6 @@
 title: 网件R7800 SS + ChinaDNS + KcpTun实现YouTuBe 4K流畅体验
 date: 2018-11-25 16:44:03
-updated: 2019-01-21
+updated: 2019-01-23
 categories:
 - 网络
 tags:
@@ -29,7 +29,7 @@ tags:
 
 ```
 crypt:  salsa20
-mode:  fast3
+mode:  fast2
 mtu:  1350
 sndwnd:  768
 rcvwnd:  768
