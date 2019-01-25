@@ -1,6 +1,6 @@
 title: 翻墙的VPS选择与SS快速搭建与优化
 date: 2018-02-28 11:06:03
-updated: 2019-01-23
+updated: 2019-01-25
 categories:
 - 网络
 tags:
@@ -22,6 +22,7 @@ tags:
 - 节点切换方面: 1小时内完成节点切换，如果需要的话，不过我用了几年下来，基本上没有特殊情况一年都不用切换一次。
 - 关于延时方面: 延时其实只是其中一个很小的纬度，我用的延时就是`200ms`左右，但是我的情况是通过下面教程的Kcptun后(我的Kcptun的配置可以通过[这篇文章](https://blog.dreamtobe.cn/r7800-ss-kcptun/)拿到)就是能够达到上面提到的情况
 
+
 ### I. VPS的选择
 
 #### 1. 前言
@@ -37,7 +38,7 @@ tags:
 最后我选择了[Vultr][vultr_url]在阿姆斯特丹的线路(费用: 每月`$3.5`，每小时`$0.005`)，从十九大期间一直使用到现在非常可靠稳定，速度方面youtube的访问常常都是1080P，因此VPS的选择推荐[Vultr][vultr_url]中的荷兰阿姆斯特丹的VPS。
 
 ![](/img/ss-and-vps-1.png)
-![](/img/ss-and-vps-2.png)
+![](/img/ss-and-vps-8.png)
 ![](/img/ss-and-vps-3.png)
 
 其速度测试，可自行到[这里](https://www.vultr.com/faq/#downloadspeedtests)进行验证，我直接用它的阿姆斯特丹的服务器ping我上海腾讯云的服务器大约在200多毫秒:
