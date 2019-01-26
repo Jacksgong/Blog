@@ -1,6 +1,6 @@
 title: 站点与服务器维护
 date: 2017-03-06 15:59:03
-updated: 2017-07-11
+updated: 2019-01-26
 categories:
 - 服务器
 tags:
@@ -28,8 +28,23 @@ tags:
 
 <script src="https://gist.dreamtobe.cn/Jacksgong/6b2c118c9a1b1c064c5d5f6402c240d3.js"></script>
 
+#### 2. 修改编辑器
 
-#### 2. 配置Shell
+```shell
+sudo update-alternatives --config editor
+```
+
+#### 3. 配置sudo不用密码
+
+我个人习惯，新创建的账户不给设置密码，只允许证书登录，并且允许无密码`sudo`
+
+通过 `sudo visudo` 进入编辑，然后添加:
+
+```
+<用户名> ALL=(ALL) NOPASSWD: ALL
+```
+
+#### 4. 配置Shell
 
 > 由于MacBook上对zsh长期的使用习惯，因此使用统一风格的zsh，并使用oh-my-zsh管理
 
@@ -55,7 +70,7 @@ cd autojump
 python install.py
 ```
 
-#### 3. 修改source
+#### 5. 修改source
 
 > **如果是海外的VPS** 可以忽略这一步。
 
@@ -67,7 +82,7 @@ python install.py
 
 配置完后，最好升级下所有的包(`sudo -- sh -c "apt-get update && apt-get upgrade"`)，这时候你就会发现有哪些被修改过了，我的做法是全部替换为原版(`maintainer's version`)
 
-#### 4. 配置10分钟闲置后自动断开
+#### 6. 配置10分钟闲置后自动断开
 
 在`/etc/ssh/sshd_config`中配置
 
@@ -76,7 +91,7 @@ ClientAliveInterval 600
 ClientAliveCountMax 0
 ```
 
-#### 5. 修改hostname
+#### 7. 修改hostname
 
 > 可以通过命令`hostname`输出当前的hostname
 
@@ -86,7 +101,7 @@ ClientAliveCountMax 0
 - 第二步: 通过修改`/etc/hostname`中的`hostname`来固化，让重启后依然使用新的`hostname`
 - 第三步: 通过在`/etc/hosts`中修改(添加)`new-host-name`到本地`127.0.0.1`中，如`127.0.0.1 new-host-name`，让通过`hostname`访问本地时能够解析到本地
 
-#### 6. 防火墙配置
+#### 8. 防火墙配置
 
 > 内对外完全放开，外对内只开启22,80,443端口
 
@@ -102,7 +117,7 @@ ClientAliveCountMax 0
 
 <img src="/img/conf-firewall.jpg" width="450px">
 
-#### 7. 配置TCP BBR拥塞算法
+#### 9. 配置TCP BBR拥塞算法
 
 快速执行配置，安装与检测安装算法(需要OpenVZ以外虚拟技术的VPS平台):
 
@@ -126,7 +141,7 @@ ClientAliveCountMax 0
 
 <img src="/img/check-bbr.png" width="450px">
 
-#### 8. 配置Swap
+#### 10. 配置Swap
 
 > 考虑到gitlab等应用对内存使用比较多，因此可以通过`top`工具来查看内存的使用情况，考虑到有可能会有内存不足导致500，可以配置Swap来避免该问题的发生
 > 在以前考虑到SSD硬盘的写入次数太过频繁很容易缩短使用寿命，因此不建议使用SSD做Swap，但是现在的[SSD已经逐渐改善](http://askubuntu.com/questions/652337/why-no-swap-partitions-on-ssd-drives/652342#652342?newreg=237ae587907241919402075b80ab6fa3)了类似的情况
@@ -147,7 +162,7 @@ ClientAliveCountMax 0
 
 <script src="https://gist.dreamtobe.cn/Jacksgong/d54e2b68e2b66faec7e671338ac4b85b.js"></script>
 
-#### 9. 安装与配置Nginx
+#### 11. 安装与配置Nginx
 
 快速执行配置:
 
@@ -161,7 +176,7 @@ ClientAliveCountMax 0
 
 <img src="/img/install-nginx.jpg" width="450px">
 
-#### 10. 安装PHP7
+#### 12. 安装PHP7
 
 快速执行配置:
 
@@ -169,7 +184,7 @@ ClientAliveCountMax 0
 sudo apt install php7.0-common php7.0-fpm php7.0-cli php7.0-json php7.0-mysql php7.0-curl php7.0-intl php7.0-mcrypt php-pear php7.0-gd php7.0-zip php7.0-xml php7.0-mbstring
 ```
 
-#### 11. 配置Java
+#### 13. 配置Java
 
 检测版本:
 
@@ -199,7 +214,7 @@ sudo apt-get install oracle-java8-installer
 sudo update-alternatives --config java
 ```
 
-#### 12. 配置Shadowsocks Client用于国内VPS翻墙
+#### 14. 配置Shadowsocks Client用于国内VPS翻墙
 
 先拉取shadowsocks-client-ubuntu项目:
 
@@ -257,7 +272,7 @@ cd shadowsocks-client-ubuntu
 ./stop.sh
 ```
 
-#### 13. 安装sendmail用于发邮件
+#### 15. 安装sendmail用于发邮件
 
 安装:
 
