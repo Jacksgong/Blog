@@ -62,6 +62,10 @@ sudo shutdown -r 0
 
 采用的是[powerlevel9k](https://github.com/bhilburn/powerlevel9k)主题，色系是[Neutron](https://github.com/Ch4s3/iTerm2-Neutron)。
 
+>  温馨提示，字体安装可以直接在[这里](https://github.com/powerline/fonts/tree/master/SourceCodePro)下载`Source Code Pro Powerline xxx`
+
+无论是主题、字体还是色系，这边都需要在iTerm2的设置中(Profiles)进行配置。
+
 样式配置(在`~/.zshrc`中添加):
 
 ```
