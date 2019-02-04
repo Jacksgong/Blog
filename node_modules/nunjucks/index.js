@@ -1,86 +1,102 @@
 'use strict';
 
 var lib = require('./src/lib');
-var env = require('./src/environment');
+
+var _require = require('./src/environment'),
+    Environment = _require.Environment,
+    Template = _require.Template;
+
 var Loader = require('./src/loader');
+
 var loaders = require('./src/loaders');
+
 var precompile = require('./src/precompile');
 
-module.exports = {};
-module.exports.Environment = env.Environment;
-module.exports.Template = env.Template;
+var compiler = require('./src/compiler');
 
-module.exports.Loader = Loader;
-module.exports.FileSystemLoader = loaders.FileSystemLoader;
-module.exports.PrecompiledLoader = loaders.PrecompiledLoader;
-module.exports.WebLoader = loaders.WebLoader;
+var parser = require('./src/parser');
 
-module.exports.compiler = require('./src/compiler');
-module.exports.parser = require('./src/parser');
-module.exports.lexer = require('./src/lexer');
-module.exports.runtime = require('./src/runtime');
-module.exports.lib = lib;
-module.exports.nodes = require('./src/nodes');
+var lexer = require('./src/lexer');
 
-module.exports.installJinjaCompat = require('./src/jinja-compat.js');
+var runtime = require('./src/runtime');
 
-// A single instance of an environment, since this is so commonly used
+var nodes = require('./src/nodes');
+
+var installJinjaCompat = require('./src/jinja-compat'); // A single instance of an environment, since this is so commonly used
+
 
 var e;
-module.exports.configure = function(templatesPath, opts) {
-    opts = opts || {};
-    if(lib.isObject(templatesPath)) {
-        opts = templatesPath;
-        templatesPath = null;
+
+function configure(templatesPath, opts) {
+  opts = opts || {};
+
+  if (lib.isObject(templatesPath)) {
+    opts = templatesPath;
+    templatesPath = null;
+  }
+
+  var TemplateLoader;
+
+  if (loaders.FileSystemLoader) {
+    TemplateLoader = new loaders.FileSystemLoader(templatesPath, {
+      watch: opts.watch,
+      noCache: opts.noCache
+    });
+  } else if (loaders.WebLoader) {
+    TemplateLoader = new loaders.WebLoader(templatesPath, {
+      useCache: opts.web && opts.web.useCache,
+      async: opts.web && opts.web.async
+    });
+  }
+
+  e = new Environment(TemplateLoader, opts);
+
+  if (opts && opts.express) {
+    e.express(opts.express);
+  }
+
+  return e;
+}
+
+module.exports = {
+  Environment: Environment,
+  Template: Template,
+  Loader: Loader,
+  FileSystemLoader: loaders.FileSystemLoader,
+  PrecompiledLoader: loaders.PrecompiledLoader,
+  WebLoader: loaders.WebLoader,
+  compiler: compiler,
+  parser: parser,
+  lexer: lexer,
+  runtime: runtime,
+  lib: lib,
+  nodes: nodes,
+  installJinjaCompat: installJinjaCompat,
+  configure: configure,
+  reset: function reset() {
+    e = undefined;
+  },
+  compile: function compile(src, env, path, eagerCompile) {
+    if (!e) {
+      configure();
     }
 
-    var TemplateLoader;
-    if(loaders.FileSystemLoader) {
-        TemplateLoader = new loaders.FileSystemLoader(templatesPath, {
-            watch: opts.watch,
-            noCache: opts.noCache
-        });
-    }
-    else if(loaders.WebLoader) {
-        TemplateLoader = new loaders.WebLoader(templatesPath, {
-            useCache: opts.web && opts.web.useCache,
-            async: opts.web && opts.web.async
-        });
-    }
-
-    e = new env.Environment(TemplateLoader, opts);
-
-    if(opts && opts.express) {
-        e.express(opts.express);
-    }
-
-    return e;
-};
-
-module.exports.compile = function(src, env, path, eagerCompile) {
-    if(!e) {
-        module.exports.configure();
-    }
-    return new module.exports.Template(src, env, path, eagerCompile);
-};
-
-module.exports.render = function(name, ctx, cb) {
-    if(!e) {
-        module.exports.configure();
+    return new Template(src, env, path, eagerCompile);
+  },
+  render: function render(name, ctx, cb) {
+    if (!e) {
+      configure();
     }
 
     return e.render(name, ctx, cb);
-};
-
-module.exports.renderString = function(src, ctx, cb) {
-    if(!e) {
-        module.exports.configure();
+  },
+  renderString: function renderString(src, ctx, cb) {
+    if (!e) {
+      configure();
     }
 
     return e.renderString(src, ctx, cb);
+  },
+  precompile: precompile ? precompile.precompile : undefined,
+  precompileString: precompile ? precompile.precompileString : undefined
 };
-
-if(precompile) {
-    module.exports.precompile = precompile.precompile;
-    module.exports.precompileString = precompile.precompileString;
-}
