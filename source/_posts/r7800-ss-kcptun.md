@@ -1,6 +1,6 @@
 title: 网件R7800 SS + ChinaDNS + KcpTun实现YouTuBe 4K流畅体验
 date: 2018-11-25 16:44:03
-updated: 2019-01-23
+updated: 2019-02-15
 categories:
 - 网络
 tags:
@@ -272,6 +272,47 @@ chmod +x /bin/update_chinadns.sh
 
 ![](/img/r7800-ss-kcptun-4.png)
 
+## V. 检测服务存在问题自动重启kcptun
+
+先确保必要的工具`wget`已经被安装:
+
+```
+opkg update
+opkg install wget
+```
+
+然后我们新建一个脚本`/root/test-kcptun`，然后填入以下内容:
+
+```
+LOGTIME=$(date "+%Y-%m-%d %H:%M:%S")
+wget --spider --quiet --tries=1 --timeout=3 www.google.co.jp
+if [ "$?" == "0" ]; then
+#     echo '['$LOGTIME'] No Problem.'
+        exit 0
+else
+        wget --spider --quiet --tries=1 --timeout=3 www.baidu.com
+        if [ "$?" == "0" ]; then
+                echo '['$LOGTIME'] Problem decteted, restarting kcptun.'
+                /etc/init.d/kcptun restart
+        else
+                echo '['$LOGTIME'] Network Problem. Do nothing.'
+        fi
+fi
+```
+
+该脚本是测试下google首页访问，如果失败，会再测试下百度首页，如果百度首页也不通说明网络存在问题就不进一步处理，如果百度首页可以通，很大程度上kcptun存在问题，就自动重启kcptun服务。
+
+给到该脚本可执行权限:
+
+```
+chmod +x /root/test-kcptun
+```
+
+配置每4分钟自动执行下这个文件，并将重启操作写入`/var/log/kcptun_watchdog.log`，执行`crontab -e`添加以下:
+
+```
+4 * * * * /root/test-kcptun >> /var/log/kcptun_watchdog.log 2>&1
+```
 
 ---
 
@@ -279,3 +320,4 @@ chmod +x /bin/update_chinadns.sh
 - [Shadowsocks + GfwList 实现 OpenWRT / LEDE 路由器自动翻墙](https://cokebar.info/archives/962)
 - [Openwrt配置Shadowsocks](http://notes.guoliangwu.com/2017/04/02/OpenWrt-ShadowSocks-Config/)
 - [OpenWrt 路由器安装 KCPTun 客户端](https://cyhour.com/479/)
+- [转载个SS异常重启脚本](https://www.right.com.cn/forum/thread-183686-1-1.html)
