@@ -1,6 +1,8 @@
 title: Mac 直播游戏，斗鱼直播，bilibili直播
 date: 2019-02-16 16:32:03
 updated: 2019-02-16
+wechatmpurl: https://mp.weixin.qq.com/s/fGFvpaH236_nPARDpxChaQ
+wechatmptitle: MacOS 直播游戏，斗鱼直播，bilibili直播
 categories:
 - 教程
 tags:
