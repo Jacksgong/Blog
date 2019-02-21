@@ -1,6 +1,6 @@
 title: Mac 直播游戏，斗鱼直播，bilibili直播
 date: 2019-02-16 16:32:03
-updated: 2019-02-16
+updated: 2019-02-21
 wechatmpurl: https://mp.weixin.qq.com/s/fGFvpaH236_nPARDpxChaQ
 wechatmptitle: MacOS 直播游戏，斗鱼直播，bilibili直播
 categories:
@@ -24,6 +24,28 @@ tags:
 ![](/img/live-guideline-2.png)
 
 因此我们只需要有工具将相关的视频流推送到直播平台提供的rtmp即可。
+
+### 什么是RTMP?
+
+之前玩NAS的时候安装[emby](https://emby.media/)多媒体中心服务，发现它也可以通过添加rtmp来接收各类电视台，今天我们又看到RTMP，这个到底是啥呢?
+
+> Real-Time Messaging Protocol
+
+- Adobe Systems公司为Flash播放器和服务器之前音视频和数据传输开发的协议
+- 标准的未加密的协议，默认端口1935
+
+一般包含 发布地址与流名称，业界已经有很多基于该协议的服务。
+
+#### 优势
+
+- 兼容性，由于其播放的客户端只需要Flash Player，使得99%的PC都可以直接在网页上直接查看
+- RTMP采用TCP作为传输层协议，避免在广域网传输过程中丢包对质量照成损失
+- 传输的FLV封装格式支持H.264视频编码，可以在很低码率下显示质量也能很不错
+
+#### 劣势
+
+- 由于基于TCP协议，实时性不如UDP，也因此占用宽带，目前基于UDP的RTMFP协议解决了这个问题(可参看[800li media server](http://www.800li.net/))
+- 依赖Flash Player，必须需要Flash Player
 
 ## 推流
 
@@ -85,3 +107,4 @@ brew install scrcpy
 ---
 
 - [使用OBS在B站直播（Mac平台）](http://augix.me/archives/5018)
+- [流媒体系统的RTMP协议](https://zhuanlan.zhihu.com/p/27368329)
