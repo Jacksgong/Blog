@@ -1,6 +1,8 @@
 title: MacBook Pro 自行升级SSD 固态970 Pro 1TB 碾压原厂
 date: 2019-02-21 02:21:03
 updated: 2019-02-21
+wechatmpurl: https://mp.weixin.qq.com/s/2HEz_GNfjCx8DHGuCOuWhg
+wechatmptitle: MacBook Pro 读写速度稳定翻倍 一毛没花还赚了100元!
 categories:
 - 硬件
 tags:
