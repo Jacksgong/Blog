@@ -1,6 +1,6 @@
 title: 站点与服务器维护
 date: 2017-03-06 15:59:03
-updated: 2019-01-26
+updated: 2019-02-24
 categories:
 - 服务器
 tags:
@@ -316,6 +316,54 @@ sudo sendmailconfig
 sudo service sendmail restart
 ```
 
+#### 16. 安装python
+
+先安装依赖:
+
+```
+sudo apt-get install build-essential checkinstall
+sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
+```
+
+下载指令:
+
+```
+version=2.7.13
+wget https://www.python.org/ftp/python/$version/Python-$version.tgz
+```
+
+解压缩:
+
+```
+tar -xvf Python-$version.tgz
+cd Python-$version
+```
+
+编译安装:
+
+```
+./configure
+make
+sudo checkinstall
+```
+
+#### 17. DNS问题处理
+
+如果发现DNS有问题，可以通过以下的方式进行配置，首先添加以下内容到`/etc/resolvconf/resolv.conf.d/base`:
+
+```
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+```
+
+DNS服务器如果不知道怎么选择，建议可以直接在[这里](https://ip.cn/dns.html)查找自己想要的DNS服务器。
+
+然后通过执行以下指令进行生效:
+
+```
+sudo resolvconf -u
+```
+
 ## 站点安装
 
 ### 1. ownCloud
@@ -448,5 +496,7 @@ sudo service sendmail restart
 - [各种系统下Shadowsocks客户端的安装与配置](http://www.jeyzhang.com/how-to-install-and-setup-shadowsocks-client-in-different-os.html)
 - [Ubuntu下shadowsocks 安装与配置（server and client）](https://my.oschina.net/lieefu/blog/500774)
 - [INSTALL SENDMAIL ON UBUNTU](https://www.leonardaustin.com/blog/technical/sendmail-on-ubuntu/)
+- [How do I set my DNS when resolv.conf is being overwritten?](https://unix.stackexchange.com/questions/128220/how-do-i-set-my-dns-when-resolv-conf-is-being-overwritten)
+- [How do I install the latest Python 2.7.X or 3.X on Ubuntu?](https://askubuntu.com/questions/101591/how-do-i-install-the-latest-python-2-7-x-or-3-x-on-ubuntu)
 
 ---
