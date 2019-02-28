@@ -63,7 +63,7 @@ Shadowsocks这块，推荐直接使用Teddysun的这个[一键安装脚本](http
 
 **Kcptun是可选的，可用可不用**。其用于加速翻墙的速度，但是需要服务端与客户端双端的支持，大概原理是使用KCP + UDP通过牺牲部分带宽来提高带宽利用率，一般来说优化效果会比较明显，特别在弱网环境。
 
-对于服务端而言推荐使用该[一键安装脚本](https://blog.kuoruan.com/110.html)，十分可靠，客户端的话[手机版的SS](https://github.com/shadowsocks/shadowsocks-android/releases)通过kcptun插件有支持，[mac版](https://github.com/shadowsocks/ShadowsocksX-NG/releases)有支持，路由器的openwrt一般也会有集成。
+对于服务端而言推荐使用该[一键安装脚本](https://blog.kuoruan.com/110.html)(如果这个网站挂了可以手动clone[这个github项目](https://github.com/kuoruan/shell-scripts)然后执行`kcptun/kcptun.sh`即可)，十分可靠，客户端的话[手机版的SS](https://github.com/shadowsocks/shadowsocks-android/releases)通过kcptun插件有支持，[mac版](https://github.com/shadowsocks/ShadowsocksX-NG/releases)有支持，路由器的openwrt一般也会有集成。
 
 相关加速的其他选择还有`锐速`与[finalspeed](https://github.com/d1sm/finalspeed)。
 
