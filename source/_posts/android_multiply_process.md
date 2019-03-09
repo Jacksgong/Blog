@@ -1,6 +1,6 @@
 title: Android Binder IPC机制
 date: 2015-11-25 23:54:03
-updated: 2015-11-25 23:54:03
+updated: 2018-11-25 23:54:03
 permalink: 2015/11/25/android_multiply_process
 wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483670&idx=1&sn=d9124d91d37fa1ecaf131238bda3fb94
 wechatmptitle: Android Binder IPC机制
@@ -110,6 +110,46 @@ Binder相比一般的IPC而言，只需要一次内存拷贝即可实现数据�
 - `area`: 类型(vm_struct), 给内核使用的虚拟地址。
 - `vma`: 类型(vm_area_struct), 给进程使用的虚拟地址。
 
+##### Binder与mmap
+
+这里我们也看到了Binder的机制实际是使用了`mmap`，其核心思想就是:
+
+1. 通过`mmap`在用户空间找到一块合适的虚拟内存
+2. 在内核空间也找到一块合适的虚拟内存
+3. 修改两个空间的页表使得两者映射到同一块物理内存
+
+我们知道每个进程有一个用户空间页表，而系统只有一个内核空间页表。因此这里数据从A进程的用户空间直接拷贝到B进程的内核空间，由于B进程对应的用户空间也有该内核空间相应的映射，因此就无需再从内核空间拷贝到B用户空间了，只需要一次拷贝即可完成。
+
+```
+static int binder_mmap(struct file *filp, struct vm_area_struct *vma)
+{
+  int ret;
+  ...
+  if ((vma->vm_end - vma->vm_start) > SZ_4M)
+    vma->vm_end = vma->vm_start + SZ_4M;
+  ...
+  // 在内核空间找合适的虚拟内存块
+  area = get_vm_area(vma->vm_end - vma->vm_start, VM_IOREMAP);
+  ...
+  proc->buffer = area->addr;
+  <!--记录用户空间虚拟地址跟内核空间虚拟地址的差值-->
+  proc->user_buffer_offset = vma->vm_start - (uintptr_t)proc->buffer;
+  ...
+  proc->pages = kzalloc(sizeof(proc->pages[0]) * ((vma->vm_end - vma->vm_start) / PAGE_SIZE), GFP_KERNEL);
+  ...
+  <!--分配page, 并更新用户控件及内存空间对应的页表-->
+  if(binder_update_page_range(proc, 1, proc->buffer, proc->buffer + PAGE_SIZE, vma)) {
+    ...
+  }
+  ...
+  return 0;
+}
+```
+
+![](/img/android-multiply-process-1.png)
+
+![](/img/android-multiply-process-2.png)
+
 
 #### 2. Service Manager
 
@@ -173,5 +213,7 @@ Service - `onTransact()` -> Client - transaction (transaction, 在binder thread)
 - [Android进程间通信（IPC）机制Binder简要介绍和学习计划](http://blog.csdn.net/luoshengyang/article/details/6618363)
 - [An Overview of Android Binder Framework](http://codetheory.in/an-overview-of-android-binder-framework/)
 - [An Android 101 : An overview on Binder framework.](https://sujaiantony.wordpress.com/2011/12/28/an-android-101-an-overview-on-binder-framework/)
+- [Android中mmap原理及应用简析](https://juejin.im/post/5c3ec9ebf265da61223a93de)
+- [binder.c#L2788](https://elixir.bootlin.com/linux/v3.6/source/drivers/staging/android/binder.c#L2788)
 
 ---
