@@ -105,7 +105,7 @@ opkg install rsyslog
 
 ### 1. V2Ray在VPS端搭建与配置
 
-要通过V2Ray进行翻墙，首先我们需要先有一台已经配置好V2Ray的墙外的VPS，对于VPS的选择与搭建可以参看[这篇文章](https://blog.dreamtobe.cn/ss-and-vps/)，下面我们就假定你已经通过[该篇文章](https://blog.dreamtobe.cn/ss-and-vps/)配置好了VPS，配置好后，你是一个Ubuntu，ok, 我们先开始搭建VPS端:
+要通过V2Ray进行翻墙，首先我们需要先有一台已经配置好V2Ray的墙外的VPS，对于VPS的选择与搭建可以参看[这篇文章](https://blog.dreamtobe.cn/2016/11/30/vps-ss/)，下面我们就假定你已经通过[该篇文章](https://blog.dreamtobe.cn/2016/11/30/vps-ss/)配置好了VPS，配置好后，你是一个Ubuntu，ok, 我们先开始搭建VPS端:
 
 由于针对Ubuntu，[官方文档](https://www.v2ray.com/chapter_00/install.html)中已经有提供脚本安装，我们就直接通过该脚本进行安装即可:
 
@@ -192,7 +192,7 @@ bash <(curl -L -s https://install.direct/go.sh)
 
 配置好后，可以通过`/usr/bin/v2ray/v2ray -test -config /etc/v2ray/config.json` 来检测下配置文件的格式是否存在问题。
 
-我们假设你使用的是`29001`端口，并且已经通过[这篇文章](https://blog.dreamtobe.cn/ss-and-vps/)设置好了通过`ufw`管理防火墙，因此这边需要允许该端口的访问:
+我们假设你使用的是`29001`端口，并且已经通过[这篇文章](https://blog.dreamtobe.cn/2016/11/30/vps-ss/)设置好了通过`ufw`管理防火墙，因此这边需要允许该端口的访问:
 
 ```
 ufw allow 29001
@@ -545,13 +545,13 @@ service dnsmasq restart
 
 ## VIII. 最后
 
-这边Youtube能够跑到1440P基本流畅不卡顿，跑下来平均速度在24.5Mbps(快的时候可以到30Mbps，慢的时候在18Mbps，80%的情况通常在22.5Mbps左右)，R7800的CPU基本上被吃到10%左右，算是符合预期吧，如果你的VPS选择也是参考[这篇文章](https://blog.dreamtobe.cn/ss-and-vps/)应该整体下来和我差不多:
+这边Youtube能够跑到1440P基本流畅不卡顿，跑下来平均速度在24.5Mbps(快的时候可以到30Mbps，慢的时候在18Mbps，80%的情况通常在22.5Mbps左右)，R7800的CPU基本上被吃到10%左右，算是符合预期吧，如果你的VPS选择也是参考[这篇文章](https://blog.dreamtobe.cn/2016/11/30/vps-ss/)应该整体下来和我差不多:
 
 ![](https://blog.dreamtobe.cn/img/r7800-openwrt-5.png)
 
 进一步优化:
 
-由于V2Ray有各类方式可以进行伪装，这边不再需要像[这篇文章](https://blog.dreamtobe.cn/ss-and-vps/)中选用阿姆斯特丹，这边虽然阿姆斯特丹掉包率极低，但是由于[参考这边](https://blog.dreamtobe.cn/ss-and-vps/)中选用的VPS的日本东京VPS从中国电信过去是直连的，因此这边改用V2Ray后我这边便直接通过将旧的VPS打Snapshots然后恢复到新开的东京的VPS(每小时$0.007，具体如何购买可以直接参考[这篇文章](https://blog.dreamtobe.cn/ss-and-vps/)，改选东京即可):
+由于V2Ray有各类方式可以进行伪装，这边不再需要像[这篇文章](https://blog.dreamtobe.cn/2016/11/30/vps-ss/)中选用阿姆斯特丹，这边虽然阿姆斯特丹掉包率极低，但是由于[参考这边](https://blog.dreamtobe.cn/2016/11/30/vps-ss/)中选用的VPS的日本东京VPS从中国电信过去是直连的，因此这边改用V2Ray后我这边便直接通过将旧的VPS打Snapshots然后恢复到新开的东京的VPS(每小时$0.007，具体如何购买可以直接参考[这篇文章](https://blog.dreamtobe.cn/2016/11/30/vps-ss/)，改选东京即可):
 
 ![](/img/r7800-openwrt-v2ray-7.png)
 
@@ -574,7 +574,7 @@ service dnsmasq restart
 
 > P.S. 如果`header`使用`wechat-video`伪装，王者荣耀等通过udp协议匹配后会直接连接失败，因此这边我们采用`utp`伪装为BT下载数据，`dtls`相关存在问题的具体原因还没有深究。
 
-使用[这篇文章](https://blog.dreamtobe.cn/ss-and-vps/)的VPS换为东京后，并且如上做mKcp调整后，最终测速下来稳定在70Mbps左右:
+使用[这篇文章](https://blog.dreamtobe.cn/2016/11/30/vps-ss/)的VPS换为东京后，并且如上做mKcp调整后，最终测速下来稳定在70Mbps左右:
 
 
 ![](/img/r7800-openwrt-v2ray-8.png)

@@ -23,7 +23,7 @@ tags:
 
 ## I. 服务器端准备
 
-这块请直接参看这篇文章: [翻墙的VPS选择与SS快速搭建与优化](https://blog.dreamtobe.cn/ss-and-vps/)
+这块请直接参看这篇文章: [翻墙的VPS选择与SS快速搭建与优化](https://blog.dreamtobe.cn/2016/11/30/vps-ss/)
 
 这边可以特别留意的是，我这边由于一个月有1000G流量($5/月)，因此我测试下来是丝毫无需顾忌流量的问题，为了确保尽可能的流畅体验，我的kcptun配置如下:
 
@@ -214,7 +214,7 @@ opkg install luci-i18n-kcptun-zh-cn_*.ipk
 
 ### 3. 开启KcpTun
 
-安装好后，通过`服务`->`Kcptun服务`中设置`客户端文件`为`/usr/bin/kcptun`并且在`服务端管理`中添加一个KcpTun的设置(这些你应该在[这里](https://blog.dreamtobe.cn/ss-and-vps/)VPS上已经配置好了)，添加好后，在`设置`中配置`服务端地址`为刚刚配置好的，然后点击保存并运行。
+安装好后，通过`服务`->`Kcptun服务`中设置`客户端文件`为`/usr/bin/kcptun`并且在`服务端管理`中添加一个KcpTun的设置(这些你应该在[这里](https://blog.dreamtobe.cn/2016/11/30/vps-ss/)VPS上已经配置好了)，添加好后，在`设置`中配置`服务端地址`为刚刚配置好的，然后点击保存并运行。
 
 ![](/img/r7800-ss-kcptun-2.png)
 
