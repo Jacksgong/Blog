@@ -28,7 +28,7 @@ tags:
 这边可以特别留意的是，我这边由于一个月有1000G流量($5/月)，因此我测试下来是丝毫无需顾忌流量的问题，为了确保尽可能的流畅体验，我的kcptun配置如下:
 
 ```
-crypt:  salsa20
+crypt:  blowfish
 mode:  fast2
 mtu:  1350
 sndwnd:  768
@@ -321,3 +321,4 @@ chmod +x /root/test-kcptun
 - [Openwrt配置Shadowsocks](http://notes.guoliangwu.com/2017/04/02/OpenWrt-ShadowSocks-Config/)
 - [OpenWrt 路由器安装 KCPTun 客户端](https://cyhour.com/479/)
 - [转载个SS异常重启脚本](https://www.right.com.cn/forum/thread-183686-1-1.html)
+- [各种加密算法比较](https://www.cnblogs.com/sunxuchu/p/5483956.html)
