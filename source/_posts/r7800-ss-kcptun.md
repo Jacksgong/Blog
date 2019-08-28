@@ -1,6 +1,6 @@
 title: 网件R7800 SS + ChinaDNS + KcpTun实现YouTuBe 4K流畅体验
 date: 2018-11-25 16:44:03
-updated: 2019-02-15
+updated: 2019-08-29
 categories:
 - 网络
 tags:
@@ -272,7 +272,36 @@ chmod +x /bin/update_chinadns.sh
 
 ![](/img/r7800-ss-kcptun-4.png)
 
-## V. 检测服务存在问题自动重启kcptun
+## V. 国内IP走默认DNS加速
+
+考虑到国内不同运营商之间通信带宽很窄，很多站点为了加速会根据实际IP地址给到相同线路的机房，如果说我们DNS走海外服务器，就容易由于没有拿到对口线路机房IP，而访问国内站点慢。
+
+针对这块[felixc.at](http://felixc.at/Dnsmasq)的开源库中总结了几乎所有国内常用站点，我们可以dnsmasq快速配置让这些域名解析直接访问DNS获得:
+
+编辑`/etc/dnsmasq.conf`，修改内容为:
+
+```
+no-resolv
+no-poll
+conf-dir=/etc/dnsmasq.d
+server=127.0.0.1#5353
+```
+
+这里默认的DNS使用`127.0.0.1#5353`，是因为文章前面配置了ChinaDNS监听端口5353，默认我们还是走ChinaDNS。完成`/etc/dnsmasq.conf`修改后，创建文件夹`/etc/dnsmasq.d`，并执行:
+
+```
+wget https://github.com/felixonmars/dnsmasq-china-list/raw/master/accelerated-domains.china.conf -O /etc/dnsmasq.d/accelerated-domains.china.conf
+```
+
+最后重启`dnsmasq`服务:
+
+```
+/etc/init.d/dnsmasq restart
+```
+
+大功告成！
+
+## VI. 检测服务存在问题自动重启kcptun
 
 先确保必要的工具`wget`已经被安装:
 
