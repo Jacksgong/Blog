@@ -1,6 +1,6 @@
 title: 网件R7800 SS + ChinaDNS + KcpTun实现YouTuBe 4K流畅体验
 date: 2018-11-25 16:44:03
-updated: 2019-08-29
+updated: 2019-09-04
 categories:
 - 网络
 tags:
@@ -341,6 +341,14 @@ chmod +x /root/test-kcptun
 
 ```
 4 * * * * /root/test-kcptun >> /var/log/kcptun_watchdog.log 2>&1
+```
+
+## VII. 其他
+
+使用wget访问https协议链接的时候遇到`not support ssl/tls`，通过以下解决
+
+```
+opkg install libustream-openssl
 ```
 
 ---
