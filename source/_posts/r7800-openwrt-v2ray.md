@@ -1,6 +1,6 @@
 title: 网件R7800 OpenWrt使用V2Ray+mKcp+透明代理完美翻墙
 date: 2018-11-17 11:51:03
-updated: 2018-12-30
+updated: 2019-09-04
 categories:
 - 网络
 tags:
@@ -27,7 +27,7 @@ tags:
 
 ## I. 刷Openwrt
 
-首先先下载[r7800-openwrt-18.06.1](http://downloads.openwrt.org/releases/18.06.1/targets/ipq806x/generic/openwrt-18.06.1-ipq806x-netgear_r7800-squashfs-factory.img)，下载完后我们通过以下步骤让路由器进入刷机模式并准备好刷机:
+首先先下载[r7800-openwrt-18.06.4](http://downloads.openwrt.org/releases/18.06.4/targets/ipq806x/generic/openwrt-18.06.4-ipq806x-netgear_r7800-squashfs-factory.img)，下载完后我们通过以下步骤让路由器进入刷机模式并准备好刷机:
 
 - 关闭路由器电源
 - 按住复位键并接入电源，此时你会看到电源LED灯变成橙色等闪烁，接着会变为白色灯闪烁，此时可以放开复位键，路由器这时已经是进入了刷机模式
@@ -58,7 +58,7 @@ uci commit
 service network restart
 ```
 
-修改好后，就可以将光猫出来的网线接入到WAN口，接入互联网了。配置Wifi之类的比较简单这里就不说了。
+修改好后，就可以将光猫出来的网线接入到WAN口，接入互联网了。配置WiFi之类的比较简单这里就不说了(需要留意下802.11ac才是传统意义的5G WiFi，配置的时候可以直接选择AP到WAN)。
 
 ## III. 添加HOST
 
