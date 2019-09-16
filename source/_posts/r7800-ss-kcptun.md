@@ -351,6 +351,36 @@ chmod +x /root/test-kcptun
 opkg install libustream-openssl
 ```
 
+配置脚本一键关闭shadowsocks+kcptun:
+
+```
+/etc/init.d/chinadns stop
+/etc/init.d/dns-forwarder stop
+/etc/init.d/shadowsocks stop
+/etc/init.d/kcptun stop
+uci set dhcp.@dnsmasq[0].local=119.29.29.29
+uci changes
+uci commit
+sed -i 's/server=.*/server=119.29.29.29/g' /etc/dnsmasq.conf
+cat /etc/dnsmasq.conf
+/etc/init.d/dnsmasq restart
+```
+
+配置脚本一键开启shadowsocks+kcptun:
+
+```
+/etc/init.d/chinadns start
+/etc/init.d/dns-forwarder start
+/etc/init.d/kcptun start
+/etc/init.d/shadowsocks start
+uci set dhcp.@dnsmasq[0].local=127.0.0.1#5353
+uci changes
+uci commit
+sed -i 's/server=.*/server=127.0.0.1#5353/g' /etc/dnsmasq.conf
+cat /etc/dnsmasq.conf
+/etc/init.d/dnsmasq restart
+```
+
 ---
 
 - [ChinaDNS + Shadowsocks](https://lvii.gitbooks.io/outman/content/ss.openwrt.html)
