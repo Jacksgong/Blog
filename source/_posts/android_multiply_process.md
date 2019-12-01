@@ -205,6 +205,27 @@ Service - `onTransact()` -> Client - transaction (transaction, 在binder thread)
 
 > The client will receive the transaction in the thread waiting for the first transaction to be finished rather than a binder thread.
 
+## IV. 特殊说明
+
+### 线程池
+
+如上面原理，每个进程一共是16个binder线程，其中15个是binder线程池中，另外有一个binder主线程。
+
+如果线程都满，就会在todo队列中阻塞等待。
+
+### 缓冲内存区
+
+Linux层对mmap的限制是4M，但是Binder申请的mmap更低，同步空间为1016K，异步空间508K（一半）。
+
+```
+# 1016K
+#define BINDER_VM_SIZE ((1*1024*1024) - (4096 *2))
+```
+
+- 如果缓冲区满，就会抛`DeadObjectException`错误
+- 如果通过广播传递Bitmap是受1016K限制的，实际中，bundle超过800K就会报`TransactionTooLargeException`。
+- 如果通过AIDL传递Bitmap，只要超过128K，就会使用Ashmem来传递图片（Ashmem最常用的地方是SurfaceFlinger服务通信)，mmap只传递Ashmem的fd。
+
 ---
 
 - [Android Binder设计与实现](http://blog.csdn.net/universus/article/details/6211589)
@@ -215,5 +236,7 @@ Service - `onTransact()` -> Client - transaction (transaction, 在binder thread)
 - [An Android 101 : An overview on Binder framework.](https://sujaiantony.wordpress.com/2011/12/28/an-android-101-an-overview-on-binder-framework/)
 - [Android中mmap原理及应用简析](https://juejin.im/post/5c3ec9ebf265da61223a93de)
 - [binder.c#L2788](https://elixir.bootlin.com/linux/v3.6/source/drivers/staging/android/binder.c#L2788)
+- [听说你Binder机制学的不错，来解决下这几个问题（一）](https://juejin.im/post/58c90816a22b9d006413f624)
+- [Android部分技术点目录（3）](https://www.jianshu.com/p/265c4b748e0d)
 
 ---
