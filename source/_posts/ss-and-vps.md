@@ -1,7 +1,7 @@
 title: 翻墙的VPS选择与SS快速搭建与优化[本文将删除]
 date: 2018-02-28 11:06:03
 updated: 2018-02-28
-permalink: 2016/11/30/vps-ss
+permalink: 2016/11/30/vps-ss-to-delete
 categories:
 - 网络
 tags:
