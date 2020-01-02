@@ -1,6 +1,6 @@
 title: 架构设计基础知识整理
 date: 2016-03-09 22:41:03
-updated: 2017-05-24
+updated: 2020-01-02
 permalink: 2016/03/09/oo_architecture
 wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&amp;mid=2247483731&amp;idx=1&amp;sn=4084630e41a91848d9c72408d737a368
 wechatmptitle: 架构设计基础知识整理(一)
@@ -105,7 +105,17 @@ From http://msdn.microsoft.com/en-us/library/ff647859.aspx
 - MVC中`Controller`控制全局事务，`View`将事件发送给`Controller`，`Controller`处理完事件同步给`Model`(数据库/数据模型)，`View`是通过所绑定的`Model`的改变来刷新自己。
 - MVP中`Presenter`从`View`中获取数据，刷新`Model`，当`Model`中的数据发生改变后，`Presenter`读取`Model`并刷新`View`。
 
-### 2. MVVM
+### 2. Flux
+
+在MVC中由于`View`与`Model`存在双向通讯，当业务逐渐复杂后，MVC势必会出现大量的`View`与`Model`交错通信的情况，这种情况是非常危险的，如:
+
+![](/img/architecutre-mvc-issue.png)
+
+基于这个Facebook在2017提出了一个新的架构概念叫Flux，它在`Model`与`View`的通信中间加入了`Dispatcher`，通过`Dispatcher`统一处理`Mode`与`View`的通信处理，讲究单项数据流:
+
+![](/img/architecture-flux.png)
+
+### 3. MVVM
 
 ![](/img/architecture-mvvm.png)
 
@@ -117,7 +127,7 @@ From http://msdn.microsoft.com/en-us/library/ff647859.aspx
 - `ViewModel`: 负责显示数据(监听到`Model`中的数据变化进行显示)，以及处理用户交互(监听`View`布局中的用户Action)
 - `Model`: 存储内容
 
-### 3. MVVM-C
+### 4. MVVM-C
 
 ![](/img/architecture-mvvm-c.png)
 
@@ -128,7 +138,7 @@ From http://msdn.microsoft.com/en-us/library/ff647859.aspx
 - `ViewModel`: 显示数据(监听`Model`中的数据变化进行显示)
 - `Model`: 存储内容
 
-#### 4. 指令分离
+#### 5. 指令分离
 
 > 这样的好处很明显，当你调用一个`getUser`的时候，符合预期的就是获取当前的User，而数据不会被修改;
 > 而当你执行`login`的时候，也就是登陆，而非为了返回数据;
@@ -146,7 +156,7 @@ UserService.login(username, password);
 User u = UserService.getUser();
 ```
 
-#### 5. 得墨忒耳定律
+#### 6. 得墨忒耳定律
 
 > 最少知识原则，尽可能少的获知有限的知识，这是一种松耦合的具体案例
 
@@ -163,7 +173,7 @@ objectA.getObjectB().getObjectC().doSomething();
 ObjectA.doSomething()
 ```
 
-#### 6. "死亡参数"
+#### 7. "死亡参数"
 
 > 当方法的参数过多或者没有严格规范时，久而久之可读性就会非常差，并且容易出现问题
 
