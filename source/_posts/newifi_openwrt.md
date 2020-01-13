@@ -12,7 +12,7 @@ tags:
 
 ---
 
-> 之前我用的是 TP-LINK WR720N v3，也[刷了OpenWrt进行翻墙](http://blog.dreamtobe.cn/2015/09/06/wr720n-v3-openwrt-shadowsocks/)，上段时间同事一直给我推荐 Lenovo的 Newifi，各项硬件都不错，于是就入手了，网上查了下，简单的刷了个基于Openwrt的Pandorabox，结果发现相同的节点，看YouTuBe连720p都卡成了翔，还不如我之前WR720N来得稳定，严重影响工作效率，于是就倒腾起来，决定还是刷官网的OpenWrt。刷完官网的OpenWrt以及配置以后，速度飕飕的，又回到了YouTuBe流畅1080p的时代，而且各方面感觉相比之前使用TP-LINK WR720N v3，会来的更快些。
+> 之前我用的是 TP-LINK WR720N v3，也[刷了OpenWrt进行翻墙](http://blog.dreamtobe.cn/2015/09/06/wr720n-v3-openwrt-shadowsocks-to-be-delete/)，上段时间同事一直给我推荐 Lenovo的 Newifi，各项硬件都不错，于是就入手了，网上查了下，简单的刷了个基于Openwrt的Pandorabox，结果发现相同的节点，看YouTuBe连720p都卡成了翔，还不如我之前WR720N来得稳定，严重影响工作效率，于是就倒腾起来，决定还是刷官网的OpenWrt。刷完官网的OpenWrt以及配置以后，速度飕飕的，又回到了YouTuBe流畅1080p的时代，而且各方面感觉相比之前使用TP-LINK WR720N v3，会来的更快些。
 
 <!-- more -->
 
@@ -81,7 +81,7 @@ opkg install resolveip
 
 ## IV. 配置
 
-基本的配置与 [TP-LINK WR720N v3刷OpenWrt完美翻墙](http://blog.dreamtobe.cn/2015/09/06/wr720n-v3-openwrt-shadowsocks/)中的(`VI. 配置shadowsocks和chinadns`)一致，配置完以后，**再进行以下最后的配置即可**。
+基本的配置与 [TP-LINK WR720N v3刷OpenWrt完美翻墙](http://blog.dreamtobe.cn/2015/09/06/wr720n-v3-openwrt-shadowsocks-to-be-delete/)中的(`VI. 配置shadowsocks和chinadns`)一致，配置完以后，**再进行以下最后的配置即可**。
 
 ### 1.手动在Global Setting中选中Server
 
