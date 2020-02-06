@@ -256,10 +256,10 @@ uci commit
 ```
 rm -rf /etc/chinadns_chnroute.txt
 wget https://raw.githubusercontent.com/17mon/china_ip_list/master/china_ip_list.txt -O /etc/chinadns_chnroute.txt
-service chinadns stop
-service chinadns start
-service shadowsocks stop
-service shadowsocks start
+/etc/init.d/chinadns stop
+/etc/init.d/chinadns start
+/etc/init.d/shadowsocks stop
+/etc/init.d/shadowsocks start
 ```
 
 然后给到其可执行权限:
