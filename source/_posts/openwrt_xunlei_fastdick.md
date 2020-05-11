@@ -14,7 +14,7 @@ tags:
 
 ---
 
-> 这次提速是在Newifi Y1上([Newifi Y1 刷Openwrt 自配Shadowsocks高稳定翻墙](http://blog.dreamtobe.cn/2016/04/24/newifi_openwrt/))，不过只要是Openwrt都可以参考这个教程，整个提速的是基于[fffonion/Xunlei-Fastdick](https://github.com/fffonion/Xunlei-Fastdick)，十分的给力，我这边的宽带下行原本是30M，成功提速到50M。
+> 这次提速是在Newifi Y1上([Newifi Y1 刷Openwrt 自配Shadowsocks高稳定翻墙](http://blog.dreamtobe.cn/2016/04/24/newifi_openwrt_to_delete/))，不过只要是Openwrt都可以参考这个教程，整个提速的是基于[fffonion/Xunlei-Fastdick](https://github.com/fffonion/Xunlei-Fastdick)，十分的给力，我这边的宽带下行原本是30M，成功提速到50M。
 
 <!-- more -->
 

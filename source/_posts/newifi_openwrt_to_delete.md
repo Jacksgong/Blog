@@ -1,7 +1,7 @@
 title: Newifi Y1 刷Openwrt 自配Shadowsocks高稳定翻墙
 date: 2016-04-24 00:22:03
 updated: 2018-08-31 10:18:03
-permalink: 2016/04/24/newifi_openwrt
+permalink: 2016/04/24/newifi_openwrt_to_delete
 categories:
 - OpenWrt
 tags:
