@@ -14,7 +14,7 @@ tags:
 
 <!-- more -->
 
-具体OpenVPN的各类配置特征可以直接参看[OpenWrt的这个帖子](https://oldwiki.archive.openwrt.org/doc/howto/vpn.openvpn#tab__server-bridge_tap_server2)，我们今天的整个流程也是主要参考该教程进行实践的，关于[OpenWRT路由搭建](https://blog.dreamtobe.cn/r7800-openwrt-v2ray/)相关的博客中有很多文章了，感兴趣的可以搜索查看。
+具体OpenVPN的各类配置特征可以直接参看[OpenWrt的这个帖子](https://oldwiki.archive.openwrt.org/doc/howto/vpn.openvpn#tab__server-bridge_tap_server2)，我们今天的整个流程也是主要参考该教程进行实践的，关于[OpenWRT路由搭建](https://blog.dreamtobe.cn/r7800-openwrt-v2ray_to_delete/)相关的博客中有很多文章了，感兴趣的可以搜索查看。
 
 ## I. 准备工作
 
@@ -60,7 +60,7 @@ sed -i '/organizationName_default/    s:= .*:= WWW Ltd.:'  ${PKI_CNF}
 sed -i '/stateOrProvinceName_default/ s:= .*:= London:'    ${PKI_CNF}
 sed -i '/countryName_default/         s:= .*:= GB:'        ${PKI_CNF}
 
-sed -i '/default_days/   s:=.*:= 3650:'                    ${PKI_CNF} ## default usu.: -days 365 
+sed -i '/default_days/   s:=.*:= 3650:'                    ${PKI_CNF} ## default usu.: -days 365
 sed -i '/default_bits/   s:=.*:= 4096:'                    ${PKI_CNF} ## default usu.: -newkey rsa:2048
 ```
 
@@ -70,13 +70,13 @@ sed -i '/default_bits/   s:=.*:= 4096:'                    ${PKI_CNF} ## default
 cat >> ${PKI_CNF} <<"EOF"
 ###############################################################################
 ### Check via: openssl x509 -text -noout -in *.crt | grep 509 -A 1
-[ my-server ] 
+[ my-server ]
 #  X509v3 Key Usage:          Digital Signature, Key Encipherment
 #  X509v3 Extended Key Usage: TLS Web Server Authentication
   keyUsage = digitalSignature, keyEncipherment
   extendedKeyUsage = serverAuth
 
-[ my-client ] 
+[ my-client ]
 #  X509v3 Key Usage:          Digital Signature
 #  X509v3 Extended Key Usage: TLS Web Client Authentication
   keyUsage = digitalSignature

@@ -17,7 +17,7 @@ tags:
 
 ## 前言
 
-由于通过KcpTun相比于[前面我们配置的V2ray](https://blog.dreamtobe.cn/r7800-openwrt-v2ray/)来说没有复杂的混淆与动态端口，因此在一定情况下会相对轻量些，只需要不断怼流量，不过通过`fast.com`中测试下来的速度应该是不如V2ray方案(至少我这边测试下来的情况是的)，但是测试耗时却会快很多很多，但是由于KcpTun可以有很灵活的配置，这边可以通过不断堆流量让整个速度稳定在较高的水平，因此这边的实际体验是通过SS+KcpTun可以流畅体验YouTuBe 4K视频，不过在看4K视频时R7800的CPU会稳定在30%左右:
+由于通过KcpTun相比于[前面我们配置的V2ray](https://blog.dreamtobe.cn/r7800-openwrt-v2ray_to_delete/)来说没有复杂的混淆与动态端口，因此在一定情况下会相对轻量些，只需要不断怼流量，不过通过`fast.com`中测试下来的速度应该是不如V2ray方案(至少我这边测试下来的情况是的)，但是测试耗时却会快很多很多，但是由于KcpTun可以有很灵活的配置，这边可以通过不断堆流量让整个速度稳定在较高的水平，因此这边的实际体验是通过SS+KcpTun可以流畅体验YouTuBe 4K视频，不过在看4K视频时R7800的CPU会稳定在30%左右:
 
 ![](/img/r7800-ss-kcptun-3.png)
 
@@ -41,7 +41,7 @@ nocomp:  true
 
 ## II. 路由器配置Shadowsocks + ChinaDNS
 
-首先建议可以先通过[这篇文章](https://blog.dreamtobe.cn/r7800-openwrt-v2ray/)中除V2ray部分的准备工作，然后我们再接下来操作。
+首先建议可以先通过[这篇文章](https://blog.dreamtobe.cn/r7800-openwrt-v2ray_to_delete/)中除V2ray部分的准备工作，然后我们再接下来操作。
 
 ### 1. 添加dist包
 

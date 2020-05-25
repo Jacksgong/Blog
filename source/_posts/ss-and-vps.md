@@ -76,7 +76,7 @@ Shadowsocks这块，推荐直接使用Teddysun的这个[一键安装脚本](http
 
 ### V. V2Ray
 
-如果你不想使用SS + Kcptun，有另外一款更加稳定的选择方案，那就是V2Ray，针对V2Ray的搭建可以参看[这篇文章](https://blog.dreamtobe.cn/r7800-openwrt-v2ray/)的《上V2ray》的部分。
+如果你不想使用SS + Kcptun，有另外一款更加稳定的选择方案，那就是V2Ray，针对V2Ray的搭建可以参看[这篇文章](https://blog.dreamtobe.cn/r7800-openwrt-v2ray_to_delete/)的《上V2ray》的部分。
 
 ### VI. 其他
 
