@@ -7,5 +7,5 @@
 
 echo "$(tput setaf 3)---------Server Deploy v1.0--------- $(tput sgr 0)"
 rm -rf public
-git clone git@git.jacksgong.com:Jacksgong/blog-deploy.git public
+git clone git@git.dreamtobe.cn:Jacksgong/blog-deploy.git public
 echo "$(tput setaf 3)Has successfully deploy to server$(tput sgr 0)"
