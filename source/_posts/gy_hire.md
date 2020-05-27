@@ -170,6 +170,6 @@ tags:
 3、具有扎实的计算机相关基础，熟悉Objective-C或Swift，有相关开发经验者优先；
 4、每周保证至少4天实习时间，可以实习3个月以上。
 
-##「发送简历，OFFER等你～」
+## 发送简历，OFFER等你～
 
-简历接收邮箱：`gongzhenjie@bytedance.com`
+简历接收邮箱：gongzhenjie@bytedance.com
