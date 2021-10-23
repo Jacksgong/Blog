@@ -1,6 +1,6 @@
 title: Ubuntu 16.04 安装与配置 Phabricator
 date: 2017-06-15 23:52:03
-updated: 2017-07-11
+updated: 2021-10-23
 categories:
 - 工程师技能
 tags:
@@ -145,7 +145,7 @@ sudo service nginx reload
 > 默认Mariadb的root账户在root用户下是不用密码的，因此通过`sudo`进入
 
 ```bash
-sudo mysql -user root -p
+sudo mysql -u root -p
 ```
 
 登陆数据库以后，注意屏幕有前缀`mysql> `
