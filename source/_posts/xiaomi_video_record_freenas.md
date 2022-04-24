@@ -1,5 +1,6 @@
-title: 米家智慧摄影机 云台版自动备份 FreeNAS
+title: 米家智慧摄影机 云台版自动备份 FreeNAS/TrueNAS
 date: 2020-06-21 22:51:03
+updated: 2022-04-24 20:53:03
 categories:
 - Fun
 tags:
@@ -24,4 +25,16 @@ tags:
 3. 勾选`Enable SMB1 support`
 4. 点击SAVE
 
+另外如果你使用TrueNas 12.0及以上版本，由于NMBD服务默认被系统关闭了，所以即便你上面都操作了，其实依然会找不到，并且影响备份，此时你需要做以下操作:
+
+1. 进入TrueNAS管理页面
+2. 打开网络
+3. 打开全局配置的设置页面
+4. 勾选`NetBIOS-NS`
+4. 点击保存
+
 此时你再在米家上输入用户名密码就可以正常识别了，识别选择目录后，就会在你选择的目录上新增了xiaomi_camera_videos的目录，所有视频都会自动备份到里面了。
+
+---
+
+- [TrueNAS 12 & SMB 1?](https://www.truenas.com/community/threads/truenas-12-smb-1.88159/)
