@@ -20,7 +20,7 @@ echo "$(tput setaf 3)>>>>>>start push blog$(tput sgr 0)"
 cd public
 rm -rf .git
 git init
-git remote add origin git@git.dreamtobe.cn:Jacksgong/blog-deploy.git
+git remote add origin git@gitea.partyland.cc:2222/jacks/blog-deploy.git
 
 # Commit:
 commit_date="$(date)"
@@ -34,8 +34,9 @@ echo "$(tput setaf 3)>>>>>>fninsh push blog$(tput sgr 0)"
 
 # add marker
 echo "$(tput setaf 3)>>>>>>start add deploy marker$(tput sgr 0)"
-git clone git@git.dreamtobe.cn:Jacksgong/blog-deploy-auto-marker.git deploy-marker
+git clone git@gitea.partyland.cc:2222/jacks/blog-deploy-auto-marker.git deploy-marker
 cd deploy-marker
+
 bash add-deploy.sh
 cd ..
 rm -rf deploy-marker
