@@ -1,6 +1,6 @@
 title: 站点与服务器维护
 date: 2017-03-06 15:59:03
-updated: 2019-02-24
+updated: 2022-11-01
 categories:
 - 服务器
 tags:
@@ -119,6 +119,10 @@ ClientAliveCountMax 0
 
 #### 9. 配置TCP BBR拥塞算法
 
+> 以下方法只在ubuntu 16.x上测试过，如果是使用ubuntu 22以及更高版本，可以参考[这里](https://www.linuxcapable.com/enable-bbr-on-ubuntu-22-04-boost-internet-speed/)，实际上只需要做如下操作
+> ![](/img/maintain-website-server-b50eb67c.png)
+> 也就是只需要在`/etc/sysctl.conf`中将对应模式修改即可，因为内核已经支持，不用再执行脚本去升级内核了。修改后同样的用`bbr-check.sh`来检测是否生效即可。
+
 快速执行配置，安装与检测安装算法(需要OpenVZ以外虚拟技术的VPS平台):
 
 安装:
@@ -163,6 +167,8 @@ ClientAliveCountMax 0
 <script src="https://gist.dreamtobe.cn/Jacksgong/d54e2b68e2b66faec7e671338ac4b85b.js"></script>
 
 #### 11. 安装与配置Nginx
+
+> 在ubuntu 22以及更高版本下，可以参考[这里](https://linuxhint.com/install-nginx-ubuntu-22-04/) ,只需要用`sudo apt install nginx`就可以完成安装。
 
 快速执行配置:
 
