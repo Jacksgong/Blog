@@ -40,6 +40,8 @@ curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.de
 - 假设你外网访问的域名是`gitlab.test.com`
 - 假设你内网访问的端口是`:666`
 
+![](/img/truenas_gitlab-f97bdcd4.png)
+
 编辑gitlab配置:
 
 ```
