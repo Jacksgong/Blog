@@ -29,6 +29,7 @@ commit_msg="normal commit: $commit_date"
 git commit -m "$commit_msg"
 
 # Push:
+git checkout -b master
 git push --force origin master
 echo "$(tput setaf 3)>>>>>>fninsh push blog$(tput sgr 0)"
 
