@@ -304,19 +304,25 @@ upload_max_filesize = 32M
 ./bin/config set storage.local-disk.path /path/to/store/phabricator/files
 ```
 
-Small MySQL "max_allowed_packet"
+Small MySQL "max_allowed_packet"，可以通过(`sudo mysql -u root -p`)进到mysql后，执行以下命令:
 
 ```
 SET GLOBAL max_allowed_packet=33554432;
 ```
 
-其他性能调优，到`my.cnf`下配置(`sudo vim /etc/mysql/my.cnf`)
+其他性能调优，到`my.cnf`下配置(`sudo vim /etc/mysql/my.cnf`，如果是用了mariadb，可以设置`/etc/mysql/mariadb.conf.d/50-server.cnf`)
 
 ```
 [mysqld]
 
 innodb_buffer_pool_size = 2147483648
 sql_mode=STRICT_ALL_TABLES
+```
+
+然后重启
+
+```
+sudo service mysqld restart
 ```
 
 ### 4. 配置Phabricator账户
