@@ -347,11 +347,26 @@ sql_mode=STRICT_ALL_TABLES
 
 ## V. 常用指令
 
-重置密码以及授权访问:
+### 1. 重置密码以及授权访问
 
 ```
 ./bin/auth recover <用户名>
 ```
+
+### 2. 删除所有phabricator的数据库
+
+导出删除的`sql`指令
+
+```
+sudo mysql -uroot -p  -e "show databases" | grep -v mysql | grep -v information_schema | grep -v performance_schema | grep -v test |gawk '{print "drop database " $1 ";select sleep(0.1);"}' > drop.sql
+```
+
+然后可以用`cat drop.sql`检查下有没有一些自己的其他的数据库包含在里面，如果有，也通过添加`| grep -v <你数据库名>` 来添加上去，最后通过以下指令来执行删除即可。
+
+```
+sudo mysql -uroot -p < ./drop.sql
+```
+
 
 ---
 
@@ -362,5 +377,6 @@ sql_mode=STRICT_ALL_TABLES
 - [Restarting Phabricator](https://secure.phabricator.com/book/phabricator/article/restarting/)
 - [Phabricator Ubuntu Installation Guide](https://gist.github.com/sparrc/b4eff48a3e7af8411fc1)
 - [Configuring Outbound Email](https://secure.phabricator.com/book/phabricator/article/configuring_outbound_email/)
+- [MySQL删除所有数据库](https://pein0119.github.io/2015/03/18/MySQL%E5%88%A0%E9%99%A4%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93/)
 
 ---
