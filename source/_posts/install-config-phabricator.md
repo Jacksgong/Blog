@@ -309,9 +309,11 @@ upload_max_filesize = 32M
 ```
 [mysqld]
 
-innodb_buffer_pool_size = 2147483648
+# phab op required
+innodb_buffer_pool_size=1600M
 sql_mode=STRICT_ALL_TABLES
 max_allowed_packet=33554432
+local_infile=0
 ```
 
 然后重启
