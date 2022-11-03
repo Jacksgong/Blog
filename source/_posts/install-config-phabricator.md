@@ -1,6 +1,6 @@
 title: Ubuntu 16.04 安装与配置 Phabricator
 date: 2017-06-15 23:52:03
-updated: 2021-10-23
+updated: 2022-11-03
 categories:
 - 工程师技能
 tags:
@@ -48,7 +48,7 @@ chown -R phab:phab /var/www/phab
 ```bash
 sudo add-apt-repository ppa:ondrej/php
 sudo apt-get update
-sudo apt install php7.1-common php7.1-fpm php7.1-cli php7.1-json php7.1-mysql php7.1-curl php7.1-intl php7.1-mcrypt php-pear php7.1-gd php7.1-zip php7.1-xml php7.1-mbstring
+sudo apt install php7.4-common php7.4-fpm php7.4-cli php7.4-json php7.4-mysql php7.4-curl php7.4-intl php7.4-mcrypt php-pear php7.4-gd php7.4-zip php7.4-xml php7.4-mbstring
 ```
 
 ### 3. 安装Mariadb
