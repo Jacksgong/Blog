@@ -367,6 +367,10 @@ sudo mysql -uroot -p  -e "show databases" | grep -v mysql | grep -v information_
 sudo mysql -uroot -p < ./drop.sql
 ```
 
+### 3. 迁移数据
+
+迁移数据可以直接参照[这里](https://secure.phabricator.com/book/phabricator/article/configuring_backups/)，需要注意的是不仅仅要迁移数据库，还有上传的各类文件等等
+
 
 ---
 
