@@ -3,7 +3,6 @@ date: 2018-08-15 22:07:03
 updated: 2018-12-15
 wechatmpurl: https://mp.weixin.qq.com/s/sjm891upJi3HEyhCsuHqHA
 wechatmptitle: 流利说客户端持续交付工程实践
-sticky: 3
 categories:
 - 持续交付
 tags:
