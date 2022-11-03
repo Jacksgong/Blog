@@ -345,6 +345,14 @@ sql_mode=STRICT_ALL_TABLES
 
 ![](/img/install-config-phabricator-3.png)
 
+## V. 常用指令
+
+重置密码以及授权访问:
+
+```
+./bin/auth recover <用户名>
+```
+
 ---
 
 - [Installing Phabricator (Debian, nginx, MySql)](http://povilasb.com/phabricator/install.html)
