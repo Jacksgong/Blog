@@ -88,3 +88,5 @@ POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 > 更多可参看: [主题](https://github.com/robbyrussell/oh-my-zsh/wiki/Themes)、[色系](https://github.com/mbadolato/iTerm2-Color-Schemes)
 
 ---
+
+- [入坑SpaceVim之：解决乱码](https://www.jianshu.com/p/8bc57f7095ef)
