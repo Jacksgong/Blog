@@ -60,9 +60,18 @@ sudo shutdown -r 0
 
 ![](/img/maintain-website-server-1.png)
 
+主题
 采用的是[powerlevel9k](https://github.com/bhilburn/powerlevel9k)主题，色系是[Neutron](https://github.com/Ch4s3/iTerm2-Neutron)。
 
->  温馨提示，字体安装可以直接在[这里](https://github.com/powerline/fonts/tree/master/SourceCodePro)下载`Source Code Pro Powerline xxx`
+字体
+2022.11月之前我使用的是: [这里](https://github.com/powerline/fonts/tree/master/SourceCodePro)下载`Source Code Pro Powerline xxx`
+
+2022.11月后由于重度实用spacevim，上面那个字体对一些符号支持不太好，改用了`hack-nerd`这款字体:
+
+```
+brew tap homebrew/cask-fonts
+brew install font-hack-nerd-font --cask
+```
 
 无论是主题、字体还是色系，这边都需要在iTerm2的设置中(Profiles)进行配置。
 
