@@ -1,0 +1,10 @@
+name: default
+
+kind: pipeline
+type: docker
+
+steps:
+- name: publish
+  image: hexo:blogv1
+  commands:
+    - bash deploy.sh

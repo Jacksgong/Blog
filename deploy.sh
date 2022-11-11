@@ -6,15 +6,15 @@
 # For deplay public folder.
 set -e
 
-echo "$(tput setaf 3)---------Public-Release v3.0--------- $(tput sgr 0)"
+echo "$(tput setaf 3)---------Public-Release v4.0--------- $(tput sgr 0)"
 
 echo "$(tput setaf 3)>>>>>>start generate blog$(tput sgr 0)"
 hexo g
 echo "$(tput setaf 3)<<<<<<finish generate blog$(tput sgr 0)"
 
-echo "$(tput setaf 3)>>>>>>start push source code$(tput sgr 0)"
-bash push-double-end.sh
-echo "$(tput setaf 3)<<<<<<finish push source code$(tput sgr 0)"
+#echo "$(tput setaf 3)>>>>>>start push source code$(tput sgr 0)"
+#bash push-double-end.sh
+#echo "$(tput setaf 3)<<<<<<finish push source code$(tput sgr 0)"
 
 echo "$(tput setaf 3)>>>>>>start push blog$(tput sgr 0)"
 cd public
