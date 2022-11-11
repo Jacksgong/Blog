@@ -1,9 +1,14 @@
-name: default
+name: deploy
 
 kind: pipeline
 type: docker
 
 steps:
+- name: submodules
+  image: alpine/git
+  commands:
+  - git submodule update --init --recursive
+
 - name: publish
   image: hexo:blogv1
   commands:

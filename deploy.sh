@@ -6,13 +6,14 @@
 # For deplay public folder.
 set -e
 
-# when $TERM is empty (non-interactive shell), then expand tput with '-T xterm-256color'
-[[ ${TERM}=="" ]] && TPUTTERM='-T xterm-256color' \
-                  || TPUTTERM=''
-
-declare -r    RES='tput${TPUTTERM} sgr0'       REV='tput${TPUTTERM} rev'
-declare -r    fRD='tput${TPUTTERM} setaf 1'    bRD='tput${TPUTTERM} setab 1'
-declare -r    fGN
+if [[ $- == *i* ]]; then
+  fgRed=$(tput setaf 1)     ; fgGreen=$(tput setaf 2)  ; fgBlue=$(tput setaf 4)
+  fgMagenta=$(tput setaf 5) ; fgYellow=$(tput setaf 3) ; fgCyan=$(tput setaf 6)
+  fgWhite=$(tput setaf 7)   ; fgBlack=$(tput setaf 0)
+  bgRed=$(tput setab 1)     ; bgGreen=$(tput setab 2)  ; bgBlue=$(tput setab 4)
+  bgMagenta=$(tput setab 5) ; bgYellow=$(tput setab 3) ; bgCyan=$(tput setab 6)
+  bgWhite=$(tput setab 7)   ; bgBlack=$(tput setab 0)
+fi
 
 echo "$(tput setaf 3)---------Public-Release v4.0--------- $(tput sgr 0)"
 hexo -v
