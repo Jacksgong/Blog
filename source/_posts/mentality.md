@@ -1,5 +1,6 @@
 title: 对于成长的态度
 date: 2016-03-20 14:02:03
+updated: 2016-03-20
 categories:
 - 生活笔记
 tags:
