@@ -6,7 +6,18 @@
 # For deplay public folder.
 set -e
 
+# when $TERM is empty (non-interactive shell), then expand tput with '-T xterm-256color'
+[[ ${TERM}=="" ]] && TPUTTERM='-T xterm-256color' \
+                  || TPUTTERM=''
+
+declare -r    RES='tput${TPUTTERM} sgr0'       REV='tput${TPUTTERM} rev'
+declare -r    fRD='tput${TPUTTERM} setaf 1'    bRD='tput${TPUTTERM} setab 1'
+declare -r    fGN
+
 echo "$(tput setaf 3)---------Public-Release v4.0--------- $(tput sgr 0)"
+hexo -v
+node -v
+npm -v
 
 echo "$(tput setaf 3)>>>>>>start generate blog$(tput sgr 0)"
 hexo g
