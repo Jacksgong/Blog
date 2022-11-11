@@ -13,3 +13,9 @@ steps:
   image: hexo:blogv1
   commands:
     - bash deploy.sh
+
+trigger:
+  branch:
+    - master
+  event:
+    - push
