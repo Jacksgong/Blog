@@ -10,7 +10,7 @@ steps:
   - git submodule update --init --recursive
 
 - name: publish
-  image: hexo:blogv1
+  image: hexo:blogv2
   commands:
     - bash deploy.sh
 
