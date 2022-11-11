@@ -13,6 +13,7 @@ npm -v
 
 echo "==========>>>>>>start generate blog=========="
 hexo g
+ls
 echo "==========<<<<<<finish generate blog=========="
 
 #echo "==========>>>>>>start push source code=========="
@@ -21,6 +22,7 @@ echo "==========<<<<<<finish generate blog=========="
 
 echo "==========>>>>>>start push blog=========="
 cd public
+ls
 rm -rf .git
 git init
 git remote add origin ssh://git@gitea.partyland.cc:2222/jacks/blog-deploy.git
