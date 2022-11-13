@@ -11,6 +11,9 @@ steps:
 
 - name: publish
   image: hexo:blogv2
+  environment:
+    DEPLOY_CHECK_KEY:
+      from_secret: DEPLOY_CHECK_KEY
   commands:
     - bash deploy.sh
     - bash deploy-website.sh
