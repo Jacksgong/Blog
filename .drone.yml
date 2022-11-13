@@ -13,6 +13,7 @@ steps:
   image: hexo:blogv2
   commands:
     - bash deploy.sh
+    - bash deploy-website.sh
 
 trigger:
   branch:
