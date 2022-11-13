@@ -1,6 +1,6 @@
 # Blog
 
-![](https://img.shields.io/badge/Blog-hexo-orange.svg) ![](https://img.shields.io/badge/Blog-dreamtobe.cn-blue.svg)
+![](https://img.shields.io/badge/Blog-hexo-orange.svg) ![](https://img.shields.io/badge/Blog-dreamtobe.cn-blue.svg) ![Build Status](https://drone.partyland.cc:9443/api/badges/jacks/Blog/status.svg)
 
 > 博客地址: https://blog.dreamtobe.cn
 
