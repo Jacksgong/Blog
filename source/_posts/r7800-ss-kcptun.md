@@ -17,7 +17,7 @@ tags:
 
 ## 前言
 
-建议可以通过[一元机场]（https://xn--4gq62f52gdss.com/#/register?code=WM2k9oLY）买一个1元一个月500G流量的v2ray作为备用通道，当然由于通过KcpTun相比于[前面我们配置的V2ray](https://blog.dreamtobe.cn/r7800-openwrt-v2ray_to_delete/)来说没有复杂的混淆与动态端口，因此在一定情况下会相对轻量些，只需要不断怼流量，不过通过`fast.com`中测试下来的速度应该是不如V2ray方案(至少我这边测试下来的情况是的)，但是测试耗时却会快很多很多，但是由于KcpTun可以有很灵活的配置，这边可以通过不断堆流量让整个速度稳定在较高的水平，因此这边的实际体验是通过SS+KcpTun可以流畅体验YouTuBe 4K视频，不过在看4K视频时R7800的CPU会稳定在30%左右:
+建议可以通过[一元机场](https://xn--4gq62f52gdss.com/#/register?code=WM2k9oLY)买一个1元一个月500G流量的v2ray作为备用通道，当然由于通过KcpTun相比于[前面我们配置的V2ray](https://blog.dreamtobe.cn/r7800-openwrt-v2ray_to_delete/)来说没有复杂的混淆与动态端口，因此在一定情况下会相对轻量些，只需要不断怼流量，不过通过`fast.com`中测试下来的速度应该是不如V2ray方案(至少我这边测试下来的情况是的)，但是测试耗时却会快很多很多，但是由于KcpTun可以有很灵活的配置，这边可以通过不断堆流量让整个速度稳定在较高的水平，因此这边的实际体验是通过SS+KcpTun可以流畅体验YouTuBe 4K视频，不过在看4K视频时R7800的CPU会稳定在30%左右:
 
 ![](/img/r7800-ss-kcptun-3.png)
 
