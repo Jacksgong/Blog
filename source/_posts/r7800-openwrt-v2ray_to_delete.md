@@ -1,6 +1,6 @@
 title: 网件R7800 OpenWrt使用V2Ray+mKcp+透明代理完美翻墙
 date: 2018-11-17 11:51:03
-updated: 2019-09-04
+updated: 2023-02-11
 categories:
 - 网络
 tags:
@@ -105,7 +105,7 @@ opkg install rsyslog
 
 ### 1. V2Ray在VPS端搭建与配置
 
-要通过V2Ray进行翻墙，首先我们需要先有一台已经配置好V2Ray的墙外的VPS，对于VPS的选择与搭建可以参看[这篇文章](https://blog.dreamtobe.cn/2016/11/30/vps-ss-will-be-removed/)，下面我们就假定你已经通过[该篇文章](https://blog.dreamtobe.cn/2016/11/30/vps-ss-will-be-removed/)配置好了VPS，配置好后，你是一个Ubuntu，ok, 我们先开始搭建VPS端:
+要通过V2Ray进行翻墙，首先我们需要先有一台已经配置好V2Ray的墙外的VPS，对于VPS的选择与搭建可以参看[这篇文章](https://blog.dreamtobe.cn/2016/11/30/vps-ss-will-be-removed/)（当然如果你嫌麻烦也可以考虑直接通过[这个一元机场](https://xn--4gq62f52gdss.com/#/register?code=WM2k9oLY)，一个月1元钱500G流量，快速完成搭建使用，建议可以买一个备用）下面我们就假定你已经通过[该篇文章](https://blog.dreamtobe.cn/2016/11/30/vps-ss-will-be-removed/)配置好了VPS，配置好后，你是一个Ubuntu，ok, 我们先开始搭建VPS端:
 
 由于针对Ubuntu，[官方文档](https://www.v2ray.com/chapter_00/install.html)中已经有提供脚本安装，我们就直接通过该脚本进行安装即可:
 
