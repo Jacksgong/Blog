@@ -6,7 +6,7 @@
     "version": "3.8.0"
   },
   "dependencies": {
-    "hexo": "^3.8.0",
+    "hexo": "^6.3.0",
     "hexo-all-minifier": "^0.5.3",
     "hexo-autonofollow": "^1.0.1",
     "hexo-generator-archive": "^0.1.5",
@@ -21,6 +21,6 @@
     "hexo-renderer-marked": "^0.3.2",
     "hexo-renderer-stylus": "^0.3.3",
     "hexo-server": "^0.2.2",
-    "hexo-wordcount": "^3.0.2"
+    "hexo-wordcount": "^6.0.1"
   }
 }
