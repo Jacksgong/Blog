@@ -1,0 +1,111 @@
+title: ChatGPT/OpenAI/NewBing的使用
+date: 2023-03-07 00:35:03
+updated: 2023-03-07
+categories:
+- fun
+tags:
+- chatgpt
+- openai
+- new bing
+
+---
+
+{% note info %} 现在大多数内容都是记录在Obsidian上，想了下这块还是写成博客，这样可以帮助更多博友更快的体验类似颠覆的体验。{% endnote %}
+
+<!-- more -->
+
+
+## I. ChatGPT 使用
+
+这块网络上的教程非常多，我就不过多赘述了，需要特别留意的是，翻墙不用全局翻，就做以下配置就行:
+
+1. 需要配置`openai.com`走代理
+2. 需要开启UDP（至少是443与80端口）走代理，因为ChatGPT检测IP是通过UDP获取的
+
+
+我问了下ChatGPT，居然让我用Visual Studio Code的插件来使用，具体建议网上查一查方法比较简单:
+
+![](/img/gpt_using-b047afc0.png)
+
+
+
+## II. OpenAI API 使用
+
+这块网上也非常多教程，也不过多说明了几个需要注意的点:
+
+1. 是配置`openai.com`走代理
+2. 使用[类似这个网站](https://sms-activate.org/getNumber)提供的号码，找个印度的或者美国的（推荐印度的便宜点），印度尼西亚的虽然便宜但是测试了，openai.com不认，另外没有收到验证码也不会扣钱，所以多试试没事
+3. 进入到[Dashboard](https://platform.openai.com/onboarding)页面，`Personal -> View API key`, 创建一个key，保存下来
+
+### 用python写一个机器人
+
+顺便提下，这下面的代码是GPT自己写的，写的挺好的，能用(另外还是有点能扯):
+
+![](/img/gpt_using-9d58700a.png)
+
+
+```python
+import openai
+
+# Replace with your own API key
+openai.api_key = "YOUR_OPENAI_API_KEY"
+
+# Start a conversation with "Hello"
+prompt = "Hello"
+
+# Create a chatbot using ChatGPT engine
+response = openai.Completion.create(
+    engine="text-davinci-003",
+    prompt=prompt,
+    max_tokens=50,
+    temperature=0.9
+)
+
+# Print out the chatbot's reply
+print("Chatbot:", response["choices"][0]["text"])
+
+# Loop until the user types "quit"
+while True:
+    # Get the user's input
+    user_input = input("User: ")
+
+    # Break the loop if the user types "quit"
+    if user_input.lower() == "quit":
+        break
+
+    # Append the user's input to the prompt
+    prompt += "\nUser: " + user_input
+
+    # Create a new response using the updated prompt
+    response = openai.Completion.create(
+        engine="text-davinci-003",
+        prompt=prompt,
+        max_tokens=256,
+        temperature=0.9
+    )
+
+    # Print out the chatbot's reply
+    print(response["choices"][0]["text"])
+
+    # Append the chatbot's reply to the prompt
+    prompt += "\nChatbot: " + response["choices"][0]["text"]
+```
+
+## III. New Bing 使用
+
+New Bing的使用也比较简单，不过有几点特别注意下:
+
+1. 常规的需要在[这里](https://www.bing.com/new)申请加入白名单，然后等待微软的回邮件通知
+2. 让 `bing.com` 走代理
+3. 下载 Microsoft Edge Dev 版本（我之前一直在用Chrome，说实在的，这次为了New Bing我切成Edge以后，彻底不用Chrome了，主要还是真的好用）
+4. 下载 [ModHeader](https://microsoftedge.microsoft.com/addons/detail/modheader-modify-http-h/opgbiafapkbbnbnjcdomjaghbckfkglc) 这个插件，然后配置请求头`X-Forwarded-For`: `4.2.2.2`
+![](/img/gpt_using-1247b8b8.png)
+5. 配置Edge默认搜索不要跳转中国的bing，Edge -> 设置 -> 隐私、搜索和服务 -> 地址栏和搜索 -> 管理搜索引擎，添加一个搜索引擎，`https://global.bing.com/search?q=%s&mkt=en-US`，并将其设置为默认即可
+![](/img/gpt_using-cfb0f842.png)
+
+
+相比ChatGPT来说，New Bing的准确性是非常强的，并且有引用所有的判断来源:
+
+![](/img/gpt_using-876e2cdc.png)
+
+![](/img/gpt_using-1e90978a.png)
