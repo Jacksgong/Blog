@@ -33,7 +33,7 @@ tags:
 
 这块网上也非常多教程，也不过多说明了几个需要注意的点:
 
-1. 是配置`openai.com`走代理
+1. 配置`openai.com`走代理
 2. 使用[类似这个网站](https://sms-activate.org/getNumber)提供的号码，找个印度的或者美国的（推荐印度的便宜点），印度尼西亚的虽然便宜但是测试了，openai.com不认，另外没有收到验证码也不会扣钱，所以多试试没事
 3. 进入到[Dashboard](https://platform.openai.com/onboarding)页面，`Personal -> View API key`, 创建一个key，保存下来
 
