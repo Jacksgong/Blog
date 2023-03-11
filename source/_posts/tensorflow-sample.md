@@ -25,21 +25,21 @@ AI的模型训练其实就是: 对模型变量的值进行不断调整，直到�
 
 > 由于我的MBP没有NVIDIA CUDA GPU，因此这里我没有配GPU
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/2f1f2779f08aa88342940a46540e6ea9.js"></script>
+<script src="https://gist.github.com/Jacksgong/2f1f2779f08aa88342940a46540e6ea9.js"></script>
 
 ![](/img/tensorflow-sample-1.png)
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/21f03952c3f8214cdda4c2b3c97e786b.js"></script>
+<script src="https://gist.github.com/Jacksgong/21f03952c3f8214cdda4c2b3c97e786b.js"></script>
 
 ![](/img/tensorflow-sample-2.png)
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/734e15c59e02decc025246e75c06971f.js"></script>
+<script src="https://gist.github.com/Jacksgong/734e15c59e02decc025246e75c06971f.js"></script>
 
 ![](/img/tensorflow-sample-3.png)
 
 由于我的Python是2.7.10版本，并且没有支持GPU，因此执行:
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/a0d758b72f6b50c49646920bee6347e9.js"></script>
+<script src="https://gist.github.com/Jacksgong/a0d758b72f6b50c49646920bee6347e9.js"></script>
 
 > 如果是其他情况的请参照[官方教程](https://www.tensorflow.org/install/install_mac#installing_with_virtualenv)
 
@@ -55,7 +55,7 @@ AI的模型训练其实就是: 对模型变量的值进行不断调整，直到�
 
 > 该案例来自[官方的入门案例](https://www.tensorflow.org/get_started/get_started)
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/03258a8e0f536ea8d01f64210a8a839d.js"></script>
+<script src="https://gist.github.com/Jacksgong/03258a8e0f536ea8d01f64210a8a839d.js"></script>
 
 ![](/img/tensorflow-sample-6.png)
 
@@ -63,11 +63,11 @@ AI的模型训练其实就是: 对模型变量的值进行不断调整，直到�
 
 #### 通过高级的接口快速的实现上面的模型训练
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/1d9fc40f9affe4478c06cb71004f957a.js"></script>
+<script src="https://gist.github.com/Jacksgong/1d9fc40f9affe4478c06cb71004f957a.js"></script>
 
 当然我们也可以通过`tf.contrib.learn.Estimator`这个高级接口，再使用低级接口来定制Linear Regressor算法模型(实际上内置的`tf.contrib.learn.LinearRegressor`也是继承自`tf.contrib.learn.Estimator`的)。当然我们不是通过继承，是通过提供`model_fn`来告诉他训练的步骤、如果评估等:
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/355d0129457eec50ffe2dcbd15763352.js"></script>
+<script src="https://gist.github.com/Jacksgong/355d0129457eec50ffe2dcbd15763352.js"></script>
 
 ### III. 常见的API
 

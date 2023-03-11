@@ -95,7 +95,7 @@ MNIST包含一个手写的数字，就好像:
 
 ### III. 通过Tensorflow实现
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/c90d3e0f6a877330c55daeeb7a021685.js"></script>
+<script src="https://gist.github.com/Jacksgong/c90d3e0f6a877330c55daeeb7a021685.js"></script>
 
 > 这边的正确率是92%，是由于我们的模型非常简单，最好的模型能够达到99.7%的正确率，可以看看网上的不同模型的[测试结果](http://rodrigob.github.io/are_we_there_yet/build/classification_datasets_results.html)
 

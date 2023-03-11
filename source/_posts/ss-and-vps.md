@@ -49,7 +49,7 @@ tags:
 
 ### II. SS的搭建
 
-Shadowsocks这块，推荐直接使用Teddysun的这个[一键安装脚本](https://teddysun.com/342.html)版本(如果是teddysun的这个网站挂了，可以直接拷贝[这个sh脚本](https://gist.dreamtobe.cn/Jacksgong/a7a01aacbdf1ca8b80df53fbd5df4630)，下载后执行即可)，真正做到简单省事，非常可靠。
+Shadowsocks这块，推荐直接使用Teddysun的这个[一键安装脚本](https://teddysun.com/342.html)版本(如果是teddysun的这个网站挂了，可以直接拷贝[这个sh脚本](https://gist.github.com/Jacksgong/a7a01aacbdf1ca8b80df53fbd5df4630)，下载后执行即可)，真正做到简单省事，非常可靠。
 
 ![](/img/ss-and-vps-4.png)
 

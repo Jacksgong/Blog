@@ -16,9 +16,7 @@ tags:
 
 <!-- more -->
 
-{% note warning %} 下面的所有配置都是基于Ubuntu 16.04
-
-如果你的服务器在国内，`gist.github.com`已经被墙，你可以将下面快速执行脚本中的`gist.github.com`改为`gist.dreamtobe.cn`即可(我架了一个代理) {% endnote %}
+{% note warning %} 下面的所有配置都是基于Ubuntu 16.04 {% endnote %}
 
 ## Ubuntu 16.04环境
 
@@ -26,7 +24,7 @@ tags:
 
 #### 1. 基本用户配置
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/6b2c118c9a1b1c064c5d5f6402c240d3.js"></script>
+<script src="https://gist.github.com/Jacksgong/6b2c118c9a1b1c064c5d5f6402c240d3.js"></script>
 
 #### 2. 修改编辑器
 
@@ -52,11 +50,11 @@ sudo update-alternatives --config editor
 
 快速执行配置:
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/12b7d677e6ce47e7684bb1afc0c5c629.js"></script>
+<script src="https://gist.github.com/Jacksgong/12b7d677e6ce47e7684bb1afc0c5c629.js"></script>
 
 快速执行配置时，所执行的脚本:
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/9d0519f68b7940a07075a834b3178979.js"></script>
+<script src="https://gist.github.com/Jacksgong/9d0519f68b7940a07075a834b3178979.js"></script>
 
 执行效果图:
 
@@ -78,7 +76,7 @@ python install.py
 
 先备份`/etc/apt/sources.list`文件，然后将其内容全部删除，然后使用下面的源:
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/2d960a5299ca67e728edc27ad4f284f9.js"></script>
+<script src="https://gist.github.com/Jacksgong/2d960a5299ca67e728edc27ad4f284f9.js"></script>
 
 配置完后，最好升级下所有的包(`sudo -- sh -c "apt-get update && apt-get upgrade"`)，这时候你就会发现有哪些被修改过了，我的做法是全部替换为原版(`maintainer's version`)
 
@@ -107,11 +105,11 @@ ClientAliveCountMax 0
 
 快速执行配置:
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/7369e03bce09bab7d9e432012660094f.js"></script>
+<script src="https://gist.github.com/Jacksgong/7369e03bce09bab7d9e432012660094f.js"></script>
 
 快速执行配置时，所执行的脚本:
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/1151255d4bbcf10269b781820bf74531.js"></script>
+<script src="https://gist.github.com/Jacksgong/1151255d4bbcf10269b781820bf74531.js"></script>
 
 执行效果图:
 
@@ -127,7 +125,7 @@ ClientAliveCountMax 0
 
 安装:
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/bb011a5c48ef47ef6df0b3333c02b54f.js"></script>
+<script src="https://gist.github.com/Jacksgong/bb011a5c48ef47ef6df0b3333c02b54f.js"></script>
 
 执行效果图:
 
@@ -135,11 +133,11 @@ ClientAliveCountMax 0
 
 检测安装结果:
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/684f423d5be270ce9610a053483e7a8b.js"></script>
+<script src="https://gist.github.com/Jacksgong/684f423d5be270ce9610a053483e7a8b.js"></script>
 
 检测安装结果时，所执行的脚本:
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/383df6722917610a4dd42308666703c4.js"></script>
+<script src="https://gist.github.com/Jacksgong/383df6722917610a4dd42308666703c4.js"></script>
 
 执行效果图:
 
@@ -152,11 +150,11 @@ ClientAliveCountMax 0
 
 快速执行配置:
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/5fab6a7d6cf7ee21c44d6cfeaecb400d.js"></script>
+<script src="https://gist.github.com/Jacksgong/5fab6a7d6cf7ee21c44d6cfeaecb400d.js"></script>
 
 快速执行配置时，所执行的脚本:
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/58a8421fb362b9763cfae050245e5577.js"></script>
+<script src="https://gist.github.com/Jacksgong/58a8421fb362b9763cfae050245e5577.js"></script>
 
 执行效果图:
 
@@ -164,7 +162,7 @@ ClientAliveCountMax 0
 
 也可以通过通过下面的命令从`检测情况`、`安装`、`固化`、`调优`，手动的一步一步配置Swap，需要注意的是一般来说比较好的Swap大小是等于现有RAM大小或是现有RAM的两倍:
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/d54e2b68e2b66faec7e671338ac4b85b.js"></script>
+<script src="https://gist.github.com/Jacksgong/d54e2b68e2b66faec7e671338ac4b85b.js"></script>
 
 #### 11. 安装与配置Nginx
 
@@ -172,11 +170,11 @@ ClientAliveCountMax 0
 
 快速执行配置:
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/4759813f74070cf123afdc683e0fcd0a.js"></script>
+<script src="https://gist.github.com/Jacksgong/4759813f74070cf123afdc683e0fcd0a.js"></script>
 
 快速执行配置时，所执行的脚本:
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/b582591df46dc6d2da43bbf8018f4e1c.js"></script>
+<script src="https://gist.github.com/Jacksgong/b582591df46dc6d2da43bbf8018f4e1c.js"></script>
 
 执行效果图:
 
@@ -396,7 +394,7 @@ sudo resolvconf -u
 
 快速执行配置:
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/770871658d3511012a3b9decbf7b4454.js"></script>
+<script src="https://gist.github.com/Jacksgong/770871658d3511012a3b9decbf7b4454.js"></script>
 
 #### 配置使用自己的Nginx
 
@@ -404,11 +402,11 @@ sudo resolvconf -u
 
 快速执行配置:
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/c5b1efd6da187e5ccd543e5461641bf8.js"></script>
+<script src="https://gist.github.com/Jacksgong/c5b1efd6da187e5ccd543e5461641bf8.js"></script>
 
 快速执行配置时，所执行的脚本:
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/599385bc7abc4b0c5b9aa6c91fde4082.js"></script>
+<script src="https://gist.github.com/Jacksgong/599385bc7abc4b0c5b9aa6c91fde4082.js"></script>
 
 执行效果图:
 
@@ -422,7 +420,7 @@ sudo resolvconf -u
 
 #### 各类状态检测与修复
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/c3976d9e7e53a4ef81b22efcba7388d4.js"></script>
+<script src="https://gist.github.com/Jacksgong/c3976d9e7e53a4ef81b22efcba7388d4.js"></script>
 
 #### 查看当前状态
 
@@ -465,11 +463,11 @@ sudo resolvconf -u
 
 快速执行配置:
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/feae66420a07315c389bc383ba03a25d.js"></script>
+<script src="https://gist.github.com/Jacksgong/feae66420a07315c389bc383ba03a25d.js"></script>
 
 快速执行配置时，所执行的脚本:
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/012b8be66ff15b2bfbcba81e21e73c40.js"></script>
+<script src="https://gist.github.com/Jacksgong/012b8be66ff15b2bfbcba81e21e73c40.js"></script>
 
 执行效果图:
 
@@ -484,7 +482,7 @@ sudo resolvconf -u
 
 由于Let's Encrypt的证书默认有效期是90天， 因此我们可以自己写一个计时器检测更加可靠(每周检查)，下面的脚本是每周一上午2:30自动执行`certbot-auto renew`，日志会写入`/var/log/le-renewal.log`，并且在随后5分钟重新加载nginx:
 
-<script src="https://gist.dreamtobe.cn/Jacksgong/b9cc015e17ca259349caf97fef2a39bb.js"></script>
+<script src="https://gist.github.com/Jacksgong/b9cc015e17ca259349caf97fef2a39bb.js"></script>
 
 ---
 
