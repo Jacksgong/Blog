@@ -105,7 +105,10 @@ opkg install rsyslog
 
 ### 1. V2Ray在VPS端搭建与配置
 
-要通过V2Ray进行翻墙，首先我们需要先有一台已经配置好V2Ray的墙外的VPS，对于VPS的选择与搭建可以参看[这篇文章](https://blog.dreamtobe.cn/2016/11/30/vps-ss-will-be-removed/)（当然如果你嫌麻烦也可以考虑直接通过[这个一元机场](https://xn--4gq62f52gdss.com/#/register?code=WM2k9oLY)，一个月1元钱500G流量，快速完成搭建使用，建议可以买一个备用）下面我们就假定你已经通过[该篇文章](https://blog.dreamtobe.cn/2016/11/30/vps-ss-will-be-removed/)配置好了VPS，配置好后，你是一个Ubuntu，ok, 我们先开始搭建VPS端:
+> 当然如果你嫌麻烦也可以考虑直接通过这个[一元机场](https://xn--4gq62f52gdss.com/#/register?code=WM2k9oLY)，一个月1元钱500G流量，快速完成搭建使用，建议可以买一个备用
+> 如果有Netflix/DisneyPlus的诉求，建议可以花15元买一个[Xrelay机场](https://isseys.net/#/register?code=BjU5h6ev)，这个机场主要是价格/性能最符合预期，我使用里面一个月20元一个月的188G套餐（最便宜有15元一个月108G的套餐），可以作为媒体通道，其他通道走[一元机场](https://xn--4gq62f52gdss.com/#/register?code=WM2k9oLY)或者是接下来的自建的v2ray。
+
+要通过V2Ray进行翻墙，首先我们需要先有一台已经配置好V2Ray的墙外的VPS，对于VPS的选择与搭建可以参看[这篇文章](https://blog.dreamtobe.cn/2016/11/30/vps-ss-will-be-removed/)，下面我们就假定你已经通过[该篇文章](https://blog.dreamtobe.cn/2016/11/30/vps-ss-will-be-removed/)配置好了VPS，配置好后，你是一个Ubuntu，ok, 我们先开始搭建VPS端:
 
 由于针对Ubuntu，[官方文档](https://www.v2ray.com/chapter_00/install.html)中已经有提供脚本安装，我们就直接通过该脚本进行安装即可:
 
