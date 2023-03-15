@@ -14,6 +14,7 @@ tags:
 
 <!-- more -->
 
+> GPT使用需要翻墙，这里的翻墙机场推荐[xrelay](https://isseys.net/#/register?code=BjU5h6ev)，一个月15元，使用方法配套极其简单，还有实时客服聊天指导，注册后不用付款直接可以免费试用一天，即便付款后还支持30天无条件退款。
 
 ## I. ChatGPT 使用
 
