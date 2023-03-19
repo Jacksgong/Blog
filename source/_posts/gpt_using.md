@@ -1,6 +1,6 @@
 title: ChatGPT/OpenAI/NewBing的使用
 date: 2023-03-07 00:35:03
-updated: 2023-03-07
+updated: 2023-03-19
 categories:
 - fun
 tags:
@@ -94,13 +94,19 @@ while True:
 
 ## III. New Bing 使用
 
+> 3.19更新，IP不能使用`4.2.2.2`，替换成`1.1.1.1`后可以正常使用
+
 New Bing的使用也比较简单，不过有几点特别注意下:
 
 1. 常规的需要在[这里](https://www.bing.com/new)申请加入白名单，然后等待微软的回邮件通知
 2. 让 `bing.com` 走代理
 3. 下载 Microsoft Edge Dev 版本（我之前一直在用Chrome，说实在的，这次为了New Bing我切成Edge以后，彻底不用Chrome了，主要还是真的好用）
-4. 下载 [ModHeader](https://microsoftedge.microsoft.com/addons/detail/modheader-modify-http-h/opgbiafapkbbnbnjcdomjaghbckfkglc) 这个插件，然后配置请求头`X-Forwarded-For`: `4.2.2.2`
-![](/img/gpt_using-1247b8b8.png)
+4. 下载 [Header Editor](https://microsoftedge.microsoft.com/addons/detail/header-editor/afopnekiinpekooejpchnkgfffaeceko) 这个插件，然后配置请求头`X-Forwarded-For`: `1.1.1.1`，另外为了防止跳转到国内，也可以配置一个请求头。
+
+| `x-forwarded-for` | `redirect` |
+| --- | --- |
+| ![](/img/gpt_using-ce86973c.png) | ![](/img/gpt_using-baa54a73.png) |
+
 5. 配置Edge默认搜索不要跳转中国的bing，Edge -> 设置 -> 隐私、搜索和服务 -> 地址栏和搜索 -> 管理搜索引擎，添加一个搜索引擎，`https://global.bing.com/search?q=%s&mkt=en-US`，并将其设置为默认即可
 ![](/img/gpt_using-cfb0f842.png)
 
@@ -110,3 +116,8 @@ New Bing的使用也比较简单，不过有几点特别注意下:
 ![](/img/gpt_using-876e2cdc.png)
 
 ![](/img/gpt_using-1e90978a.png)
+
+
+---
+
+- [New Bing 只是给我拉黑了？](https://www.v2ex.com/t/924296)
