@@ -1,6 +1,6 @@
 title: 图片生成创意
 date: 2023-03-25 10:11:03
-updated: 2023-03-25
+updated: 2023-03-26
 categories:
 - fun
 tags:
@@ -16,8 +16,9 @@ tags:
 
 > GPT使用可以参考[这篇文章](https://blog.dreamtobe.cn/gpt_using/)。
 
-## MidJourney
+## I. MidJourney
 
+> 这个是通用图片类型自动生成最好的工具
 
 ### 登录注册
 
@@ -77,6 +78,29 @@ https://discord.com/
 
 收集各类关键词
 - 看下别人生成的图与关键词
+
+## II. Uizard
+
+> 这是目前看到Web/Mobile App UI生成比较好的工具
+
+### 注册登录
+
+打开[网站](https://uizard.io/i/87c008b274)进行注册登录
+
+### 创建生成
+
+#### 现有的拍照生成
+
+支持通过拍照草图自动生成
+![](/img/image_generate-2ab6c153.png)
+
+#### 正在开发中，马上会到来的generate模式
+
+这个自动生成，有点类似MidJourney，只不过更针对App/Web进行适配，有个独立的入口，从[这里](https://uizard.io/autodesigner/df98d9b7)进入
+
+![](/img/image_generate-01bf4a2a.png)
+
+![](/img/image_generate-e2dc1777.png)
 
 ---
 
