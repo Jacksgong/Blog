@@ -5,3 +5,5 @@ public/
 .deploy*/
 db.json
 /.idea
+
+/postob.sh
