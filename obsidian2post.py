@@ -1,4 +1,3 @@
-
 import os
 import re
 import sys
@@ -81,11 +80,11 @@ with open(target_markdown_file_path, 'r') as file:
             print('compressing {}'.format(asset))
             # get size of the png
             origin_size = os.path.getsize('{}/{}'.format(target_asset_folder, asset))
-            os.system('pngquant --force --ext .png --speed 1 --quality 60-80 {}/{}'.format(target_asset_folder, asset))
+            os.system('/opt/homebrew/bin/pngquant --force --ext .png --speed 1 --quality 60-80 {}/{}'.format(target_asset_folder, asset))
             # get the size of the png after compressing
             compressed_size = os.path.getsize('{}/{}'.format(target_asset_folder, asset))
             # print the size of the png before and after compressing with human readable
-        print('origin size: {} compressed size: {}'.format(humanize.naturalsize(origin_size), humanize.naturalsize(compressed_size)))
+            print('origin size: {} compressed size: {}'.format(humanize.naturalsize(origin_size), humanize.naturalsize(compressed_size)))
 
     # replace the assets path in the markdown file
     for i, asset in enumerate(assets):
@@ -95,3 +94,6 @@ with open(target_markdown_file_path, 'r') as file:
         # write filedata to the target markdown file
         with open(target_markdown_file_path, 'w') as file:
             file.write(filedata)
+
+# print success message
+print('success')
