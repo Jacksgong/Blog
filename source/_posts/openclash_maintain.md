@@ -17,7 +17,7 @@ tags:
 
 ## I. 常用规则配置
 
-直接参看这篇文章极客: [规则设置（访问控制） · vernesong/OpenClash Wiki (github.com)](https://github.com/vernesong/OpenClash/wiki/%E8%A7%84%E5%88%99%E8%AE%BE%E7%BD%AE%EF%BC%88%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%EF%BC%89).     
+直接参看这篇文章极客: [规则设置（访问控制） · vernesong/OpenClash Wiki (github.com)](https://github.com/vernesong/OpenClash/wiki/%E8%A7%84%E5%88%99%E8%AE%BE%E7%BD%AE%EF%BC%88%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%EF%BC%89) 里面的内容，这里就不再赘述了。
 
 ## II. 如何使用kcptun
 
