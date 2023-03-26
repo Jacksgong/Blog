@@ -16,7 +16,7 @@ tags:
 
 > GPT使用可以参考[这篇文章](https://blog.dreamtobe.cn/gpt_using/)。
 
-## I. MidJourney
+## I. MidJourney - 通用图片生成
 
 > 这个是通用图片类型自动生成最好的工具
 
@@ -79,7 +79,7 @@ https://discord.com/
 收集各类关键词
 - 看下别人生成的图与关键词
 
-## II. Uizard
+## II. Uizard - App/Web UI生成
 
 > 这是目前看到Web/Mobile App UI生成比较好的工具
 
@@ -101,6 +101,14 @@ https://discord.com/
 ![](/img/image_generate-01bf4a2a.png)
 
 ![](/img/image_generate-e2dc1777.png)
+
+## III. Removebg - 移除图片背景
+
+直接[打开网页](https://www.remove.bg/r/9rpoFMPurm4zvmoBRkuDrzEW)就可以使用，这个网站使用超级简单而且是免费的。
+
+![](assets/image_generate-127d1b80.png)
+
+![](assets/image_generate-c01ea861.png)
 
 ---
 
