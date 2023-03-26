@@ -4,24 +4,26 @@ import re
 import sys
 import humanize
 
-path_of_obsidian_valt = sys.argv[1]
+blog_root_path = sys.argv[1]
+path_of_obsidian_valt = sys.argv[2]
 obsidian_assset_folder= path_of_obsidian_valt + '/assets'
-ob_markdown_file_path = sys.argv[2]
+ob_markdown_file_path = sys.argv[3]
 
 # if the third argument is not empty, then use the third argument as the target markdown file name
-if len(sys.argv) > 3:
-    target_markdown_file_name = sys.argv[3]
-    target_markdown_file_path = '{}/source/_posts/{}.md'.format(os.getcwd(), sys.argv[3])
+if len(sys.argv) > 4:
+    target_markdown_file_name = sys.argv[4]
+    target_markdown_file_path = '{}/source/_posts/{}.md'.format(blog_root_path, sys.argv[4])
 else:
     target_markdown_file_name = ob_markdown_file_path.split('/')[-1].split('.')[0]
 
 # target markdown file path equal to the current folder + source/_posts + target_markdown_file_name + .md
-target_markdown_file_path = '{}/source/_posts/{}.md'.format(os.getcwd(), target_markdown_file_name)
+target_markdown_file_path = '{}/source/_posts/{}.md'.format(blog_root_path, target_markdown_file_name)
 
 # target asset folder equal to the current folder + source/img
-target_asset_folder = os.getcwd() + '/source/img'
+target_asset_folder = blog_root_path + '/source/img'
 
 # output all arguments
+print('blog_root_path: {}'.format(blog_root_path))
 print('path_of_obsidian_valt: {}'.format(path_of_obsidian_valt))
 print('obsidian_assset_folder: {}'.format(obsidian_assset_folder))
 print('ob_markdown_file_path: {}'.format(ob_markdown_file_path))
