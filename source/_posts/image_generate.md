@@ -76,8 +76,8 @@ https://discord.com/
 
 ### 技巧
 
-收集各类关键词
-- 看下别人生成的图与关键词
+收集各类关键词，看下别人生成的图与关键词，这里推荐[ArtHub](https://arthub.ai/)这个站点，里面都是很优秀的AI生成的图片并且提供了每张图片的Prompt。
+
 
 ## II. Uizard - App/Web UI生成
 
