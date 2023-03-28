@@ -1,6 +1,6 @@
 title: ChatGPT/OpenAI/NewBing的使用
 date: 2023-03-07 00:35:03
-updated: 2023-03-19
+updated: 2023-03-28
 categories:
 - fun
 tags:
@@ -123,13 +123,13 @@ New Bing的使用也比较简单，不过有几点特别注意下:
 
 基于这个Chrome插件，可以同时使用ChatGPT与New Bing，甚至可以在上面直接使用Bard，非常方便。
 
-![](assets/gpt_using-a976b067.png)
+![](/img/gpt_using-a976b067.png)
 
 可以明显感受到，ChatGPT比较快，但是New Bing比较准确，算是可以相互互补。
 
 需要留意的是，最好是使用`API Mode`，如果使用`Webapp Mode`通常不是很稳定
 
-![](assets/gpt_using-50d1bbe5.png)
+![](/img/gpt_using-50d1bbe5.png)
 
 当然如果你有ChatGPT Plus，也可以配置使用GPT4的`API Model`。
 
