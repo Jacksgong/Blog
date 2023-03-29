@@ -1,6 +1,6 @@
 title: ChatGPT/OpenAI/NewBing的使用
 date: 2023-03-07 00:35:03
-updated: 2023-03-28
+updated: 2023-03-29
 categories:
 - fun
 tags:
@@ -133,6 +133,23 @@ New Bing的使用也比较简单，不过有几点特别注意下:
 
 当然如果你有ChatGPT Plus，也可以配置使用GPT4的`API Model`。
 
+### 2. 通过沟通控制软件系列
+
+#### 2.1 Cursor/CodeX
+
+这两个就不用多说了，[Cursor](https://www.cursor.so/)，通过沟通来编写代码，支持重构，写单测等等。
+
+![](/img/gpt_using-19f078c2.png)
+
+[CodeX](https://openai.com/blog/openai-codex)也是类似，还支持实时preview。
+
+![](/img/gpt_using-7d965930.png)
+
+#### 2.2 Unity AICommand
+
+[AICommand](https://github.com/keijiro/AICommand) 可以支持通过和GPT聊天就能在Unity上创作作品，不过这个非官方，官方的还在迭代。
+
+![](/img/gpt_using-f16d1b5e.png)
 
 ---
 
