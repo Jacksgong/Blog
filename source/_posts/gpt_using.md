@@ -1,6 +1,6 @@
 title: ChatGPT/OpenAI/NewBing的使用
 date: 2023-03-07 00:35:03
-updated: 2023-03-29
+updated: 2023-03-30
 categories:
 - fun
 tags:
@@ -165,6 +165,17 @@ Alt+A: 翻译/切换原文，按一下翻译，再按一下显示原文。
 Alt+W: 翻译整个页面，而不是默认的智能翻译内容区域。
 ```
 
+### 4. [Warp](https://app.warp.dev/referral/Z99DVP) - 与GPT深度整合的Terminal
+
+我用了很多年的iTerm2+Tmux这样的组合，这是第一次让我有冲动尝试的全新的终端，你可以通过对话的方式，让[Warp](https://app.warp.dev/referral/Z99DVP)帮你完成一些操作，比如：
+
+![](/img/gpt_using-ce940d1c.png)
+
+当然Warp整体的UI以及交互也会更加友好，比如：
+
+![](/img/gpt_using-ae14090e.png)
+
+更多的大家可以自己去尝试，我已经在尝试使用了。
 
 ---
 
