@@ -151,6 +151,21 @@ New Bing的使用也比较简单，不过有几点特别注意下:
 
 ![](/img/gpt_using-f16d1b5e.png)
 
+### 3. [沉浸式双语网页翻译扩展](https://immersive-translate.owenyoung.com/)
+
+这个扩展可以让你在浏览网页的时候，可以同时看到英文和中文，非常方便。支持OpenAI的GPT-3，也支持Google的翻译。
+
+![](/img/gpt_using-4bf0cf9f.png)
+
+并且支持快捷键，如默认支持的快捷键，超级方便:
+
+```
+Alt+A: 翻译/切换原文，按一下翻译，再按一下显示原文。
+
+Alt+W: 翻译整个页面，而不是默认的智能翻译内容区域。
+```
+
+
 ---
 
 - [New Bing 只是给我拉黑了？](https://www.v2ex.com/t/924296)
