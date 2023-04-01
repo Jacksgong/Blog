@@ -147,7 +147,16 @@ Alt+A: 翻译/切换原文，按一下翻译，再按一下显示原文。
 Alt+W: 翻译整个页面，而不是默认的智能翻译内容区域。
 ```
 
-### 1.3 
+### 1.3  [OpenAI Translator](https://chrome.google.com/webstore/detail/openai-translator/)
+
+已经有了沉浸式双语网页翻译扩展了，为啥我还推荐[OpenAI Translator](https://chrome.google.com/webstore/detail/openai-translator/)这个插件呢，原因很简单，就是他的能力绝不仅仅是`Translator`，他可以支持：
+
+- 选择的文本的润色
+- 选择的文本的总结
+- 选择的内容的语法分析
+- 选择的代码的解释
+
+![](/img/gpt_using-108ff620.png)
 
 ### 2. 通过沟通控制软件系列
 
