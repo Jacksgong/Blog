@@ -1,4 +1,4 @@
-title: ChatGPT/OpenAI/NewBing的使用
+title: ChatGPT/OpenAI/NewBing的使用以及AI工具推荐
 date: 2023-03-07 00:35:03
 updated: 2023-04-01
 categories:
@@ -27,8 +27,6 @@ tags:
 我问了下ChatGPT，居然让我用Visual Studio Code的插件来使用，具体建议网上查一查方法比较简单:
 
 ![](/img/gpt_using-b047afc0.png)
-
-
 
 ## II. OpenAI API 使用
 
@@ -119,7 +117,9 @@ New Bing的使用也比较简单，不过有几点特别注意下:
 
 ## IV. 好用的工具
 
-### 1. [ChatHub - All-in-one chatbot client](https://chrome.google.com/webstore/detail/chathub-all-in-one-chatbo/iaakpnchhognanibcahlpcplchdfmgma/related)
+### 1. Chrome/Firefox/Edge插件
+
+#### 1.1 [ChatHub - All-in-one chatbot client](https://chrome.google.com/webstore/detail/chathub-all-in-one-chatbo/iaakpnchhognanibcahlpcplchdfmgma/related)
 
 基于这个Chrome插件，可以同时使用ChatGPT与New Bing，甚至可以在上面直接使用Bard，非常方便。
 
@@ -132,6 +132,22 @@ New Bing的使用也比较简单，不过有几点特别注意下:
 ![](/img/gpt_using-50d1bbe5.png)
 
 当然如果你有ChatGPT Plus，也可以配置使用GPT4的`API Model`。
+
+### 1.2 [沉浸式双语网页翻译扩展](https://immersive-translate.owenyoung.com/)
+
+这个扩展可以让你在浏览网页的时候，可以同时看到英文和中文，非常方便。支持OpenAI的GPT-3，也支持Google的翻译。
+
+![](/img/gpt_using-4bf0cf9f.png)
+
+并且支持快捷键，如默认支持的快捷键，超级方便:
+
+```
+Alt+A: 翻译/切换原文，按一下翻译，再按一下显示原文。
+
+Alt+W: 翻译整个页面，而不是默认的智能翻译内容区域。
+```
+
+### 1.3 
 
 ### 2. 通过沟通控制软件系列
 
@@ -151,33 +167,9 @@ New Bing的使用也比较简单，不过有几点特别注意下:
 
 ![](/img/gpt_using-f16d1b5e.png)
 
-### 3. [沉浸式双语网页翻译扩展](https://immersive-translate.owenyoung.com/)
+#### 2.3 [Shell GPT](https://github.com/TheR1D/shell_gpt) - 在已有的Terminal里面集成GPT
 
-这个扩展可以让你在浏览网页的时候，可以同时看到英文和中文，非常方便。支持OpenAI的GPT-3，也支持Google的翻译。
-
-![](/img/gpt_using-4bf0cf9f.png)
-
-并且支持快捷键，如默认支持的快捷键，超级方便:
-
-```
-Alt+A: 翻译/切换原文，按一下翻译，再按一下显示原文。
-
-Alt+W: 翻译整个页面，而不是默认的智能翻译内容区域。
-```
-
-### 4. [Warp](https://app.warp.dev/referral/Z99DVP) - 深度整合GPT的Terminal
-
-我用了很多年的iTerm2+Tmux这样的组合，这是第一次让我有冲动尝试的全新的终端，你可以通过对话的方式，让[Warp](https://app.warp.dev/referral/Z99DVP)帮你完成一些操作，比如：
-
-![](/img/gpt_using-ce940d1c.png)
-
-当然Warp整体的UI以及交互也会更加友好，比如：
-
-![](/img/gpt_using-ae14090e.png)
-
-### 5. [Shell GPT](https://github.com/TheR1D/shell_gpt) - 在已有的Terminal里面集成GPT
-
-不过如果你仅仅只想要在terminal里面集成GPT，也可以直接安装[Shell GPT](https://github.com/TheR1D/shell_gpt)来实现:
+如果你仅仅只想要在terminal里面集成GPT，可以直接安装[Shell GPT](https://github.com/TheR1D/shell_gpt)来实现:
 
 ```bash
 pip install shell-gpt
@@ -235,6 +227,16 @@ sgpt "check these logs, find errors, and explain what the error is about: ${dock
 ```bash
 sgpt --code "solve classic fizz buzz problem using Python" > fizz_buzz.py
 ```
+
+### 3. [Warp](https://app.warp.dev/referral/Z99DVP) - 深度整合GPT的Terminal
+
+我用了很多年的iTerm2+Tmux这样的组合，这是第一次让我有冲动尝试的全新的终端，你可以通过对话的方式，让[Warp](https://app.warp.dev/referral/Z99DVP)帮你完成一些操作，比如：
+
+![](/img/gpt_using-ce940d1c.png)
+
+当然Warp整体的UI以及交互也会更加友好，比如：
+
+![](/img/gpt_using-ae14090e.png)
 
 ---
 
