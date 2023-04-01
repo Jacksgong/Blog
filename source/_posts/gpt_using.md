@@ -1,6 +1,6 @@
 title: ChatGPT/OpenAI/NewBing的使用
 date: 2023-03-07 00:35:03
-updated: 2023-03-30
+updated: 2023-04-01
 categories:
 - fun
 tags:
@@ -165,7 +165,7 @@ Alt+A: 翻译/切换原文，按一下翻译，再按一下显示原文。
 Alt+W: 翻译整个页面，而不是默认的智能翻译内容区域。
 ```
 
-### 4. [Warp](https://app.warp.dev/referral/Z99DVP) - 与GPT深度整合的Terminal
+### 4. [Warp](https://app.warp.dev/referral/Z99DVP) - 深度整合GPT的Terminal
 
 我用了很多年的iTerm2+Tmux这样的组合，这是第一次让我有冲动尝试的全新的终端，你可以通过对话的方式，让[Warp](https://app.warp.dev/referral/Z99DVP)帮你完成一些操作，比如：
 
@@ -175,7 +175,66 @@ Alt+W: 翻译整个页面，而不是默认的智能翻译内容区域。
 
 ![](/img/gpt_using-ae14090e.png)
 
-更多的大家可以自己去尝试，我已经在尝试使用了。
+### 5. [Shell GPT](https://github.com/TheR1D/shell_gpt) - 在已有的Terminal里面集成GPT
+
+不过如果你仅仅只想要在terminal里面集成GPT，也可以直接安装[Shell GPT](https://github.com/TheR1D/shell_gpt)来实现:
+
+```bash
+pip install shell-gpt
+```
+
+使用之前留意在环境变量中加上你的API Key，然后就可以愉快的玩耍了，赋值到这个`OPENAI_API_KEY`环境变量。
+
+这个的用法也很简单:
+
+![](/img/gpt_using-7451532a.png)
+
+当然也有很多灵活的用法，比如：
+
+```bash
+sgpt "nginx default config file location"
+# -> The default configuration file for Nginx is located at /etc/nginx/nginx.conf.
+
+sgpt "mass of sun"
+# -> = 1.99 × 10^30 kg
+
+```
+
+如果仅仅只是想要查询指令可以使用`--shell`或者`-s`:
+
+```bash
+sgpt --shell "make all files in current directory read only"
+# -> chmod 444 *
+# -> Execute shell command? [y/N]: y
+# ...
+
+ls
+# -> 1.mp4 2.mp4 3.mp4
+sgpt -s "using ffmpeg combine multiple videos into one without audio. Video file names: $(ls -m)"
+# -> ffmpeg -i 1.mp4 -i 2.mp4 -i 3.mp4 -filter_complex "[0:v] [1:v] [2:v] concat=n=3:v=1 [v]" -map "[v]" out.mp4
+# -> Execute shell command? [y/N]: y
+# ...
+```
+
+当然也包含基本的GPT的能力，如总结输入的内容之类的:
+
+```bash
+sgpt "Generate git commit message, my changes: $(git diff)"
+# -> Commit message: Implement Model enum and get_edited_prompt() func, add temperature, top_p and editor args for OpenAI request.
+```
+
+甚至对出现的错误给出解决建议:
+
+```bash
+sgpt "check these logs, find errors, and explain what the error is about: ${docker logs -n 20 container_name}"
+# ...
+```
+
+还可以生成代码，如下面生成一个代码片段，并直接写入到`fizz_buzz.py`:
+
+```bash
+sgpt --code "solve classic fizz buzz problem using Python" > fizz_buzz.py
+```
 
 ---
 
