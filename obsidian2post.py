@@ -91,7 +91,7 @@ with open(target_markdown_file_path, 'r') as file:
         # replace the asset path in the markdown file
         print('replacing {} to {}'.format(asset, target_assets[i]))
         filedata = filedata.replace('![[{}]]'.format(asset), '![](/img/{})'.format(target_assets[i]))
-        
+
     # write filedata to the target markdown file
     with open(target_markdown_file_path, 'w') as file:
         file.write(filedata)

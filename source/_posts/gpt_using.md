@@ -1,6 +1,6 @@
 title: ChatGPT/OpenAI/NewBing的使用以及AI工具推荐
 date: 2023-03-07 00:35:03
-updated: 2023-04-01
+updated: 2023-04-02
 categories:
 - fun
 tags:
@@ -246,6 +246,18 @@ sgpt --code "solve classic fizz buzz problem using Python" > fizz_buzz.py
 当然Warp整体的UI以及交互也会更加友好，比如：
 
 ![](/img/gpt_using-ae14090e.png)
+
+### 4. [Tome AI](https://tome.app/invite/jacks-gong-clfz87ouh6mrx429ic8d845nm) - 自动做PPT
+
+通过这个网站可以快速的自动创建PPT，根据你的idea自动找图，生成动画，自动生成文案等，非常的自然好用。
+
+![](/img/gpt_using-082f7446.png)
+
+输入一个主题，立马全自动生成整个PPT，并且可以定制修改，支持中文，甚至支持做PPT演示录制。下面就是我输入了一个"如何迎接AGI时代的到来"，然后就自动生成了一个PPT。
+
+![](/img/gpt_using-d5b1b23a.png)
+
+不过需要留意的是，整体体验下来，整体模板样式目前还比较单一，另外就是会自动为PPT添加文本以及图片。
 
 ---
 
