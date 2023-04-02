@@ -259,6 +259,13 @@ sgpt --code "solve classic fizz buzz problem using Python" > fizz_buzz.py
 
 不过需要留意的是，整体体验下来，整体模板样式目前还比较单一，另外就是会自动为PPT添加文本以及图片。
 
+### 5. [Clipdrop](https://clipdrop.co/) - 图片移除背景，移除区域内容等图片处理
+
+这个是一个非常有意思的网站，可以通过GPT来处理图片，能力非常的有用，比如：
+
+![](/img/gpt_using-e08239b0.png)
+
+
 ---
 
 - [New Bing 只是给我拉黑了？](https://www.v2ex.com/t/924296)
