@@ -17,6 +17,9 @@ tags:
 
 
 <!--more-->
+
+> 在此之前，近期有发现了一个学习git比较有意思的站点，推荐新手同学可以试试: [learngitbranching.js.org](https://learngitbranching.js.org/)
+
 ## Git使用
 ### I. 创建:
 #### 本地:

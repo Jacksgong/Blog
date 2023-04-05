@@ -265,6 +265,7 @@ sgpt --code "solve classic fizz buzz problem using Python" > fizz_buzz.py
 
 ![](/img/gpt_using-e08239b0.png)
 
+当然也有一些可以快速替换背景的站点，比如[Mokker](https://app.mokker.ai/)，这个可以快速识别出背景并且替换背景包括背光，作为商品的演示之类的特别适用。
 
 ---
 
