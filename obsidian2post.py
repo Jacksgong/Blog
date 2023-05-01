@@ -53,6 +53,106 @@ for file in os.listdir(target_asset_folder):
         print('deleting {}'.format(file))
         os.remove('{}/{}'.format(target_asset_folder, file))
 
+
+# read each line from target_markdown_file_path and replace all obsidian content links in target_markdown_file_path like ![[post#subtitle]] to target real content in the post file and rewrite the target_markdown_file_path
+print('read each line from $target_markdown_file_path and replace all obsidian content links in target_markdown_file_path like ![[post#subtitle]] to target real content in the post file and rewrite the target_markdown_file_path')
+with open(target_markdown_file_path, 'r') as file:
+    # read each line from file
+    filedata = file.read()
+    # find 'post' and 'subtitle' from read content like '![[post#subtitle]]'
+    obsidian_content = re.findall(r'!\[\[(.*?)\]\]', filedata)
+    # if not match the pattern, then skip
+    if len(obsidian_content) == 0:
+        print('not match the pattern, skip')
+        exit(0)
+
+    # write filedata to the target markdown file
+    with open(target_markdown_file_path, 'w') as file:
+        file.write(filedata)
+
+    # replace all obsidian content links in target_markdown_file_path like ![[post#subtitle]] to target real content in the post file and rewrite the target_markdown_file_path
+    for obsidian in obsidian_content:
+        # split the obsidian by '#'
+        obsidian_split = obsidian.split('#')
+        # if the obsidian not contain '#', then skip
+        if len(obsidian_split) == 1:
+            continue
+
+        # get the post and subtitle from the obsidian
+        post = obsidian_split[0]
+        subtitle = obsidian_split[1]
+
+        print('post: {}, subtitle: {}'.format(post, subtitle))
+
+        # find file with post.md by traversing path_of_obsidian_valt directory
+        post_file_path = ''
+        for root, dirs, files in os.walk(path_of_obsidian_valt):
+            for file in files:
+                if file == post + '.md':
+                    post_file_path = os.path.join(root, file)
+                    break
+
+        print('post_file_path: {}'.format(post_file_path))
+        # if the post not exist in the path_of_obsidian_valt, then skip
+        if not os.path.exists(post_file_path):
+            print('not exist {} in {}'.format(post_file_path, path_of_obsidian_valt))
+            continue
+
+        # if the post not exist in the path_of_obsidian_valt, then skip
+        if not os.path.exists(post_file_path):
+            print('not exist {} in {}'.format(post_file_path, path_of_obsidian_valt))
+            continue
+
+        # read the post file
+        with open(post_file_path, 'r') as post_file:
+            post_filedata = post_file.read()
+            # 找出subtitle所在行，在subtitle之前有几个#
+            subtitle_level = len(re.findall(r'^#+ {}'.format(subtitle), post_filedata, re.MULTILINE)[0].split(' ')[0])
+            print('subtitle_level: {}'.format(subtitle_level))
+
+            subtitle_content = ''
+            begine_assemble = False
+            code_block = False
+            for line in post_filedata.split('\n'):
+                if line.startswith('#'):
+                    # if the content is start with '#' and end with subtitle, then begine assemble the content
+                    if line.startswith('#') and line.endswith(subtitle):
+                        print('begine assemble the content with {}'.format(line))
+                        begine_assemble = True
+                        continue
+
+                # if begine assemble the content, then assemble the content
+                if begine_assemble:
+                    # if the content is start with '```', then set code_block to True
+                    if not code_block and line.startswith('```'):
+                        code_block = True
+                    # if the content is end with '```' and code_block is True, then set code_block to False
+                    if code_block and line.endswith('```'):
+                        code_block = False
+
+                    # if the content is start with '#' and subtitle_level is same or higher than subtitle_level, then end assemble the content
+                    if line.startswith('#') and len(line.split(' ')[0]) <= subtitle_level and not code_block:
+                        print('end assemble the content with {}'.format(line))
+                        break
+                    subtitle_content += line + '\n'
+
+            print('subtitle_content: {}'.format(subtitle_content))
+
+            # if not match the subtitle, then skip
+            if len(subtitle_content) == 0:
+                print('not match the subtitle, skip')
+                continue
+
+            # 将subtitle_content列表中的所有的内容拼接起来
+            subtitle_content = ''.join(subtitle_content)
+
+            # 将target_markdown_file_path中的![[post#subtitle]]替换为subtitle_content
+            filedata = filedata.replace('![[{}#{}]]'.format(post, subtitle), subtitle_content)
+
+        # write filedata to the target markdown file
+        with open(target_markdown_file_path, 'w') as file:
+            file.write(filedata)
+
 # read the file and found all assets define like ![[image.png]] in the target markdown file
 with open(target_markdown_file_path, 'r') as file:
     filedata = file.read()
