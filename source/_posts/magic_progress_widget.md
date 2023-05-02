@@ -1,7 +1,7 @@
 title: Magic Progress Widget
 date: 2015-12-13 15:45:03
 updated: 2015-12-13 15:45:03
-permalink: 2015/12/13/magic_progress_widget
+permalink: 2015/12/13/magic_progress_widget/
 categories:
 - 开源项目
 tags:

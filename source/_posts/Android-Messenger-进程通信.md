@@ -1,7 +1,7 @@
 title: Android Messenger 进程通信
 date: 2013-12-14 08:35:03
 updated: 2013-12-14 08:35:03
-permalink: 2013/12/14/Android-Messenger-进程通信
+permalink: 2013/12/14/Android-Messenger-进程通信/
 categories:
 - Android机制
 tags:

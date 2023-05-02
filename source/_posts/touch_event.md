@@ -3,7 +3,7 @@ date: 2016-03-10 09:49:03
 updated: 2016-03-10 09:49:03
 wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483664&idx=1&sn=9871b049b89ec0b5198e85759986f50b
 wechatmptitle: Android Touch Event派发分析
-permalink: 2016/03/10/touch_event
+permalink: 2016/03/10/touch_event/
 categories:
 - Android机制
 tags:

@@ -1,7 +1,7 @@
 title: 多角度对抗WAF
 date: 2015-07-17 21:35:03
 updated: 2015-07-17 21:35:03
-permalink: 2015/07/17/wh_waf
+permalink: 2015/07/17/wh_waf/
 categories:
 - 安全
 tags:

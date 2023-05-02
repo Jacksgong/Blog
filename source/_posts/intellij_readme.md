@@ -1,7 +1,7 @@
 title: Intellij 使用说明
 date: 2015-02-25 08:35:03
 updated: 2015-02-25 08:35:03
-permalink: 2015/02/25/intellij_readme
+permalink: 2015/02/25/intellij_readme/
 categories:
 - 工程师技能
 tags:

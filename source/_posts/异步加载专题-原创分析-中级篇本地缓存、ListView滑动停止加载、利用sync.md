@@ -1,7 +1,7 @@
 title: 【异步加载专题】【原创分析】中级篇-各类架构与线程数控制
 date: 2012-12-31 08:35:03
 updated: 2012-12-31 08:35:03
-permalink: 2012/12/31/异步加载专题-原创分析-中级篇本地缓存、ListView滑动停止加载、利用sync
+permalink: 2012/12/31/异步加载专题-原创分析-中级篇本地缓存、ListView滑动停止加载、利用sync/
 tags:
 - Android
 - ListView

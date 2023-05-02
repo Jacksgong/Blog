@@ -1,7 +1,7 @@
 title: Android优化
 date: 2015-10-26 15:32:03
 updated: 2017-04-10 15:32:03
-permalink: 2015/10/26/android_optimize
+permalink: 2015/10/26/android_optimize/
 wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483709&idx=1&sn=3d8ed0adb66d3544f109fbdbcf07e317
 wechatmptitle: Android性能与优化
 categories:

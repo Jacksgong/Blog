@@ -1,7 +1,7 @@
 title: ThreadDebugger And ThreadPool
 date: 2016-09-01 16:43:03
 updated: 2016-09-01 16:43:03
-permalink: 2016/09/01/thread_debugger_and_thread_pool
+permalink: 2016/09/01/thread_debugger_and_thread_pool/
 categories:
 - 开源项目
 tags:

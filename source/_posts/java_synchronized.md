@@ -1,7 +1,7 @@
 title: Java Synchronised机制
 date: 2015-11-13 21:14:03
 updated: 2015-11-13 21:14:03
-permalink: 2015/11/13/java_synchronized
+permalink: 2015/11/13/java_synchronized/
 wechatmptitle: Java Synchronized机制与常见的多线程抢占
 wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483673&idx=1&sn=cc20b1149e9ffed649dd00d8737e6a08
 categories:

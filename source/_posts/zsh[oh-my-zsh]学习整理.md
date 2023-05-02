@@ -1,7 +1,7 @@
 title: zsh[oh my zsh]
 date: 2015-03-29 20:29:03
 updated: 2017-03-01 20:29:0
-permalink: 2015/03/29/zsh[oh-my-zsh]学习整理
+permalink: 2015/03/29/zsh[oh-my-zsh]学习整理/
 categories:
 - 工程师技能
 tags:

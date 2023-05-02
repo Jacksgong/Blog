@@ -1,7 +1,7 @@
 title: 腾讯web安全
 date: 2015-07-17 21:35:03
 updated: 2015-07-17 21:35:03
-permalink: 2015/07/17/wh_tencent_web
+permalink: 2015/07/17/wh_tencent_web/
 categories:
 - 安全
 tags:

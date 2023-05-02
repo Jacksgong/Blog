@@ -1,7 +1,7 @@
 title: Google 2015 Material Design Summit
 date: 2015-04-21 04:05:03
 updated: 2015-04-21 04:05:03
-permalink: 2015/04/21/Google-2015-Material-Design-Summit
+permalink: 2015/04/21/Google-2015-Material-Design-Summit/
 categories:
 - Google Summit
 tags:

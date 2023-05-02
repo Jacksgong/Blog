@@ -1,6 +1,6 @@
 title: Android GC
 date: 2015-11-30 09:00:03
-permalink: 2015/11/30/gc
+permalink: 2015/11/30/gc/
 wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483725&idx=1&sn=1b416b52c51ed0486bd34d66fc5abb2f
 wechatmptitle: Activity管理服务、虚拟机与GC
 updated: 2017-04-24

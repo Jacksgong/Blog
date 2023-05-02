@@ -1,7 +1,7 @@
 title: Android Handler Looper机制
 date: 2016-03-11 14:36:03
 updated: 2016-03-11 14:36:03
-permalink: 2016/03/11/android_handler_looper
+permalink: 2016/03/11/android_handler_looper/
 wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483661&idx=1&sn=39c0e67abfb50042936f4af9ec985ed8
 wechatmptitle: Android Handler
 categories:

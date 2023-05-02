@@ -1,7 +1,7 @@
 title: Notification最佳实践
 date: 2016-01-09 15:06:03
 updated: 2017-04-24
-permalink: 2016/01/09/notification_best_practise
+permalink: 2016/01/09/notification_best_practise/
 wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483727&idx=1&sn=5a43afb4c00c41bce62fbc9f3e13e805
 wechatmptitle: Notification最佳实践
 categories:

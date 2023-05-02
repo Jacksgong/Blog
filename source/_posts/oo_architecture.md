@@ -1,7 +1,7 @@
 title: 架构设计基础知识整理
 date: 2016-03-09 22:41:03
 updated: 2020-01-02
-permalink: 2016/03/09/oo_architecture
+permalink: 2016/03/09/oo_architecture/
 wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&amp;mid=2247483731&amp;idx=1&amp;sn=4084630e41a91848d9c72408d737a368
 wechatmptitle: 架构设计基础知识整理(一)
 categories:

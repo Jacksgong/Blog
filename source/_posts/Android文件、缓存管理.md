@@ -1,7 +1,7 @@
 title: Android文件、缓存管理
 date: 2013-12-17 08:35:03
 updated: 2013-12-17 08:35:03
-permalink: 2013/12/17/Android文件、缓存管理
+permalink: 2013/12/17/Android文件、缓存管理/
 categories:
 - 开源项目
 tags:

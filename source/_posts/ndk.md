@@ -1,7 +1,7 @@
 title: NDK与JNI
 date: 2015-11-08 23:16:03
 updated: 2017-04-11
-permalink: 2015/11/08/ndk
+permalink: 2015/11/08/ndk/
 wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483711&idx=1&sn=7b3f68b9131b57a6e58925840bacc863
 wechatmptitle: Android NDK与JNI
 categories:

@@ -1,7 +1,7 @@
 title: Android 切图与标注
 date: 2015-11-08 22:35:03
 updated: 2015-11-08
-permalink: 2015/11/08/density_dpi
+permalink: 2015/11/08/density_dpi/
 categories:
 - Android UI交互
 tags:

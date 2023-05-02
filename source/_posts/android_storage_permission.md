@@ -1,7 +1,7 @@
 title: Android中尽量不用Storage Permission
 date: 2015-11-30 09:00:03
 updated: 2015-11-30 09:00:03
-permalink: 2015/11/30/android_storage_permission
+permalink: 2015/11/30/android_storage_permission/
 categories:
 - Android最佳实践
 tags:

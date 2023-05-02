@@ -3,7 +3,7 @@ date: 2015-12-07 00:48:03
 updated: 2015-12-07 00:48:03
 wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483667&idx=1&sn=5e4cc3bd07e81efa41fbfce25f4a6bd3
 wechatmptitle: Android动态加载dex
-permalink: 2015/12/07/android_dynamic_dex
+permalink: 2015/12/07/android_dynamic_dex/
 categories:
 - Android机制
 tags:

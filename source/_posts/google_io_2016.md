@@ -1,7 +1,7 @@
 title: Google IO 2016
 date: 2016-05-19 03:03:03
 updated: 2016-05-19 03:03:03
-permalink: 2016/05/19/google_io_2016
+permalink: 2016/05/19/google_io_2016/
 categories:
 - Google Summit
 tags:

@@ -1,7 +1,7 @@
 title: SVG矢量预研期总结
 date: 2015-02-04 08:35:03
 updated: 2015-02-04 08:35:03
-permalink: 2015/02/04/SVG矢量预研期总结
+permalink: 2015/02/04/SVG矢量预研期总结/
 categories:
 - SVG
 tags:

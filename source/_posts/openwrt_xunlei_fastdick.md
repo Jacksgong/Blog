@@ -3,7 +3,7 @@ date: 2016-05-29 14:30:03
 updated: 2016-05-29 14:30:03
 wechatmptitle: OpenWrt通过迅雷快鸟提速
 wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483654&idx=1&sn=151940b17d4f1bd03076988027a35831
-permalink: 2016/05/29/openwrt_xunlei_fastdick
+permalink: 2016/05/29/openwrt_xunlei_fastdick/
 categories:
 - OpenWrt
 tags:

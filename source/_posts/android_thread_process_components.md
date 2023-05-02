@@ -1,7 +1,7 @@
 title: Android中线程、进程与组件的关系
 date: 2015-04-08 08:35:03
 updated: 2015-04-08 08:35:03
-permalink: 2015/04/08/android_thread_process_components
+permalink: 2015/04/08/android_thread_process_components/
 categories:
 - Android机制
 tags:

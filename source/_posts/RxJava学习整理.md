@@ -1,7 +1,7 @@
 title: RxJava
 date: 2015-04-29 08:35:03
 updated: 2015-04-29 08:35:03
-permalink: 2015/04/29/RxJava学习整理
+permalink: 2015/04/29/RxJava学习整理/
 categories:
 - 编程方式
 tags:

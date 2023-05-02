@@ -1,7 +1,7 @@
 title: 英语流利说 Android 架构演进
 date: 2016-05-29 01:28:03
 updated: 2016-05-29 01:28:03
-permalink: 2016/05/29/lls_architecture
+permalink: 2016/05/29/lls_architecture/
 categories:
 - 架构
 tags:

@@ -3,7 +3,7 @@ date: 2015-03-25 08:35:03
 updated: 2015-03-25 08:35:03
 wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483673&idx=1&sn=cc20b1149e9ffed649dd00d8737e6a08
 wechatmptitle: Java Synchronized机制与常见的多线程抢占
-permalink: 2015/03/25/Java多线程抢占
+permalink: 2015/03/25/Java多线程抢占/
 categories:
 - 编程语言
 tags:

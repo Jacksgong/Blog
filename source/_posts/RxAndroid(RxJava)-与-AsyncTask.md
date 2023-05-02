@@ -1,7 +1,7 @@
 title: RxAndroid(RxJava) 与 AsyncTask
 date: 2015-05-9 08:35:03
 updated: 2015-05-9 08:35:03
-permalink: 2015/05/9/RxAndroid(RxJava)-与-AsyncTask
+permalink: 2015/05/9/RxAndroid(RxJava)-与-AsyncTask/
 tags:
 - AsyncTask
 - RxJava

@@ -3,7 +3,7 @@ date: 2016-05-15 00:40:03
 updated: 2017-10-13 12:39:03
 wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483680&idx=1&sn=a81f0b86696f243bf32c032fc7b09574
 wechatmptitle: Android单元测试与模拟测试
-permalink: 2016/05/15/android_test
+permalink: 2016/05/15/android_test/
 categories:
 - Android测试
 tags:

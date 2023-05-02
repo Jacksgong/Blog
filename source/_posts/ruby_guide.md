@@ -3,7 +3,7 @@ date: 2015-07-26 20:39:03
 updated: 2017-04-24
 wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483723&idx=1&sn=e558bddb5dd8e8d4861c72005898433d
 wechatmptitle: Ruby入门
-permalink: 2015/07/26/ruby_guide
+permalink: 2015/07/26/ruby_guide/
 categories:
 - 编程语言
 tags:

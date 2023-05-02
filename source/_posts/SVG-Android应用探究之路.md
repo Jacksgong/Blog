@@ -1,7 +1,7 @@
 title: SVG Android应用探究之路
 date: 2014-11-08 15:46:03
 updated: 2014-11-08 15:46:03
-permalink: 2014/11/08/SVG-Android应用探究之路
+permalink: 2014/11/08/SVG-Android应用探究之路/
 categories:
 - SVG
 tags:

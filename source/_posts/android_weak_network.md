@@ -1,7 +1,7 @@
 title: Android弱网通信探究
 date: 2016-08-16 11:34:03
 updated: 2017-02-10 11:34:03
-permalink: 2016/08/16/android_weak_network
+permalink: 2016/08/16/android_weak_network/
 categories:
 - 网络
 tags:

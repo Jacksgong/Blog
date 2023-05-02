@@ -1,7 +1,7 @@
 title: Java 8 Lambda
 date: 2015-04-28 08:35:03
 updated: 2015-04-28 08:35:03
-permalink: 2015/04/28/Java-8-Lambda
+permalink: 2015/04/28/Java-8-Lambda/
 categories:
 - 编程语言
 tags:

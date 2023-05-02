@@ -1,7 +1,7 @@
 title: Flatbuffer Use Optimize
 date: 2015-01-05 08:35:03
 updated: 2015-01-05 08:35:03
-permalink: 2015/01/05/Flatbuffer-Use-Optimize
+permalink: 2015/01/05/Flatbuffer-Use-Optimize/
 categories:
 - 开源项目
 tags:

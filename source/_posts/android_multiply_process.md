@@ -1,7 +1,7 @@
 title: Android Binder IPC机制
 date: 2015-11-25 23:54:03
 updated: 2019-12-01 20:55:03
-permalink: 2015/11/25/android_multiply_process
+permalink: 2015/11/25/android_multiply_process/
 wechatmpurl: https://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483670&idx=1&sn=d9124d91d37fa1ecaf131238bda3fb94
 wechatmptitle: Android Binder IPC机制
 categories:

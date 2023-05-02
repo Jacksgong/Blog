@@ -1,7 +1,7 @@
 title: TP-LINK WR720N v3 刷OpenWrt 完美翻墙[本文已经根据有关法律废弃]
 date: 2015-09-06 23:20:03
 updated: 2015-09-06 23:20:03
-permalink: 2015/09/06/wr720n-v3-openwrt-shadowsocks-will-be-removed
+permalink: 2015/09/06/wr720n-v3-openwrt-shadowsocks-will-be-removed/
 categories:
 - OpenWrt
 tags:

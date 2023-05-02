@@ -1,7 +1,7 @@
 title: 如何从外围入各大公司内网
 date: 2015-07-17 21:35:03
 updated: 2015-07-17 21:35:03
-permalink: 2015/07/17/wh_invade
+permalink: 2015/07/17/wh_invade/
 categories:
 - 安全
 tags:

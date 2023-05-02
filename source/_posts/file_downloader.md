@@ -1,7 +1,7 @@
 title: FileDownloader
 date: 2015-12-23 11:18:03
 updated: 2015-12-23 11:18:03
-permalink: 2015/12/23/file_downloader
+permalink: 2015/12/23/file_downloader/
 categories:
 - 开源项目
 tags:

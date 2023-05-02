@@ -1,7 +1,7 @@
 title: ConstraintLayout
 date: 2016-08-03 08:33:03
 updated: 2016-08-03 08:33:03
-permalink: 2016/08/03/constraint-layout
+permalink: 2016/08/03/constraint-layout/
 categories:
 - Android UI交互
 tags:

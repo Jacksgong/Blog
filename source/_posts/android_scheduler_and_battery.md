@@ -3,7 +3,7 @@ date: 2016-08-15 09:07:03
 updated: 2017-04-27 09:07:03
 wechatmpurl: http://mp.weixin.qq.com/s?__biz=MzIyMjQxMzAzOA==&mid=2247483685&idx=1&sn=7f548740be9dd4e5b8849b861cb75ec7
 wechatmptitle: Android后台调度任务与省电
-permalink: 2016/08/15/android_scheduler_and_battery
+permalink: 2016/08/15/android_scheduler_and_battery/
 categories:
 - Android性能与优化
 tags:
