@@ -1,12 +1,13 @@
 'use strict';
 
-const url = require('url');
+const { encodeURL, escapeHTML } = require('hexo-util');
+const { resolve } = require('url');
 
 /**
  * Asset link tag
  *
  * Syntax:
- *   {% asset_link slug [title] %}
+ *   {% asset_link slug [title] [escape] %}
  */
 module.exports = ctx => {
   const PostAsset = ctx.model('PostAsset');
@@ -18,8 +19,19 @@ module.exports = ctx => {
     const asset = PostAsset.findOne({post: this._id, slug});
     if (!asset) return;
 
-    const title = args.length ? args.join(' ') : asset.slug;
+    let escape = args[args.length - 1];
+    if (escape === 'true' || escape === 'false') {
+      args.pop();
+    } else {
+      escape = 'true';
+    }
 
-    return `<a href="${url.resolve(ctx.config.root, asset.path)}" title="${title}">${title}</a>`;
+    let title = args.length ? args.join(' ') : asset.slug;
+    const attrTitle = escapeHTML(title);
+    if (escape === 'true') title = attrTitle;
+
+    const link = encodeURL(resolve(ctx.config.root, asset.path));
+
+    return `<a href="${link}" title="${attrTitle}">${title}</a>`;
   };
 };

@@ -1,7 +1,7 @@
 title: Debian 11 维护与环境配置
 date: 2023-05-02 00:46:36
 updated: 2023-05-02
-permalink: maintain_debian
+permalink: maintain_debian/
 categories:
 - fun
 tags:
