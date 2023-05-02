@@ -538,6 +538,16 @@ sudo ufw allow 8006
 
 ![](/img/maintain_debian_6.png)
 
+最后需要留意的是，如果你是使用的Nvidia，PVE这边需要做下配置，参考[PVE Nvidia教程](https://pve.proxmox.com/wiki/Developer_Workstations_with_Proxmox_VE_and_X11#Optional:_NVidia_Drivers):
+
+```bash
+su
+echo "blacklist nouveau" >> /etc/modprobe.d/blacklist.conf
+apt install pve-headers
+apt-get update 
+apt-get install  nvidia-driver
+```
+
 
 
 ## VI. VNC与远程桌面访问
@@ -675,7 +685,10 @@ vncserver -kill :1
 
 ## VII. 驱动
 
+
 ### 网卡
+
+> 参考[这个](https://www.jeffgeerling.com/blog/2021/check-your-driver-faster-linux-25g-networking-realtek-rtl8125b)教程也可以
 
 检查网卡型号:
 ```bash
@@ -716,6 +729,9 @@ systemctl reboot
 
 检查状态`nvidia-smi`
 ![](/img/maintain_debian_16.png)
+
+
+
 
 ## VIII. 监控与管理
 
