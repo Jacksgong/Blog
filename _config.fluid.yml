@@ -479,7 +479,7 @@ index:
 
     # 为空则按 hexo config.subtitle 显示
     # If empty, text based on `subtitle` in hexo config
-    text: "我们一定要过一段无怨无悔的人生，将来一定要出海，然后随心所欲的活着，比谁都要自由。—— ONE PIECE 艾斯"
+    text: "我们一定要过一段无怨无悔的人生，将来一定要出海，然后随心所欲的活着，比谁都要自由。— ONE PIECE 艾斯"
 
     # 通过 API 接口作为首页副标题的内容，必须返回的是 JSON 格式，如果请求失败则按 text 字段显示，该功能必须先开启 typing 打字机功能
     # Subtitle of the homepage through the API, must be returned a JSON. If the request fails, it will be displayed in `text` value. This feature must first enable the typing animation
