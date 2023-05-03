@@ -14,8 +14,6 @@ steps:
   volumes:
     - name: blog-env
       path: /opt/blog
-      host:
-        path: /mnt/dev/opt/hexo-blog
   environment:
     DEPLOY_CHECK_KEY:
       from_secret: DEPLOY_CHECK_KEY
