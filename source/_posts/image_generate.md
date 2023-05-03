@@ -108,19 +108,19 @@ https://discord.com/
 
 直接[打开网页](https://www.remove.bg/r/9rpoFMPurm4zvmoBRkuDrzEW)就可以使用，这个网站使用超级简单而且是免费的。
 
-![](assets/image_generate-127d1b80.png)
+![](/img/image_generate-127d1b80.png)
 
-![](assets/image_generate-c01ea861.png)
+![](/img/image_generate-c01ea861.png)
 
 ## IV. Roomgpt - 室内设计平面图自动生成
 
 直接打开[网站](https://www.roomgpt.io/)，比如我自己测试了下:
 
-![](assets/image_generate-779c08bf.png)
+![](/img/image_generate-779c08bf.png)
 
 主要就是选择主题，然后选择房间类型，然后上传图片，等个几秒钟，简单易用：
 
-![](assets/image_generate-a03a2e29.png)
+![](/img/image_generate-a03a2e29.png)
 
 ---
 
