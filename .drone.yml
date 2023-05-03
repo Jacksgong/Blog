@@ -26,3 +26,8 @@ trigger:
     - master
   event:
     - push
+
+volumes:
+  - name: blog-env
+    host:
+      path: /mnt/dev/opt/hexo-blog
