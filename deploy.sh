@@ -11,8 +11,10 @@ hexo -v
 node -v
 npm -v
 
+echo "==========>>>>>>prepare private key=========="
+cp /opt/blog/.env .env
 echo "==========>>>>>>start generate blog=========="
-hexo g
+python3 run_with_private_key.py g
 ls
 echo "==========<<<<<<finish generate blog=========="
 
