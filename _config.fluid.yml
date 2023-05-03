@@ -728,7 +728,7 @@ post:
     # 指定的插件，需要同时设置对应插件的必要参数
     # The specified plugin needs to set the necessary parameters at the same time
     # Options: utterances | disqus | gitalk | valine | waline | changyan | livere | remark42 | twikoo | cusdis | giscus
-    type: valine
+    type: waline
 
 
 #---------------------------
@@ -759,8 +759,8 @@ disqus:
   # 以下为 Disqusjs 支持, 国内用户如果想使用 Disqus 建议配合使用
   # The following are Disqusjs configurations, please ignore if DisqusJS is not required
   # See: https://github.com/SukkaW/DisqusJS
-  disqusjs: true
-  apikey: cOb7tQd8Owjrs7xWClsert9PJPL4TZGa5RTouUa3XzAp99cjRlegZUwbYArj6tAd
+  disqusjs: false
+  apikey: 
 
 # Gitalk
 # 基于 GitHub Issues
@@ -789,8 +789,8 @@ gitalk:
 # Based on LeanCloud
 # See: https://valine.js.org/
 valine:
-  appId: bYtMA3zU0rkwM92HpnULHUsZ-gzGzoHsz
-  appKey: xFC9vBnPAASnkYa6nxM6FUIh
+  appId: 
+  appKey: 
   path: window.location.pathname
   placeholder:
   avatar: 'retro'
@@ -810,7 +810,7 @@ valine:
 # Derived from Valine, with self-hosted service and new features
 # See: https://waline.js.org/
 waline:
-  serverURL: 'https://blog.dreamtobe.cn'
+  serverURL: $WALINE_SERVER
   path: window.location.pathname
   meta: ['nick', 'mail', 'link']
   requiredMeta: ['nick']
