@@ -1,6 +1,6 @@
 title: Debian 11 维护与环境配置
 date: 2023-05-02 00:46:36
-updated: 2023-05-02
+updated: 2023-05-03
 permalink: maintain_debian/
 categories:
 - fun
@@ -701,6 +701,13 @@ lspci | grep -i ethernet
 1. 在[这里](https://www.realtek.com/en/component/zoo/category/network-interface-controllers-10-100-1000m-gigabit-ethernet-pci-express-software)下载`2.5G Ethernet LINUX driver r8125 for kernel up to 5.19`这个驱动
 2. 解压缩后，执行目录下的`autorun.sh`后重启即可。
 
+检测是否安装正确:
+```bash
+sudo apt install ethtool
+sudo ethtool -i enp8s0
+```
+![](/img/maintain_debian_15.png)
+
 ### 显卡
 
 > 官方说明参考[这里](https://wiki.debian.org/NvidiaGraphicsDrivers)
@@ -718,7 +725,7 @@ sudo apt install nvidia-detect
 sudo nvidia-detect
 ```
 
-![](/img/maintain_debian_15.png)
+![](/img/maintain_debian_16.png)
 
 执行`sudo apt install [driver name]`，通常如下:
 ```bash
@@ -728,7 +735,7 @@ systemctl reboot
 ```
 
 检查状态`nvidia-smi`
-![](/img/maintain_debian_16.png)
+![](/img/maintain_debian_17.png)
 
 
 
@@ -831,13 +838,13 @@ sudo ufw allow 9090
 ```bash
 systemctl status nvidia_gpu_exporter.service
 ```
-![](/img/maintain_debian_17.png)
+![](/img/maintain_debian_18.png)
 
 检查下端口情况
 ```bash
 sudo lsof -i -P -n | grep LISTEN
 ```
-![](/img/maintain_debian_18.png)
+![](/img/maintain_debian_19.png)
 
 开放端口
 ```bash
@@ -882,25 +889,25 @@ sudo ufw 9100
 #### 检测与添加到Grafana
 
 到`docker-compose.yml`的目录下执行`sudo docker-compose up -d`启动刚刚的Grafana与Prometheus，然后访问prometheus检查是否有正常链接上，搜索`up`如果后面数值是`1`则表示数据正常，连接成功。
-![](/img/maintain_debian_19.png)
+![](/img/maintain_debian_20.png)
 
 登录Grafana添加Prometheus作为其数据源，我就不过多赘述这里。
-![](/img/maintain_debian_20.png)
+![](/img/maintain_debian_21.png)
 
 ##### 添加系统监控到Grafana
 
 添加系统监控，可以考虑使用[这个](https://grafana.com/grafana/dashboards/15172-node-exporter-for-prometheus-dashboard-based-on-11074/)。
 
-![](/img/maintain_debian_21.png)
+![](/img/maintain_debian_22.png)
 
 然后拷贝这个ID: `15172`，选用好数据源为刚刚创建的Prometheus的，即可
-![](/img/maintain_debian_22.png)
+![](/img/maintain_debian_23.png)
 
 ##### 添加GPU监控到Grafana
 
 添加Nvidia GPU监控，可以考虑使用[这个](https://grafana.com/grafana/dashboards/14574-nvidia-gpu-metrics/)，添加方法和上面一样不赘述了
 
-![](/img/maintain_debian_23.png)
+![](/img/maintain_debian_24.png)
 
 ### Docker情况
 
@@ -926,7 +933,7 @@ services:
 
 然后启动下`sudo docker-compose up -d`，搞定，这里我们使用`portainer.yourdomain.com`访问
 
-![](/img/maintain_debian_24.png)
+![](/img/maintain_debian_25.png)
 
 ## IX. 最后附录
 
