@@ -11,9 +11,6 @@ steps:
 
 - name: publish
   image: hexo:blogv5
-  volumes:
-    - name: blog-env
-      path: /opt/blog
   environment:
     DEPLOY_CHECK_KEY:
       from_secret: DEPLOY_CHECK_KEY
@@ -26,8 +23,3 @@ trigger:
     - master
   event:
     - push
-
-volumes:
-  - name: blog-env
-    host:
-      path: /mnt/dev/opt/hexo-blog
