@@ -7,3 +7,4 @@ db.json
 /.idea
 
 /postob.sh
+/.env
