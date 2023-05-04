@@ -1,6 +1,7 @@
 import os
 import re
 import sys
+import uuid
 import humanize
 
 blog_root_path = sys.argv[1]
@@ -165,7 +166,8 @@ with open(target_markdown_file_path, 'r') as file:
         # get the suffix from the asset path
         suffix = asset.split('.')[-1]
 
-        target_asset_file_name = '{}_{}.{}'.format(target_markdown_file_name, i, suffix)
+        # generate uuid for the asset file name for avoid web server cache
+        target_asset_file_name = '{}_{}_{}.{}'.format(target_markdown_file_name, i, uuid.uuid4(), suffix)
         print('copying {} to {}'.format(asset, '{}/{}'.format(target_asset_folder, target_asset_file_name)))
 
         with open('{}/{}'.format(obsidian_assset_folder, asset), 'rb') as asset_file:
