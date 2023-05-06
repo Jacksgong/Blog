@@ -1,3 +1,4 @@
+import hashlib
 import os
 import re
 import sys
@@ -47,14 +48,7 @@ with open(ob_markdown_file_path, 'r') as file:
     with open(target_markdown_file_path, 'w') as target_file:
         target_file.write(filedata)
 
-# delete prefix name is target_markdown_file_name in the target asset folder
-print('delete prefix name is target_markdown_file_name in the target asset folder')
-for file in os.listdir(target_asset_folder):
-    if file.startswith(target_markdown_file_name + '_'):
-        print('deleting {}'.format(file))
-        os.remove('{}/{}'.format(target_asset_folder, file))
-
-
+# 处理![[post#subtitle]]这样的文章内链引用
 # read each line from target_markdown_file_path and replace all obsidian content links in target_markdown_file_path like ![[post#subtitle]] to target real content in the post file and rewrite the target_markdown_file_path
 print('read each line from $target_markdown_file_path and replace all obsidian content links in target_markdown_file_path like ![[post#subtitle]] to target real content in the post file and rewrite the target_markdown_file_path')
 with open(target_markdown_file_path, 'r') as file:
@@ -154,11 +148,13 @@ with open(target_markdown_file_path, 'r') as file:
         with open(target_markdown_file_path, 'w') as file:
             file.write(filedata)
 
+# 处理图片
 # read the file and found all assets define like ![[image.png]] in the target markdown file
 with open(target_markdown_file_path, 'r') as file:
     filedata = file.read()
     assets = re.findall(r'!\[\[(.*?)\]\]', filedata)
     target_assets = []
+    using_assets = []
 
     # copy the assets to the target asset folder and make their name as markdown file name + incremental number
     print('copy the assets to the target asset folder and make their name as markdown file name + incremental number')
@@ -166,15 +162,35 @@ with open(target_markdown_file_path, 'r') as file:
         # get the suffix from the asset path
         suffix = asset.split('.')[-1]
 
-        # generate uuid for the asset file name for avoid web server cache
-        target_asset_file_name = '{}_{}_{}.{}'.format(target_markdown_file_name, i, uuid.uuid4(), suffix)
+        # genereate short md5 hash for the asset
+        md5_hash = hashlib.md5(asset.encode('utf-8')).hexdigest()[:8]
+
+        # generate the target asset file name
+        target_asset_file_name = '{}_{}_{}.{}'.format(target_markdown_file_name, md5_hash,i, suffix)
         print('copying {} to {}'.format(asset, '{}/{}'.format(target_asset_folder, target_asset_file_name)))
 
+        # record in using assets
+        using_assets.append(target_asset_file_name)
+
+        # if the target asset file exist, then skip
+        if os.path.exists('{}/{}'.format(target_asset_folder, target_asset_file_name)):
+            print('target asset file({}) exist, skip'.format(target_asset_file_name))
+            continue
+
+        # copy the asset to the target asset folder
         with open('{}/{}'.format(obsidian_assset_folder, asset), 'rb') as asset_file:
             with open('{}/{}'.format(target_asset_folder, target_asset_file_name), 'wb') as target_asset_file:
                 target_asset_file.write(asset_file.read())
+
         # assign the new asset path to the target_assets
         target_assets.append(target_asset_file_name)
+
+    # if asset is not in using_assets and prefix name is target_markdown_file_name in the target asset folder, then delete it
+    print('if asset is not in using_assets(size:{}) and prefix name is {} in the {}, then delete it'.format(len(using_assets), target_markdown_file_name, target_asset_folder))
+    for asset in os.listdir(target_asset_folder):
+        if asset.split('_')[0] == target_markdown_file_name and asset not in using_assets:
+            print('deleting {}'.format(asset))
+            os.remove('{}/{}'.format(target_asset_folder, asset))
        
     # compress the png in the target asset folder
     for asset in target_assets:
