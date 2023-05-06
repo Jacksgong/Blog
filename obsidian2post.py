@@ -190,11 +190,14 @@ with open(target_markdown_file_path, 'r') as file:
 
     # if asset is not in using_assets and prefix name is target_markdown_file_name in the target asset folder, then delete it
     print('if asset is not in using_assets(size:{}) and prefix name is {} in the {}, then delete it'.format(len(using_assets), target_markdown_file_name, target_asset_folder))
+    deleted_assets = []
     for asset in os.listdir(target_asset_folder):
         if asset.startswith(target_markdown_file_name) and asset not in using_assets:
             print('deleting {}'.format(asset))
             os.remove('{}/{}'.format(target_asset_folder, asset))
-       
+            deleted_assets.append(asset)
+    print('deleted assets size: {}'.format(len(deleted_assets))) 
+
     # compress the png in the target asset folder
     for asset in target_assets:
         if asset.split('.')[-1] == 'png':
