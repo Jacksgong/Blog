@@ -2,7 +2,6 @@ import hashlib
 import os
 import re
 import sys
-import uuid
 import humanize
 
 blog_root_path = sys.argv[1]
@@ -48,6 +47,7 @@ with open(ob_markdown_file_path, 'r') as file:
     with open(target_markdown_file_path, 'w') as target_file:
         target_file.write(filedata)
 
+debug_mode_for_ref = False
 # 处理![[post#subtitle]]这样的文章内链引用
 # read each line from target_markdown_file_path and replace all obsidian content links in target_markdown_file_path like ![[post#subtitle]] to target real content in the post file and rewrite the target_markdown_file_path
 print('read each line from $target_markdown_file_path and replace all obsidian content links in target_markdown_file_path like ![[post#subtitle]] to target real content in the post file and rewrite the target_markdown_file_path')
@@ -77,7 +77,7 @@ with open(target_markdown_file_path, 'r') as file:
         post = obsidian_split[0]
         subtitle = obsidian_split[1]
 
-        print('post: {}, subtitle: {}'.format(post, subtitle))
+        print('\n>>>post: {}, subtitle: {}'.format(post, subtitle))
 
         # find file with post.md by traversing path_of_obsidian_valt directory
         post_file_path = ''
@@ -131,7 +131,10 @@ with open(target_markdown_file_path, 'r') as file:
                         break
                     subtitle_content += line + '\n'
 
-            print('subtitle_content: {}'.format(subtitle_content))
+            if debug_mode_for_ref: 
+                print('subtitle_content: {}'.format(subtitle_content))
+            else:
+                print('subtitle_content first line(for demo): {}'.format(subtitle_content.split('\n')[0]))
 
             # if not match the subtitle, then skip
             if len(subtitle_content) == 0:
@@ -167,7 +170,6 @@ with open(target_markdown_file_path, 'r') as file:
 
         # generate the target asset file name
         target_asset_file_name = '{}_{}_{}.{}'.format(target_markdown_file_name, md5_hash,i, suffix)
-        print('copying {} to {}'.format(asset, '{}/{}'.format(target_asset_folder, target_asset_file_name)))
 
         # record in using assets
         using_assets.append(target_asset_file_name)
@@ -178,6 +180,7 @@ with open(target_markdown_file_path, 'r') as file:
             continue
 
         # copy the asset to the target asset folder
+        print('copying {} to {}'.format(asset, '{}/{}'.format(target_asset_folder, target_asset_file_name)))
         with open('{}/{}'.format(obsidian_assset_folder, asset), 'rb') as asset_file:
             with open('{}/{}'.format(target_asset_folder, target_asset_file_name), 'wb') as target_asset_file:
                 target_asset_file.write(asset_file.read())
@@ -188,7 +191,7 @@ with open(target_markdown_file_path, 'r') as file:
     # if asset is not in using_assets and prefix name is target_markdown_file_name in the target asset folder, then delete it
     print('if asset is not in using_assets(size:{}) and prefix name is {} in the {}, then delete it'.format(len(using_assets), target_markdown_file_name, target_asset_folder))
     for asset in os.listdir(target_asset_folder):
-        if asset.split('_')[0] == target_markdown_file_name and asset not in using_assets:
+        if asset.startswith(target_markdown_file_name) and asset not in using_assets:
             print('deleting {}'.format(asset))
             os.remove('{}/{}'.format(target_asset_folder, asset))
        
@@ -207,8 +210,8 @@ with open(target_markdown_file_path, 'r') as file:
     # replace the assets path in the markdown file
     for i, asset in enumerate(assets):
         # replace the asset path in the markdown file
-        print('replacing {} to {}'.format(asset, target_assets[i]))
-        filedata = filedata.replace('![[{}]]'.format(asset), '![](/img/{})'.format(target_assets[i]))
+        print('replacing {} to {}'.format(asset, using_assets[i]))
+        filedata = filedata.replace('![[{}]]'.format(asset), '![](/img/{})'.format(using_assets[i]))
 
     # write filedata to the target markdown file
     with open(target_markdown_file_path, 'w') as file:
