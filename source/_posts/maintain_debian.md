@@ -1,6 +1,6 @@
 title: Debian 11 维护与环境配置
 date: 2023-05-02 00:46:36
-updated: 2023-05-05
+updated: 2023-05-06
 permalink: maintain_debian/
 categories:
 - fun
@@ -70,7 +70,7 @@ sudo ufw status
 ```
 
 此时就可以远程用ssh访问了，如果你不确定目前的ip是多少可以通过该方式确认下，查看当前接口名称`ip a`
-![](/img/maintain_debian_0_cfc2b3f4-ad14-4d6c-9cae-088e76c71ff5.png)
+![](/img/maintain_debian_0_44db37ad-0426-4af0-85ab-4bb5a466d3c2.png)
 
 配置非密码访问，将本地的public key添加到`vi ~/.ssh/authorized_keys`，确保通过密钥登录有效。
 
@@ -213,16 +213,16 @@ mdadm --create /dev/md0 --level=raid1 --raid-devices=2 /dev/sdb2 /dev/sdc2
 ```
 
 查看当前RAID情况`cat /proc/mdstat`
-![](/img/maintain_debian_1_35d04252-7b9c-4256-84b5-4f0e54198c9e.png)
+![](/img/maintain_debian_1_b8f527bc-250c-4ffe-86f7-4731b5359abc.png)
 
 也可以使用`sudo mdadm --detail --scan`
-![](/img/maintain_debian_2_214d8f8e-2aee-441d-9325-249c2be65933.png)
+![](/img/maintain_debian_2_664976a2-44dd-4dce-a34c-5db9c741740d.png)
 
 如果是首次，不是恢复，还需要对RAID格式化:
 ```bash
 sudo mkfs.ext4 /dev/md/0
 ```
-![](/img/maintain_debian_3_5bb3ae3e-b25e-477b-9a1a-17993bde0442.png)
+![](/img/maintain_debian_3_83f90df3-3201-4b21-a6da-4b2a487a1bf1.png)
 
 ### 挂载RAID
 
@@ -235,7 +235,7 @@ sudo mkdir /mnt/dev
 ```bash
 sudo mount -t ext /dev/md/0 /mnt/dev
 ```
-![](/img/maintain_debian_4_f703db08-19b6-4683-8b68-0ef98f9df92e.png)
+![](/img/maintain_debian_4_6b234c0b-7288-47d1-9be1-5fdb2ffead48.png)
 
 开机自动挂载，可以参照[这个教程](https://www.digitalocean.com/community/tutorials/how-to-create-raid-arrays-with-mdadm-on-debian-9)，使用`mdadm`来进行操作（这样在关机以及一些系统性操作的时候也会自动关联）:
 
@@ -478,7 +478,7 @@ sudo apt install proxmox-ve postfix open-iscsi
 ```
 
 安装过程中提示邮箱服务，如果你debian系统中没有安装没有，就直接选择`Local only`即可:
-![](/img/maintain_debian_5_3c221608-7e80-4189-9ccd-c2576d36b5d8.png)
+![](/img/maintain_debian_5_f0d1bbea-27ac-4d5d-b9b5-4c8b2435958c.png)
 
 过程提示的系统邮箱域名，直接使用前面提到的`debian.yourdomain.com`即可。
 
@@ -536,7 +536,7 @@ sudo ufw allow 8006
 
 然后通过`https://<your_local_ip>:8006`就已经可以整访问了，具体如果域名反向代理，可以使用前面提到的Traefik去做到，这里就不赘述了。
 
-![](/img/maintain_debian_6_b2fab663-25ec-49b4-92f3-0c86108c38f5.png)
+![](/img/maintain_debian_6_a9023218-ac73-49a8-bad1-acf628deefc7.png)
 
 最后需要留意的是，如果你是使用的Nvidia，PVE这边需要做下配置，参考[PVE Nvidia教程](https://pve.proxmox.com/wiki/Developer_Workstations_with_Proxmox_VE_and_X11#Optional:_NVidia_Drivers):
 
@@ -556,37 +556,88 @@ apt-get install  nvidia-driver
 > 整体可以考虑参照[这个教程](https://www.jwtechtips.top/how-to-install-openwrt-in-proxmox/)就行，不过这个教程引导会有点小问题，跟着[这个教程](https://optimus-xs.github.io/posts/install-openwrt-in-pve/)就可以完美解决。
 
 首先基本的配置，先准备好`vmbr0`，这个桥接的网络在前面安装好pve后已经做了说明，然后创建虚拟机整体配置除这里的硬盘外与这个一致即可，前面一步一步的配置随便配置也行，配置完都可以修改，实在不清楚可以参看[这个教程](https://www.jwtechtips.top/how-to-install-openwrt-in-proxmox/)。
-![](/img/maintain_debian_7_059e2e05-1032-4fb2-b294-5d53b843c909.png)
+![](/img/maintain_debian_7_248767c5-014c-436d-abb5-ccf9498e3e21.png)
 
 配置完后可以先将原本的默认的硬盘分离+删除了，方便接下来写入一个新的openwrt。
 
 然后下载openwrt固件，下载这里我们下载K9的，可以直接在 [这里](https://supes.top/?version=22.03&target=x86%2F64&id=generic)下载
-![](/img/maintain_debian_8_6cf9e20b-fc77-4232-b909-b60649c06fae.png)
+![](/img/maintain_debian_8_4d8d249d-642b-4df6-8bd4-c6430c5426f1.png)
 
 选择EFI启动的固件，然后用`gunzip`解压缩
 ```bash
 gunzip openwrt-04.18.2023-x86-64-generic-squashfs-combined-efi.img.gz
 ```
-![](/img/maintain_debian_9_9862d465-f147-4b5c-85d2-cbd8008a1514.png)
+![](/img/maintain_debian_9_fd7abc3f-ce61-48a8-a587-3b936e8bd549.png)
 
 写入指令
 ```bash
 sudo qm importdisk 100 openwrt-04.18.2023-x86-64-generic-squashfs-combined-efi.img local
 ```
-![](/img/maintain_debian_10_a0a20f25-9f99-4e03-a98f-d610e4246661.png)
+![](/img/maintain_debian_10_2974c903-a346-4c4b-8b0e-934c82694619.png)
 
 这里的`100`是虚拟机的id，`local`是存储名，分别可以在前端页面找到:
-![](/img/maintain_debian_11_c3410f44-3028-4a1c-93a6-a51001a98655.png)
+![](/img/maintain_debian_11_4c516668-c04c-46ff-9b7c-b20657e985e6.png)
 
 完成后，这里会出现一个新的硬盘，点击后修改为STATA即可，最后的状态如下:
 
-![](/img/maintain_debian_12_364c274c-3fa3-4786-b4be-7de37f560404.png)
+![](/img/maintain_debian_12_85fcb5cc-ff7c-4760-811d-b257ba96ca9c.png)
 
 然后将开机引导调整为sata0即可
-![](/img/maintain_debian_13_155d62d7-6d0c-4ad2-afb9-c765772b94f9.png)
+![](/img/maintain_debian_13_ff4f1f62-2111-42b3-8f34-b73ef0482ab9.png)
 
 至此已经安装完成
-![](/img/maintain_debian_14_03db5f05-f2ae-4493-ac6d-7447432cd066.png)
+![](/img/maintain_debian_14_d8a0cade-12db-4efa-94e8-bc0f6ac97dbc.png)
+
+
+### PVE上安装iKuai
+
+
+> 基本上参照[这个教程](https://blog.csdn.net/xuehu96/article/details/128888993)即可
+
+#### 设置直通
+
+先编辑Linux系统的引导加载器GRUB:
+
+```bash
+sudo nvim /etc/default/grub
+```
+
+找到 `GRUB_CMDLINE_LINUX_DEFAULT="quiet"`，修改为 `GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on"`，开启Intel CPU的IOMMU功能，这样可以让虚拟机直接访问物理设备，比如显卡网卡，保存退出后执行`update-grub`
+
+然后编辑`modules`确保启动时相关内核模块有被加载
+
+```bash
+sudo nvim /etc/modules
+```
+
+添加以下几行确保启动时PCI的一些设备能被虚拟机识别到：  
+```
+vfio
+vfio_iommu_type1
+vfio_pci
+vfio_virqfd
+```
+
+执行 ： `update-initramfs -u -k all.`  然后reboot 重启PVE。
+
+#### 安装ikuai
+
+先从[iKuai官方](https://www.ikuai8.com/component/download)下载64位ISO文件，然后上传到`local`上:
+![](/img/maintain_debian_15_95900c66-6f06-4828-8781-1655172fb89e.png)
+k
+
+创建的时候，由于是64位，需要配置4096M内存，CPU 4核，硬盘1-8G，其他默认即可。
+
+然后通过添加PCI设备，添加WAN口网卡即可:
+
+![](/img/maintain_debian_16_6b383221-523b-44fd-a33b-0dc11d99a828.png)
+
+如我的WAN口是这个千兆的网口:
+
+![](/img/maintain_debian_17_36989f83-1742-49eb-ba49-53a78fade2d8.png)
+
+其余的就根据正常的iKuai安装方法安装即可，当然也可以参考[这个教程](https://blog.csdn.net/xuehu96/article/details/128888993)。
+
 
 
 ## VI. VNC与远程桌面访问
@@ -633,7 +684,7 @@ vncserver -localhost no
 
 这里简单提下，如果没有`-localhost no`本地访问以外的都会被拒绝。
 
-![](/img/maintain_debian_15_e0cdee2f-28b2-420f-a2c8-69e528cb6197.png)
+![](/img/maintain_debian_18_fce45c45-9377-494b-b990-2979a2bd4d70.png)
 
 ### 支持gnome桌面的VNC
 
@@ -647,7 +698,7 @@ sudo apt install task-gnome-desktop dbus-x11
 vncserver -xstartup /usr/bin/gnome-session -localhost no
 ```
 
-![](/img/maintain_debian_16_e38ca54d-746f-49e0-988c-e2299774f1dc.png)
+![](/img/maintain_debian_19_232de127-d6d5-4368-bea5-869e8add9fbc.png)
 
 ### 支持KDE桌面的VNC
 
@@ -691,7 +742,7 @@ fi
 vncserver -localhost no
 ```
 
-![](/img/maintain_debian_17_58a38963-45a4-45ff-ac9d-53f4299e5e66.png)
+![](/img/maintain_debian_20_b20bc840-f7a2-4383-b4c0-d1f023bdfb13.png)
 
 ### 日常维护
 
@@ -699,25 +750,25 @@ vncserver -localhost no
 ```bash
 echo $DESKTOP_SESSION
 ```
-![](/img/maintain_debian_18_164af4f4-4a99-47ef-a443-72d025d639bf.png)
+![](/img/maintain_debian_21_8571ec9c-7cfb-4df8-a4b0-498e66103443.png)
 
 切换默认显示管理器
 ```bash
 sudo dpkg-reconfigure lightdm
 ```
-![](/img/maintain_debian_19_a4e3eb01-09d9-45f7-bfdf-16a47a5069dc.png)
+![](/img/maintain_debian_22_d71a86a4-affd-4962-96c8-8f25379b39f9.png)
 
 检查当前有没有在跑的列表
 ```bash
 vncserver -list
 ```
-![](/img/maintain_debian_20_fc9a13f7-880e-4988-9913-33a1da02b57c.png)
+![](/img/maintain_debian_23_7eddd1b4-e3c6-42d2-b41a-31e836c1fbe1.png)
 
 关闭`:1`屏幕服务
 ```bash
 vncserver -kill :1
 ```
-![](/img/maintain_debian_21_c97c98ed-02dc-40a7-9f92-6a0ca83b2d13.png)
+![](/img/maintain_debian_24_82e69cca-6ecf-439b-85cd-3a9a8e9124ec.png)
 
 
 
@@ -733,7 +784,7 @@ vncserver -kill :1
 ```bash
 lspci | grep -i ethernet
 ```
-![](/img/maintain_debian_22_60c689c5-3407-4937-8e79-d61e191184d7.png)
+![](/img/maintain_debian_25_56c72ba0-db98-46b4-af72-24b6ba1d0661.png)
 
 比如我这个RTL8125B的驱动，可以参考[这个](https://askubuntu.com/questions/1259947/cant-get-rtl8125b-working-on-20-04)，留意如果正在用到这个网卡，需要本地物理机接入进去更新。
 
@@ -745,7 +796,7 @@ lspci | grep -i ethernet
 sudo apt install ethtool
 sudo ethtool -i enp8s0
 ```
-![](/img/maintain_debian_23_ee76210e-49a0-4a50-9e85-e9590831b439.png)
+![](/img/maintain_debian_26_e1f636f1-df16-4463-8792-ab1c303415b9.png)
 
 ### 显卡
 
@@ -764,7 +815,7 @@ sudo apt install nvidia-detect
 sudo nvidia-detect
 ```
 
-![](/img/maintain_debian_24_8df31189-cb50-4007-a55d-6a4651be4f74.png)
+![](/img/maintain_debian_27_bc753b84-ee60-4ca7-a196-2eda58995234.png)
 
 执行`sudo apt install [driver name]`，通常如下:
 ```bash
@@ -774,7 +825,7 @@ systemctl reboot
 ```
 
 检查状态`nvidia-smi`
-![](/img/maintain_debian_25_a02b8a0c-80b9-4bf7-8c27-8cf1931e7b96.png)
+![](/img/maintain_debian_28_0ccbb312-8ef2-4e58-936d-4056c843a81e.png)
 
 #### Docker里面支持Nvidia解码
 
@@ -803,7 +854,7 @@ sudo systemctl restart docker
 # Test the GPU with a base CUDA container.
 sudo docker run --rm --gpus all nvidia/cuda:11.0.3-base-ubuntu20.04 nvidia-smi
 ```
-![](/img/maintain_debian_26_77781dd9-d79c-4d91-9393-9276ccc673b6.png)
+![](/img/maintain_debian_29_19cda062-1c60-47cc-a01c-8987b2ee231b.png)
 
 
 
@@ -905,13 +956,13 @@ sudo ufw allow 9090
 ```bash
 systemctl status nvidia_gpu_exporter.service
 ```
-![](/img/maintain_debian_27_3f691348-5031-4b04-8022-ab1a0ca3d162.png)
+![](/img/maintain_debian_30_427312e2-2309-4ca2-945d-a1dd34da8f4e.png)
 
 检查下端口情况
 ```bash
 sudo lsof -i -P -n | grep LISTEN
 ```
-![](/img/maintain_debian_28_5f8ff2fb-d44c-4af0-83d4-6bd005ae5247.png)
+![](/img/maintain_debian_31_9e2d20fa-304e-4524-bc4c-b953ae71bfc0.png)
 
 开放端口
 ```bash
@@ -956,25 +1007,25 @@ sudo ufw 9100
 #### 检测与添加到Grafana
 
 到`docker-compose.yml`的目录下执行`sudo docker-compose up -d`启动刚刚的Grafana与Prometheus，然后访问prometheus检查是否有正常链接上，搜索`up`如果后面数值是`1`则表示数据正常，连接成功。
-![](/img/maintain_debian_29_dc0b51b6-a38d-4139-bb1b-e4008bbe7deb.png)
+![](/img/maintain_debian_32_927228be-4f99-4251-ad42-78676d655ce8.png)
 
 登录Grafana添加Prometheus作为其数据源，我就不过多赘述这里。
-![](/img/maintain_debian_30_a6725d41-ca58-484c-bc77-177e2ae29f2c.png)
+![](/img/maintain_debian_33_3b1f7f8a-e25c-421b-8d50-eb597ec4f923.png)
 
 ##### 添加系统监控到Grafana
 
 添加系统监控，可以考虑使用[这个](https://grafana.com/grafana/dashboards/15172-node-exporter-for-prometheus-dashboard-based-on-11074/)。
 
-![](/img/maintain_debian_31_5c8ddd6a-c748-4eaa-9720-8bad730c5c24.png)
+![](/img/maintain_debian_34_6a31b522-8124-4bf0-b17c-04baa4b13079.png)
 
 然后拷贝这个ID: `15172`，选用好数据源为刚刚创建的Prometheus的，即可
-![](/img/maintain_debian_32_c2d5664e-d669-4d1b-afb6-08244b1b8cf5.png)
+![](/img/maintain_debian_35_599695c5-6878-4452-97a8-85b1274dd5d4.png)
 
 ##### 添加GPU监控到Grafana
 
 添加Nvidia GPU监控，可以考虑使用[这个](https://grafana.com/grafana/dashboards/14574-nvidia-gpu-metrics/)，添加方法和上面一样不赘述了
 
-![](/img/maintain_debian_33_10bd68fa-4e15-4de8-8367-de166b363ba9.png)
+![](/img/maintain_debian_36_ee6e362a-491b-4f57-80de-b67f60c10e10.png)
 
 ### Docker情况
 
@@ -1000,7 +1051,7 @@ services:
 
 然后启动下`sudo docker-compose up -d`，搞定，这里我们使用`portainer.yourdomain.com`访问
 
-![](/img/maintain_debian_34_d196b88f-9cce-4629-9127-c250131ff8b6.png)
+![](/img/maintain_debian_37_0cc17b61-860d-4de4-9a4d-9113315837c2.png)
 
 ## IX. 最后附录
 
