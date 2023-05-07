@@ -47,24 +47,15 @@ with open(ob_markdown_file_path, 'r') as file:
     with open(target_markdown_file_path, 'w') as target_file:
         target_file.write(filedata)
 
-debug_mode_for_ref = False
 # 处理![[post#subtitle]]这样的文章内链引用
-# read each line from target_markdown_file_path and replace all obsidian content links in target_markdown_file_path like ![[post#subtitle]] to target real content in the post file and rewrite the target_markdown_file_path
-print('read each line from $target_markdown_file_path and replace all obsidian content links in target_markdown_file_path like ![[post#subtitle]] to target real content in the post file and rewrite the target_markdown_file_path')
-with open(target_markdown_file_path, 'r') as file:
-    # read each line from file
-    filedata = file.read()
+def replace_obsidian(filedata, path_of_obsidian_valt, parent_ref_list=[]):
     # find 'post' and 'subtitle' from read content like '![[post#subtitle]]'
     obsidian_content = re.findall(r'!\[\[(.*?)\]\]', filedata)
     # if not match the pattern, then skip
     if len(obsidian_content) == 0:
-        print('not match the pattern, skip')
-        exit(0)
+        return filedata
 
-    # write filedata to the target markdown file
-    with open(target_markdown_file_path, 'w') as file:
-        file.write(filedata)
-
+    replaced_filedata = filedata
     # replace all obsidian content links in target_markdown_file_path like ![[post#subtitle]] to target real content in the post file and rewrite the target_markdown_file_path
     for obsidian in obsidian_content:
         # split the obsidian by '#'
@@ -76,8 +67,7 @@ with open(target_markdown_file_path, 'r') as file:
         # get the post and subtitle from the obsidian
         post = obsidian_split[0]
         subtitle = obsidian_split[1]
-
-        print('\n>>>post: {}, subtitle: {}'.format(post, subtitle))
+        parent_ref_list.append(obsidian)
 
         # find file with post.md by traversing path_of_obsidian_valt directory
         post_file_path = ''
@@ -87,15 +77,9 @@ with open(target_markdown_file_path, 'r') as file:
                     post_file_path = os.path.join(root, file)
                     break
 
-        print('post_file_path: {}'.format(post_file_path))
         # if the post not exist in the path_of_obsidian_valt, then skip
         if not os.path.exists(post_file_path):
-            print('not exist {} in {}'.format(post_file_path, path_of_obsidian_valt))
-            continue
-
-        # if the post not exist in the path_of_obsidian_valt, then skip
-        if not os.path.exists(post_file_path):
-            print('not exist {} in {}'.format(post_file_path, path_of_obsidian_valt))
+            print('post {} not exist!!!'.format(post))
             continue
 
         # read the post file
@@ -103,16 +87,15 @@ with open(target_markdown_file_path, 'r') as file:
             post_filedata = post_file.read()
             # 找出subtitle所在行，在subtitle之前有几个#
             subtitle_level = len(re.findall(r'^#+ {}'.format(subtitle), post_filedata, re.MULTILINE)[0].split(' ')[0])
-            print('subtitle_level: {}'.format(subtitle_level))
 
             subtitle_content = ''
             begine_assemble = False
             code_block = False
+            skip_line_with_loop = False # new variable to track if current line contains a nested loop
             for line in post_filedata.split('\n'):
                 if line.startswith('#'):
                     # if the content is start with '#' and end with subtitle, then begine assemble the content
                     if line.startswith('#') and line.endswith(subtitle):
-                        print('begine assemble the content with {}'.format(line))
                         begine_assemble = True
                         continue
 
@@ -127,29 +110,45 @@ with open(target_markdown_file_path, 'r') as file:
 
                     # if the content is start with '#' and subtitle_level is same or higher than subtitle_level, then end assemble the content
                     if line.startswith('#') and len(line.split(' ')[0]) <= subtitle_level and not code_block:
-                        print('end assemble the content with {}'.format(line))
                         break
-                    subtitle_content += line + '\n'
+                    # if this line contains a nested loop, skip it
+                    if skip_line_with_loop:
+                        skip_line_with_loop = False
+                        continue
 
-            if debug_mode_for_ref: 
-                print('subtitle_content: {}'.format(subtitle_content))
-            else:
-                print('subtitle_content first line(for demo): {}'.format(subtitle_content.split('\n')[0]))
+                    # 避免循环依赖，如果当前行包含父级引用，则跳过
+                    for parent_ref in parent_ref_list:
+                        if parent_ref in line:
+                            print('parent_ref({}) in the line({}), so ignore line'.format(parent_ref, line))
+                            continue
+
+                    subtitle_content += line + '\n'
 
             # if not match the subtitle, then skip
             if len(subtitle_content) == 0:
-                print('not match the subtitle, skip')
                 continue
 
-            # 将subtitle_content列表中的所有的内容拼接起来
-            subtitle_content = ''.join(subtitle_content)
+            # 处理当前层级的引用
+            replaced_subtitle_content = replace_obsidian(subtitle_content, path_of_obsidian_valt, parent_ref_list)
 
             # 将target_markdown_file_path中的![[post#subtitle]]替换为subtitle_content
-            filedata = filedata.replace('![[{}#{}]]'.format(post, subtitle), subtitle_content)
+            replaced_filedata = replaced_filedata.replace('![[{}#{}]]'.format(post, subtitle), replaced_subtitle_content)
 
-        # write filedata to the target markdown file
-        with open(target_markdown_file_path, 'w') as file:
-            file.write(filedata)
+    return replaced_filedata
+
+
+# read each line from target_markdown_file_path and replace all obsidian content links in target_markdown_file_path like ![[post#subtitle]] to target real content in the post file and rewrite the target_markdown_file_path
+print('read each line from $target_markdown_file_path and replace all obsidian content links in target_markdown_file_path like ![[post#subtitle]] to target real content in the post file and rewrite the target_markdown_file_path')
+with open(target_markdown_file_path, 'r') as file:
+    # read each line from file
+    filedata = file.read()
+    
+    # replace all obsidian content links in target_markdown_file_path like ![[post#subtitle]] to target real content in the post file and rewrite the target_markdown_file_path
+    filedata = replace_obsidian(filedata, path_of_obsidian_valt)
+
+    # write filedata to the target markdown file
+    with open(target_markdown_file_path, 'w') as file:
+        file.write(filedata)
 
 # 处理图片
 # read the file and found all assets define like ![[image.png]] in the target markdown file
