@@ -855,6 +855,66 @@ sudo docker run --rm --gpus all nvidia/cuda:11.0.3-base-ubuntu20.04 nvidia-smi
 ```
 ![](/img/maintain_debian_0c8f0233_29.png)
 
+具体的案例可以参考运行在Docker上的Plex的使用:
+
+
+> 整体可以根据[这里](https://tizutech.com/plex-transcoding-with-docker-nvidia-gpu/)的教程
+
+
+参考[这里](https://github.com/docker/compose/issues/8142)需要升级`docker-compose`以支持`devices`指定资源关键字
+
+```bash
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+```
+
+对应的Docker Compose配置可以参考如下:
+
+```yml
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+              driver: nvidia
+    ports:
+      - "7109:32400"
+    environment:
+      - TZ=Asia/Shanghai
+      - PUID=1000
+      - PGID=1000
+      - VERSION=docker
+      - PLEX_CLAIM=<genereate by plex claim>
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
+      - ADVERTISE_IP=https://plex.$MY_DOMAIN:2443
+    volumes:
+      - /mnt/dev/opt/plex:/config
+      - /mnt/nas/movie:/movies
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.plex.rule=Host(`plex.$MY_DOMAIN`)"
+      - "traefik.http.services.plex.loadbalancer.server.port=32400"
+      - "traefik.http.routers.plex.entrypoints=websecure"
+      - "traefik.http.routers.plex.tls=true"
+```
+
+开通Plex PASS后，在转化器中开启硬解:
+![](/img/maintain_debian_f2c5835e_30.png)
+
+开启后播放一个需要转码的影片，可以看到`[hw]`标记，说明已经在使用
+![](/img/maintain_debian_3c01d91c_31.png)
+
+还不确定，可以到监控面板查看Nvidia的情况
+![](/img/maintain_debian_a03e3475_32.png)
+
+
+
 
 
 ## VIII. 监控与管理
@@ -955,13 +1015,13 @@ sudo ufw allow 9090
 ```bash
 systemctl status nvidia_gpu_exporter.service
 ```
-![](/img/maintain_debian_32a337e8_30.png)
+![](/img/maintain_debian_32a337e8_33.png)
 
 检查下端口情况
 ```bash
 sudo lsof -i -P -n | grep LISTEN
 ```
-![](/img/maintain_debian_42b7ded3_31.png)
+![](/img/maintain_debian_42b7ded3_34.png)
 
 开放端口
 ```bash
@@ -1006,25 +1066,25 @@ sudo ufw 9100
 #### 检测与添加到Grafana
 
 到`docker-compose.yml`的目录下执行`sudo docker-compose up -d`启动刚刚的Grafana与Prometheus，然后访问prometheus检查是否有正常链接上，搜索`up`如果后面数值是`1`则表示数据正常，连接成功。
-![](/img/maintain_debian_ad4e1282_32.png)
+![](/img/maintain_debian_ad4e1282_35.png)
 
 登录Grafana添加Prometheus作为其数据源，我就不过多赘述这里。
-![](/img/maintain_debian_20645a9b_33.png)
+![](/img/maintain_debian_20645a9b_36.png)
 
 ##### 添加系统监控到Grafana
 
 添加系统监控，可以考虑使用[这个](https://grafana.com/grafana/dashboards/15172-node-exporter-for-prometheus-dashboard-based-on-11074/)。
 
-![](/img/maintain_debian_3a1e9c31_34.png)
+![](/img/maintain_debian_3a1e9c31_37.png)
 
 然后拷贝这个ID: `15172`，选用好数据源为刚刚创建的Prometheus的，即可
-![](/img/maintain_debian_b4735551_35.png)
+![](/img/maintain_debian_b4735551_38.png)
 
 ##### 添加GPU监控到Grafana
 
 添加Nvidia GPU监控，可以考虑使用[这个](https://grafana.com/grafana/dashboards/14574-nvidia-gpu-metrics/)，添加方法和上面一样不赘述了
 
-![](/img/maintain_debian_6302a8e2_36.png)
+![](/img/maintain_debian_6302a8e2_39.png)
 
 ### Docker情况
 
@@ -1050,7 +1110,7 @@ services:
 
 然后启动下`sudo docker-compose up -d`，搞定，这里我们使用`portainer.yourdomain.com`访问
 
-![](/img/maintain_debian_8767fd7e_37.png)
+![](/img/maintain_debian_8767fd7e_40.png)
 
 ## IX. 最后附录
 
