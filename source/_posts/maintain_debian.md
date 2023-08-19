@@ -415,6 +415,13 @@ sudo docker-compose up -d
 sudo docker-compose down
 ```
 
+升级Docker（我们以Plex为例子)
+
+```bash
+sudo docker-compose -f ./docker-compose.yml pull plex
+sudo docker-compose up --force-recreate --build -d plex
+```
+
 
 
 ## V. PVE虚拟机与配置
