@@ -2,7 +2,7 @@ title: Debian PVE 下磁盘分区调整
 date: 2023-08-27 15:56:05
 updated: 2023-08-27
 categories:
-- fun
+- service
 tags:
 - debian
 - pve
