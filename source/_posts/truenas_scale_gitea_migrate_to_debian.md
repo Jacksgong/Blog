@@ -16,7 +16,8 @@ tags:
 
 ## 1. 从Truenas中通过备份的dump指令导出zip
 
-需要留意的是使用命令`/bin/bash`，另外所在容器参考下面的截图
+需要留意的是使用命令`/bin/bash`，另外所在容器参考下面的截图:
+
 ![](/img/truenas_scale_gitea_migrate_to_debian_9da5eef7_0.png)
 
 执行指令，这里特别留意:
