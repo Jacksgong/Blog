@@ -10,7 +10,7 @@ steps:
   - git submodule update --init --recursive
 
 - name: publish
-  image: hexo:blogv6
+  image: hexo:blogv7
   environment:
     DEPLOY_CHECK_KEY:
       from_secret: DEPLOY_CHECK_KEY
