@@ -10,7 +10,7 @@ tags:
 
 ---
 
-{% note info %} 本文主要介绍了从Truenas Scale的应用中迁移Gitea 迁移到 Debian下，其中踩到不少坑点，都在文中一一提到解决方案，如果你也有类似诉求希望能够有所帮助。 {% endnote %}
+{% note info %} 本文主要介绍了如何从Truenas Scale的应用中迁移Gitea 迁移到 Debian下，其中踩到不少坑点，都在文中一一提到解决方案，如果你也有类似诉求希望能够有所帮助。 {% endnote %}
 
 <!-- more -->
 
