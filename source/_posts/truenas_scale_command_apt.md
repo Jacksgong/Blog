@@ -106,3 +106,7 @@ ntpq -p
 ```
 
 ![](/img/truenas_scale_command_apt_96c3132f_3.png)
+
+---
+
+- [Get a Shell to a Running Container](https://kubernetes.io/docs/tasks/debug/debug-application/get-shell-running-container/)
