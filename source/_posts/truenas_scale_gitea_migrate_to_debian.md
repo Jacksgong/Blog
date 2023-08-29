@@ -75,7 +75,9 @@ sudo docker-compose restart gitea
 
 至此成功完成迁移工作。
 
-![](/img/truenas_scale_gitea_migrate_to_debian_5d79aee5_5.png)
+![](/img/truenas_scale_gitea_migrate_to_debian_a2a9f97c_5.png)
+
+![](/img/truenas_scale_gitea_migrate_to_debian_9d2f8fba_6.png)
 
 ---
 
