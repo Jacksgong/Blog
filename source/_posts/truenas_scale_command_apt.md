@@ -1,11 +1,12 @@
 title: Truenas Scale 指令与apt使用
 date: 2023-08-26 15:58:40
-updated: 2023-08-27
-permalink: 
+updated: 2023-08-29
 categories:
-- fun
+- service
 tags:
-- python
+- truenas scale
+- apt
+- k3s
 
 ---
 
