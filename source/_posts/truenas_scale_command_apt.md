@@ -60,7 +60,7 @@ Truenas scale中使用的是轻量的k3s，因此注意管理应用时候需要�
 
 ### 访问k3s的指令
 
-> 更多指令可以参看这里: https://www.truenasscale.com/2021/12/19/340.html
+> 更多指令可以参看这里(需要注意所有的`kubectl`指令，都需要使用`k3s kubectl`): https://www.truenasscale.com/2021/12/19/340.html
 
 ```
 k3s kubectl get pods -o wide --all-namespaces
