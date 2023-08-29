@@ -62,11 +62,25 @@ Truenas scale中使用的是轻量的k3s，因此注意管理应用时候需要�
 
 > 更多指令可以参看这里(需要注意所有的`kubectl`指令，都需要使用`k3s kubectl`): https://www.truenasscale.com/2021/12/19/340.html
 
-```
+```bash
 k3s kubectl get pods -o wide --all-namespaces
 ```
 
 ![](/img/truenas_scale_command_apt_bde7380e_0.png)
+
+### 进入到某个pods里面
+
+这里以进入Gitea为案例，在Truenas Scale里面默认每一个应用都会有独立的namespace，这里Gitea的namespace是`ix-gitea`，pods name是`gitea-f65c58dcb-z62z5`:
+
+![](/img/truenas_scale_command_apt_b0eb6fb4_1.png)
+
+```bash
+k3s kubectl --namespace ix-gitea exec -ti gitea-f65c58dcb-z62z5 -- /bin/bash
+```
+
+执行后就成功进入了:
+
+![](/img/truenas_scale_command_apt_25e7fe2e_2.png)
 
 ### k3s内应用相互访问的ip
 
@@ -90,4 +104,4 @@ service ntp restart
 ntpq -p
 ```
 
-![](/img/truenas_scale_command_apt_96c3132f_1.png)
+![](/img/truenas_scale_command_apt_96c3132f_3.png)
