@@ -195,6 +195,22 @@ sudo nvim /etc/locale.gen
 sudo locale-gen
 ```
 
+#### 修改关机等待1min30s超时
+
+一般来说是不建议修改的，因为有些服务在设计之初就会依赖这个等待时间，不过如果你觉得每次关机都得等1min30s超时有点长也可以去修改，参照[这里](https://www.reddit.com/r/linuxquestions/comments/3vc526/how_do_i_abort_a_stop_job_is_running_waits_at/)的教程:
+
+可以先看下系统中这个超时等待是多久：
+
+```bash
+systemctl show sshd -p TimeoutStopUSec
+```
+
+在`/etc/systemd/system.conf`中添加`[Service]`（如果已经有了就不用添加了），在这行下面添加:
+
+```conf
+TimeoutStopUSec=30s
+```
+
 ## III. 挂载与RAID
 
 
@@ -797,6 +813,23 @@ lspci | grep -i ethernet
 1. 在[这里](https://www.realtek.com/en/component/zoo/category/network-interface-controllers-10-100-1000m-gigabit-ethernet-pci-express-software)下载`2.5G Ethernet LINUX driver r8125 for kernel up to 5.19`这个驱动
 2. 解压缩后，执行目录下的`autorun.sh`后重启即可。
 
+特别注意如果执行`autorun.sh`的时候遇到问题，可以尝试先用`sudo apt install linux-headers-4.19.0-20-amd64`安装前置编译依赖后再试。这里的`4.19.0-20-amd64`是根据报错提示的文件目录版本来决定的，比如我在一台Debian上安装就一直报`/lib/modules/5.10.0-25-amd64/build 文件不存在`的问题，这种情况下，我需要先到`/etc/apt/sources.list`添加对应包依赖:
+
+```list
+deb http://ftp.de.debian.org/debian bullseye main
+deb http://security.debian.org/debian-security bullseye-security main
+```
+
+然后安装:
+
+```bash
+sudo apt update
+sudo apt install
+sudo apt --fix-broken install linux-headers-5.10.0-25-amd64
+```
+
+搞定这一切后，再执行`sudo bash autorun.sh`虽然有一些警告，但是还是安装完成。
+
 检测是否安装正确:
 ```bash
 sudo apt install ethtool
@@ -1148,3 +1181,7 @@ Docker不同的存储驱动方式会影响容器的数据层的管理和性能�
 
 ##### 虚拟化上差异
 虚拟化的方式会影响虚拟机的资源分配和性能。Debian和Ubuntu都可以使用KVM、Xen、VirtualBox等虚拟化软件，而Ubuntu还可以使用VMware等虚拟化软件。KVM和Xen都是基于内核模块（Kernel Module）的虚拟化软件，它们都可以实现虚拟机之间的资源隔离和高效利用。一般来说，KVM比Xen有更高的性能和易用性，但是Xen可能对一些特殊的硬件或场景有更好的支持。VirtualBox和VMware都是基于用户空间（User Space）的虚拟化软件，它们都可以实现虚拟机之间的资源共享和灵活配置。一般来说，VirtualBox比VMware有更低的资源消耗和更好的免费版功能，但是VMware可能对一些专业的功能或场景有更好的支持。
+
+---
+
+- [Unable to install network driver r8125 on debian - Unix & Linux Stack Exchange](https://unix.stackexchange.com/questions/652864/unable-to-install-network-driver-r8125-on-debian)
