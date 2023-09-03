@@ -458,7 +458,7 @@ sudo apt -y update && sudo apt -y upgrade
 
 > 这个**一定要做**，否则后面安装会各种提示连接不上
 
-我们假设你的主机名是`debian`，你的域名是`debian.yourdomain.com`，你debian系统的ip是`<your_local_ip>`。
+我们假设你的主机名是`debian`，你的域名是`debian.yourdomain.com`，你debian系统的ip是`<your_local_ip>`(这个是局域网的IP如`10.0.0.57`)。
 
 先通过`sudo -i`切换到`root`账户下
 
