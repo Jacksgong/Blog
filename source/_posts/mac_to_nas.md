@@ -1,6 +1,6 @@
 title: 将MacMini/Macbook改为家庭服务器
 date: 2023-09-02 00:41:54
-updated: 2023-09-02
+updated: 2023-09-03
 categories:
 - service
 tags:
@@ -19,17 +19,17 @@ tags:
 
 ### 关闭休眠
 
-![](/img/mac_to_nas_59673c7a_0.png)
+![](/img/mac_to_nas_4b4e2319_0.png)
 
 ### 关闭登录验证
 
-![](/img/mac_to_nas_e7e2b550_1.png)
+![](/img/mac_to_nas_47116094_1.png)
 
 ### 停电后自动开机
 
-该设置这个在Mac Mini上有，在Macbook上是没有的
+该设置这个在Mac Mini上有，在Macbook上是没有的:
 
-![](/img/mac_to_nas_91ecf484_2.png)
+![](/img/mac_to_nas_4f31556b_2.png)
 
 ## II. 远程访问
 
@@ -64,3 +64,17 @@ tags:
 ### 缓存服务器
 
 ![](/img/mac_to_nas_b55986f4_10.png)
+
+## III. 常用服务
+
+### Plex
+
+Plex Server已经支持Silicon，直接到[官网](https://www.plex.tv/media-server-downloads/)，下载后打开即可。
+
+![](/img/mac_to_nas_8fbdee35_11.png)
+
+### Nezha监控
+
+参照[官方](https://nezha.wiki/guide/agent.html#%E5%9C%A8-macos-%E4%B8%AD%E5%AE%89%E8%A3%85-agent)教程，即可，唯一需要留意的是`1`代表正常启动，`0`代表没有启动，负数代表有错误。在启动时需要在设置里面点击仍然打开。
+
+![](/img/mac_to_nas_762e59a0_12.png)
