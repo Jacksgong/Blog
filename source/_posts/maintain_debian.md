@@ -233,7 +233,7 @@ sudo mkdir /mnt/dev
 
 挂载上
 ```bash
-sudo mount -t ext /dev/md/0 /mnt/dev
+sudo mount -t ext4 /dev/md/0 /mnt/dev
 ```
 ![](/img/maintain_debian_5e23d057_4.png)
 
