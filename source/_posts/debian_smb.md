@@ -71,7 +71,7 @@ sudo chmod 2770 /mnt/data/micamera
   path = /mnt/data/micamera
   writable = yes
   guest ok = no
-  valid user = @mi
+  valid users = @mi
 ```
 
 此时配置完成，可以通过以下指令检查下看看配置是否有效:
