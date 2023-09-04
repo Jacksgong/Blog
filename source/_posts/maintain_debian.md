@@ -75,10 +75,16 @@ sudo ufw status
 配置非密码访问，将本地的public key添加到`vi ~/.ssh/authorized_keys`，确保通过密钥登录有效。
 
 禁止密码访问，并且限制登录账号，编辑`/etc/ssh/sshd_config`，找到相关字段并修改为:
-```bash
+```sshd_config
 ClientAliveInterval 600  
 ClientAliveCountMax 0
 PasswordAuthentication no
+```
+
+如果需要禁止root账户ssh访问，需要再添加:
+
+```sshd_config
+PermitRootLogin no
 ```
 
 重启服务
@@ -86,6 +92,8 @@ PasswordAuthentication no
 service sshd restart
 service ssh status
 ```
+
+如果需要执行指令无需`sudo`密码，全部依赖可信的ssh证书校验，可以考虑参考[这里](https://blog.dreamtobe.cn/maintain-website-server/#3-%E9%85%8D%E7%BD%AEsudo%E4%B8%8D%E7%94%A8%E5%AF%86%E7%A0%81)编辑。
 
 禁止休眠，防止休眠后断网导致远程ssh访问不了，可以参考[这个教程](https://blog.csdn.net/weixin_45980458/article/details/122952607)，具体操作如下:
 ```bash
@@ -205,10 +213,10 @@ sudo locale-gen
 systemctl show sshd -p TimeoutStopUSec
 ```
 
-在`/etc/systemd/system.conf`中添加`[Service]`（如果已经有了就不用添加了），在这行下面添加:
+在`/etc/systemd/system.conf`中修改`[Manager]`下面:
 
 ```conf
-TimeoutStopUSec=30s
+DefaultTimeoutStopSec=30s
 ```
 
 ## III. 挂载与RAID
