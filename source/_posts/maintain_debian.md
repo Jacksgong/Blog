@@ -569,7 +569,7 @@ sudo ufw allow 8006
 
 ![](/img/maintain_debian_b1dfda8c_6.png)
 
-最后需要留意的是，如果你是使用的Nvidia，PVE这边需要做下配置，参考[PVE Nvidia教程](https://pve.proxmox.com/wiki/Developer_Workstations_with_Proxmox_VE_and_X11#Optional:_NVidia_Drivers):
+另外需要留意的是，如果你是使用的Nvidia，PVE这边需要做下配置，参考[PVE Nvidia教程](https://pve.proxmox.com/wiki/Developer_Workstations_with_Proxmox_VE_and_X11#Optional:_NVidia_Drivers):
 
 ```bash
 su
@@ -580,6 +580,17 @@ apt-get install  nvidia-driver
 ```
 
 
+最后我们会发现安装完PVE后，执行`sudo apt update`总会有这样的错误:
+
+![](/img/maintain_debian_7e42a6d5_7.png)
+
+这是因为需要添加PVE License，不过如果你没有License只是免费使用（免费使用已经可以使用大多数PVE的核心能力了)，那么请编辑`/etc/apt/sources.list.d/pve-enterprise.list`，将这个付费license源注解掉即可:
+
+```list
+#deb https://enterprise.proxmox.com/debian/pve buster pve-enterprise
+```
+
+
 
 ### PVE上安装Openwrt
 
@@ -587,37 +598,37 @@ apt-get install  nvidia-driver
 > 整体可以考虑参照[这个教程](https://www.jwtechtips.top/how-to-install-openwrt-in-proxmox/)就行，不过这个教程引导会有点小问题，跟着[这个教程](https://optimus-xs.github.io/posts/install-openwrt-in-pve/)就可以完美解决。
 
 首先基本的配置，先准备好`vmbr0`，这个桥接的网络在前面安装好pve后已经做了说明，然后创建虚拟机整体配置除这里的硬盘外与这个一致即可，前面一步一步的配置随便配置也行，配置完都可以修改，实在不清楚可以参看[这个教程](https://www.jwtechtips.top/how-to-install-openwrt-in-proxmox/)。
-![](/img/maintain_debian_d548921e_7.png)
+![](/img/maintain_debian_d548921e_8.png)
 
 配置完后可以先将原本的默认的硬盘分离+删除了，方便接下来写入一个新的openwrt。
 
 然后下载openwrt固件，下载这里我们下载K9的，可以直接在 [这里](https://supes.top/?version=22.03&target=x86%2F64&id=generic)下载
-![](/img/maintain_debian_6477fb60_8.png)
+![](/img/maintain_debian_6477fb60_9.png)
 
 选择EFI启动的固件，然后用`gunzip`解压缩
 ```bash
 gunzip openwrt-04.18.2023-x86-64-generic-squashfs-combined-efi.img.gz
 ```
-![](/img/maintain_debian_1876518e_9.png)
+![](/img/maintain_debian_1876518e_10.png)
 
 写入指令
 ```bash
 sudo qm importdisk 100 openwrt-04.18.2023-x86-64-generic-squashfs-combined-efi.img local
 ```
-![](/img/maintain_debian_ed8535f3_10.png)
+![](/img/maintain_debian_ed8535f3_11.png)
 
 这里的`100`是虚拟机的id，`local`是存储名，分别可以在前端页面找到:
-![](/img/maintain_debian_2efc0249_11.png)
+![](/img/maintain_debian_2efc0249_12.png)
 
 完成后，这里会出现一个新的硬盘，点击后修改为STATA即可，最后的状态如下:
 
-![](/img/maintain_debian_1a70ff1d_12.png)
+![](/img/maintain_debian_1a70ff1d_13.png)
 
 然后将开机引导调整为sata0即可
-![](/img/maintain_debian_9171cd74_13.png)
+![](/img/maintain_debian_9171cd74_14.png)
 
 至此已经安装完成
-![](/img/maintain_debian_de1ec5f8_14.png)
+![](/img/maintain_debian_de1ec5f8_15.png)
 
 
 ### PVE上安装iKuai
@@ -654,17 +665,17 @@ vfio_virqfd
 #### 安装ikuai
 
 先从[iKuai官方](https://www.ikuai8.com/component/download)下载64位ISO文件，然后上传到`local`上:
-![](/img/maintain_debian_906c39e8_15.png)
+![](/img/maintain_debian_906c39e8_16.png)
 
 创建的时候，由于是64位，需要配置4096M内存，CPU 4核，硬盘1-8G，其他默认即可。
 
 然后通过添加PCI设备，添加WAN口网卡即可:
 
-![](/img/maintain_debian_cc405640_16.png)
+![](/img/maintain_debian_cc405640_17.png)
 
 如我的WAN口是这个千兆的网口:
 
-![](/img/maintain_debian_f1a71622_17.png)
+![](/img/maintain_debian_f1a71622_18.png)
 
 其余的就根据正常的iKuai安装方法安装即可，当然也可以参考[这个教程](https://blog.csdn.net/xuehu96/article/details/128888993)。
 
@@ -714,7 +725,7 @@ vncserver -localhost no
 
 这里简单提下，如果没有`-localhost no`本地访问以外的都会被拒绝。
 
-![](/img/maintain_debian_874d98b1_18.png)
+![](/img/maintain_debian_874d98b1_19.png)
 
 ### 支持gnome桌面的VNC
 
@@ -728,7 +739,7 @@ sudo apt install task-gnome-desktop dbus-x11
 vncserver -xstartup /usr/bin/gnome-session -localhost no
 ```
 
-![](/img/maintain_debian_3cdaf301_19.png)
+![](/img/maintain_debian_3cdaf301_20.png)
 
 ### 支持KDE桌面的VNC
 
@@ -772,7 +783,7 @@ fi
 vncserver -localhost no
 ```
 
-![](/img/maintain_debian_d7965a7b_20.png)
+![](/img/maintain_debian_d7965a7b_21.png)
 
 ### 日常维护
 
@@ -780,25 +791,25 @@ vncserver -localhost no
 ```bash
 echo $DESKTOP_SESSION
 ```
-![](/img/maintain_debian_3c73a41a_21.png)
+![](/img/maintain_debian_3c73a41a_22.png)
 
 切换默认显示管理器
 ```bash
 sudo dpkg-reconfigure lightdm
 ```
-![](/img/maintain_debian_be258a7b_22.png)
+![](/img/maintain_debian_be258a7b_23.png)
 
 检查当前有没有在跑的列表
 ```bash
 vncserver -list
 ```
-![](/img/maintain_debian_6050b238_23.png)
+![](/img/maintain_debian_6050b238_24.png)
 
 关闭`:1`屏幕服务
 ```bash
 vncserver -kill :1
 ```
-![](/img/maintain_debian_75c6a573_24.png)
+![](/img/maintain_debian_75c6a573_25.png)
 
 
 
@@ -814,7 +825,7 @@ vncserver -kill :1
 ```bash
 lspci | grep -i ethernet
 ```
-![](/img/maintain_debian_ea96c6d5_25.png)
+![](/img/maintain_debian_ea96c6d5_26.png)
 
 比如我这个RTL8125B的驱动，可以参考[这个](https://askubuntu.com/questions/1259947/cant-get-rtl8125b-working-on-20-04)，留意如果正在用到这个网卡，需要本地物理机接入进去更新。
 
@@ -843,7 +854,7 @@ sudo apt --fix-broken install linux-headers-5.10.0-25-amd64
 sudo apt install ethtool
 sudo ethtool -i enp8s0
 ```
-![](/img/maintain_debian_482371f5_26.png)
+![](/img/maintain_debian_482371f5_27.png)
 
 ### 显卡
 
@@ -862,7 +873,7 @@ sudo apt install nvidia-detect
 sudo nvidia-detect
 ```
 
-![](/img/maintain_debian_df4eb7c7_27.png)
+![](/img/maintain_debian_df4eb7c7_28.png)
 
 执行`sudo apt install [driver name]`，通常如下:
 ```bash
@@ -872,7 +883,7 @@ systemctl reboot
 ```
 
 检查状态`nvidia-smi`
-![](/img/maintain_debian_69cb38dc_28.png)
+![](/img/maintain_debian_69cb38dc_29.png)
 
 #### Docker里面支持Nvidia解码
 
@@ -901,7 +912,7 @@ sudo systemctl restart docker
 # Test the GPU with a base CUDA container.
 sudo docker run --rm --gpus all nvidia/cuda:11.0.3-base-ubuntu20.04 nvidia-smi
 ```
-![](/img/maintain_debian_0c8f0233_29.png)
+![](/img/maintain_debian_0c8f0233_30.png)
 
 具体的案例可以参考运行在Docker上的Plex的使用:
 
@@ -953,13 +964,13 @@ docker-compose --version
 ```
 
 开通Plex PASS后，在转化器中开启硬解:
-![](/img/maintain_debian_f2c5835e_30.png)
+![](/img/maintain_debian_f2c5835e_31.png)
 
 开启后播放一个需要转码的影片，可以看到`[hw]`标记，说明已经在使用
-![](/img/maintain_debian_3c01d91c_31.png)
+![](/img/maintain_debian_3c01d91c_32.png)
 
 还不确定，可以到监控面板查看Nvidia的情况
-![](/img/maintain_debian_a03e3475_32.png)
+![](/img/maintain_debian_a03e3475_33.png)
 
 
 
@@ -1063,13 +1074,13 @@ sudo ufw allow 9090
 ```bash
 systemctl status nvidia_gpu_exporter.service
 ```
-![](/img/maintain_debian_32a337e8_33.png)
+![](/img/maintain_debian_32a337e8_34.png)
 
 检查下端口情况
 ```bash
 sudo lsof -i -P -n | grep LISTEN
 ```
-![](/img/maintain_debian_42b7ded3_34.png)
+![](/img/maintain_debian_42b7ded3_35.png)
 
 开放端口
 ```bash
@@ -1114,25 +1125,25 @@ sudo ufw 9100
 #### 检测与添加到Grafana
 
 到`docker-compose.yml`的目录下执行`sudo docker-compose up -d`启动刚刚的Grafana与Prometheus，然后访问prometheus检查是否有正常链接上，搜索`up`如果后面数值是`1`则表示数据正常，连接成功。
-![](/img/maintain_debian_ad4e1282_35.png)
+![](/img/maintain_debian_ad4e1282_36.png)
 
 登录Grafana添加Prometheus作为其数据源，我就不过多赘述这里。
-![](/img/maintain_debian_20645a9b_36.png)
+![](/img/maintain_debian_20645a9b_37.png)
 
 ##### 添加系统监控到Grafana
 
 添加系统监控，可以考虑使用[这个](https://grafana.com/grafana/dashboards/15172-node-exporter-for-prometheus-dashboard-based-on-11074/)。
 
-![](/img/maintain_debian_3a1e9c31_37.png)
+![](/img/maintain_debian_3a1e9c31_38.png)
 
 然后拷贝这个ID: `15172`，选用好数据源为刚刚创建的Prometheus的，即可
-![](/img/maintain_debian_b4735551_38.png)
+![](/img/maintain_debian_b4735551_39.png)
 
 ##### 添加GPU监控到Grafana
 
 添加Nvidia GPU监控，可以考虑使用[这个](https://grafana.com/grafana/dashboards/14574-nvidia-gpu-metrics/)，添加方法和上面一样不赘述了
 
-![](/img/maintain_debian_6302a8e2_39.png)
+![](/img/maintain_debian_6302a8e2_40.png)
 
 ### Docker情况
 
@@ -1158,7 +1169,7 @@ services:
 
 然后启动下`sudo docker-compose up -d`，搞定，这里我们使用`portainer.yourdomain.com`访问
 
-![](/img/maintain_debian_8767fd7e_40.png)
+![](/img/maintain_debian_8767fd7e_41.png)
 
 ## IX. 最后附录
 
