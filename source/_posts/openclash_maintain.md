@@ -1,6 +1,6 @@
 title: OpenClash 常用与维护
 date: 2023-03-27 00:15:13
-updated: 2023-09-03
+updated: 2023-09-05
 permalink: openclash_maintain
 categories:
 - fun
@@ -127,9 +127,12 @@ tags:
 那么我们可以在覆写设置->规则设置->自定义规则框中添加如下:
 ![](/img/openclash_maintain_4bfd0bdd_22.png)
 
+当然也可以直接添加Rule set比如：
+![](/img/openclash_maintain_da4b65da_23.png)
+
 最后保存配置，应用配置完成设置。
 
-![](/img/openclash_maintain_90fa3968_23.png)
+![](/img/openclash_maintain_90fa3968_24.png)
 
 ---
 
