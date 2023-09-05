@@ -1,6 +1,6 @@
 title: 将MacMini/Macbook改为家庭服务器
 date: 2023-09-02 00:41:54
-updated: 2023-09-03
+updated: 2023-09-05
 categories:
 - service
 tags:
@@ -56,6 +56,24 @@ tags:
 此时即可在远程通过ssh访问:
 
 ![](/img/mac_to_nas_cd0ec930_8.png)
+
+（可选）设置仅仅支持public key的方式访问，禁止密码登录:
+
+1. 在`~/.ssh/authorized_keys`添加好需要访问的终端的public key
+2. 编辑`/etc/ssh/sshd_config`并在其中添加:
+
+```sshd_config
+PubkeyAuthentication yes
+PasswordAuthentication no
+UsePAM no
+```
+
+3. 重启服务
+
+```bash
+sudo launchctl stop com.openssh.sshd
+sudo launchctl start com.openssh.sshd
+```
 
 ### 远程smb访问
 
