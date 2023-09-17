@@ -1,6 +1,6 @@
 # Blog
 
-![](https://img.shields.io/badge/Blog-hexo-orange.svg) ![](https://img.shields.io/badge/Blog-dreamtobe.cn-blue.svg) ![Build Status](https://drone.partyland.cc:9443/api/badges/jacks/Blog/status.svg)
+![](https://img.shields.io/badge/Blog-hexo-orange.svg) ![](https://img.shields.io/badge/Blog-dreamtobe.cn-blue.svg) ![Build Status](https://drone.partyland.cc:2443/api/badges/jacks/Blog/status.svg)
 
 > 博客地址: https://blog.dreamtobe.cn
 
@@ -33,6 +33,8 @@
 - 2017年3月 博客服务器迁到日本，并改用KVM架构VPS，并将TCP拥塞控制算法改为BBR: https://nocdn.dreamtobe.cn/
 - 2017年3月 压缩站点，考虑到腾讯CDN优化缓慢(BBR、HTTP2等)，深受牵制，只将js/css图片等放到CDN，站点地址直接解析回自己的VPS
 - 2017年3月 考虑到出口有时候丢包与延时严重，另外租了一台腾讯VPS，域名解析国内的走腾讯在广州的VPS，海外的走日本的VPS
+- 2022年 考虑到性能与自动化考虑搭建[Gitea](http://gitea.partyland.cc:2443/)+[Drone](https://drone.partyland.cc:2443/)+[Webhook](https://github.com/adnanh/webhook)组合实现提交自动部署
+- 2023年 考虑到绝大多数笔记都已经是用Obsidian管理，有很长一段时间只在Obsidian上做私有笔记记录，考虑到做开放笔记更有易于认真梳理+需要做隔离，编写[脚本](https://github.com/Jacksgong/Blog/blob/master/obsidian2post.py)做Obsidian上日志指定迁移，并支持图片、差量等能力
 
 
 ## LICENSE
