@@ -165,8 +165,7 @@ printf "yabai: configuration loaded...\\n"
 
 ```bash
 # view the last lines of the error log 
-tail -f /tmp/yabai_$USER.err.log
-
+tail -f /tmp/yabai_$USE
 # view the last lines of the debug log
 tail -f /tmp/yabai_$USER.out.log
 ```
@@ -175,6 +174,12 @@ tail -f /tmp/yabai_$USER.out.log
 
 ```bash
 yabai --restart-service
+```
+
+最后，如果是因为第一次使用Yabai，不适应BSP的形式展示窗口，可以尝试修改默认的`layout`或者是，直接将所有窗口管理默认都设置为非Yabai管理，然后通过需要的时候快捷键切换为管理:
+
+```bash
+yabai -m rule --add app="^.*$" manage=off
 ```
 
 ## 绑定快捷键执行
