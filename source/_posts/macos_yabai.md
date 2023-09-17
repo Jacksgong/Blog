@@ -10,7 +10,7 @@ tags:
 
 ---
 
-{% note info %} 如果用过Linux下的i3wm就知道其实窗口管理可以玩的多花，之前我主要是通过Moom + Raycast + Mac自带设置中的焦点快捷键工具来做窗口管理，另外Terminal中的窗口管理主要是通过iTerm2 + tmux + spaceVim来做，但是近段时间尝试习惯Yabai后，发现通过Yabai + skhd + Mac自带调度快捷键 确实还是能再提高一些效率。 {% endnote %}
+{% note info %} 如果用过Linux下的i3wm就知道其实窗口管理可以玩的多花，之前我主要是通过Moom + Raycast + Mac自带设置中的焦点快捷键工具来做窗口管理，另外Terminal中的窗口管理主要是通过iTerm2 + tmux + spaceVim来做，Chrome主要通过Vimium插件，但是近段时间尝试习惯Yabai后，发现通过Yabai + skhd + Mac自带调度快捷键 确实还是能再提高一些效率。 {% endnote %}
 
 <!-- more -->
 
