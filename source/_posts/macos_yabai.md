@@ -16,7 +16,7 @@ tags:
 
 ## 前置配置
 
-这里的前置配置我建议直接参考Youtube Josean的配置: [josean.com/posts/yabai-setup](https://www.josean.com/posts/yabai-setup):
+这里的前置配置我建议直接参考[Youtuber Josean的配置](https://www.josean.com/posts/yabai-setup):
 
 在键盘设置中，设置调度中心快捷键，下面是我的习惯，大家可以按照自己的习惯，默认是`ctrl + [number]`:
 
