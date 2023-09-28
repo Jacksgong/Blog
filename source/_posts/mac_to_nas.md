@@ -1,6 +1,6 @@
 title: 将MacMini/Macbook改为家庭服务器
 date: 2023-09-02 00:41:54
-updated: 2023-09-05
+updated: 2023-09-28
 categories:
 - service
 tags:
@@ -91,8 +91,35 @@ Plex Server已经支持Silicon，直接到[官网](https://www.plex.tv/media-ser
 
 ![](/img/mac_to_nas_8fbdee35_11.png)
 
+如果异常关机，有可能会引发Plex Server打开失败，现象就是一打开Menu Bar上面Plex的iCon出现立马消失，修复方法就是参考[官方教程](https://support.plex.tv/articles/202485658-restore-a-database-backed-up-via-scheduled-tasks/)重新恢复数据库，大概步骤:
+
+![](/img/mac_to_nas_b67647ff_12.png)
+
+1. 进入`/Users/[你的用户名]/Library/Application Support/Plex Media Server/Plug-in Support/Databases`
+2. 将以下文件移动到任意其他目录用作备份
+
+```
+com.plexapp.plugins.library.db
+com.plexapp.plugins.library.db-shm
+com.plexapp.plugins.library.db-wal
+com.plexapp.plugins.library.blobs.db
+com.plexapp.plugins.library.blobs.db-shm
+com.plexapp.plugins.library.blobs.db-wal
+```
+
+3. 然后在目录下选一个备份的重命名为`db`与`blobs.db`，这里案例我选了一个9.27自动备份的:
+
+```bash
+cp com.plexapp.plugins.library.db-2023-09-27 com.plexapp.plugins.library.db
+cp com.plexapp.plugins.library.blobs.db-2023-09-27 com.plexapp.plugins.library.blobs.db
+```
+
+4. 重新打开Plex Server就修复了
+
+
+
 ### Nezha监控
 
 参照[官方](https://nezha.wiki/guide/agent.html#%E5%9C%A8-macos-%E4%B8%AD%E5%AE%89%E8%A3%85-agent)教程，即可，唯一需要留意的是`1`代表正常启动，`0`代表没有启动，负数代表有错误。在启动时需要在设置里面点击仍然打开。
 
-![](/img/mac_to_nas_762e59a0_12.png)
+![](/img/mac_to_nas_762e59a0_13.png)
