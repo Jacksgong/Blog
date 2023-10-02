@@ -318,3 +318,9 @@ sudo visudo -f /private/etc/sudoers.d/yabai
 ```bash
 yabai --restart-service
 ```
+
+## 其他
+
+我们在用yabai的时候，通常会结合着space来用，当前处于哪个space，可以借助[spaceman](https://github.com/Jaysce/Spaceman)这个小工具在menu bar上显示：
+
+![](/img/macos_yabai_9c969e34_3.png)
