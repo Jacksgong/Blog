@@ -1,7 +1,7 @@
 title: MacOS 下高效窗口管理 Yabai
 date: 2023-09-17 18:23:37
-updated: 2023-09-17
-categories:
+updated: 2023-10-03
+categorie:
 - fun
 tags:
 - yabai
@@ -285,4 +285,36 @@ ctrl + alt - r : yabai --restart-service
  重启配置:
 ```bash
 skhd --restart-service
+```
+
+## 升级
+
+升级只需要使用brew升级即可:
+
+```bash
+brew update
+brew upgrade yabai
+```
+
+不过每次升级之后需要注意（参考[该同学的提醒](https://github.com/koekeishiya/yabai/issues/1772#issuecomment-1742267451))，由于yabai的执行文件发生了变化，需要重新参考 [官网](https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)#configure-scripting-addition)配置一遍sudo权限:
+
+```bash
+# create a new file for writing - visudo uses the vim editor by default.
+# go read about this if you have no idea what is going on.
+
+sudo visudo -f /private/etc/sudoers.d/yabai
+
+# input the line below into the file you are editing.
+#  replace <yabai> with the path to the yabai binary (output of: which yabai).
+#  replace <user> with your username (output of: whoami). 
+#  replace <hash> with the sha256 hash of the yabai binary (output of: shasum -a 256 $(which yabai)).
+#   this hash must be updated manually after running brew upgrade.
+
+<user> ALL=(root) NOPASSWD: sha256:<hash> <yabai> --load-sa
+```
+
+搞定后重启yabai即可:
+
+```bash
+yabai --restart-service
 ```
