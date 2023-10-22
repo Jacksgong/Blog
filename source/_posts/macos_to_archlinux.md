@@ -13,7 +13,7 @@ tags:
 
 <!-- more -->
 
-![](/img/macos_to_archlinux_6e41b4fc_0.png)
+![](/img/macos_to_archlinux_3fd5e4b1_0.jpg)
 
 ## I. 前置在MacOS上进行准备
 
