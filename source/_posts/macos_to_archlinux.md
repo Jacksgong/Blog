@@ -13,6 +13,8 @@ tags:
 
 <!-- more -->
 
+![](/img/macos_to_archlinux_6e41b4fc_0.png)
+
 ## I. 前置在MacOS上进行准备
 
 ### 1. 创建分区
@@ -20,10 +22,10 @@ tags:
 先在Macbook中使用磁盘工具创建一个分区，这个分区后面会给到ArchLinux使用:
 
 选择分区：
-![](/img/macos_to_archlinux_3d5192bd_0.png)
+![](/img/macos_to_archlinux_3d5192bd_1.png)
 
 选择创建分区:
-![](/img/macos_to_archlinux_b9cb073b_1.png)
+![](/img/macos_to_archlinux_b9cb073b_2.png)
 
 设置想要的大小，然后点击完成等待创建完成。
 
@@ -83,7 +85,7 @@ fdisk /dev/nvme0n1
 
 具体的`fdisk`操作不懂的可以可以直接参考这个作者: [Macbook Pro安装arch linux - 知乎](https://zhuanlan.zhihu.com/p/161350432)(当然也可以考虑使用`cfdisk`，这个更可视化些)，如下图:
 
-![](/img/macos_to_archlinux_175ce44e_2.png)
+![](/img/macos_to_archlinux_175ce44e_3.png)
 
 分区写入后，进行格式化:
 ```text
@@ -292,7 +294,7 @@ sudo ./touchbar.sh
 
 比如我是喜欢默认是F1-F12，功能键后再切换到媒体键，就做下配置:
 
-![](/img/macos_to_archlinux_cdbc5b47_3.png)
+![](/img/macos_to_archlinux_cdbc5b47_4.png)
 
 #### 显卡
 配置参考[这里](https://wiki.t2linux.org/guides/hybrid-graphics/#enabling-the-igpu):
@@ -313,11 +315,11 @@ sudo pacman -Syu base-devel gnu-efi
 重启系统后，通过如下方式检测:
 
 运行`journalctl -k --grep=gmux`，如果输出类似说明说已经正常运行:
-![](/img/macos_to_archlinux_2b490a96_4.png)
+![](/img/macos_to_archlinux_2b490a96_5.png)
 
 运行`glxinfo | grep "OpenGL renderer"`，输出类似:
 
-![](/img/macos_to_archlinux_7c9fbb73_5.png)
+![](/img/macos_to_archlinux_7c9fbb73_6.png)
 
 #### 声卡
 
