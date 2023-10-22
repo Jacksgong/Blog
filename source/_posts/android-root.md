@@ -1,6 +1,6 @@
 title: Android Root
 date: 2017-05-13 21:22:03
-updated: 2017-05-13
+updated: 2023-10-22
 categories:
 - 工程师技能
 tags:
@@ -53,6 +53,13 @@ Android手机有一个独立的Recovery分区，用于存储Recovery，Recovery�
 
 1. 利用系统漏洞（如有些linux kernal或者驱动存在UAF或者overflow的漏洞），KingRoot之类的软件就利用这些漏洞让自己的代码运行在内核态，让后把自己进程的uid与gid(这些存在内核态，用户态是没法直接改的)，等等改成0，这样这个进程权限就被提到root了：不推荐这种，因为对应的软件通常都很没有节操。
 2. 将su的命令集(binary)放到`/system/xbin/`或者(最新版本SuperSu)`/su/bin/su`下，使得app可以通过`su -c xxxcmd`以最高管理员权限执行指令，但是要刷入包含Su指令集的刷机包需要绕过Recovery中的校验，因此就需要解锁来刷入第三方的Recovery: 推荐这种，因为目前有Supersu这种开源的软件，可以刷入其提供的su命令集，以及安装其提供的管理员权限管理APP，干净绿色。
+
+#### 突破bl安全限制
+
+> 部分品牌需要授权，老手机一般可以
+
+- 联发科通过: SPFlash
+- 高通: QFIL或者第三方的QPT
 
 ---
 
