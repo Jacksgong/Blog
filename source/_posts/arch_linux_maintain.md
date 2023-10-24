@@ -1,11 +1,13 @@
 title: Arch Linux 维护与配置
 date: 2023-10-22 21:08:52
 updated: 2023-10-22
-permalink: 
 categories:
-- fun
+- linux
 tags:
-- python
+- arch linux
+- dwm
+- kde
+- maintain
 
 ---
 
