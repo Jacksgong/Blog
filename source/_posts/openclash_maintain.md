@@ -1,6 +1,7 @@
 title: OpenClash 常用与维护
 date: 2023-03-27 00:15:13
 updated: 2023-09-05
+permalink: openclash_maintain
 categories:
 - fun
 tags:
@@ -132,6 +133,52 @@ tags:
 最后保存配置，应用配置完成设置。
 
 ![](/img/openclash_maintain_90fa3968_24.png)
+
+## III. DNS海外解析出现问题解决方案
+
+OpenClash由于有时候DNsmasq转发会与其他的一些服务冲突，导致所有的海外域名都无法正常解析，这种情况下可以考虑尝试以下方案处理。
+
+### 方案一.  关闭使用Dnsmasq转发
+
+缺点: 很明显，就是会发现一些域名相关的openclash配置会失效
+优点: 配置比较简单
+
+如下图配置即可
+
+![](/img/openclash_maintain_d94ccf94_25.png)
+
+### 方案二. 指定覆写DNS服务器
+
+缺点: 配置麻烦，需要多启一个DNS服务器，对域名响应会有略微影响；需要用到Meta内核，不清楚有没有未知坑
+优点: openclash所有功能可用
+
+第一步. 安装Adguard
+
+![](/img/openclash_maintain_3453ac12_26.png)
+
+第二步. 启动Adguard，并且查看其监听DNS端口(这里我们看到的是1745)
+
+![](/img/openclash_maintain_119a8a7f_27.png)
+
+第三步. 在插件设置里勾选 使用Meta内核
+
+![](/img/openclash_maintain_5aeb2af6_28.png)
+
+第四步. 配置覆写设置->DNS设置
+
+1. 勾选自定义上游DNS服务器
+2. 将NameServer中所有的启用勾勾都去掉，把第一个勾上，配置为如下截图（这里的1745，是上面Adguard监听的DNS端口)
+![](/img/openclash_maintain_eb965948_29.png)
+3. 点击第一个勾上并且修改好的右边的编辑进去，将"节点域名解析"勾上，然后保存配置
+![](/img/openclash_maintain_3970ef25_30.png)
+4. 将FallBack中所有的启用勾勾去掉，把第一个勾上，保留默认配置即可，然后点击右侧的编辑
+![](/img/openclash_maintain_62b6b384_31.png)
+5. 进入编辑后，指定一个可用的策略组，然后保存配置
+![](/img/openclash_maintain_2447c322_32.png)
+6. 应用配置，可以看看是不是可以了，不行再重启下路由器即可
+
+如果还有问题，确认下Adguard的6060重定向是否是选择"无"，如果不是记得选择"无"保存。
+![](/img/openclash_maintain_d06f23ee_33.png)
 
 ---
 
