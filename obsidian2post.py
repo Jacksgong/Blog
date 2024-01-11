@@ -1,3 +1,5 @@
+# auhor jacksgong (dreamtobe.cn)
+
 import hashlib
 import os
 import re
