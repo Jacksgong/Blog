@@ -1,6 +1,6 @@
 title: MacOS 下高效窗口管理 Yabai
 date: 2023-09-17 18:23:37
-updated: 2023-10-03
+updated: 2024-03-11
 categorie:
 - fun
 tags:
@@ -34,7 +34,16 @@ tags:
 
 > 安装教程参考[这个](https://www.josean.com/posts/yabai-setup)和[这个](https://thiscute.world/posts/macos-window-manager-yabai-usage/)教程就行，当然也可以直接参考[官方](https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release))的。
 
-首先参考这篇官方 Wiki [Disabling System Integrity Protection](https://github.com/koekeishiya/yabai/wiki/Disabling-System-Integrity-Protection) 关闭 SIP，然后参照如下流程安装 yabai 与 skhd。
+如果仅仅只是需要用到（窗口转移到另一个拓展屏 以及 鼠标的焦点控制），那么只需要做以下安装即可（除了 Mac 自带的辅助权限（运行的时候会提示），无需其他权限）：
+
+```bash
+brew install koekeishiya/formulae/yabai
+brew install koekeishiya/formulae/skhd
+yabai --start-service
+skhd --start-service
+```
+
+如果需要完整的能力，可以参考这篇官方 Wiki [Disabling System Integrity Protection](https://github.com/koekeishiya/yabai/wiki/Disabling-System-Integrity-Protection) 关闭 SIP，然后参照如下流程安装 yabai 与 skhd。
 
 ```bash
 # 安装yabai
@@ -63,7 +72,7 @@ sudo visudo -f /private/etc/sudoers.d/yabai
 ```
 
 ## 配置
-kjkj
+
 根据[官方Wiki](https://github.com/koekeishiya/yabai/wiki/Configuration#configuration-file)说明，配置可以放在多个地方，并且只要文件在，就会被读取，我比较习惯放在`~/.config/yabai/yabairc`中，我的配置可以参考:
 
 该配置是以[这个](https://github.com/julian-heng/yabai-config/blob/master/yabairc)配置为底板，然后结合[该作者](https://www.josean.com/posts/yabai-setup)的建议，以及我个人的行为习惯来添加的。
