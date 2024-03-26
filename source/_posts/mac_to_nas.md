@@ -1,6 +1,6 @@
 title: 将MacMini/Macbook改为家庭服务器
 date: 2023-09-02 00:41:54
-updated: 2023-09-28
+updated: 2024-03-27
 categories:
 - service
 tags:
@@ -123,3 +123,24 @@ cp com.plexapp.plugins.library.blobs.db-2023-09-27 com.plexapp.plugins.library.b
 参照[官方](https://nezha.wiki/guide/agent.html#%E5%9C%A8-macos-%E4%B8%AD%E5%AE%89%E8%A3%85-agent)教程，即可，唯一需要留意的是`1`代表正常启动，`0`代表没有启动，负数代表有错误。在启动时需要在设置里面点击仍然打开。
 
 ![](/img/mac_to_nas_762e59a0_13.png)
+
+
+### Radarr
+
+> 主要参考[该 Wiki](https://wiki.servarr.com/radarr/installation/macos)
+
+1. 到Radarr[官网](https://github.com/Radarr/Radarr/releases/tag/v5.3.6.8612)下载最新版本
+
+![](/img/mac_to_nas_475fa02b_14.png)
+
+2. 解压缩拷贝到`/System/Applications`目录下
+
+3. 执行脚本使用`Self-sign`:
+
+```bash
+codesign --force --deep -s - /Applications/Radarr.app && xattr -rd com.apple.quarantine /Applications/Radarr.app
+```
+
+最后打开该 App 即可。
+
+![](/img/mac_to_nas_df5fa305_15.png)
