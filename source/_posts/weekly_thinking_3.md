@@ -95,7 +95,7 @@ tags:
 #### 想做的事情但至今没做
 
 - 2022-06-09 做一期视频介绍美的半岛庄园
-	- 已经写了[文章](https://qcvnadb5xj.feishu.cn/docs/doccnHdQiUWYcEu4KC1vTl1Asch)，但是并没有做成视频，到时发了[在半岛骑行](https://www.bilibili.com/video/BV11V4y1q7ju/?spm_id_from=333.999.0.0&vd_source=9b2b907312f8df06da2c26860c44e6a9)的视频
+	- 已经写了[文章](https://qcvnadb5xj.feishu.cn/docs/doccnHdQiUWYcEu4KC1vTl1Asch)，但是并没有做成视频，倒是发了[在半岛骑行](https://www.bilibili.com/video/BV11V4y1q7ju/?spm_id_from=333.999.0.0&vd_source=9b2b907312f8df06da2c26860c44e6a9)的视频
 - 2022-06-08 记录与研究梦境
 	- 坚持了2 周，后面就逐渐没有记录了，明天开始重启记录（微信建一个独立的群置顶记录吧，也算是监督了，但是这块的私密性比较高，需要想清楚怎么避免泄露（包括单独的一个日子的记录））
 - 2022-04-30 来自儿子的建议：打造自动折叠，自动盖到身上的被子
