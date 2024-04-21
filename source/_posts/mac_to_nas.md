@@ -1,6 +1,6 @@
 title: 将MacMini/Macbook改为家庭服务器
 date: 2023-09-02 00:41:54
-updated: 2024-03-27
+updated: 2024-04-21
 categories:
 - service
 tags:
@@ -21,10 +21,22 @@ tags:
 
 ![](/img/mac_to_nas_4b4e2319_0.png)
 
+如果是 MacbookPro 需要通过以下指令来避免盖下盖子被休眠了：
+
+```bash
+sudo pmset -b sleep 0; sudo pmset -b disablesleep 1
+```
+
+如果你想重新恢复原有的休眠能力可以用:
+
+```bash
+sudo pmset -b sleep 5; sudo pmset -b disablesleep 0
+```
+
 ### 关闭登录验证
 
 ![](/img/mac_to_nas_47116094_1.png)
-
+k
 ### 停电后自动开机
 
 该设置这个在Mac Mini上有，在Macbook上是没有的:
