@@ -1,6 +1,6 @@
 title: 将MacMini/Macbook改为家庭服务器
 date: 2023-09-02 00:41:54
-updated: 2024-04-21
+updated: 2024-04-22
 categories:
 - service
 tags:
@@ -77,6 +77,7 @@ k
 ```sshd_config
 PubkeyAuthentication yes
 PasswordAuthentication no
+ChallengeResponseAuthentication no
 UsePAM no
 ```
 
@@ -156,3 +157,8 @@ codesign --force --deep -s - /Applications/Radarr.app && xattr -rd com.apple.qua
 最后打开该 App 即可。
 
 ![](/img/mac_to_nas_df5fa305_15.png)
+
+
+---
+
+- [Disable ssh password authentication on High Sierra - Ask Different](https://apple.stackexchange.com/questions/315881/disable-ssh-password-authentication-on-high-sierra)
