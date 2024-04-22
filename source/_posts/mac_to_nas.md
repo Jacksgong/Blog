@@ -36,7 +36,7 @@ sudo pmset -b sleep 5; sudo pmset -b disablesleep 0
 ### 关闭登录验证
 
 ![](/img/mac_to_nas_47116094_1.png)
-k
+
 ### 停电后自动开机
 
 该设置这个在Mac Mini上有，在Macbook上是没有的:
