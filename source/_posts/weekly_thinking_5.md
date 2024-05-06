@@ -131,6 +131,8 @@ AI带来的很大的突破是生产力的无限提升。生产力的提升其实
 
 ### [Proxyman](https://proxyman.io/)
 
+> **正版 7 折购买地址:** [Proxyman - HTTP网络调试 SSL抓包分析工具 - 荔枝软件商店](https://store.lizhi.io/site/products/id/96?cid=t5c4ispf)
+
 Mac下最好用的对 MacOS 的抓包软件，无论是 HTTP 还是 HTTPS，特别适用于要抓包类似微信小程序，简化很多。
 
 ![](/img/weekly_thinking_5_c0bd5201_3.png)
@@ -141,7 +143,7 @@ Mac 下比较好用的应用、后台程序、启动项、插件等识别，有�
 
 ![](/img/weekly_thinking_5_de7120e3_4.png)
 
-### [Little Snitch](https://www.obdev.at/products/littlesnitch/index.html)
+### [Little Snitch](https://store.lizhi.io/site/products/id/176?cid=t5c4ispf)
 
 Mac 下最强流量监控软件，可以通过不同的模式来监控所有电脑中的网络访问，避免数据泄露。
 

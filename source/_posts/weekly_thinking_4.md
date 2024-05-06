@@ -86,11 +86,15 @@ tags:
 
 ### [App Cleaner & Uninstaller](https://app-cleaner.com/)
 
+> **正版4折购买地址：** [App Cleaner & Uninstaller 8 - Mac 软件卸载清理工具 安全彻底删除应用 - 荔枝软件商店](https://store.lizhi.io/site/products/id/598?cid=t5c4ispf)
+
 之前一直使用的是AppCleaner，主要是苹果应用再`/Application`下卸载后，还有很多遗留的文件（比如在`Library`）之类的，清理不干净；近期尝试了这个新的软件，感觉也一样很轻量并且好用。
 
 ![](/img/weekly_thinking_4_4865ac56_0.png)
 
 ### [DaisyDisk](https://daisydiskapp.com/)
+
+> **正版优惠购买地址：** [DaisyDisk - 磁盘空间扫描工具 - 荔枝软件商店](https://lizhi.shop/site/products/id/130)
 
 之前用过 CleanMyMac，主要比较贵，也比较重，但是卸载了发现，Mac 用久了还是磁盘空间不经意就满了的情况，用这个软件可以根据目录的大小饼型图拆解，很快找到大文件清理，特别实用。
 
