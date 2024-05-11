@@ -18,7 +18,7 @@ tags:
 ## 前言
 
 > 建议可以通过[一元机场](https://xn--4gq62f52gdss.com/#/register?code=WM2k9oLY)买一个1元一个月500G流量的v2ray作为备用通道
-> 另外假如有看Netflix/DisneyPlus的预期，建议可以花15元买一个[Xrelay机场](https://isseys.net/#/register?code=BjU5h6ev)，这个机场注册后立马可以免费试用一天，购买后还可以支持30天内免费退款，另外主要是价格/性能最符合预期，有新加坡，通道多，我使用里面一个月20元一个月的188G套餐（最便宜有15元一个月108G的套餐）
+> 另外假如有看Netflix/DisneyPlus的预期，建议可以花15元买一个[Xrelay机场](https://xrelay.net/#/register?code=BjU5h6ev)，这个机场注册后立马可以免费试用一天，购买后还可以支持30天内免费退款，另外主要是价格/性能最符合预期，有新加坡，通道多，我使用里面一个月20元一个月的188G套餐（最便宜有15元一个月108G的套餐）
 
 由于通过KcpTun相比于[前面我们配置的V2ray](https://blog.dreamtobe.cn/r7800-openwrt-v2ray_to_delete/)来说没有复杂的混淆与动态端口，因此在一定情况下会相对轻量些，只需要不断怼流量，不过通过`fast.com`中测试下来的速度应该是不如V2ray方案(至少我这边测试下来的情况是的)，但是测试耗时却会快很多很多，但是由于KcpTun可以有很灵活的配置，这边可以通过不断堆流量让整个速度稳定在较高的水平，因此这边的实际体验是通过SS+KcpTun可以流畅体验YouTuBe 4K视频，不过在看4K视频时R7800的CPU会稳定在30%左右:
 
