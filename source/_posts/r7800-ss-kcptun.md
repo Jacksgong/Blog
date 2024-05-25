@@ -17,7 +17,9 @@ tags:
 
 ## 前言
 
-> 建议可以通过[一元机场](https://xn--4gq62f52gdss.com/#/register?code=WM2k9oLY)买一个1元一个月500G流量的v2ray作为备用通道
+
+> 如果有Netflix/Disney+/GPT的诉求，建议可以花6元买一个[EFCloud](https://www.easyfastcloud.com/#/register?code=ETl5jLN4)，这个机场使用方法配套极其简单，全球有50+节点，也有Telegram群交流与教程，注册后有问题支持退款。另外主要是价格/性能最符合预期，通道多，有新加坡，美国等，我使用里面一个月10元一个月的200G套餐（最便宜有6元一个月100G的套餐），可以作为媒体/GPT通道。
+
 
 由于通过KcpTun相比于[前面我们配置的V2ray](https://blog.dreamtobe.cn/r7800-openwrt-v2ray_to_delete/)来说没有复杂的混淆与动态端口，因此在一定情况下会相对轻量些，只需要不断怼流量，不过通过`fast.com`中测试下来的速度应该是不如V2ray方案(至少我这边测试下来的情况是的)，但是测试耗时却会快很多很多，但是由于KcpTun可以有很灵活的配置，这边可以通过不断堆流量让整个速度稳定在较高的水平，因此这边的实际体验是通过SS+KcpTun可以流畅体验YouTuBe 4K视频，不过在看4K视频时R7800的CPU会稳定在30%左右:
 
