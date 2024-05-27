@@ -14,7 +14,7 @@ tags:
 
 <!-- more -->
 
-> GPT使用需要翻墙，这里的翻墙机场推荐[EFCloud](https://www.easyfastcloud.com/#/register?code=ETl5jLN4)，一个月 6 元，使用方法配套极其简单，全球有50+节点，也有Telegram群交流与教程，还有实时客服聊天指导，注册后有问题支持退款。
+> GPT使用需要翻墙，这里的翻墙机场推荐[EFCloud](https://www.easyfastcloud.com/#/register?code=ETl5jLN4)，一个月4.8元(购买时输入优惠码`new`享8 折)，使用方法配套极其简单，全球有50+节点，也有Telegram群交流与教程，还有实时客服聊天指导，注册后有问题支持退款。
 
 ## I. ChatGPT 使用
 

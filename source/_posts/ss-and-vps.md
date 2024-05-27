@@ -18,7 +18,7 @@ tags:
 
 ### 最终的情况
 
-- 我购买了[EFCloud](https://www.easyfastcloud.com/#/register?code=ETl5jLN4)来观看Netflix、Disney+以及使用ChatGPT，，一个月 6 元，使用方法配套极其简单，全球有50+节点，也有Telegram群交流与教程，还有实时客服聊天指导，注册后有问题支持退款，所有Netflix以及ChatGPT的流量走这个机场，流量够用，其他流量走自建/备用机场
+- 我购买了[EFCloud](https://www.easyfastcloud.com/#/register?code=ETl5jLN4)来观看Netflix、Disney+以及使用ChatGPT，，一个月4.8元(购买时输入优惠码`new`享8 折)，使用方法配套极其简单，全球有50+节点，也有Telegram群交流与教程，还有实时客服聊天指导，注册后有问题支持退款，所有Netflix以及ChatGPT的流量走这个机场，流量够用，其他流量走自建/备用机场
 - 我使用[Vultr][vultr_url]的情况: 通过这个教程，最终的结果是各类墙外页面都能够秒开，pornhub、youtube等各类视频网站基本都可以看最高质量视频(1080P或者4K、甚至8K)。
 - 费用方面: 一个月`$3.5`([Vultr][vultr_url]支持支付宝)，按小时付费，并且随时可以关停。
 - 节点切换方面: 1小时内完成节点切换，如果需要的话，不过我用了几年下来，基本上没有特殊情况一年都不用切换一次。

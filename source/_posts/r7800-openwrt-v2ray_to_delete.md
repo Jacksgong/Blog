@@ -105,7 +105,7 @@ opkg install rsyslog
 
 ### 1. V2Ray在VPS端搭建与配置
 
-> 如果有Netflix/Disney+/GPT的诉求，建议可以花6元买一个[EFCloud](https://www.easyfastcloud.com/#/register?code=ETl5jLN4)，这个机场使用方法配套极其简单，全球有50+节点，也有Telegram群交流与教程，注册后有问题支持退款。另外主要是价格/性能最符合预期，通道多，有新加坡，美国等，我使用里面一个月10元一个月的200G套餐（最便宜有6元一个月100G的套餐），可以作为媒体/GPT通道。
+> 如果有Netflix/Disney+/GPT的诉求，建议可以花4.8元(购买时输入优惠码`new`享8 折)买一个[EFCloud](https://www.easyfastcloud.com/#/register?code=ETl5jLN4)，这个机场使用方法配套极其简单，全球有50+节点，也有Telegram群交流与教程，注册后有问题支持退款。另外主要是价格/性能最符合预期，通道多，有新加坡，美国等，我使用里面券后一个月8元的200G套餐，可以作为媒体/GPT通道。
 
 要通过V2Ray进行翻墙，首先我们需要先有一台已经配置好V2Ray的墙外的VPS，对于VPS的选择与搭建可以参看[这篇文章](https://blog.dreamtobe.cn/2016/11/30/vps-ss-will-be-removed/)，下面我们就假定你已经通过[该篇文章](https://blog.dreamtobe.cn/2016/11/30/vps-ss-will-be-removed/)配置好了VPS，配置好后，你是一个Ubuntu，ok, 我们先开始搭建VPS端:
 
