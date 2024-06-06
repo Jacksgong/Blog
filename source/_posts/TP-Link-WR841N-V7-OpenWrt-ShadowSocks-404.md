@@ -3,9 +3,8 @@ date: 2015-09-05 02:08:03
 updated: 2015-09-05 02:08:03
 permalink: 2015/09/05/TP-Link-WR841N-V7-OpenWrt-ShadowSocks-404/
 categories:
-
 - OpenWrt
-  tags:
+tags:
 - 硬件
 - 路由器
 - 翻墙
