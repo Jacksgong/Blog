@@ -1,6 +1,6 @@
 title: 将MacMini/Macbook改为家庭服务器
 date: 2023-09-02 00:41:54
-updated: 2024-04-22
+updated: 2024-06-06
 categories:
 - service
 tags:
@@ -92,6 +92,18 @@ sudo launchctl start com.openssh.sshd
 
 ![](/img/mac_to_nas_c8067a2b_9.png)
 
+当然如果你是有设备需要通过SMBv1来连接，需要注意做兼容开启：创建或者编辑文件`/etc/nsmb.conf`，添加如下：
+
+```bash
+[default]
+signing_required=no
+streams=yes
+protocol_vers_map=7
+minauth=ntlmv2
+```
+
+这里的`protocol_vers_map`，表明了最低兼容SMBv1，虽然牺牲了部分性能，但是至少能用了。配置后，到共享里面重新打开关闭一次文件共享即可。
+
 ### 缓存服务器
 
 ![](/img/mac_to_nas_b55986f4_10.png)
@@ -162,3 +174,4 @@ codesign --force --deep -s - /Applications/Radarr.app && xattr -rd com.apple.qua
 ---
 
 - [Disable ssh password authentication on High Sierra - Ask Different](https://apple.stackexchange.com/questions/315881/disable-ssh-password-authentication-on-high-sierra)
+- [如何在 macOS 中停用 SMB 1 或 NetBIOS - 官方 Apple 支持 (中国)](https://support.apple.com/zh-cn/102050)
