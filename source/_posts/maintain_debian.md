@@ -1,6 +1,6 @@
 title: Debian 11 维护与环境配置
 date: 2023-05-02 00:46:36
-updated: 2023-09-04
+updated: 2024-06-10
 permalink: maintain_debian/
 categories:
 - fun
@@ -217,6 +217,120 @@ systemctl show sshd -p TimeoutStopUSec
 
 ```conf
 DefaultTimeoutStopSec=30s
+```
+
+### 系统优化
+
+#### 设置添加缓存
+
+1. 创建新的swap文件： 选择适当的大小（例如，4GB）来创建一个新的swap文件。
+
+```bash
+sudo dd if=/dev/zero of=/swapfile bs=1G count=4
+sudo chmod 600 /swapfile
+```
+
+2. 创建swap空间，并启用：
+
+```bash
+sudo mkswap /swapfile
+sudo swapon /swapfile
+```
+
+3. 验证swap是否已启用：
+
+```bash
+sudo swapon --show
+```
+
+4. 将swap文件添加到`/etc/fstab`以便重启后自动启用：
+
+```bash
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+```
+    
+
+调整swap优先级，swap空间的优先级可以通过`swappiness`和`pri`参数来调整。
+
+1. 调整`swappiness`： `swappiness`决定了内核将内存页面交换到swap空间的倾向。它的取值范围是0到100，值越大表示内核更倾向于使用swap。默认值通常是60。查看当前的`swappiness`值：
+
+```bash
+cat /proc/sys/vm/swappiness
+```
+
+临时调整`swappiness`值（例如，设置为10）：
+
+```bash
+sudo sysctl vm.swappiness=10
+```
+
+永久调整`swappiness`值，编辑`/etc/sysctl.conf`文件，添加以下行:
+
+```conf
+vm.swappiness=10
+```
+
+应用更改：
+
+```
+sudo sysctl -p
+```
+    
+2. 调整swap分区或文件的优先级： 使用`pri`参数可以设置不同swap空间的优先级，优先级越高，内核越先使用该swap。查看当前swap空间的优先级：
+
+```bash
+sudo swapon --show
+```
+
+临时设置swap文件的优先级（例如，设置为100）：
+
+```bash
+sudo swapoff /swapfile sudo swapon --priority 100 /swapfile
+```
+
+要永久设置优先级，编辑`/etc/fstab`文件中的swap条目，添加`pri`参数：
+
+```bash
+/swapfile none swap sw,pri=100 0 0
+```
+    
+
+通过创建新的swap文件和调整`swappiness`及`pri`参数，可以有效优化swap空间的使用，从而提高系统性能。在应用这些设置后，使用以下命令验证swap设置：
+
+
+```bash
+sudo swapon --show
+cat /proc/sys/vm/swappiness
+```
+
+这些调整有助于确保系统在内存紧张时有效利用swap，提高整体系统响应速度和稳定性。
+
+#### 为 SSD 的盘启用TRIM
+
+找到与SSD相关的行，并添加`discard,noatime,nodiratime`选项，例如：
+
+```bash
+/dev/sda2   /   ext4   defaults,discard,noatime,nodiratime  0   1
+```
+
+也可以手动运行 TRIM 命令：
+
+```bash
+sudo fstrim / -v
+sudo fstrim /mnt/md0 -v
+```
+
+将I/O调度器设置为`noop`或`deadline`，它们对SSD更友好。编辑`/etc/default/grub`在`GRUB_CMDLINE_LINUX_DEFAULT`行中添加`elevator=noop`：
+
+```bash
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash elevator=noop"
+```
+
+更新GRUB并重启系统：
+
+```bash
+sudo update-grub
+sudo reboot
 ```
 
 ## III. 挂载与RAID
