@@ -250,7 +250,7 @@ echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 ```
     
 
-调整swap优先级，swap空间的优先级可以通过`swappiness`和`pri`参数来调整。
+调整swap优先级，降低swap读写频率，swap空间的优先级可以通过`swappiness`和`pri`参数来调整。
 
 1. 调整`swappiness`： `swappiness`决定了内核将内存页面交换到swap空间的倾向。它的取值范围是0到100，值越大表示内核更倾向于使用swap。默认值通常是60。查看当前的`swappiness`值：
 
@@ -313,6 +313,10 @@ cat /proc/sys/vm/swappiness
 /dev/sda2   /   ext4   defaults,discard,noatime,nodiratime  0   1
 ```
 
+这里说明下：
+- `discard`: 启动SSD的TRIM功能，可以提升性能和使用持久性
+- `noatime`: 不记录文件最后访问时间，只记录最后修改时间，有效减少写操作提升性能
+
 也可以手动运行 TRIM 命令：
 
 ```bash
@@ -326,11 +330,20 @@ sudo fstrim /mnt/md0 -v
 GRUB_CMDLINE_LINUX_DEFAULT="quiet splash elevator=noop"
 ```
 
+这里说明下，在系统只有 SSD 的情况下这里使用NOOP，用于 SSD 读取效率非常高，因此可以省去了排队的开销。
+
 更新GRUB并重启系统：
 
 ```bash
 sudo update-grub
 sudo reboot
+```
+
+添加每周执行一次Trim，`sudo crontab -e`
+
+```
+@weekly /sbin/fstrim /
+@weekly /sbin/fstrim /mnt/md0
 ```
 
 
