@@ -333,6 +333,23 @@ sudo update-grub
 sudo reboot
 ```
 
+
+写速度测试：
+```bash
+time dd if=/dev/zero of=/tmp/test bs=8k count=1000000
+```
+
+读速度测试:
+
+```bash
+time dd if=/tmp/test of=/dev/null bs=8k
+```
+
+读写速度测试:
+```bash
+time dd if=/tmp/test of=/var/test bs=64k
+```
+
 ## III. 挂载与RAID
 
 
@@ -1316,4 +1333,6 @@ Docker不同的存储驱动方式会影响容器的数据层的管理和性能�
 
 ---
 
+
 - [Unable to install network driver r8125 on debian - Unix & Linux Stack Exchange](https://unix.stackexchange.com/questions/652864/unable-to-install-network-driver-r8125-on-debian)
+- [Linux下用dd命令测试硬盘的读写速度 - Oops!# - 博客园](https://www.cnblogs.com/weifeng1463/p/11024185.html)
