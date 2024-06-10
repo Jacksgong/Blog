@@ -427,6 +427,40 @@ sudo apt-get install docker
 sudo apt-get install docker-compose
 ```
 
+添加当前账户无需`sudo`就能执行`docker`相关指令，将当前用户添加到`docker`群组下（如当前用户是`jacks`）：
+
+```bash
+sudo usermod -aG docker jacks
+su - jacks
+```
+
+(可选) 将docker相关目录调整到`/mnt/dev/docker/lib`目录上:
+
+1）同步内容
+
+```bash
+sudo systemctl stop docker
+sudo mkdir -p /mnt/dev/docker/lib
+sudo rsync -a /var/lib/docker /mnt/dev/docker/lib/
+```
+
+2) 修改/添加`/etc/docker/daemon.json`
+
+```bash
+{
+    "data-root": "/new/path/docker"
+}
+```
+
+3) 重新加载并查看是否添加成功
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl start docker
+docker info | grep "DockerRoot Dir"
+sudo rm -rf /var/lib/docker
+```
+
 ### 服务配置
 
 我习惯于用`docker-compose`管理，这里就简单做两个案例，配置一个ddns-go与traefik
