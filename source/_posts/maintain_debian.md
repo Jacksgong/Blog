@@ -472,7 +472,7 @@ sudo apt -y update && sudo apt -y upgrade
 
 设置hostname:
 ```bash
-sudo hostnamectl set-hostname debian.yourdomain --static
+sudo hostnamectl set-hostname debian.yourdomain.cc --static
 ```
 
 `/etc/hosts`要添加确保本地能访问:
@@ -578,7 +578,6 @@ apt install pve-headers
 apt-get update 
 apt-get install  nvidia-driver
 ```
-
 
 最后我们会发现安装完PVE后，执行`sudo apt update`总会有这样的错误:
 
