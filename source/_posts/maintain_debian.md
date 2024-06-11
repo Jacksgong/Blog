@@ -448,7 +448,7 @@ sudo rsync -a /var/lib/docker /mnt/dev/docker/lib/
 
 ```bash
 {
-    "data-root": "/new/path/docker"
+    "data-root": "/mnt/dev/docker/lib"
 }
 ```
 
@@ -457,7 +457,7 @@ sudo rsync -a /var/lib/docker /mnt/dev/docker/lib/
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl start docker
-docker info | grep "DockerRoot Dir"
+docker info | grep "Docker Root Dir"
 sudo rm -rf /var/lib/docker
 ```
 
