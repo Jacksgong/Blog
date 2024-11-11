@@ -1,6 +1,6 @@
 title: 将MacMini/Macbook改为家庭服务器
 date: 2023-09-02 00:41:54
-updated: 2024-11-10
+updated: 2024-11-11
 categories:
 - service
 tags:
@@ -176,23 +176,25 @@ codesign --force --deep -s - /Applications/Radarr.app && xattr -rd com.apple.qua
 
 ## IV. 路由
 
-我们甚至可以让 Macmini 成为一台路由器，通过在虚拟机VMware Fusion上运行 OpenWrt来实现。
+我们甚至可以让 Macmini 成为一台路由器，通过在虚拟机UMT上运行 OpenWrt来实现。
 
-### 下载安装VMware Fusion
+### 下载安装UTM
 
-这个大家自行下载安装就行，比如我用的就是13.6.1这个版本（13.6 版本网上有很多注册码）
+> 之前我使用过VMware Fusion，发现其根本跑不满网速，但是UMT可以跑满，这很重要，详情可以参照我在[恩山发的帖子](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=8405649&page=1#pid20912133)
 
-![](/img/mac_to_nas_f898cbe6_16.png)
+大家直接到[getutm.app](https://docs.getutm.app/installation/macos/) 下载他的最新版本即可
 
-### 准备好兼容的 OpenWrt 的VMDK文件
 
-**方案一. K9 提供的 VMDK**
+![](/img/mac_to_nas_60b7d375_16.png)
 
-本案例以K9的[这个为案例](https://openwrt.ai/?target=armsr%2Farmv8&id=generic)，直接下载下图这个制作好的VMDK即可：
 
-![](/img/mac_to_nas_215739e8_17.png)
+### 准备好兼容的 OpenWrt 的img文件
 
-比如我就下载的是上图中的`kwrt-09.26.2024-armsr-armv8-generic-ext4-combined.vmdk`这个版本。
+**方案一. K9 提供的 img**
+
+本案例以K9的[这个为案例](https://openwrt.ai/?target=armsr%2Farmv8&id=generic)，主要是默认提供了一些基础的代理，配置过程有较好的容错，直接下载下图这个即可：
+
+![](/img/mac_to_nas_560ca402_17.png)
 
 **方案二. 官网提供的自行制作**
 
@@ -206,57 +208,66 @@ codesign --force --deep -s - /Applications/Radarr.app && xattr -rd com.apple.qua
 gzcat openwrt-*ext4-combined.img.gz > openwrt.img
 ```
 
-然后用再将其转化为`vmdk`（需要留意的是转化工具如果没有可以通过Homebrew安装: `brew install qemu`）：
-
-```
-qemu-img convert -O vmdk openwrt.img openwrt.vmdk
-```
-
-###  在VMware Fusion上跑起VMDK
+###  在UTM上跑起镜像
 
 先新建，创建自定义虚拟机：
 
-![](/img/mac_to_nas_4c3caf6f_19.png)
+![](/img/mac_to_nas_cd85c6f5_19.png)
 
-操作系统选择`Linux`->`其他 Linux 5.x 内核 64 位 ARM`:
+操作系统选择`其他`:
 
-![](/img/mac_to_nas_1ab82776_20.png)
+![](/img/mac_to_nas_fca65d18_20.png)
 
-选择虚拟磁盘这里，选择`使用现有虚拟磁盘`->`选择虚拟磁盘`，然后选择刚刚制作好的`vmdk`文件
+Boot Device这里，选择`无`:
 
-![](/img/mac_to_nas_59ee2f26_21.png)
+![](/img/mac_to_nas_ae89a0bf_21.png)
 
-然后继续，完成，存储虚拟机配置文件，保存在任意自己想要的目录，比如我将其保存为`kwrt.wmwarevm`:
+然后这个内存与 CPU 你根据需求来就行，比如我家常年 50+设备需要接入路由，外加有比较多的服务需要，因此我设置了 2G 内存以及 2 个核心：
 
-![](/img/mac_to_nas_ad7dfa40_22.png)
+![](/img/mac_to_nas_1492cab2_22.png)
 
-接着虚拟机会自动启动，我们先手动关闭它，在`虚拟机`->`关机`
+存储空间，默认就行，别管他，一会儿还得删除了：
 
-![](/img/mac_to_nas_36a5c277_23.png)
+![](/img/mac_to_nas_1f8362b9_23.png)
+
+共享目录，默认就行，用不到:
+
+![](/img/mac_to_nas_47bb4250_24.png)
+
+勾选`打开虚拟机设置`，名称取一个你喜欢的，点击保存
+
+![](/img/mac_to_nas_ffe7a7a8_25.png)
 
 ### 虚拟机配置
 
+保存后，自动进入到设置页面，之后移除掉声音，用不到:
 
-进入到设置页面后，可以先将CD/DVD与声卡移除了，移除方法都是点击进去以后在下面找到移除按钮移除即可:
+![](/img/mac_to_nas_7cdbf518_26.png)
 
-![](/img/mac_to_nas_9364e50d_24.png)
+然后删除掉 默认配置的驱动器，一会儿添加我们自己的：
 
+![](/img/mac_to_nas_b67a1659_27.png)
 
-这里我的案例是，我有两个网口，一个是我用usb给 MacMini 拓展的网口，这里将用桥接方式，后面进入到OpenWrt后会自动将它作为 lan 口，这里我们修改原本的`网络适配器`:
+添加我们自己的驱动器，在驱动器下面点击`新建`->`导入`:
 
-![](/img/mac_to_nas_af28ed7f_25.png)
+![](/img/mac_to_nas_131b730b_28.png)
 
-然后另一个网口，就是 MacMini 自带的千兆以太网口，这里我们创建一个，然后用桥接方式，后面进入到OpenWrt后会自动将它作为 wan 口，这里我们添加一个`网络适配器`：
+然后导入刚刚我们制作好img文件:
 
-![](/img/mac_to_nas_90b48c43_26.png)
+![](/img/mac_to_nas_1d7affac_29.png)
+
+然后配置网络，这里我的案例是，我有两个网口，一个是我用usb给 MacMini 拓展的网口，这里将用桥接方式，后面进入到OpenWrt后会自动将它作为 lan 口，这里我们修改原本的`网络`:
+
+> 这里留意下，如果你不知道这个是en几，可以直接到`系统信息`->`网络`里面找到。
+
+![](/img/mac_to_nas_08a6fa2b_30.png)
+
+然后另一个网口，就是 MacMini 自带的千兆以太网口，这里我们创建一个，然后用桥接方式，后面进入到OpenWrt后会自动将它作为 wan 口，这里我们`设备`->`新建`->`网络`：
+
+![](/img/mac_to_nas_331f25d3_31.png)
 
 自此网络这块配置完成了，需要特别注意的是，由于是桥接，在MacMini上这两个网口有自己的 IP 地址，但是在 OpenWrt 里面这两个网口也有自己的 IP，两者是不影响的，中间是一层虚拟的物理桥接。
 
-修改下处理器，我使用 `2`个内核与`2048`内存:
-
-![](/img/mac_to_nas_be826056_27.png)
-
-然后开机
 
 ### 配置并进入到 OpenWrt 管理页面
 
@@ -270,16 +281,16 @@ vim /etc/config/network
 
 我们假设你家里的局域网网段是`10.0.0.x`，这里我们指定 `10.0.0.168`这里只需要确保这里的 IP 与你现在电脑在同一个局域网网段，并且这个 IP 没有和局域网中的其他 IP 冲突即可:
 
-![](/img/mac_to_nas_6f9aa81c_28.png)
+![](/img/mac_to_nas_6f9aa81c_32.png)
 
 
 修改完后`:wq`退出，然后重启网络`/etc/init.d/network restart`
 
-![](/img/mac_to_nas_427149c0_29.png)
+![](/img/mac_to_nas_427149c0_33.png)
 
 重启后，此时你就已经可以在你当前电脑通过刚刚设定的IP访问到这台OpenWrt了:
 
-![](/img/mac_to_nas_dcc6d8fe_30.png)
+![](/img/mac_to_nas_dcc6d8fe_34.png)
 
 ### 特别说明
 
@@ -301,22 +312,17 @@ vim /etc/config/network
 
 我先将旧的OpenWrt上的 Lan 口的 IP 改为非`10.0.0.1`，因为这个需要给到MacMini 虚拟机里的 OpenWrt 使用
 
-![](/img/mac_to_nas_63e7f64e_31.png)
+![](/img/mac_to_nas_63e7f64e_35.png)
 
 然后将旧的OpenWrt上的 Lan 口 DHCP 能力关闭了，这样以来局域网里面就只有虚拟机里的 OpenWrt 提供 DHCP 服务，就可以完成迁移：
 
-![](/img/mac_to_nas_ca82992b_32.png)
+![](/img/mac_to_nas_ca82992b_36.png)
 
-其他大家有任何问题，欢迎探讨，这块已经非常清晰了，但是我遇到一个问题，我自己也没有任何办法，就是无法跑满千兆的外网：
+其他大家有任何问题，欢迎探讨，这块已经非常清晰了
 
-以下是我家里正常的外网速度:
-
-![](/img/mac_to_nas_657ffd2d_33.png)
-
-但是在虚拟机里的 OpenWrt，速度都只能跑到 400Mb/s 左右，最高也只能到600Mb/s，根本跑不满，而且对于我家这台 MacMini M2 来说，通过监控看，CPU 最大占用只能到 25%（无论配置8核8G，给满配，还是 2 核 2G，都一样，所以我刚开始就是怀疑 OpenWrt 的原因，换了上面 K9 与官网两个版本都一样，我甚至怀疑是因为外接 RAID 硬盘读写速度原因，换到内部 SSD 也一样）
-
-![](/img/mac_to_nas_bbc925bd_34.png)
+![](/img/mac_to_nas_388eb4a4_37.png)
 
 ---
 
 - [Disable ssh password authentication on High Sierra - Ask Different](https://apple.stackexchange.com/questions/315881/disable-ssh-password-authentication-on-high-sierra)
+- [\[OpenWrt Wiki\] OpenWrt on UTM on Apple Silicon HowTo](https://openwrt.org/docs/guide-user/virtualization/utm)
