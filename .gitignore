@@ -8,3 +8,4 @@ db.json
 
 /postob.sh
 /.env
+/local-deploy.sh
