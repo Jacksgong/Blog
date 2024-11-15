@@ -1,6 +1,6 @@
 title: 将MacMini/Macbook改为家庭服务器
 date: 2023-09-02 00:41:54
-updated: 2024-11-11
+updated: 2024-11-15
 categories:
 - service
 tags:
@@ -322,7 +322,65 @@ vim /etc/config/network
 
 ![](/img/mac_to_nas_388eb4a4_37.png)
 
+## V. HomeAssistant
+
+由于 UTM 出色的性能表现，我们直接使用 UTM 模拟x86框架运行即可。
+
+### 下载 qcow2 文件
+
+可以直接到[HA的github](https://github.com/home-assistant/operating-system/releases/latest) 下载qcow文件:
+
+![](/img/mac_to_nas_3e634147_38.png)
+
+下载后双击解压缩
+
+### 配置运行
+
+配置这块比较简单，更多可以参考上面的 OpenWrt的配置，我说下选项
+
+- 打开 UTM 并且 `创建一个新虚拟机` -> `模拟` -> `其他`
+- BootDevice 选择 `无`
+- 架构: x86_64
+- 系统默认的就行: (q35) Standard PC
+- 内存: 2048 MB
+- CPU 核心: 1
+- 存储空间默认就行，晚点我们会添加我们自己的
+- 共享目录默认就行: 用不上
+
+右键新创建的虚拟机->`编辑`:
+
+- 网络 > 网络模式: 选择 `桥接（高级）`
+- 桥接接口：如果你只有一个网口，你直接选择`自动`，否则你选择你家的 lan 口的（具体哪个是 lan 口参考前面 OpenWrt 提到在系统信息里面看）
+- 删除旧的驱动器，`新建`->`IDE`-> `导入`：选择前面下面并且解压缩为了`qcow2`镜像文件
+- 保存
+- 启动虚拟机
+
+自此就可以了。（下面我家智能设备比较多，我分配了 2G 内存，一般 1G 就够了）
+
+![](/img/mac_to_nas_ca6b2ac5_39.png)
+
+
+## VI. Debian
+
+有 debian 需求的建议直接到[UTM 浏览库](https://mac.getutm.app/gallery/)中找一个，点击打开即可下载并导入到 UTM 中，比如我就比较喜欢这个占用资源小并且我比较熟悉的 [Debian 11(LXDE)](https://mac.getutm.app/gallery/debian-11-ldxe)
+
+![](/img/mac_to_nas_e44d5cd2_40.png)
+
+
+我唯一的修改就是，将这个的网络改成了桥接（具体怎么改，参考前面HomeAssistant/OpenWrt这两个相关配置）
+
+![](/img/mac_to_nas_f639ce27_41.png)
+
+另外一般来说你可以设置一个共享目录，比如我的诉求就是家里的小米监控对 MacMini 提供的 SMB 总是存在识别不稳定的问题，但是对 debian 的比较稳定，所以我才安装的 Debian，所以我需要共享一个目录进去：
+
+![](/img/mac_to_nas_3abe7ed8_42.png)
+
+如上图`浏览`后选择一个目录，保存即可。进入到debian后，发现会被自动挂载在了`/media/share`目录下:
+
+![](/img/mac_to_nas_c376cf03_43.png)
+
 ---
 
 - [Disable ssh password authentication on High Sierra - Ask Different](https://apple.stackexchange.com/questions/315881/disable-ssh-password-authentication-on-high-sierra)
 - [\[OpenWrt Wiki\] OpenWrt on UTM on Apple Silicon HowTo](https://openwrt.org/docs/guide-user/virtualization/utm)
+- [Home Assistant in Mac M1 - Configuration - Home Assistant Community](https://community.home-assistant.io/t/home-assistant-in-mac-m1/350977/63?page=4)
