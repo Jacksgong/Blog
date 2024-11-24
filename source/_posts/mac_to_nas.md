@@ -1,6 +1,6 @@
 title: 将MacMini/Macbook改为家庭服务器
 date: 2023-09-02 00:41:54
-updated: 2024-11-15
+updated: 2024-11-24
 categories:
 - service
 tags:
@@ -178,6 +178,10 @@ codesign --force --deep -s - /Applications/Radarr.app && xattr -rd com.apple.qua
 
 我们甚至可以让 Macmini 成为一台路由器，通过在虚拟机UMT上运行 OpenWrt来实现。
 
+整体拓扑结构简述:
+
+![](/img/mac_to_nas_16432a03_16.png)
+
 ### 下载安装UTM
 
 > 之前我使用过VMware Fusion，发现其根本跑不满网速，但是UMT可以跑满，这很重要，详情可以参照我在[恩山发的帖子](https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=8405649&page=1#pid20912133)
@@ -185,7 +189,7 @@ codesign --force --deep -s - /Applications/Radarr.app && xattr -rd com.apple.qua
 大家直接到[getutm.app](https://docs.getutm.app/installation/macos/) 下载他的最新版本即可
 
 
-![](/img/mac_to_nas_60b7d375_16.png)
+![](/img/mac_to_nas_60b7d375_17.png)
 
 
 ### 准备好兼容的 OpenWrt 的img文件
@@ -194,13 +198,13 @@ codesign --force --deep -s - /Applications/Radarr.app && xattr -rd com.apple.qua
 
 本案例以K9的[这个为案例](https://openwrt.ai/?target=armsr%2Farmv8&id=generic)，主要是默认提供了一些基础的代理，配置过程有较好的容错，直接下载下图这个即可：
 
-![](/img/mac_to_nas_560ca402_17.png)
+![](/img/mac_to_nas_560ca402_18.png)
 
 **方案二. 官网提供的自行制作**
 
 当然也可以参考[这个教程](https://openwrt.org/docs/guide-user/virtualization/fusion)，到[targets/armsr/arvm8/ 目录](https://downloads.openwrt.org/releases/)这个官方地址下载最新的`generic-ext4-combined.img.gz`
 
-![](/img/mac_to_nas_ca9360b9_18.png)
+![](/img/mac_to_nas_ca9360b9_19.png)
 
 下载后先得到`img`: 
 
@@ -212,59 +216,59 @@ gzcat openwrt-*ext4-combined.img.gz > openwrt.img
 
 先新建，创建自定义虚拟机：
 
-![](/img/mac_to_nas_cd85c6f5_19.png)
+![](/img/mac_to_nas_cd85c6f5_20.png)
 
 操作系统选择`其他`:
 
-![](/img/mac_to_nas_fca65d18_20.png)
+![](/img/mac_to_nas_fca65d18_21.png)
 
 Boot Device这里，选择`无`:
 
-![](/img/mac_to_nas_ae89a0bf_21.png)
+![](/img/mac_to_nas_ae89a0bf_22.png)
 
 然后这个内存与 CPU 你根据需求来就行，比如我家常年 50+设备需要接入路由，外加有比较多的服务需要，因此我设置了 2G 内存以及 2 个核心：
 
-![](/img/mac_to_nas_1492cab2_22.png)
+![](/img/mac_to_nas_1492cab2_23.png)
 
 存储空间，默认就行，别管他，一会儿还得删除了：
 
-![](/img/mac_to_nas_1f8362b9_23.png)
+![](/img/mac_to_nas_1f8362b9_24.png)
 
 共享目录，默认就行，用不到:
 
-![](/img/mac_to_nas_47bb4250_24.png)
+![](/img/mac_to_nas_47bb4250_25.png)
 
 勾选`打开虚拟机设置`，名称取一个你喜欢的，点击保存
 
-![](/img/mac_to_nas_ffe7a7a8_25.png)
+![](/img/mac_to_nas_ffe7a7a8_26.png)
 
 ### 虚拟机配置
 
 保存后，自动进入到设置页面，之后移除掉声音，用不到:
 
-![](/img/mac_to_nas_7cdbf518_26.png)
+![](/img/mac_to_nas_7cdbf518_27.png)
 
 然后删除掉 默认配置的驱动器，一会儿添加我们自己的：
 
-![](/img/mac_to_nas_b67a1659_27.png)
+![](/img/mac_to_nas_b67a1659_28.png)
 
 添加我们自己的驱动器，在驱动器下面点击`新建`->`导入`:
 
-![](/img/mac_to_nas_131b730b_28.png)
+![](/img/mac_to_nas_131b730b_29.png)
 
 然后导入刚刚我们制作好img文件:
 
-![](/img/mac_to_nas_1d7affac_29.png)
+![](/img/mac_to_nas_1d7affac_30.png)
 
 然后配置网络，这里我的案例是，我有两个网口，一个是我用usb给 MacMini 拓展的网口，这里将用桥接方式，后面进入到OpenWrt后会自动将它作为 lan 口，这里我们修改原本的`网络`:
 
 > 这里留意下，如果你不知道这个是en几，可以直接到`系统信息`->`网络`里面找到。
 
-![](/img/mac_to_nas_08a6fa2b_30.png)
+![](/img/mac_to_nas_08a6fa2b_31.png)
 
 然后另一个网口，就是 MacMini 自带的千兆以太网口，这里我们创建一个，然后用桥接方式，后面进入到OpenWrt后会自动将它作为 wan 口，这里我们`设备`->`新建`->`网络`：
 
-![](/img/mac_to_nas_331f25d3_31.png)
+![](/img/mac_to_nas_331f25d3_32.png)
 
 自此网络这块配置完成了，需要特别注意的是，由于是桥接，在MacMini上这两个网口有自己的 IP 地址，但是在 OpenWrt 里面这两个网口也有自己的 IP，两者是不影响的，中间是一层虚拟的物理桥接。
 
@@ -281,16 +285,16 @@ vim /etc/config/network
 
 我们假设你家里的局域网网段是`10.0.0.x`，这里我们指定 `10.0.0.168`这里只需要确保这里的 IP 与你现在电脑在同一个局域网网段，并且这个 IP 没有和局域网中的其他 IP 冲突即可:
 
-![](/img/mac_to_nas_6f9aa81c_32.png)
+![](/img/mac_to_nas_6f9aa81c_33.png)
 
 
 修改完后`:wq`退出，然后重启网络`/etc/init.d/network restart`
 
-![](/img/mac_to_nas_427149c0_33.png)
+![](/img/mac_to_nas_427149c0_34.png)
 
 重启后，此时你就已经可以在你当前电脑通过刚刚设定的IP访问到这台OpenWrt了:
 
-![](/img/mac_to_nas_dcc6d8fe_34.png)
+![](/img/mac_to_nas_dcc6d8fe_35.png)
 
 ### 特别说明
 
@@ -312,15 +316,15 @@ vim /etc/config/network
 
 我先将旧的OpenWrt上的 Lan 口的 IP 改为非`10.0.0.1`，因为这个需要给到MacMini 虚拟机里的 OpenWrt 使用
 
-![](/img/mac_to_nas_63e7f64e_35.png)
+![](/img/mac_to_nas_63e7f64e_36.png)
 
 然后将旧的OpenWrt上的 Lan 口 DHCP 能力关闭了，这样以来局域网里面就只有虚拟机里的 OpenWrt 提供 DHCP 服务，就可以完成迁移：
 
-![](/img/mac_to_nas_ca82992b_36.png)
+![](/img/mac_to_nas_ca82992b_37.png)
 
 其他大家有任何问题，欢迎探讨，这块已经非常清晰了
 
-![](/img/mac_to_nas_388eb4a4_37.png)
+![](/img/mac_to_nas_388eb4a4_38.png)
 
 ## V. HomeAssistant
 
@@ -330,7 +334,7 @@ vim /etc/config/network
 
 可以直接到[HA的github](https://github.com/home-assistant/operating-system/releases/latest) 下载qcow文件:
 
-![](/img/mac_to_nas_3e634147_38.png)
+![](/img/mac_to_nas_3e634147_39.png)
 
 下载后双击解压缩
 
@@ -357,27 +361,27 @@ vim /etc/config/network
 
 自此就可以了。（下面我家智能设备比较多，我分配了 2G 内存，一般 1G 就够了）
 
-![](/img/mac_to_nas_ca6b2ac5_39.png)
+![](/img/mac_to_nas_ca6b2ac5_40.png)
 
 
 ## VI. Debian
 
 有 debian 需求的建议直接到[UTM 浏览库](https://mac.getutm.app/gallery/)中找一个，点击打开即可下载并导入到 UTM 中，比如我就比较喜欢这个占用资源小并且我比较熟悉的 [Debian 11(LXDE)](https://mac.getutm.app/gallery/debian-11-ldxe)
 
-![](/img/mac_to_nas_e44d5cd2_40.png)
+![](/img/mac_to_nas_e44d5cd2_41.png)
 
 
 我唯一的修改就是，将这个的网络改成了桥接（具体怎么改，参考前面HomeAssistant/OpenWrt这两个相关配置）
 
-![](/img/mac_to_nas_f639ce27_41.png)
+![](/img/mac_to_nas_f639ce27_42.png)
 
 另外一般来说你可以设置一个共享目录，比如我的诉求就是家里的小米监控对 MacMini 提供的 SMB 总是存在识别不稳定的问题，但是对 debian 的比较稳定，所以我才安装的 Debian，所以我需要共享一个目录进去：
 
-![](/img/mac_to_nas_3abe7ed8_42.png)
+![](/img/mac_to_nas_3abe7ed8_43.png)
 
 如上图`浏览`后选择一个目录，保存即可。进入到debian后，发现会被自动挂载在了`/media/share`目录下:
 
-![](/img/mac_to_nas_c376cf03_43.png)
+![](/img/mac_to_nas_c376cf03_44.png)
 
 ---
 
