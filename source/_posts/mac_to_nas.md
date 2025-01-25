@@ -43,6 +43,7 @@ sudo pmset -b sleep 5; sudo pmset -b disablesleep 0
 
 ![](/img/mac_to_nas_4f31556b_2.png)
 
+
 ## II. 远程访问
 
 ### 远程桌面访问
@@ -382,6 +383,29 @@ vim /etc/config/network
 如上图`浏览`后选择一个目录，保存即可。进入到debian后，发现会被自动挂载在了`/media/share`目录下:
 
 ![](/img/mac_to_nas_c376cf03_44.png)
+
+## VII. 其他问题
+
+### MacMini 外接硬盘迁移到新设备
+
+> 参考[小红书](https://www.xiaohongshu.com/explore/672ed530000000001a037060?xsec_token=ABdCpqHPEdg_NwikjlVTySOowHfUr7cxES6m3fgiV33Z0=&xsec_source=pc_search&source=web_explore_feed)以及[v2ex](https://www.v2ex.com/t/1087887)中的相关文章
+
+如果说你的场景是之前使用的是MacMini M2，一直系统盘都是外接硬盘，现在新买了 MacMini M4，你直接将外接硬盘在新 MacMini 上设置为启动盘，会提示报错（`SDErrorDomain 错误 104`)，此时需要在新 MacMini 做以下操作：
+
+1. 启动内置系统
+2. 在 app store下载一个新的15.x的系统
+3. 接入作为系统盘的外接盘
+4. 内置系统设置里打开文件保险箱（这个是为了可以在外接硬盘安装新系统）
+5. 打开在 App store 下载的那个新的系统，并且选择安装到外接盘中
+6. 重启，等待自动加载（一般为 2-3 小时）
+7. 加载完成后就正常进入外接盘的系统了（**所有配置与数据都不会被覆盖，等于无缝衔接了**）
+
+不过在进入以后，还需要做几个简单的设置（这几个设置应该是被覆盖了）：
+
+1. 在系统设置-能源里，将 "显示器关闭时，防止自动进入睡眠" 打开
+2. 在系统设置-锁定屏幕里，将几个锁屏的设置都设置为 `永不`
+
+如果说在使用 UTM 的时候，如果遇到`QEMU exited from an error: With SME enabled, at least one vector length must be enabled`，参考[issue](https://github.com/utmapp/UTM/issues/6790)的探讨，直接下载最新版本的即可，旧版本对 M4 有兼容问题，用最新版本就行。
 
 ---
 
