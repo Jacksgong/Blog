@@ -1,6 +1,6 @@
 title: 将MacMini/Macbook改为家庭服务器
 date: 2023-09-02 00:41:54
-updated: 2024-11-24
+updated: 2025-01-25
 categories:
 - service
 tags:
