@@ -1,6 +1,6 @@
 title: 将MacMini/Macbook改为家庭服务器
 date: 2023-09-02 00:41:54
-updated: 2025-01-25
+updated: 2025-09-05
 categories:
 - service
 tags:
@@ -384,7 +384,50 @@ vim /etc/config/network
 
 ![](/img/mac_to_nas_c376cf03_44.png)
 
-## VII. 其他问题
+## VII. 爱快 AC 安装与配置
+
+最近升级了家里的无线方案，就是由于是虚拟机里面跑的 OpenWrt 作为主路由，其实不再需要外部路由，就买了几个爱快专门的AP，但是需要管理 AP，需要 AC，于是在 MacOS 上用 UTM 安装了爱快，家里的无线网络环境明显变好，也变得更加可控了。
+
+![](/img/mac_to_nas_47c21cd0_45.png)
+
+第一步，到[爱快的官网](https://www.ikuai8.com/component/download)，下载 IOS 镜像文件 64 位的版本：
+
+![](/img/mac_to_nas_bf295b20_46.png)
+
+第二步，UTM 上创建新虚拟机，选择 模拟 -> 其他
+
+![](/img/mac_to_nas_c1b966f8_47.png)
+
+第三步，配置，首先 启动设备选择 `CD/DVD 映像`，启动 IOS 映像选择`刚刚下载那个ISO文件`，然后点击继续。硬件部分，我是有 100 个左右设备需要接入，所以我分配了2G内存和 2 个 CPU 核心，正常情况 1G，1 个核心够了。存储空间一般占用不了多少 32G 够够的了。
+
+![](/img/mac_to_nas_a81e47c4_48.png)
+
+第四步，配置网络，右击编辑，进去后，选择网络，改为桥接，将你的外接到交换机或者是外部的 LAN 口（我这里是en6桥接上），模拟网卡选用 e1000 那个就行。
+
+![](/img/mac_to_nas_64e79a45_49.png)
+
+第五步，运行，自动会用刚刚的 IOS 映像文件执行安装，如果提示是否安装 UEFI 引导，选y，
+然后安装到sda1，选1，安装好后自动重启，此时会自动还是走到 IOS 映像，将其退出，关闭虚拟机，重启就进入系统了
+
+![](/img/mac_to_nas_9a1aa45a_50.png)
+
+第六步，配置 IP，选择 2 设置 LAN/WAN 地址，给一个没有被占用的地址，如我这里给的是`10.0.0.22`。
+
+![](/img/mac_to_nas_05e16ca6_51.png)
+
+第七步，浏览器打开`10.0.0.22`，输入默认用户名/密码 admin/admin，设置完新密码后，如下图：停用 DHCP 服务
+
+![](/img/mac_to_nas_319f620c_52.png)
+
+第八步，到 AC 管理 -> 无线概况 中打开 AC 智能控制
+
+![](/img/mac_to_nas_9f16a5b6_53.png)
+
+至此，只要你的局域网中有接入爱快的 AP，就会自动识别到了，你可以在 AP 分组中创建分组后，在分组里面设置后，将 AP 加入到分组中就完成 AP 的自动漫游以及统一的 WiFi 配置了，可以留意 SSID，2.5G 与 5G 可以都用一样的，这样设备会自动根据情况选择。另外优化，可以使用无线网优试试。
+
+![](/img/mac_to_nas_afe1bc97_54.png)
+
+## VIII. 其他问题
 
 ### MacMini 外接硬盘迁移到新设备
 
@@ -406,6 +449,12 @@ vim /etc/config/network
 2. 在系统设置-锁定屏幕里，将几个锁屏的设置都设置为 `永不`
 
 如果说在使用 UTM 的时候，如果遇到`QEMU exited from an error: With SME enabled, at least one vector length must be enabled`，参考[issue](https://github.com/utmapp/UTM/issues/6790)的探讨，直接下载最新版本的即可，旧版本对 M4 有兼容问题，用最新版本就行。
+
+### MacMini 中 Crontab 的脚本任务没有磁盘权限
+
+需要添加常用终端（如我这里是`iTerm.app`）与`/usr/sbin/cron`完全磁盘访问权限：
+
+![](/img/mac_to_nas_615e65a4_55.png)
 
 ---
 
