@@ -36,6 +36,11 @@
 - 2022年 考虑到性能与自动化考虑搭建[Gitea](http://gitea.partyland.cc:2443/)+[Drone](https://drone.partyland.cc:2443/)+[Webhook](https://github.com/adnanh/webhook)组合实现提交自动部署
 - 2023年 考虑到绝大多数笔记都已经是用Obsidian管理，有很长一段时间只在Obsidian上做私有笔记记录，考虑到做开放笔记更有易于认真梳理+需要做隔离，编写[脚本](https://github.com/Jacksgong/Blog/blob/master/obsidian2post.py)做Obsidian上日志指定迁移，并支持图片、差量等能力
 
+## 当前部署方式
+
+1. 使用脚本将Obsidian上的笔记进行转录，比如: `./postob.sh ~/note/dev/ops/将MacMini改为家庭服务器.md mac_to_nas`
+2. 使用本地脚本进行编译与部署，直接执行：`./local-deploy.sh`
+3. 将变更推送到远端：`./push-double-end.sh`
 
 ## LICENSE
 
