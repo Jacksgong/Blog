@@ -1,6 +1,5 @@
 title: OpenClash 常用与维护
 date: 2023-03-27 00:15:13
-updated: 2024-03-24
 categories:
 - fun
 tags:
